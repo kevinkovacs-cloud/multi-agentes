@@ -1,0 +1,14 @@
+[project]
+name = "moav-hr"
+version = "0.1.0"
+description = "Marco de Orquestación Multiagente con Ciclo de Vida Adaptativo (MOACV)"
+authors = [{name = "Kevin Yoel Kovacs"}]
+requires-python = ">=3.10"
+readme = "README.md"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
