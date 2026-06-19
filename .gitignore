@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+*.egg-info/
+.ipynb_checkpoints/
+data/raw/
+data/*.csv
+data/*.parquet
+*.log
+.DS_Store
+.idea/
+.vscode/
+models/
+*.gguf
+
+# Documentos de trabajo privados — NO publicar.
+# Contienen correspondencia, datos de personas y notas internas.
+docs/GUIA_COMPLETA.md
+docs/propuesta_tesis.docx
+DEMO_GUION.md
+
+# Config local del harness / preview (paths de máquina, no va al repo)
+.claude/

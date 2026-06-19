@@ -1,0 +1,22 @@
+# MOACV — dependencias
+langchain>=0.3.0
+langgraph>=0.2.0
+langchain-community>=0.3.0
+langchain-ollama>=1.0.0
+ollama>=0.3.0
+opentelemetry-api>=1.27.0
+opentelemetry-sdk>=1.27.0
+opentelemetry-exporter-otlp>=1.27.0
+langfuse>=2.0.0
+fairlearn>=0.10.0
+aif360>=0.6.0
+scikit-learn>=1.5.0
+numpy>=1.26.0
+pandas>=2.1.0
+datasets>=2.18.0
+pydantic>=2.5.0
+python-dotenv>=1.0.0
+pytest>=8.0.0
+# Ontología / trazabilidad RDF (§2.5)
+rdflib>=7.0
+pyshacl>=0.26
