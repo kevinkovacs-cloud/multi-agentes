@@ -27,6 +27,10 @@ El framework aborda tres vacancias concretas del estado del arte:
 
 ![Arquitectura del modelo](assets/arquitectura_modelo.svg)
 
+**Figura 1.** Pipeline de cinco agentes con ciclo de vida individual por agente (BIO→TBO→WIO) y transferencia de teorías entre instancias del mismo rol (§4 del plan de tesis).
+
+![Figura 1 — Pipeline de cinco agentes](assets/figura1_arquitectura_pipeline.png)
+
 El sistema se compone de cinco agentes especializados por rol:
 
 | Agente | Rol |
@@ -58,6 +62,10 @@ U  = Función de utilidad (pondera precisión predictiva y equidad)
 
 **Transferencia maestro→aprendiz:** cuando un agente Mature colabora con un Novato del mismo rol, refuerza P y K de las teorías exitosas y pondera la utilidad U, acelerando la maduración del agente novato sin reentrenar desde cero.
 
+**Figura 2.** Ciclo de vida del aprendizaje (LLC) adaptado a agentes LLM, vista en planta. El agente auditor Ω es un nodo supervisor externo que actúa en las regiones 4 y 7 y pondera la compartición de teorías (§5 del plan de tesis).
+
+![Figura 2 — Ciclo de vida LLC adaptado a agentes LLM](assets/figura2_ciclo_vida_llc.png)
+
 ## Stack tecnológico
 
 - **Orquestación:** LangGraph + LangChain
@@ -73,6 +81,10 @@ El framework está diseñado para cumplir con:
 - **NYC Local Law 144** — bias audits anuales
 - **Argentina** — Disposición 2/2023, Ley 25.326
 
+**Figura 3.** Arquitectura conceptual: articulación del LLM (inferencia), la ontología (estructuración y compartición M2M de teorías y audit trail) y el aprendizaje basado en equidad dentro del ciclo de vida del agente (§2.6 del plan de tesis).
+
+![Figura 3 — Arquitectura conceptual](assets/figura3_arquitectura_conceptual.png)
+
 ## Estructura del proyecto
 
 El código separa el **modelo genérico** (`core/`) de la **instancia de dominio** (`instances/hr/`) — `core/` no importa nada de `instances/` (regla verificada por test).
@@ -81,7 +93,11 @@ El código separa el **modelo genérico** (`core/`) de la **instancia de dominio
 moav-hr/
 ├── README.md
 ├── MAPPING.md                       # equivalencia código ↔ propuesta v13 (§2.5, §2bis)
-├── assets/arquitectura_modelo.svg
+├── assets/                          # diagramas del plan de tesis (Figs. 1–3) + SVG
+│   ├── arquitectura_modelo.svg
+│   ├── figura1_arquitectura_pipeline.png
+│   ├── figura2_ciclo_vida_llc.png
+│   └── figura3_arquitectura_conceptual.png
 ├── poc/index.html                   # PoC interactiva (abrir en navegador)
 ├── src/moav_hr/
 │   ├── core/                        # modelo GENÉRICO (§2, §2bis, §3)
