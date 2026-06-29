@@ -25,11 +25,9 @@ El framework aborda tres vacancias concretas del estado del arte:
 
 ## Arquitectura
 
-![Arquitectura del modelo](assets/arquitectura_modelo.svg)
+![Figura 1 — Arquitectura instanciada](assets/arquitectura_modelo.svg)
 
-**Figura 1.** Pipeline de cinco agentes con ciclo de vida individual por agente (BIO→TBO→WIO) y transferencia de teorías entre instancias del mismo rol (§4 del plan de tesis).
-
-![Figura 1 — Pipeline de cinco agentes](assets/figura1_arquitectura_pipeline.png)
+**Figura 1 — Arquitectura instanciada (instancia HR, §4.1 del plan de tesis).** Pipeline de cinco agentes con ciclo de vida individual por agente (BIO→TBO→WIO) y transferencia de teorías entre instancias del mismo rol. En esta instancia, el **Monitor de Utilidad de Equidad se cablea como el agente Bias Auditor** dentro de la cadena. En el **modelo genérico**, en cambio, el auditor Ω es un **supervisor externo** al DAG (ver Figura 2): ambas lecturas describen el mismo mecanismo en distinto nivel de abstracción, no se contradicen.
 
 El sistema se compone de cinco agentes especializados por rol:
 
