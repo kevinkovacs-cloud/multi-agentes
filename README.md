@@ -91,11 +91,10 @@ El código separa el **modelo genérico** (`core/`) de la **instancia de dominio
 moav-hr/
 ├── README.md
 ├── MAPPING.md                       # equivalencia código ↔ propuesta v13 (§2.5, §2bis)
-├── assets/                          # diagramas del plan de tesis (Figs. 1–3) + SVG
-│   ├── arquitectura_modelo.svg
-│   ├── figura1_arquitectura_pipeline.png
-│   ├── figura2_ciclo_vida_llc.png
-│   └── figura3_arquitectura_conceptual.png
+├── assets/                          # diagramas del plan de tesis
+│   ├── arquitectura_modelo.svg      # Figura 1 (instancia HR) · dark-mode
+│   ├── figura2_ciclo_vida_llc.png   # Figura 2 (ciclo de vida, modelo genérico)
+│   └── figura3_arquitectura_conceptual.png  # Figura 3
 ├── poc/index.html                   # PoC interactiva (abrir en navegador)
 ├── src/moav_hr/
 │   ├── core/                        # modelo GENÉRICO (§2, §2bis, §3)
