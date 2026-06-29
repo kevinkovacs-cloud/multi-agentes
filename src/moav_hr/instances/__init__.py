@@ -1,1 +1,1 @@
-"""Instancias de dominio del modelo genérico MOACV (core/)."""
+"""Instancias de dominio del modelo genérico (core/)."""

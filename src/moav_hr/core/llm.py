@@ -1,5 +1,5 @@
 """
-Backend LLM genérico del modelo MOACV.
+Backend LLM genérico del modelo.
 
 Modo `sim` (determinístico, sin LLM — el dominio computa la salida) o `llm`
 (inferencia real con Llama 3.1 vía Ollama, import perezoso). El núcleo no conoce

@@ -3,7 +3,7 @@
 Caso de demostración del PoC (Plan §5) — determinístico y narrado.
 
 Reproduce SIEMPRE igual el caso ilustrativo: un candidato calificado al que el caso
-basal (un único agente) RECHAZA por subestimación, y que MOACV deriva a REVISIÓN HUMANA
+basal (un único agente) RECHAZA por subestimación, y que el modelo deriva a REVISIÓN HUMANA
 cuando el Monitor de Utilidad de Equidad detecta sesgo por encima del umbral.
 
 Muestra el flujo de los 5 agentes, el audit trail, el grafo RDF (validado con SHACL)
@@ -31,7 +31,7 @@ def main():
     pipe = HRPipeline(mode="sim")            # determinístico, sin LLM
     pipe.warmup(CANDIDATES)                   # siembra la base de teorías (experiencia)
 
-    print(f"\n  CASO DE DEMOSTRACIÓN MOACV — {c.name}")
+    print(f"\n  CASO DE DEMOSTRACIÓN — {c.name}")
     rule("═")
     print(f"  Candidato: {c.name}  ·  {c.gender}/{c.origin}/{c.age}a  ·  {c.exp}a exp  ·  {c.edu}")
     print(f"  Skills: {', '.join(c.skills)}")
@@ -45,10 +45,10 @@ def main():
     if c.true_qual >= 0.75 and base["decision"] == "REJECT":
         print(f"      ⚠️  FALSO RECHAZO: candidato calificado (tq={c.true_qual:.2f}) rechazado por subestimación.")
 
-    # --- PIPELINE MOACV (5 agentes) ---
+    # --- PIPELINE MODELO (5 agentes) ---
     st = pipe.process(c)
     p, m, a, e = st["parser"], st["matcher"], st["auditor"], st["explain"]
-    print(f"\n  [2] PIPELINE MOACV — 5 agentes con ciclo de vida")
+    print(f"\n  [2] PIPELINE — 5 agentes con ciclo de vida")
     print(f"      Parser (BIO, región 1)      → Si={p['si']}")
     print(f"                                    sensibles detectados={p['sensitive']}  retenidos={p['retained']}  (guardrail BIO)")
     print(f"      Matcher (TBO, región 2)     → score={m['score']:.3f}  ({m['source']}, {m['n_retrieved']} teorías RAG)")
@@ -59,9 +59,9 @@ def main():
 
     # --- CONTRASTE ---
     print(f"\n  [3] CONTRASTE")
-    print(f"      basal={base['decision']}   →   MOACV={st['decision']}")
+    print(f"      basal={base["decision"]}   →   modelo={st['decision']}")
     if base["decision"] == "REJECT" and st["decision"] == "ESCALATE_HUMAN":
-        print(f"      ✅ MOACV detecta el sesgo y deriva a revisión humana (EU AI Act Art.14) "
+        print(f"      ✅ El modelo detecta el sesgo y deriva a revisión humana (EU AI Act Art.14) "
               f"en lugar de rechazar.")
 
     # --- AUDIT TRAIL + RDF ---

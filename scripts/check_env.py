@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Verificación del entorno de MOACV / MOAV-HR.
+Verificación del entorno de MOAV-HR.
 
 Comprueba que el stack completo esté operativo:
   - versión de Python
@@ -100,7 +100,7 @@ def check_llm_inference() -> None:
 
 def check_package() -> None:
     global ok
-    print("\n[4] Código del paquete MOACV")
+    print("\n[4] Código del paquete")
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
     try:
         from moav_hr.core.theory import Theory, TheoryBase     # núcleo genérico
@@ -135,7 +135,7 @@ if __name__ == "__main__":
     check_package()
     print("\n" + ("=" * 48))
     if ok:
-        print("✅ ENTORNO OK — listo para construir los agentes MOACV")
+        print("✅ ENTORNO OK — listo para construir los agentes")
         sys.exit(0)
     else:
         print("❌ HAY PROBLEMAS — revisá las líneas marcadas arriba")

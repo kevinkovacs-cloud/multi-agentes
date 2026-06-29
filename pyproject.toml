@@ -1,7 +1,7 @@
 [project]
 name = "moav-hr"
 version = "0.1.0"
-description = "Marco de Orquestación Multiagente con Ciclo de Vida Adaptativo (MOACV)"
+description = "Modelo de Ciclo de Vida para el Aprendizaje de Agentes Autónomos basados en Equidad"
 authors = [{name = "Kevin Yoel Kovacs"}]
 requires-python = ">=3.10"
 readme = "README.md"

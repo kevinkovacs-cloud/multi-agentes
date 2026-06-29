@@ -4,7 +4,7 @@ La **v13 es la fuente de verdad**. Esta tabla documenta cómo los nombres y cons
 del documento (§2, §2bis, §2.5, §3, §4) se materializan en el código.
 
 ## Estructura (decoupling — P4)
-- `src/moav_hr/core/` — modelo **genérico** MOACV (§2, §2bis, §3). No importa `instances/` (test: `tests/test_decoupling.py`).
+- `src/moav_hr/core/` — modelo **genérico** (§2, §2bis, §3). No importa `instances/` (test: `tests/test_decoupling.py`).
 - `src/moav_hr/instances/hr/` — instancia de **selección de personal** (§4).
 
 ## Definiciones (§2bis) → código

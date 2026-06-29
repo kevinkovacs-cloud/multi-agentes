@@ -1,4 +1,4 @@
-# Implementación Python de MOACV (alineada a la propuesta v13)
+# Implementación Python del modelo (alineada a la propuesta v13)
 
 Separa el **modelo genérico** (`core/`) de la **instancia de dominio** (`instances/hr/`).
 Regla no negociable (test `tests/test_decoupling.py`): **`core/` no importa `instances/`**.

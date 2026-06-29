@@ -21,7 +21,7 @@ de la tesis** (Ejes 1–3). La fuente de verdad del modelo es el plan de tesis.
 **Ingeniería**
 - Decoupling `core/` (genérico) vs `instances/hr/` (dominio), verificado por test.
 - Parser robusto (CVs mal formateados, sinónimos, texto/HTML) + guardrail BIO de no-retención.
-- Caso de demostración §5 determinístico (basal rechaza → MOACV escala). 
+- Caso de demostración §5 determinístico (basal rechaza → modelo escala). 
 - Corre con modelos locales (Llama 3.1 8B vía Ollama) o en modo `sim` sin LLM. Sin claves.
 - App web standalone (5 vistas) para el video. `MAPPING.md` (código↔documento).
 

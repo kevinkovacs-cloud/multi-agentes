@@ -1,5 +1,5 @@
 """
-Núcleo genérico del modelo MOACV (independiente del dominio).
+Núcleo genérico del modelo (independiente del dominio).
 
 Implementa el modelo formal de la propuesta v13 §2 / §2bis:
   - ciclo de vida individual del agente (Def. 2) y las 7 regiones (§3)

@@ -55,7 +55,7 @@ def collaborate(receptor: TheoryBase, colaborador: TheoryBase,
     Def. 8 — colaboración maestro→aprendiz (nivel(colaborador) ≻ nivel(receptor)).
     Igual → refuerza (P+=, K+=). Similar → debilita (solo K+=). Inexistente → transfiere.
     Condicionada por Def. 9: solo si donor_reputation ≥ tau.
-    La condición de niveles se valida en MOACVAgent.transfer_to (usa el orden total).
+    La condición de niveles se valida en transfer_to (usa el orden total).
     """
     rep = ShareReport("collaboration", accepted=donor_reputation >= tau)
     if not rep.accepted:

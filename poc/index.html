@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MOACV — PoC · Kevin Kovacs · DIIT-UNLaM</title>
+<title>Modelo de Ciclo de Vida — PoC · Kevin Kovacs · DIIT-UNLaM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -297,7 +297,7 @@ select.inp { background: var(--surface2); color: var(--text); border: 1px solid 
 <!-- HEADER -->
 <div class="header">
   <div>
-    <div class="logo">MOACV<span>·HR</span> &nbsp;<span style="font-size:11px;color:var(--muted);font-weight:400">Prueba de Concepto</span></div>
+    <div class="logo">Modelo<span>·HR</span> &nbsp;<span style="font-size:11px;color:var(--muted);font-weight:400">Prueba de Concepto</span></div>
     <div class="header-sub">Marco de Orquestación Multiagente con Ciclo de Vida Adaptativo — Tesis Doctoral · Kevin Kovacs · DIIT-UNLaM</div>
   </div>
   <div class="header-badges">
@@ -312,7 +312,7 @@ select.inp { background: var(--surface2); color: var(--text); border: 1px solid 
   <button class="tab active" data-view="pipeline"><span class="tnum">01</span>Pipeline</button>
   <button class="tab" data-view="lifecycle"><span class="tnum">02</span>Ciclo de vida & transferencia</button>
   <button class="tab" data-view="theories"><span class="tnum">03</span>Teorías ⟨Si,A,Sf,P,K,U⟩</button>
-  <button class="tab" data-view="baseline"><span class="tnum">04</span>Caso basal vs MOACV</button>
+  <button class="tab" data-view="baseline"><span class="tnum">04</span>Caso basal vs Modelo</button>
   <button class="tab" data-view="ontology"><span class="tnum">05</span>Ontología & Compliance</button>
 </div>
 
@@ -448,11 +448,11 @@ reliability = P / K</div>
 <!-- ============ VIEW 04: CASO BASAL ============ -->
 <div class="view view-scroll" id="view-baseline">
   <div class="wrap">
-    <div class="vtitle">Caso basal (1 agente) vs MOACV (5 agentes)</div>
-    <div class="vsub">Punto de comparación experimental (caso basal de la propuesta). El basal es un único agente LLM (solo matching, sin auditoría de sesgo); MOACV agrega la cadena con Bias Auditor + escalado a humano.</div>
+    <div class="vtitle">Caso basal (1 agente) vs Modelo (5 agentes)</div>
+    <div class="vsub">Punto de comparación experimental (caso basal de la propuesta). El basal es un único agente LLM (solo matching, sin auditoría de sesgo); el modelo agrega la cadena con Bias Auditor + escalado a humano.</div>
     <div class="callout callout-green">
       <b>Hipótesis del baseline:</b> un agente individual subestima sistemáticamente a los candidatos de alto riesgo interseccional
-      (score asignado &lt; calificación real) y puede <b>rechazar erróneamente</b> a candidatos calificados. MOACV detecta y corrige
+      (score asignado &lt; calificación real) y puede <b>rechazar erróneamente</b> a candidatos calificados. El modelo detecta y corrige
       ese sesgo en la cadena y deriva los casos límite a revisión humana (EU AI Act Art. 14).
     </div>
 
@@ -460,10 +460,10 @@ reliability = P / K</div>
     <div class="grid2" id="baseline-cards" style="margin-bottom:20px"></div>
 
     <div class="card">
-      <div class="card-title">Decisión por candidato — basal vs MOACV</div>
-      <div class="card-sub">"Error vs ground-truth" = score asignado − calificación real. Negativo = subestimación. En verde, los casos que MOACV corrige.</div>
+      <div class="card-title">Decisión por candidato — basal vs Modelo</div>
+      <div class="card-sub">"Error vs ground-truth" = score asignado − calificación real. Negativo = subestimación. En verde, los casos que el modelo corrige.</div>
       <table class="rtable">
-        <thead><tr><th>Candidato</th><th>Grupo</th><th>Riesgo</th><th>Real (tq)</th><th>Basal: score</th><th>Basal: decisión</th><th>MOACV: score</th><th>MOACV: decisión</th></tr></thead>
+        <thead><tr><th>Candidato</th><th>Grupo</th><th>Riesgo</th><th>Real (tq)</th><th>Basal: score</th><th>Basal: decisión</th><th>Modelo: score</th><th>Modelo: decisión</th></tr></thead>
         <tbody id="baseline-body"></tbody>
       </table>
     </div>
@@ -540,7 +540,7 @@ const now = () => new Date().toTimeString().slice(0,8);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const sc = s => s>=0.85?'#10b981':s>=0.75?'#f59e0b':'#ef4444';
 
-/* funciones de scoring compartidas (basal y MOACV) */
+/* funciones de scoring compartidas (basal y modelo) */
 function scoreOf(c){
   const expAdj = c.exp < MIN_EXP ? -0.05 : 0;
   const eduAdj = ['Maestría','Doctorado'].includes(c.edu) ? 0.02 : 0;
@@ -625,7 +625,7 @@ function selectCand(id) {
 function renderWaiting() {
   const c = CANDS.find(x=>x.id===selId);
   document.getElementById('pipeline-area').innerHTML = `
-    <div class="section-label">Pipeline MOACV — ${c.name}</div>
+    <div class="section-label">Pipeline — ${c.name}</div>
     <div class="dag" id="dag">
       ${agentNode('pa','P','ic-blue','Parser Agent','BIO+TBO+WIO','mature','Esperando...')}
       <div class="arrow-down">▼</div>
@@ -1007,7 +1007,7 @@ function renderSelection() {
 }
 
 /* ============================================================
-   VIEW 04 — CASO BASAL vs MOACV
+   VIEW 04 — CASO BASAL vs MODELO
    ============================================================ */
 function moacvDecisionDet(c) {
   const base = scoreOf(c);
@@ -1080,7 +1080,7 @@ function renderBaseline() {
       </div>
     </div>
     <div class="card" style="margin-bottom:0">
-      <div class="card-title" style="color:#34d399">MOACV — 5 agentes</div>
+      <div class="card-title" style="color:#34d399">Modelo — 5 agentes</div>
       <div class="card-sub">Cadena con Bias Auditor + escalado a humano + audit trail.</div>
       <div class="metrics-row" style="margin:0">
         <div class="metric-card"><div class="mc-label">Subestim. alto riesgo</div><div class="mc-val c-ok">${(mErrHigh/nHigh).toFixed(3)}</div><div class="mc-sub c-ok">corregido → ~0</div></div>

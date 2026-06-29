@@ -1,5 +1,5 @@
 """
-Agente genérico del modelo MOACV (Def. 2: aᵢ = ⟨θᵢ, sᵢ, Lᵢ⟩).
+Agente genérico del modelo (Def. 2: aᵢ = ⟨θᵢ, sᵢ, Lᵢ⟩).
 
 Cada agente posee su base de teorías θᵢ, su estado de evolución sᵢ y su capa activa Lᵢ,
 recorre las 7 regiones (§3), recupera teorías por RAG (§2.2) y puede compartir

@@ -1,7 +1,5 @@
-# MOACV — Marco de Orquestación Multiagente con Ciclo de Vida Adaptativo
+# Modelo de Ciclo de Vida para el Aprendizaje de Agentes Autónomos basados en Equidad
 
-> **Multi-Agent Orchestration with Adaptive life Cycle for decisions in Vulnerable social contexts**
->
 > Propuesta de tesis doctoral — Doctorado en Ingeniería con Mención en Tecnología de la Información
 > Grupo de Inteligencia Artificial Aplicada (GIDSA) · DIIT-UNLaM
 >
@@ -11,23 +9,23 @@
 
 ## Resumen
 
-MOACV es un framework de orquestación multiagente con ciclo de vida adaptativo para la toma de decisiones asistida en contextos donde intervienen atributos socialmente sensibles (género, origen, edad). El framework extiende el **Modelo de Ciclo de Vida LLC (Learning Life Cycle)** con capas BIO/TBO/WIO (modelo LLC, UNLP 2010) al dominio de los agentes de lenguaje de gran escala (LLM agents).
+Este trabajo propone un framework de orquestación multiagente con ciclo de vida adaptativo para la toma de decisiones asistida en contextos donde intervienen atributos socialmente sensibles (género, origen, edad). El framework extiende el **Modelo de Ciclo de Vida LLC (Learning Life Cycle)** con capas BIO/TBO/WIO (modelo LLC, UNLP 2010) al dominio de los agentes de lenguaje de gran escala (LLM agents).
 
-El **dominio de experimentación** es la selección de personal, elegido por la disponibilidad de datos públicos y por la existencia de vacancias verificadas en la literatura. El reclutamiento es la instancia experimental, no el tema central de la tesis.
+El **caso de aplicación** es la selección de personal, elegido por la disponibilidad de datos públicos y por la existencia de vacancias verificadas en la literatura. El reclutamiento es el caso de prueba, no el tema central de la tesis.
 
 ## Aporte original
 
 El framework aborda tres vacancias concretas del estado del arte:
 
-1. **Teórico-formal** — No existe teoría formal de amplificación/atenuación de sesgo en cadenas de agentes coordinados. MOACV extiende el modelo BiasAmp→ (Wang & Russakovsky, ICML 2021) a grafos dirigidos acíclicos de agentes (DAG-MAS).
+1. **Teórico-formal** — No existe teoría formal de amplificación/atenuación de sesgo en cadenas de agentes coordinados. El modelo extiende BiasAmp→ (Wang & Russakovsky, ICML 2021) a grafos dirigidos acíclicos de agentes (DAG-MAS).
 
-2. **Metodológico** — Los sistemas MAS de reclutamiento existentes no incorporan ciclo de vida de agentes. Cada agente de MOACV posee su propio ciclo de vida individual (Born→Novato→Trained→Mature) y su propia base de conocimiento de teorías ⟨Si, A, Sf, P, K, U⟩.
+2. **Metodológico** — Los sistemas MAS existentes no incorporan ciclo de vida de agentes. Cada agente posee su propio ciclo de vida individual (Born→Novato→Trained→Mature) y su propia base de conocimiento de teorías ⟨Si, A, Sf, P, K, U⟩.
 
-3. **Empírico-aplicado** — No existe un benchmark en español de sistemas multiagente para selección de personal con ground-truth demográfico. MOACV propone construirlo.
+3. **Empírico-aplicado** — No existe un benchmark en español de sistemas multiagente para selección de personal con ground-truth demográfico. El modelo propone construirlo.
 
 ## Arquitectura
 
-![Arquitectura MOACV](assets/arquitectura_moacv.svg)
+![Arquitectura del modelo](assets/arquitectura_modelo.svg)
 
 El sistema se compone de cinco agentes especializados por rol:
 
@@ -83,10 +81,10 @@ El código separa el **modelo genérico** (`core/`) de la **instancia de dominio
 moav-hr/
 ├── README.md
 ├── MAPPING.md                       # equivalencia código ↔ propuesta v13 (§2.5, §2bis)
-├── assets/arquitectura_moacv.svg
+├── assets/arquitectura_modelo.svg
 ├── poc/index.html                   # PoC interactiva (abrir en navegador)
 ├── src/moav_hr/
-│   ├── core/                        # modelo GENÉRICO MOACV (§2, §2bis, §3)
+│   ├── core/                        # modelo GENÉRICO (§2, §2bis, §3)
 │   │   ├── agent.py · lifecycle.py · theory.py · sharing.py
 │   │   ├── retrieval.py · fairness.py · monitor.py · orchestrator.py
 │   │   ├── audit/                   # trail OpenTelemetry + eventos
@@ -104,7 +102,7 @@ moav-hr/
 
 Hay dos PoC complementarias:
 
-- **PoC HTML** (`poc/index.html`) — aplicación web standalone que se abre directo en el navegador, sin instalar nada. Organizada en cinco pestañas: (1) *Pipeline* de los cinco agentes sobre 12 candidatos sintéticos con audit trail en vivo; (2) *Ciclo de vida & transferencia* — madurez Born→Mature por agente y colaboración maestro→aprendiz; (3) *Teorías* ⟨Si,A,Sf,P,K,U⟩ con el criterio de selección U>P>K en vivo; (4) *Caso basal vs MOACV* — comparación de equidad; (5) *Ontología & Compliance* — evento JSON-LD y justificación.
+- **PoC HTML** (`poc/index.html`) — aplicación web standalone que se abre directo en el navegador, sin instalar nada. Organizada en cinco pestañas: (1) *Pipeline* de los cinco agentes sobre 12 candidatos sintéticos con audit trail en vivo; (2) *Ciclo de vida & transferencia* — madurez Born→Mature por agente y colaboración maestro→aprendiz; (3) *Teorías* ⟨Si,A,Sf,P,K,U⟩ con el criterio de selección U>P>K en vivo; (4) *Caso basal vs Modelo* — comparación de equidad; (5) *Ontología & Compliance* — evento JSON-LD y justificación.
 - **PoC Python** (`src/moav_hr/` + `experiments/run_poc.py`) — implementación con el stack real (LangGraph + Ollama/Llama 3.1). Corre en modo `sim` (determinístico, liviano) o `llm` (inferencia real). Ver `src/moav_hr/README.md`.
 
 ## Cómo correr
@@ -122,7 +120,7 @@ pip install -e .
 # 3. tests
 pytest tests/ -q
 
-# 4. caso de demostración determinístico (Plan §5) — basal rechaza → MOACV escala
+# 4. caso de demostración determinístico (Plan §5) — basal rechaza → modelo escala
 python experiments/demo_caso.py
 
 # 5. pipeline completo: fairness, μ/D, ontología RDF+SHACL+SPARQL, fidelidad, compartición
@@ -137,15 +135,24 @@ Alcance hecho/futuro en [`ESTADO.md`](ESTADO.md) · mapeo código↔documento en
 
 ## Estado del desarrollo
 
+**Año 1 · 1.º sem**
 - [x] Estado del arte y vacancias identificadas
-- [x] Propuesta formal revisada
+- [x] Propuesta formal revisada (modelo genérico + conjetura de atenuación)
 - [x] Diagrama de arquitectura
 - [x] Prueba de concepto funcional (HTML interactivo + Python sobre LangGraph/Ollama)
-- [~] Implementación Python con LLMs reales (Año 1) — pipeline operativo; calibración del LLM (TBO) en curso
-- [ ] Caso basal sobre FairCVtest / JobFair (Año 1)
-- [ ] Benchmark sintético en español (Año 2)
-- [ ] Teoremas de composición de fairness (Año 3)
-- [ ] Validación con usuarios reales (Año 4)
+
+**Año 1 · 2.º sem**
+- [~] Framework con LLMs reales (LangGraph/Ollama) — pipeline operativo; calibración TBO en curso
+- [ ] Caso basal sobre FairCVtest / JobFair
+- [ ] Benchmark sintético en español
+
+**Año 2 · 1.º sem**
+- [ ] Experimentos de amplificación/atenuación en topologías simples
+- [ ] Ontología completa (PROV-O, SHACL, orden) y explicabilidad M2M
+
+**Año 2 · 2.º sem**
+- [ ] Validación de utilidad acotada con usuarios (n ≥ 30)
+- [ ] Consolidación, escritura y defensa
 
 ## Licencia
 

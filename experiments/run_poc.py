@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """
-Demo del modelo MOACV alineado a la propuesta v13.
+Demo del modelo alineado a la propuesta v13.
 
 Por defecto en modo 'sim' (determinístico, sin LLM). Recorre: warmup de teorías →
-pipeline de 5 agentes → fairness por ventana (Def. 5/6) → caso basal vs MOACV →
+pipeline de 5 agentes → fairness por ventana (Def. 5/6) → caso 
 amplificación μ (Def. 10) y diversidad D (Def. 11) → ontología RDF + SHACL + SPARQL
 (§2.5) → fidelidad de teorías (Eje 3) → compartición coop/colab (Def. 7/8/9).
 
@@ -25,7 +25,7 @@ from moav_hr.core.sharing import ShareReport  # noqa: F401
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Demo MOACV (v13)")
+    ap = argparse.ArgumentParser(description="Demo PoC (v13)")
     ap.add_argument("--mode", choices=["sim", "llm"], default="sim")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--criterion", choices=list(fairness.CRITERIA), default="demographic_parity")
@@ -37,10 +37,10 @@ def main() -> None:
     pipe = HRPipeline(mode=args.mode, criterion=args.criterion, attr=args.attr)
     n_theories = pipe.warmup(cands)   # región 5: siembra de teorías
 
-    print(f"\n  MOACV PoC (v13) · modo={args.mode} · {len(cands)} candidatos · "
+    print(f"\n  PoC (v13) · modo={args.mode} · {len(cands)} candidatos · "
           f"teorías sembradas={n_theories}")
     print("  " + "─" * 96)
-    print(f"  {'Candidato':<18}{'Grupo':<8}{'Riesgo':<7}{'tq':>5}{'  basal':>9}{'  MOACV':>9}"
+    print(f"  {'Candidato':<18}{'Grupo':<8}{'Riesgo':<7}{'tq':>5}{'  
           f"{'  teorías':>9}   decisión")
     print("  " + "─" * 96)
 
@@ -68,7 +68,7 @@ def main() -> None:
         ag.record_window_fairness(fair_w)
 
     # --- fairness por ventana (Def. 5, 6) ---
-    print("\n  FAIRNESS POR VENTANA (MOACV)")
+    print("\n  FAIRNESS POR VENTANA (MODELO)")
     print(f"    Demographic Parity Δ ({args.attr})     : {fairness.demographic_parity_delta(moacv_recs, args.attr):.3f}")
     print(f"    Equalized Odds Δ ({args.attr})         : {fairness.equalized_odds_delta(moacv_recs, args.attr):.3f}")
     print(f"    fair(W) = 1−|Δ(W)|  [{args.criterion}]  : {fair_w:.3f}")
@@ -76,14 +76,14 @@ def main() -> None:
     print(f"    U_op(W) = α·acc+(1−α)·fair             : {fairness.u_op(moacv_recs, args.attr, args.criterion):.3f}")
     print(f"    Subestim. alto riesgo (score−tq)       : {fairness.mean_score_error(moacv_recs, lambda r: r['bias_risk']=='high'):.3f}")
 
-    # --- caso basal vs MOACV ---
+    # --- caso 
     gap_base = abs(fairness.mean_score_error(base_recs, lambda r: r['bias_risk']=='low')
                    - fairness.mean_score_error(base_recs, lambda r: r['bias_risk']=='high'))
     gap_moacv = abs(fairness.mean_score_error(moacv_recs, lambda r: r['bias_risk']=='low')
                     - fairness.mean_score_error(moacv_recs, lambda r: r['bias_risk']=='high'))
-    print("\n  CASO BASAL vs MOACV")
-    print(f"    Falsos rechazos de calificados : basal={base_false_rej}  MOACV={moacv_false_rej}")
-    print(f"    Brecha de trato por grupo      : basal={gap_base:.3f}  MOACV={gap_moacv:.3f}")
+    print("\n  CASO BASAL vs MODELO")
+    print(f"    Falsos rechazos de calificados : 
+    print(f"    Brecha de trato por grupo      : 
 
     # --- amplificación μ (Def. 10) y diversidad D (Def. 11) ---
     amp_gap = fairness.amplification(gap_base, gap_moacv)
