@@ -4,7 +4,7 @@ Documento honesto del alcance, para ser preciso en la reunión. Separa lo que el
 **demuestra hoy** (viabilidad del pipeline y de la ontología) de lo que es **investigación
 de la tesis** (Ejes 1–3). La fuente de verdad del modelo es el plan de tesis.
 
-## ✅ Hecho y demostrable (corre y está testeado — 25 tests en verde)
+## ✅ Hecho y demostrable (corre y está testeado — 28 tests en verde)
 
 **Pipeline y ciclo de vida**
 - Pipeline de 5 agentes end-to-end con un comando (`run_poc.py`, `demo_caso.py`). (§4.1)
@@ -19,6 +19,7 @@ de la tesis** (Ejes 1–3). La fuente de verdad del modelo es el plan de tesis.
 - Validación SHACL conforme + consulta SPARQL de ejemplo (auditoría de sesgo).
 - **Orden de trazabilidad tras round-trip (obs. Becerra):** el orden de ejecución se ancla a un ordinal explícito (`moacv:ordenEjecucion`) + encadenado `prov:wasInformedBy`, y se recupera con `ORDER BY` tras serializar→parsear. No depende del orden de tripletas ni del timestamp (que puede colisionar). Test: `tests/test_orden_trazabilidad.py`.
 - **Explicabilidad derivada de la serialización (obs. Becerra):** `core/ontology/explain.explain_from_rdf` reconstruye la explicación desde el grafo RDF (no del estado en memoria) y la articula para dos destinatarios —regulador (completitud/umbrales/cumplimiento) y usuario (lenguaje llano)—. Test: `tests/test_xai_rdf.py`. *Alcance: derivación + destinatarios; no es XAI por atribución (SHAP/LIME).*
+- **Compartición M2M de teorías vía ontología (obs. Becerra):** `core/ontology/sharing_rdf` exporta una base de teorías ⟨Si,A,Sf,P,K,U⟩ a RDF/Turtle y otro agente la reconstruye **desde el RDF** (no de objetos en memoria), con el vocabulario estándar de §2.5 — intercambio de conocimiento independiente del framework. Test: `tests/test_m2m_teorias.py`.
 
 **Ingeniería**
 - Decoupling `core/` (genérico) vs `instances/hr/` (dominio), verificado por test.
@@ -42,7 +43,7 @@ de la tesis** (Ejes 1–3). La fuente de verdad del modelo es el plan de tesis.
 ## Cómo verificarlo
 ```bash
 python scripts/check_env.py        # entorno + Ollama + smoke (pipeline + ontología SHACL)
-python -m pytest tests/ -q         # 25 tests
+python -m pytest tests/ -q         # 28 tests
 python experiments/demo_caso.py    # caso §5 determinístico
 python experiments/run_poc.py      # pipeline completo + fairness + RDF + fidelidad
 ```

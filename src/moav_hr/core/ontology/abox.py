@@ -69,10 +69,17 @@ def build_abox(state: dict, agents: list | None = None) -> Graph:
             g.add((tu, MOACV.K, Literal(int(t.k), datatype=XSD.integer)))
             g.add((tu, MOACV.U, Literal(round(float(t.u), 4), datatype=XSD.double)))
             g.add((tu, MOACV.confiabilidad, Literal(round(t.reliability, 4), datatype=XSD.double)))
+            # acción A (Def. 3) como propiedad — completa la tupla ⟨Si,A,Sf,P,K,U⟩ en el RDF
+            g.add((tu, MOACV.accion, Literal(t.a)))
             si = _uri("Si", f"{a.name}-{i}")
             g.add((si, RDF.type, MOACV.SituacionInicial))
             g.add((si, MOACV.representacionJSON, Literal(serialize(t.si))))
             g.add((tu, MOACV.aplicaEn, si))
+            # situación final Sf (Def. 3) — necesaria para reconstruir/compartir la teoría (M2M)
+            sf = _uri("Sf", f"{a.name}-{i}")
+            g.add((sf, RDF.type, MOACV.SituacionFinal))
+            g.add((sf, MOACV.representacionJSON, Literal(serialize(t.sf))))
+            g.add((tu, MOACV.aplicaEn, sf))
 
     # decisión final
     dec = state.get("decision")

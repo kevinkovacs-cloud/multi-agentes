@@ -55,6 +55,9 @@ DATA_PROPS = {
     "ordenEjecucion": XSD.integer,
     # enriquecimiento para la explicación derivada del RDF (ítem B)
     "sesgoDetectado": XSD.double, "tipoSesgo": XSD.string, "bloqueada": XSD.boolean,
+    # acción A de la teoría ⟨Si,A,Sf,P,K,U⟩, para reconstruirla desde el RDF y
+    # compartirla entre agentes de forma estándar / M2M (obs. Becerra).
+    "accion": XSD.string,
 }
 
 

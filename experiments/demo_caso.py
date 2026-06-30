@@ -21,6 +21,8 @@ from moav_hr.instances.hr.synthetic import CANDIDATES, get
 from moav_hr.instances.hr.pipeline import HRPipeline, run_baseline
 from moav_hr.core.ontology import abox, shapes, queries
 from moav_hr.core.ontology.explain import explain_from_rdf
+from moav_hr.core.ontology.sharing_rdf import theories_to_turtle, theories_from_turtle
+from moav_hr.core.theory import TheoryBase
 
 
 def rule(ch="─"):
@@ -92,6 +94,18 @@ def main():
     print(f"\n  [6] EXPLICABILIDAD derivada del RDF serializado (dos destinatarios)")
     print(f"      · regulador: {exp['regulador']}")
     print(f"      · usuario:   {exp['usuario']}")
+
+    # --- COMPARTICIÓN M2M DE TEORÍAS vía ontología (ítem M2M · Becerra) ---
+    emisor = pipe.matcher.theories.theories               # base de teorías del Matcher
+    ttl = theories_to_turtle(emisor, agent="Matcher")     # exporta a RDF/Turtle estándar
+    receptor = TheoryBase()                               # otro agente, base vacía
+    for t in theories_from_turtle(ttl):                   # reconstruye DESDE el RDF
+        receptor.add(t)
+    print(f"\n  [7] COMPARTICIÓN M2M DE TEORÍAS vía ontología (independiente del framework)")
+    print(f"      Matcher exporta {len(emisor)} teorías ⟨Si,A,Sf,P,K,U⟩ a RDF/Turtle "
+          f"({len(ttl)} chars)")
+    print(f"      → agente receptor reconstruye {len(receptor)} teorías desde el RDF "
+          f"(sin compartir memoria)")
     rule("═")
     print()
 
