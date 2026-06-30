@@ -84,6 +84,16 @@ def build_abox(state: dict, agents: list | None = None) -> Graph:
         aud = state.get("auditor", {})
         if "adjusted_score" in aud:
             g.add((du, MOACV.scoreMatching, Literal(float(aud["adjusted_score"]), datatype=XSD.double)))
+        # equidad: materializa el dictamen del Monitor en el RDF para que la explicación
+        # se pueda derivar del grafo serializado y no del estado en memoria (ítem B).
+        if "bias_score" in aud:
+            g.add((du, MOACV.sesgoDetectado, Literal(float(aud["bias_score"]), datatype=XSD.double)))
+        if "threshold" in aud:
+            g.add((du, MOACV.umbralEquidad, Literal(float(aud["threshold"]), datatype=XSD.double)))
+        if "bias_type" in aud:
+            g.add((du, MOACV.tipoSesgo, Literal(str(aud["bias_type"]))))
+        if "blocked" in aud:
+            g.add((du, MOACV.bloqueada, Literal(bool(aud["blocked"]), datatype=XSD.boolean)))
         g.add((du, PROV.wasAssociatedWith, _agent_node(g, "Orchestrator")))
         if cand_uri is not None:
             g.add((du, PROV.used, cand_uri))
@@ -95,15 +105,23 @@ def build_abox(state: dict, agents: list | None = None) -> Graph:
     # eventos del audit trail (≡ spans OpenTelemetry)
     trail = state.get("trail")
     if trail is not None:
+        prev_eu = None
         for j, ev in enumerate(trail.events):
             eu = _uri("Evento", f"{trace}-{j}")
             g.add((eu, RDF.type, EVENT_CLASS.get(ev.event_type, MOACV.EventoDeAuditoria)))
             g.add((eu, RDF.type, PROV.Activity))
             g.add((eu, MOACV.timestamp, Literal(float(ev.ts), datatype=XSD.double)))
+            # ordinal explícito: ancla la secuencia al índice de ejecución, no al orden de
+            # triples ni al timestamp (que puede colisionar). Recuperar con ORDER BY ?orden.
+            g.add((eu, MOACV.ordenEjecucion, Literal(j, datatype=XSD.integer)))
             g.add((eu, MOACV.tipo, Literal(ev.action)))
+            # encadenado causal PROV-O entre eventos consecutivos (refuerza el orden)
+            if prev_eu is not None:
+                g.add((eu, PROV.wasInformedBy, prev_eu))
             ag = _agent_node(g, ev.agent)
             g.add((eu, PROV.wasAssociatedWith, ag))
             g.add((ag, MOACV.generaEvento, eu))
+            prev_eu = eu
     return g
 
 

@@ -36,6 +36,15 @@ SELECT (COUNT(?e) AS ?escalamientos)
 WHERE { ?e a moacv:EventoEscalamiento . }
 """
 
+# secuencia de ejecución recuperada por el ordinal explícito (no por orden de triples):
+# corrobora que la trazabilidad secuencial sobrevive al round-trip de serialización (ítem A).
+Q_EVENTS_ORDERED = """
+PREFIX moacv: <https://moav-hr.diit.unlam.edu.ar/ontology/>
+SELECT ?evento ?orden ?tipo
+WHERE { ?evento moacv:ordenEjecucion ?orden ; moacv:tipo ?tipo . }
+ORDER BY ?orden
+"""
+
 
 def run(graph: Graph, query: str) -> list[dict]:
     rows = []

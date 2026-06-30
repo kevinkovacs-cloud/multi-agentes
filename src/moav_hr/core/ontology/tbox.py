@@ -50,6 +50,11 @@ DATA_PROPS = {
     "accW": XSD.double, "timestamp": XSD.double, "scoreMatching": XSD.double,
     "resultado": XSD.string, "criterioEquidad": XSD.string, "genero": XSD.string,
     "origen": XSD.string, "edad": XSD.integer, "representacionJSON": XSD.string, "tipo": XSD.string,
+    # orden de ejecución explícito: los grafos RDF no preservan el orden de inserción,
+    # así que la trazabilidad secuencial se ancla a un ordinal, no al timestamp (Becerra, ítem A).
+    "ordenEjecucion": XSD.integer,
+    # enriquecimiento para la explicación derivada del RDF (ítem B)
+    "sesgoDetectado": XSD.double, "tipoSesgo": XSD.string, "bloqueada": XSD.boolean,
 }
 
 
