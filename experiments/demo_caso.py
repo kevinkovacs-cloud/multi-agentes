@@ -15,9 +15,12 @@ Uso:  python experiments/demo_caso.py            (default: Ahmed El-Sayed, id 10
 from __future__ import annotations
 import sys
 
+from rdflib import Graph
+
 from moav_hr.instances.hr.synthetic import CANDIDATES, get
 from moav_hr.instances.hr.pipeline import HRPipeline, run_baseline
 from moav_hr.core.ontology import abox, shapes, queries
+from moav_hr.core.ontology.explain import explain_from_rdf
 
 
 def rule(ch="─"):
@@ -75,6 +78,20 @@ def main():
     esc = queries.run(g, queries.Q_ESCALATIONS)
     print(f"      tripletas RDF generadas: {len(g)}  ·  spans OpenTelemetry: {len(st['trail'].spans())}")
     print(f"      validación SHACL conforme: {conforms}  ·  SPARQL escalamientos: {esc[0]['escalamientos'] if esc else 0}")
+
+    # --- ORDEN TRAS ROUND-TRIP (ítem A · Becerra) ---
+    print(f"\n  [5] ORDEN DE TRAZABILIDAD tras serializar→recuperar (RDF no preserva orden)")
+    turtle = g.serialize(format="turtle")                 # serialización a string Turtle
+    g2 = Graph().parse(data=turtle, format="turtle")      # se recupera en un grafo NUEVO
+    seq = queries.run(g2, queries.Q_EVENTS_ORDERED)       # ORDER BY ?ordenEjecucion
+    print("      secuencia recuperada por ordinal: "
+          + " → ".join(f"{int(r['orden'])+1}.{r['tipo']}" for r in seq))
+
+    # --- EXPLICACIÓN DERIVADA DE LA SERIALIZACIÓN (ítem B · Becerra) ---
+    exp = explain_from_rdf(turtle)                         # entrada = RDF serializado, no memoria
+    print(f"\n  [6] EXPLICABILIDAD derivada del RDF serializado (dos destinatarios)")
+    print(f"      · regulador: {exp['regulador']}")
+    print(f"      · usuario:   {exp['usuario']}")
     rule("═")
     print()
 

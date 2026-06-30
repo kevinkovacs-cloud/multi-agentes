@@ -25,7 +25,9 @@ del documento (§2, §2bis, §2.5, §3, §4) se materializan en el código.
 - TBox (clases, propiedades, axiomas, alineación PROV-O): `core/ontology/tbox.py`.
 - ABox automático (homomorfismo estado/spans → tripletas): `core/ontology/abox.py`.
 - SHACL (validación de conformidad): `core/ontology/shapes.py`.
-- SPARQL (interoperabilidad / auditoría de sesgo): `core/ontology/queries.py`.
+- SPARQL (interoperabilidad / auditoría de sesgo / orden de ejecución): `core/ontology/queries.py` (incl. `Q_EVENTS_ORDERED`).
+- Orden de trazabilidad (§2.5 "orden de ejecución en el grafo"): propiedad ordinal `moacv:ordenEjecucion` + `prov:wasInformedBy` en `core/ontology/abox.py`; round-trip recuperado con `ORDER BY` (test `test_orden_trazabilidad.py`).
+- Explicabilidad desde la serialización (§2.5 "trazabilidad ≠ explicabilidad"): `core/ontology/explain.explain_from_rdf` (regulador / usuario, derivada del grafo RDF; test `test_xai_rdf.py`).
 - Nombres de clases/propiedades: **idénticos a §2.5** (Agente, AgenteAuditor, Teoria, Situacion(Inicial/Final), Accion, BaseDeConocimiento, Decision, VentanaDeDecisiones, EventoDeAuditoria + subclases, Candidato, AtributoProtegido; poseeBase, contieneTeoria, registra, aplicaEn, esIgualA/esSimilarA, cooperaCon (simétrica), colaboraCon, produce, audita, ponderaComparticion, generaEvento).
 
 ## Regiones (§3) → código
@@ -36,3 +38,5 @@ Cada evento del audit trail lleva `region=N` (1–7). Región 1 = Parser; 2 = Ma
 - **Similitud semántica:** proxy *cosine* sobre tokens `clave=valor` (sin embeddings). Upgrade a embeddings (Ollama / sentence-transformers) es directo en `core/retrieval.similarity`.
 - **TBox:** antes era un dict JSON-LD plano; ahora es el esquema RDF de §2.5 con `rdflib`.
 - **Ontología "curada manualmente — estado del repositorio" (§2.5):** ahora el TBox es código versionado y el ABox se genera automático.
+- **"Triple store" (obs. Becerra):** lo que hay es **serialización RDF a Turtle** sobre un grafo `rdflib` en memoria, no un store persistente. El orden de ejecución NO se confía al orden de tripletas ni al `timestamp` (puede colisionar) sino a un ordinal explícito; el round-trip serializar→recuperar está testeado. Store persistente (Fuseki/GraphDB) = trabajo futuro.
+- **Explicabilidad (obs. Becerra):** trazabilidad ≠ explicabilidad. La explicación se deriva del **RDF serializado** (no del estado en memoria) y se separa por destinatario (regulador / usuario). Es derivación + articulación, **no** XAI por atribución (SHAP/LIME/contrafácticos). La explicación tri-nivel L1/L2/L3 del `ExplainabilityAgent` (instancia HR) sigue siendo la del agente; la nueva derivación RDF→explicación es genérica (`core/`).
