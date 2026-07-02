@@ -35,6 +35,12 @@ del documento (§2, §2bis, §2.5, §3, §4) se materializan en el código.
 Cada evento del audit trail lleva `region=N` (1–7). Región 1 = Parser; 2 = Matcher (RAG+few-shot, §2.2); 4 = Bias Auditor; 7 = decisión/evolución (Orchestrator/Monitor).
 
 ## Divergencias declaradas (honestidad)
+- **Def. 7 (cooperación) — divergencia plan↔código, a resolver en el Eje 1:** el plan define
+  que la cooperación "genera una base de conocimiento común θ_c" y que, para teorías
+  similares, "se conserva la P **del aportante**". El código actual (`core/sharing.cooperate`)
+  muta la base del **receptor** (no materializa una θ_c común) y conserva la P del receptor.
+  Se resuelve contrastando con la fuente original (Maceri & García Martínez 2001;
+  García-Martínez et al. 2006) antes de tocar el código — no se corrige sin la fuente.
 - **μ (Def. 10):** se mide contra la **entrada**. El demo reporta dos instrumentaciones —brecha vs ground-truth y el criterio de equidad elegido— y **no valida la conjetura μ<1** (es trabajo del Eje 1; el PoC sólo demuestra el mecanismo, §5).
 - **Similitud semántica:** proxy *cosine* sobre tokens `clave=valor` (sin embeddings). Upgrade a embeddings (Ollama / sentence-transformers) es directo en `core/retrieval.similarity`.
 - **TBox:** antes era un dict JSON-LD plano; ahora es el esquema RDF de §2.5 con `rdflib`.

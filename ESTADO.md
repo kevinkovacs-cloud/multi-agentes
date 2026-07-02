@@ -4,13 +4,14 @@ Documento honesto del alcance, para ser preciso en la reunión. Separa lo que el
 **demuestra hoy** (viabilidad del pipeline y de la ontología) de lo que es **investigación
 de la tesis** (Ejes 1–3). La fuente de verdad del modelo es el plan de tesis.
 
-## ✅ Hecho y demostrable (corre y está testeado — 28 tests en verde)
+## ✅ Hecho y demostrable (corre y está testeado — 32 tests en verde)
 
 **Pipeline y ciclo de vida**
 - Pipeline de 5 agentes end-to-end con un comando (`run_poc.py`, `demo_caso.py`). (§4.1)
 - Teorías ⟨Si,A,Sf,P,K,U⟩: selección por ranking U>P>K (Def. 4), equivalencia por cuantización (Def. 3).
 - Compartición: cooperación (Def. 7) y colaboración maestro→aprendiz (Def. 8), con gating por reputación r/τ (Def. 9).
 - Monitor de Utilidad de Equidad Ω: `fair(W)`, bloqueo/escalado por umbral, regiones 4 y 7. (§2.4)
+  Cableado y ejercitado en `run_poc.py`: auditoría por ventana (`audit_window`), aprobación de compartición (`approve_sharing`, Def. 9) y gate de evolución (`gate_evolution`, región 7). Tests: `tests/test_monitor.py`.
 - Integración teorías↔LLM: recuperación por similitud + few-shot, punto de inyección explícito. (§2.2)
 
 **Ontología y trazabilidad (interoperabilidad RDF)**
@@ -31,6 +32,26 @@ de la tesis** (Ejes 1–3). La fuente de verdad del modelo es el plan de tesis.
 **Instrumental listo (interfaces, sin correr experimentos)**
 - `μ(M)=b(M)/b_in` (Def. 10), diversidad `D(M)` (Def. 11), harness de fidelidad (intervención causal).
 
+## ⚠️ Alcance del modo sim (cómo leer los números del demo)
+
+Tres límites del modo `sim`, declarados juntos porque se encadenan:
+
+1. **El sesgo por caso es un proxy etiquetado, no una detección.** El Bias Auditor asigna el
+   sesgo según la etiqueta `bias_risk` del dataset sintético (alto=0.10 · medio=0.035 ·
+   bajo=0.008); no lo infiere de los datos. La detección per-caso sobre datasets públicos
+   (FairCVtest/JobFair) es trabajo del Eje 2.
+2. **El ajuste de score usa el oráculo del benchmark.** Al bloquear un caso de alto riesgo,
+   `adjusted_score = true_qual` (el ground-truth); en riesgo medio, el ajuste tira 0.4 hacia
+   `true_qual`. En producción ese valor no existe: la acción defendible del sistema es
+   detectar → bloquear → derivar a revisión humana; el "ajuste" es instrumentación del sim.
+3. **Las magnitudes del lote heredan lo anterior.** Las mejoras basal→modelo (subestimación,
+   brecha de trato) están parcialmente construidas por esos ajustes con oráculo: demuestran el
+   mecanismo (dónde actúa el Monitor), no capacidad de detección ni magnitudes de hallazgo.
+
+Lo que **sí** se computa de verdad en sim, sin etiquetas ni oráculo: la disparidad por ventana
+`Δ(W)`/`fair(W)` (Def. 5) sale de las decisiones del lote, y μ/D se calculan con ese
+instrumental (sin validar la conjetura).
+
 ## 🔬 Trabajo futuro (tesis — NO incluido en el PoC, no fabricado)
 
 - **Eje 1 (teórico):** demostrar/­refutar la conjetura de atenuación μ<1 bajo C1/C2/C3; teoremas de composición. *(El PoC mide μ pero NO la valida — riesgo alto declarado en el plan.)*
@@ -43,7 +64,7 @@ de la tesis** (Ejes 1–3). La fuente de verdad del modelo es el plan de tesis.
 ## Cómo verificarlo
 ```bash
 python scripts/check_env.py        # entorno + Ollama + smoke (pipeline + ontología SHACL)
-python -m pytest tests/ -q         # 28 tests
+python -m pytest tests/ -q         # 32 tests
 python experiments/demo_caso.py    # caso §5 determinístico
 python experiments/run_poc.py      # pipeline completo + fairness + RDF + fidelidad
 ```
