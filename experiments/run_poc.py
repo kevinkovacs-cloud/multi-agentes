@@ -3,9 +3,10 @@
 Demo del modelo alineado a la propuesta v13.
 
 Por defecto en modo 'sim' (determinístico, sin LLM). Recorre: warmup de teorías →
-pipeline de 5 agentes → fairness por ventana (Def. 5/6) → caso 
-amplificación μ (Def. 10) y diversidad D (Def. 11) → ontología RDF + SHACL + SPARQL
-(§2.5) → fidelidad de teorías (Eje 3) → compartición coop/colab (Def. 7/8/9).
+pipeline de 5 agentes → auditoría por ventana del Monitor Ω (Def. 5/6, región 4) →
+caso basal vs modelo → amplificación μ (Def. 10) y diversidad D (Def. 11) →
+ontología RDF + SHACL + SPARQL (§2.5) → fidelidad de teorías (Eje 3) →
+compartición coop/colab (Def. 7/8/9, ponderada por Ω).
 
 Uso:
     python experiments/run_poc.py
@@ -40,7 +41,7 @@ def main() -> None:
     print(f"\n  PoC (v13) · modo={args.mode} · {len(cands)} candidatos · "
           f"teorías sembradas={n_theories}")
     print("  " + "─" * 96)
-    print(f"  {'Candidato':<18}{'Grupo':<8}{'Riesgo':<7}{'tq':>5}{'  
+    print(f"  {'Candidato':<18}{'Grupo':<8}{'Riesgo':<7}{'tq':>5}{'  basal':>9}{'  modelo':>9}"
           f"{'  teorías':>9}   decisión")
     print("  " + "─" * 96)
 
@@ -62,28 +63,30 @@ def main() -> None:
               f"{st['matcher']['n_retrieved']:>9}   {b['decision']}→{st['decision']}")
     print("  " + "─" * 96)
 
-    # registrar fair(W) en los agentes (para reputación, Def. 9)
-    fair_w = fairness.fair_window(moacv_recs, args.attr, args.criterion)
+    # el Monitor Ω audita la ventana (región 4) y su fair(W) alimenta la reputación (Def. 9)
+    audit = pipe.monitor.audit_window(moacv_recs)
+    fair_w = audit.fair
     for ag in pipe.agents:
         ag.record_window_fairness(fair_w)
 
-    # --- fairness por ventana (Def. 5, 6) ---
-    print("\n  FAIRNESS POR VENTANA (MODELO)")
+    # --- fairness por ventana (Def. 5, 6) — auditada por el Monitor Ω ---
+    print("\n  FAIRNESS POR VENTANA (MODELO) — auditoría del Monitor Ω (región 4)")
     print(f"    Demographic Parity Δ ({args.attr})     : {fairness.demographic_parity_delta(moacv_recs, args.attr):.3f}")
     print(f"    Equalized Odds Δ ({args.attr})         : {fairness.equalized_odds_delta(moacv_recs, args.attr):.3f}")
-    print(f"    fair(W) = 1−|Δ(W)|  [{args.criterion}]  : {fair_w:.3f}")
-    print(f"    acc(W)                                 : {fairness.acc_window(moacv_recs):.3f}")
-    print(f"    U_op(W) = α·acc+(1−α)·fair             : {fairness.u_op(moacv_recs, args.attr, args.criterion):.3f}")
+    print(f"    fair(W) = 1−|Δ(W)|  [{args.criterion}]  : {audit.fair:.3f}")
+    print(f"    acc(W)                                 : {audit.acc:.3f}")
+    print(f"    U_op(W) = α·acc+(1−α)·fair             : {audit.u_op:.3f}")
+    print(f"    Ventana marcada por Ω (|Δ|>{pipe.monitor.disparity_threshold})     : {audit.blocked}")
     print(f"    Subestim. alto riesgo (score−tq)       : {fairness.mean_score_error(moacv_recs, lambda r: r['bias_risk']=='high'):.3f}")
 
-    # --- caso 
+    # --- caso basal vs modelo ---
     gap_base = abs(fairness.mean_score_error(base_recs, lambda r: r['bias_risk']=='low')
                    - fairness.mean_score_error(base_recs, lambda r: r['bias_risk']=='high'))
     gap_moacv = abs(fairness.mean_score_error(moacv_recs, lambda r: r['bias_risk']=='low')
                     - fairness.mean_score_error(moacv_recs, lambda r: r['bias_risk']=='high'))
     print("\n  CASO BASAL vs MODELO")
-    print(f"    Falsos rechazos de calificados : 
-    print(f"    Brecha de trato por grupo      : 
+    print(f"    Falsos rechazos de calificados : basal={base_false_rej} → modelo={moacv_false_rej}")
+    print(f"    Brecha de trato por grupo      : basal={gap_base:.3f} → modelo={gap_moacv:.3f}")
 
     # --- amplificación μ (Def. 10) y diversidad D (Def. 11) ---
     amp_gap = fairness.amplification(gap_base, gap_moacv)
@@ -116,8 +119,11 @@ def main() -> None:
     print("\n  FIDELIDAD DE TEORÍAS (Eje 3 — dependencia causal de la decisión)")
     print(f"    {fid}")
 
-    # --- compartición: cooperación (Def. 7) y colaboración (Def. 8/9) ---
-    print("\n  COMPARTICIÓN DE CONOCIMIENTO (Def. 7/8/9)")
+    # --- compartición (Def. 7/8) ponderada por el Monitor Ω (Def. 9) + gate de evolución (región 7) ---
+    print("\n  COMPARTICIÓN DE CONOCIMIENTO (Def. 7/8/9) — ponderada por el Monitor Ω")
+    ok_share = pipe.monitor.approve_sharing(pipe.matcher)
+    print(f"    Aprobación de Ω para compartir (r≥τ)      : {ok_share} "
+          f"(r={pipe.matcher.reputation():.3f}, τ={pipe.monitor.tau})")
     novato = SemanticMatcherAgent(pipe.backend)          # Born (sin entrenar)
     novato.tbo.training_runs = 0
     rep_collab = pipe.matcher.transfer_to(novato, tau=pipe.monitor.tau)
@@ -128,7 +134,9 @@ def main() -> None:
     rep_coop = pipe.matcher.cooperate_with(pipe2.matcher, tau=pipe.monitor.tau)
     print(f"    Cooperación matcher↔matcher (Trained)     : {rep_coop.op} aceptada={rep_coop.accepted} "
           f"(refuerza={rep_coop.reinforced}, debilita={rep_coop.weakened}, nuevas={rep_coop.transferred})")
-    print(f"    Reputación de equidad del matcher (r)     : {pipe.matcher.reputation():.3f}  (τ={pipe.monitor.tau})")
+    ok_evol = pipe.monitor.gate_evolution(pipe.matcher)
+    print(f"    Gate de evolución de Ω (región 7)         : {ok_evol} "
+          f"(el matcher {'puede' if ok_evol else 'NO puede'} progresar de estado)")
 
     if args.turtle is not None:
         st = pipe.process(get(args.turtle))
