@@ -4,12 +4,13 @@ Documento honesto del alcance, para ser preciso en la reunión. Separa lo que el
 **demuestra hoy** (viabilidad del pipeline y de la ontología) de lo que es **investigación
 de la tesis** (Ejes 1–3). La fuente de verdad del modelo es el plan de tesis.
 
-## ✅ Hecho y demostrable (corre y está testeado — 32 tests en verde)
+## ✅ Hecho y demostrable (corre y está testeado — 35 tests en verde)
 
 **Pipeline y ciclo de vida**
 - Pipeline de 5 agentes end-to-end con un comando (`run_poc.py`, `demo_caso.py`). (§4.1)
 - Teorías ⟨Si,A,Sf,P,K,U⟩: selección por ranking U>P>K (Def. 4), equivalencia por cuantización (Def. 3).
 - Compartición: cooperación (Def. 7) y colaboración maestro→aprendiz (Def. 8), con gating por reputación r/τ (Def. 9).
+  **Verificadas contra la fuente** (Ierache 2010, Alg. 4.9/4.10, SEDICI): la cooperación genera base común aplicada por ambos; en similares cada variante conserva su P con K sumado. Test: `tests/test_sharing_fuente.py`.
 - Monitor de Utilidad de Equidad Ω: `fair(W)`, bloqueo/escalado por umbral, regiones 4 y 7. (§2.4)
   Cableado y ejercitado en `run_poc.py`: auditoría por ventana (`audit_window`), aprobación de compartición (`approve_sharing`, Def. 9) y gate de evolución (`gate_evolution`, región 7). Tests: `tests/test_monitor.py`.
 - Integración teorías↔LLM: recuperación por similitud + few-shot, punto de inyección explícito. (§2.2)
@@ -64,7 +65,7 @@ instrumental (sin validar la conjetura).
 ## Cómo verificarlo
 ```bash
 python scripts/check_env.py        # entorno + Ollama + smoke (pipeline + ontología SHACL)
-python -m pytest tests/ -q         # 32 tests
+python -m pytest tests/ -q         # 35 tests
 python experiments/demo_caso.py    # caso §5 determinístico
 python experiments/run_poc.py      # pipeline completo + fairness + RDF + fidelidad
 ```

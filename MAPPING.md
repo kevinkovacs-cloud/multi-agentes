@@ -35,12 +35,19 @@ del documento (§2, §2bis, §2.5, §3, §4) se materializan en el código.
 Cada evento del audit trail lleva `region=N` (1–7). Región 1 = Parser; 2 = Matcher (RAG+few-shot, §2.2); 4 = Bias Auditor; 7 = decisión/evolución (Orchestrator/Monitor).
 
 ## Divergencias declaradas (honestidad)
-- **Def. 7 (cooperación) — divergencia plan↔código, a resolver en el Eje 1:** el plan define
-  que la cooperación "genera una base de conocimiento común θ_c" y que, para teorías
-  similares, "se conserva la P **del aportante**". El código actual (`core/sharing.cooperate`)
-  muta la base del **receptor** (no materializa una θ_c común) y conserva la P del receptor.
-  Se resuelve contrastando con la fuente original (Maceri & García Martínez 2001;
-  García-Martínez et al. 2006) antes de tocar el código — no se corrige sin la fuente.
+- **Def. 7 (cooperación) — RESUELTA contra la fuente (03/07/2026):** se verificó el original
+  —Ierache (2010), tesis doctoral, SEDICI-UNLP (handle 10915/18378), **Alg. 4.9 (pág. 108)
+  y Alg. 4.10 (pág. 115)**, que implementan el método de Maceri & García-Martínez— y el
+  código se corrigió para ser fiel: la cooperación **genera una base común (BCCRAB) asignada
+  a ambos agentes**; en teorías **similares entra cada variante conservando SU propia P**
+  ("P del aportante") con K = suma del par; la colaboración construye la base y la asigna
+  **solo al receptor** (BCCRR). El plan (Def. 7) ya coincidía con la fuente. Test:
+  `tests/test_sharing_fuente.py`.
+- **Def. 8 (plan) — simplificación textual detectada al cotejar la fuente:** el Alg. 4.10
+  además **agrega la teoría similar del colaborador** (con su P y K sumado); la redacción
+  actual de la Def. 8 ("similar → debilita, suma solo K") describe solo el lado del
+  receptor. El código sigue la fuente. Ajuste de redacción del plan = decisión de Kevin
+  (menor, no urgente).
 - **μ (Def. 10):** se mide contra la **entrada**. El demo reporta dos instrumentaciones —brecha vs ground-truth y el criterio de equidad elegido— y **no valida la conjetura μ<1** (es trabajo del Eje 1; el PoC sólo demuestra el mecanismo, §5).
 - **Similitud semántica:** proxy *cosine* sobre tokens `clave=valor` (sin embeddings). Upgrade a embeddings (Ollama / sentence-transformers) es directo en `core/retrieval.similarity`.
 - **TBox:** antes era un dict JSON-LD plano; ahora es el esquema RDF de §2.5 con `rdflib`.
