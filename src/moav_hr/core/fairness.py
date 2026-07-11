@@ -32,18 +32,35 @@ def demographic_parity_delta(records: list[dict], attr: str) -> float:
     return round(max(rates) - min(rates), 4) if len(rates) >= 2 else 0.0
 
 
-def equalized_odds_delta(records: list[dict], attr: str) -> float:
-    """Δ de equalized odds (aproximación por TPR usando true_qual≥0.75 como etiqueta)."""
+def equalized_odds_components(records: list[dict], attr: str) -> dict:
+    """
+    Componentes de equalized odds (A7): ΔTPR y ΔFPR entre grupos.
+
+    Etiqueta: true_qual ≥ 0.75 (positivos) / < 0.75 (negativos). Cada componente se
+    computa solo si ≥2 grupos tienen casos de esa clase; si no, vale 0.0.
+    """
     groups: dict[str, list[tuple[bool, bool]]] = {}
     for r in records:
         groups.setdefault(str(r[attr]), []).append(
             (r["true_qual"] >= 0.75, r["decision"] in POSITIVE))
-    tprs = []
+    tprs, fprs = [], []
     for pairs in groups.values():
         pos = [adv for q, adv in pairs if q]
+        neg = [adv for q, adv in pairs if not q]
         if pos:
             tprs.append(sum(pos) / len(pos))
-    return round(max(tprs) - min(tprs), 4) if len(tprs) >= 2 else 0.0
+        if neg:
+            fprs.append(sum(neg) / len(neg))
+    tpr_delta = round(max(tprs) - min(tprs), 4) if len(tprs) >= 2 else 0.0
+    fpr_delta = round(max(fprs) - min(fprs), 4) if len(fprs) >= 2 else 0.0
+    return {"tpr_delta": tpr_delta, "fpr_delta": fpr_delta}
+
+
+def equalized_odds_delta(records: list[dict], attr: str) -> float:
+    """Δ de equalized odds (A7): max(ΔTPR, ΔFPR) — el criterio completo exige igualdad
+    en AMBAS tasas; la versión anterior (solo TPR) subestimaba la disparidad."""
+    c = equalized_odds_components(records, attr)
+    return max(c["tpr_delta"], c["fpr_delta"])
 
 
 def disparity(records: list[dict], attr: str, criterion: str) -> float:
