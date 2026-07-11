@@ -1,5 +1,8 @@
 # Modelo de Ciclo de Vida para el Aprendizaje de Agentes Autónomos basados en Equidad
 
+> El nombre vigente del modelo es el del título; la sigla histórica **MOACV** se
+> conserva únicamente como nombre del paquete de código (`moav_hr`).
+
 > Propuesta de tesis doctoral — Doctorado en Ingeniería con Mención en Tecnología de la Información
 > Grupo de Inteligencia Artificial Aplicada (GIDSA) · DIIT-UNLaM
 >
@@ -95,18 +98,28 @@ moav-hr/
 │   ├── arquitectura_modelo.svg      # Figura 1 (instancia HR) · dark-mode
 │   ├── figura2_ciclo_vida_llc.png   # Figura 2 (ciclo de vida, modelo genérico)
 │   └── figura3_arquitectura_conceptual.png  # Figura 3
+├── ESTADO.md                        # alcance honesto: hecho vs. trabajo futuro
 ├── poc/index.html                   # PoC interactiva (abrir en navegador)
 ├── src/moav_hr/
 │   ├── core/                        # modelo GENÉRICO (§2, §2bis, §3)
 │   │   ├── agent.py · lifecycle.py · theory.py · sharing.py
 │   │   ├── retrieval.py · fairness.py · monitor.py · orchestrator.py
+│   │   ├── stats.py                 # LCB (Hoeffding) · min_window · BCa de log μ
+│   │   ├── committee.py             # topologías de comité (k agentes, B4)
+│   │   ├── calibration.py           # Platt · isotónica · ECE (criterio TBO)
+│   │   ├── runlog.py                # registro de corridas (config_sha + git_sha)
 │   │   ├── audit/                   # trail OpenTelemetry + eventos
 │   │   └── ontology/               # TBox · ABox · SHACL · SPARQL (PROV-O)
 │   └── instances/hr/                # INSTANCIA selección de personal (§4)
 │       ├── parser_agent.py · semantic_matcher.py · bias_auditor.py
+│       ├── bias_auditor_exp.py      # auditor EXPERIMENTAL sin oráculo (B1)
+│       ├── human_sim.py             # humano simulado: oracle/noisy/biased (B2)
 │       ├── explainability_agent.py · pipeline.py · fidelity.py
 │       └── synthetic.py · scoring.py
-├── experiments/run_poc.py           # demo end-to-end (sim / llm / langgraph)
+├── configs/                         # YAML por experimento (--config)
+├── experiments/run_poc.py           # demo end-to-end (sim / llm; chain / committee)
+├── experiments/e0_instrumento.py    # E0: gate del instrumento (μ, c_k, ι_k, IC)
+├── experiments/e_fpr_monitor.py     # FPR del monitor bajo H₀ (puntual vs certificado)
 ├── scripts/check_env.py
 └── tests/                           # core · pipeline · ontología · parser · decoupling
 ```
