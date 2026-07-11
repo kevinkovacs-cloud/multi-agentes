@@ -124,15 +124,26 @@ def amplification(bias_in: float, bias_out: float) -> AmplificationResult:
     return AmplificationResult(round(bias_in, 4), round(bias_out, 4), round(mu, 4), regime)
 
 
-def diversity(agent_bias_vectors: dict[str, list[float]]) -> float:
+def diversity(agent_bias_vectors: dict[str, list[float]], comparable: bool = True) -> float:
     """
-    Def. 11 — D(M) ∈ [0,1] = 1 − correlación media de los sesgos b(aᵢ) entre pares.
-    D=0 sesgos perfectamente correlacionados (agentes equivalentes); D=1 independientes.
-    (Estimación operacional; la calibración de pesos/umbral D₀ es del Eje 1.)
+    Def. 11 (corregida, A3) — D(M) = (1 − ρ̄) / 2 ∈ [0, 1], con ρ̄ la correlación media
+    de las series de sesgo b(aᵢ) entre pares de agentes. Sin clamp: la fórmula ya cae
+    en [0,1] para ρ̄ ∈ [−1, 1] (D=0 clones · D=½ independientes · D=1 anticorrelados).
+
+    `comparable=True` DECLARA que las series comparadas provienen de agentes que estiman
+    la MISMA cantidad (p. ej., miembros de un comité sobre los mismos candidatos, N2).
+    Comparar una etapa con el pipeline que la contiene está estructuralmente
+    correlacionado y no mide diversidad — la validación dura es responsabilidad del
+    caller; este parámetro deja la precondición explícita.
+
+    Pares con serie constante (var≈0) aportan correlación 0 (sin información).
+    Requiere ≥2 vectores (ValueError si no).
     """
+    if not comparable:
+        raise ValueError("diversity exige series comparables (misma cantidad estimada)")
     names = list(agent_bias_vectors)
     if len(names) < 2:
-        return 1.0
+        raise ValueError("diversity requiere ≥2 series de sesgo (una por agente)")
     corrs = []
     for i in range(len(names)):
         for j in range(i + 1, len(names)):
@@ -142,5 +153,18 @@ def diversity(agent_bias_vectors: dict[str, list[float]]) -> float:
                 corrs.append(0.0)
             else:
                 corrs.append(float(np.corrcoef(vi, vj)[0, 1]))
-    mean_corr = float(np.mean(corrs)) if corrs else 0.0
-    return round(max(0.0, min(1.0, 1.0 - mean_corr)), 4)
+    mean_corr = float(np.mean(corrs))
+    return round((1.0 - mean_corr) / 2.0, 4)
+
+
+def d_max(k: int) -> float:
+    """
+    Cota de alcanzabilidad de la diversidad (A3): D ≤ k / (2(k−1)).
+
+    Toda matriz de correlación válida R de k agentes es PSD ⇒ 1ᵀR1 ≥ 0 ⇒
+    ρ̄ ≥ −1/(k−1) ⇒ D = (1−ρ̄)/2 ≤ k/(2(k−1)). El umbral D₀ de la condición C2 no
+    puede exigirse por encima de esta cota (k=2 → 1 · k=3 → 0.75 · k→∞ → ½).
+    """
+    if k < 2:
+        raise ValueError("d_max requiere k ≥ 2 agentes")
+    return k / (2 * (k - 1))

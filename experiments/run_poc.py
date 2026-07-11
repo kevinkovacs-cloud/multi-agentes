@@ -88,18 +88,17 @@ def main() -> None:
     print(f"    Falsos rechazos de calificados : basal={base_false_rej} → modelo={moacv_false_rej}")
     print(f"    Brecha de trato por grupo      : basal={gap_base:.3f} → modelo={gap_moacv:.3f}")
 
-    # --- amplificación μ (Def. 10) y diversidad D (Def. 11) ---
+    # --- amplificación μ (Def. 10) ---
     amp_gap = fairness.amplification(gap_base, gap_moacv)
     amp_dp = fairness.amplification(
         abs(fairness.disparity(base_recs, args.attr, args.criterion)),
         abs(fairness.disparity(moacv_recs, args.attr, args.criterion)))
-    matcher_bias = [st["matcher"]["score"] - st["candidate"].true_qual for st in states]
-    pipe_bias = [st["auditor"]["adjusted_score"] - st["candidate"].true_qual for st in states]
-    D = fairness.diversity({"matcher": matcher_bias, "pipeline": pipe_bias})
+    # N2: la D entre "matcher" y "pipeline" se eliminó — una etapa y el pipeline que la
+    # contiene están estructuralmente correlacionados y esa comparación no mide
+    # diversidad. D se computa SOLO entre miembros de un comité (topology="committee").
     print("\n  COMPOSICIÓN DE SESGO EN LA CADENA (Eje 1 — instrumental, NO valida la conjetura)")
     print(f"    μ por brecha-vs-ground-truth : {amp_gap}")
     print(f"    μ por {args.criterion:<19}: {amp_dp}")
-    print(f"    Diversidad arquitectural D    : {D}")
 
     # --- ontología RDF + SHACL + SPARQL (§2.5), sobre el lote completo ---
     g = abox.build_abox(states[0], agents=list(pipe.agents))
