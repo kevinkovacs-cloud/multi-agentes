@@ -94,6 +94,19 @@ def main() -> None:
     print(f"    U_op(W) = α·acc+(1−α)·fair             : {audit.u_op:.3f}")
     print(f"    Ventana marcada por Ω (|Δ|>{pipe.monitor.disparity_threshold})     : {audit.blocked}")
     print(f"    Subestim. alto riesgo (score−tq)       : {fairness.mean_score_error(moacv_recs, lambda r: r['bias_risk']=='high'):.3f}")
+    # --- B3: guardrail BIO auditable — d̂_TV del canal proxy a la salida del Parser.
+    #     Cota inferior por clasificador A-vs-A′ sobre las Si (lema del canal proxy):
+    #     d̂_TV ≈ 0 certifica que ninguna etapa posterior puede discriminar por A.
+    si_list = [st["parser"]["si"] for st in states]
+    grupos = [st["candidate"].origin_group for st in states]
+    try:
+        dtv = fairness.dtv_lower_bound(si_list, grupos, seed=args.seed)
+        nota = " (n chico: ilustrativo)" if len(si_list) < 100 else ""
+        print(f"    d_TV canal proxy (Parser, cota inf.)   : {dtv:.3f}{nota}")
+        if pipe.heterogeneous_reputation:
+            pipe.parser.record_window_fairness(1.0 - dtv)   # N3, detrás del flag
+    except ValueError as exc:
+        print(f"    d_TV canal proxy (Parser)              : n/d ({exc})")
 
     # --- caso basal vs modelo ---
     gap_base = abs(fairness.mean_score_error(base_recs, lambda r: r['bias_risk']=='low')

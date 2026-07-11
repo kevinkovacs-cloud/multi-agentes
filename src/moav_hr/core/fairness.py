@@ -160,6 +160,39 @@ def amplification(bias_in: float, bias_out: float) -> AmplificationResult:
     return AmplificationResult(round(bias_in, 4), round(bias_out, 4), round(mu, 4), regime)
 
 
+def dtv_lower_bound(si_list: list[dict], groups: list[str], seed: int = 0,
+                    test_size: float = 0.3) -> float:
+    """
+    COTA INFERIOR del d_TV del canal proxy (B3): d̂_TV = max(0, 2·bAcc − 1), con bAcc
+    la exactitud balanceada de un clasificador A-vs-A′ entrenado sobre las Si y
+    evaluada en HELD-OUT.
+
+    Fundamento (lema del canal proxy): para cualquier decisor aguas abajo f,
+    Δ_DP(f) ≤ d_TV(P(Si|A=a), P(Si|A=a′)), con igualdad para el test óptimo; la
+    exactitud balanceada del clasificador de Bayes es (1+d_TV)/2, y cualquier
+    clasificador entrenado da una COTA INFERIOR (se reporta como tal, nunca como
+    el valor). Es el guardrail BIO vuelto número: d̂_TV ≈ 0 certifica que ninguna
+    etapa posterior puede discriminar por A a partir de Si.
+    """
+    from sklearn.feature_extraction import DictVectorizer
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.metrics import balanced_accuracy_score
+    from sklearn.model_selection import train_test_split
+
+    if len(si_list) != len(groups) or len(si_list) < 4:
+        raise ValueError("se requieren ≥4 pares (Si, grupo) alineados")
+    if len(set(groups)) != 2:
+        raise ValueError("d_TV binario: exactamente 2 grupos")
+    X = DictVectorizer(sparse=False).fit_transform(
+        [{str(k): v for k, v in si.items()} for si in si_list])
+    y = [str(g) for g in groups]
+    X_tr, X_te, y_tr, y_te = train_test_split(
+        X, y, test_size=test_size, random_state=seed, stratify=y)
+    clf = LogisticRegression(max_iter=1000, random_state=seed).fit(X_tr, y_tr)
+    bacc = balanced_accuracy_score(y_te, clf.predict(X_te))
+    return round(max(0.0, 2.0 * bacc - 1.0), 4)
+
+
 def bias_in_reference(reference_clf_scores: list[float], records: list[dict],
                       attr: str, criterion: str) -> float:
     """
