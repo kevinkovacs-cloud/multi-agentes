@@ -18,6 +18,7 @@ import argparse
 
 from moav_hr.instances.hr.synthetic import CANDIDATES, get
 from moav_hr.instances.hr.pipeline import HRPipeline, run_baseline, record_of, matcher_view
+from moav_hr.instances.hr.human_sim import resolve as human_resolve, MODES as HUMAN_MODES
 from moav_hr.instances.hr.fidelity import measure_fidelity
 from moav_hr.core import fairness
 from moav_hr.core.ontology import abox, shapes, queries
@@ -32,6 +33,11 @@ def main() -> None:
     ap.add_argument("--criterion", choices=list(fairness.CRITERIA), default="demographic_parity")
     ap.add_argument("--attr", default="origin_group")
     ap.add_argument("--turtle", type=int, metavar="ID", help="imprime el RDF/Turtle del candidato ID")
+    ap.add_argument("--human", choices=list(HUMAN_MODES), default="oracle",
+                    help="modo del humano simulado que resuelve las derivaciones (B2)")
+    ap.add_argument("--epsilon", type=float, default=0.1, help="ruido del humano noisy")
+    ap.add_argument("--bh", type=float, default=0.0, help="corrimiento de umbral del humano biased")
+    ap.add_argument("--seed", type=int, default=0, help="seed del humano simulado")
     args = ap.parse_args()
 
     cands = CANDIDATES[: args.limit] if args.limit else CANDIDATES
@@ -97,6 +103,25 @@ def main() -> None:
     print("\n  CASO BASAL vs MODELO")
     print(f"    Falsos rechazos de calificados : basal={base_false_rej} → modelo={moacv_false_rej}")
     print(f"    Brecha de trato por grupo      : basal={gap_base:.3f} → modelo={gap_moacv:.3f}")
+
+    # --- B2: flujo automatizado vs total — el humano simulado resuelve las derivaciones.
+    #     Siempre JUNTOS: reportar solo el flujo censurado (μ_auto) esconde la derivación;
+    #     solo el total esconde el costo (tasa de escalamiento e).
+    escalated = [r for r in moacv_recs if r["decision"] == "ESCALATE_HUMAN"]
+    autos = [r for r in moacv_recs if r["decision"] != "ESCALATE_HUMAN"]
+    e_rate = len(escalated) / len(moacv_recs)
+    resolved = [dict(r, decision=d) for r, d in
+                zip(escalated, human_resolve(escalated, mode=args.human, seed=args.seed,
+                                             epsilon=args.epsilon, b_h=args.bh,
+                                             group_attr=args.attr))]
+    total_recs = autos + resolved
+    d_base = abs(fairness.disparity(base_recs, args.attr, args.criterion))
+    d_auto = abs(fairness.disparity(autos, args.attr, args.criterion)) if autos else 0.0
+    d_total = abs(fairness.disparity(total_recs, args.attr, args.criterion))
+    print(f"\n  FLUJO AUTOMATIZADO vs TOTAL (B2 — humano simulado: {args.human})")
+    print(f"    tasa de escalamiento e       : {e_rate:.3f}  ({len(escalated)}/{len(moacv_recs)})")
+    print(f"    Δ_auto  (solo no derivados)  : {d_auto:.3f}   μ_rel_auto : {fairness.amplification(d_base, d_auto)}")
+    print(f"    Δ_total (derivados resueltos): {d_total:.3f}   μ_rel_total: {fairness.amplification(d_base, d_total)}")
 
     # --- amplificación relativa al basal (N1: esto es μ_rel, NO el μ de la Def. 10) ---
     amp_gap = fairness.amplification(gap_base, gap_moacv)
