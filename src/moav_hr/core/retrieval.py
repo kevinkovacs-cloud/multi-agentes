@@ -2,18 +2,24 @@
 Recuperación de teorías por similitud (RAG sobre la base de teorías) — v13 §2.2.
 
 Flujo (P2.1): serializar Si (JSON) → similitud sobre la base → filtrar por umbral δ
-(equivalencia por cuantización, Def. 3) → top-k por ranking de utilidad (Def. 4) →
-formatear como few-shot para inyectar en el prompt del LLM.
+de RECUPERACIÓN (distinto de la identidad por cuantización, A1) → top-k por ranking
+de utilidad (Def. 4) → formatear como few-shot para inyectar en el prompt del LLM.
 
-Similitud: cosine sobre bag-of-words de la serialización (determinística, sin modelo).
-Es un proxy liviano de la similitud semántica; el upgrade a embeddings (Ollama /
-sentence-transformers) es directo cambiando `similarity`.
+Similitud (C3): seleccionable por la variable de entorno MOAV_SIMILARITY —
+  · "token-cosine" (default): cosine sobre tokens clave=valor. Determinística, sin
+    modelo ni red: la reproducibilidad del modo sim no depende de descargas.
+  · "embeddings": cosine sobre sentence-transformers (extra opcional
+    `pip install .[embeddings]`; import perezoso; el modelo se cachea localmente).
+    Cierra la divergencia declarada "proxy cosine" cuando se activa.
 """
 from __future__ import annotations
 import math
+import os
 from collections import Counter
 
 from moav_hr.core.theory import Theory, TheoryBase, serialize
+
+_EMBEDDER = None            # cache del modelo (import/carga perezosos)
 
 
 def _kv_tokens(situation: dict) -> Counter:
@@ -21,8 +27,7 @@ def _kv_tokens(situation: dict) -> Counter:
     return Counter(f"{k}={situation[k]}" for k in situation)
 
 
-def similarity(a: dict, b: dict) -> float:
-    """Cosine sobre tokens clave=valor. Inyectable en TheoryBase como sim_fn (equivalencia Def. 3)."""
+def _token_cosine(a: dict, b: dict) -> float:
     ca, cb = _kv_tokens(a), _kv_tokens(b)
     common = set(ca) & set(cb)
     if not ca or not cb:
@@ -31,6 +36,32 @@ def similarity(a: dict, b: dict) -> float:
     na = math.sqrt(sum(v * v for v in ca.values()))
     nb = math.sqrt(sum(v * v for v in cb.values()))
     return num / (na * nb) if na and nb else 0.0
+
+
+def _embedding_cosine(a: dict, b: dict) -> float:
+    global _EMBEDDER
+    if _EMBEDDER is None:
+        try:
+            from sentence_transformers import SentenceTransformer
+        except ImportError as exc:                      # extra opcional no instalado
+            raise ImportError(
+                "MOAV_SIMILARITY=embeddings requiere `pip install .[embeddings]`") from exc
+        _EMBEDDER = SentenceTransformer(
+            os.environ.get("MOAV_EMBED_MODEL",
+                           "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"))
+    va, vb = _EMBEDDER.encode([serialize(a), serialize(b)], normalize_embeddings=True)
+    return float((va * vb).sum())
+
+
+def similarity(a: dict, b: dict) -> float:
+    """Similitud de RECUPERACIÓN (no de identidad). Backend según MOAV_SIMILARITY."""
+    backend = os.environ.get("MOAV_SIMILARITY", "token-cosine")
+    if backend == "token-cosine":
+        return _token_cosine(a, b)
+    if backend == "embeddings":
+        return _embedding_cosine(a, b)
+    raise ValueError(f"MOAV_SIMILARITY desconocido: {backend!r} "
+                     "(usar 'token-cosine' o 'embeddings')")
 
 
 class TheoryRetriever:
