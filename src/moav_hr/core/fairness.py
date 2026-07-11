@@ -72,6 +72,42 @@ def disparity(records: list[dict], attr: str, criterion: str) -> float:
     raise ValueError(f"criterio desconocido: {criterion}")
 
 
+def disparity_signed(records: list[dict], attr: str, criterion: str,
+                     reference_group: str) -> float:
+    """
+    Disparidad FIRMADA (B3): tasa(referencia) − tasa(resto agrupado).
+
+    Positivo ⇒ el sistema desfavorece al grupo NO-referencia (su tasa es menor);
+    negativo ⇒ lo favorece (posible sobrecorrección). El grupo de referencia se pasa
+    explícito y debe reportarse junto al valor. Para equalized_odds la tasa es la TPR
+    (positivos = true_qual ≥ 0.75).
+    """
+    ref, rest = [], []
+    for r in records:
+        (ref if str(r[attr]) == reference_group else rest).append(r)
+    if not ref or not rest:
+        raise ValueError(f"grupo de referencia '{reference_group}' o resto vacío")
+
+    def _rate(rs: list[dict]) -> float:
+        if criterion == "demographic_parity":
+            return _pos_rate(r["decision"] for r in rs)
+        if criterion == "equalized_odds":
+            pos = [r for r in rs if r["true_qual"] >= 0.75]
+            return _pos_rate(r["decision"] for r in pos) if pos else 0.0
+        raise ValueError(f"criterio desconocido: {criterion}")
+
+    return round(_rate(ref) - _rate(rest), 4)
+
+
+def is_inversion(delta_in: float, delta_out: float, floor: float) -> bool:
+    """
+    Detector de INVERSIÓN de signo (B3): el sistema pasó de desfavorecer a un grupo a
+    desfavorecer al otro con magnitud material (signos opuestos y |Δ_out| > floor).
+    Un μ<1 en valor absoluto puede encubrir una sobrecorrección: esta bandera la expone.
+    """
+    return (delta_in * delta_out < 0) and abs(delta_out) > floor
+
+
 # ---------- utilidad por ventana (Def. 5, 6) ----------
 def fair_window(records: list[dict], attr: str, criterion: str) -> float:
     """fair(W) = 1 − |Δ(W)|  (Def. 5)."""
