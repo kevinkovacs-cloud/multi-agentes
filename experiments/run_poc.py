@@ -33,6 +33,11 @@ def main() -> None:
     ap.add_argument("--criterion", choices=list(fairness.CRITERIA), default="demographic_parity")
     ap.add_argument("--attr", default="origin_group")
     ap.add_argument("--turtle", type=int, metavar="ID", help="imprime el RDF/Turtle del candidato ID")
+    ap.add_argument("--topology", choices=["chain", "committee"], default="chain",
+                    help="topología del rol decisor (B4): cadena o comité de k matchers")
+    ap.add_argument("--k", type=int, default=3, help="miembros del comité (B4)")
+    ap.add_argument("--aggregation", choices=["mean", "median", "majority"],
+                    default="mean", help="agregación del comité (B4)")
     ap.add_argument("--human", choices=list(HUMAN_MODES), default="oracle",
                     help="modo del humano simulado que resuelve las derivaciones (B2)")
     ap.add_argument("--epsilon", type=float, default=0.1, help="ruido del humano noisy")
@@ -41,7 +46,8 @@ def main() -> None:
     args = ap.parse_args()
 
     cands = CANDIDATES[: args.limit] if args.limit else CANDIDATES
-    pipe = HRPipeline(mode=args.mode, criterion=args.criterion, attr=args.attr)
+    pipe = HRPipeline(mode=args.mode, criterion=args.criterion, attr=args.attr,
+                      topology=args.topology, k=args.k, aggregation=args.aggregation)
     n_theories = pipe.warmup(cands)   # región 5: siembra de teorías
 
     print(f"\n  PoC (v13) · modo={args.mode} · {len(cands)} candidatos · "
@@ -149,6 +155,12 @@ def main() -> None:
     print(f"    μ_rel por {args.criterion:<19}: {amp_dp}")
     print("    μ_rel = b(modelo)/b(basal); el μ de la Def. 10 se computa contra la")
     print("    ENTRADA (b_in del benchmark, Eje 2 — fairness.bias_in_reference).")
+    if args.topology == "committee":
+        # B4/N2: D SOLO sobre miembros del comité (series comparables: misma cantidad)
+        series = pipe.matcher.member_bias_series(states)
+        D = fairness.diversity(series)
+        print(f"    Diversidad D ({len(series)} miembros)       : {D:.4f}  "
+              f"(D_max(k)={fairness.d_max(len(series)):.3f})")
 
     # --- ontología RDF + SHACL + SPARQL (§2.5), sobre el lote completo ---
     g = abox.build_abox(states[0], agents=list(pipe.agents))
@@ -162,6 +174,16 @@ def main() -> None:
     print(f"    Spans OpenTelemetry capturados         : {spans}")
     print(f"    Validación SHACL conforme              : {conforms}")
     print(f"    SPARQL escalamientos en el grafo       : {esc[0]['escalamientos'] if esc else 0}")
+
+    if args.topology == "committee":
+        # las demos de fidelidad y compartición son del matcher único (modo chain)
+        print("\n  (fidelidad y compartición: demos del modo chain — correr sin --topology)")
+        if args.turtle is not None:
+            st = pipe.process(get(args.turtle))
+            print(f"\n  RDF/Turtle — {get(args.turtle).name}\n")
+            print(abox.to_turtle(st, agents=list(pipe.agents)))
+        print()
+        return
 
     # --- fidelidad de teorías (Eje 3) ---
     fid = measure_fidelity(pipe, cands)

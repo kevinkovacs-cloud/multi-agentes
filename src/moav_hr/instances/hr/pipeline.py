@@ -26,14 +26,27 @@ def _finalize(state: dict) -> str:
 class HRPipeline:
     def __init__(self, mode: str = "sim", criterion: str = "demographic_parity",
                  attr: str = "origin_group", threshold: float = 0.075,
-                 heterogeneous_reputation: bool = False, auditor_mode: str = "demo"):
+                 heterogeneous_reputation: bool = False, auditor_mode: str = "demo",
+                 topology: str = "chain", k: int = 3, aggregation: str = "mean"):
         # N3: reputación heterogénea para nodos transformadores (Parser ← 1−d̂_TV).
         # Default OFF: decisión pendiente con la dirección; los decisores siempre
         # acumulan fair(W) sobre SUS PROPIAS salidas (ver run_poc).
         self.heterogeneous_reputation = heterogeneous_reputation
         self.backend = LLMBackend(mode)
         self.parser = ParserAgent()
-        self.matcher = SemanticMatcherAgent(self.backend)
+        # B4: topología del rol decisor — "chain" (un matcher) o "committee" (k matchers
+        # sobre el mismo candidato, cada uno con su base de teorías; misma familia LLM
+        # en esta tanda). D (Def. 11) se computa SOLO sobre miembros de comité (N2).
+        self.topology = topology
+        if topology == "committee":
+            from moav_hr.core.committee import Committee
+            self.matcher = Committee(
+                [SemanticMatcherAgent(self.backend) for _ in range(k)],
+                aggregation=aggregation)
+        elif topology == "chain":
+            self.matcher = SemanticMatcherAgent(self.backend)
+        else:
+            raise ValueError("topology debe ser 'chain' o 'committee'")
         # B1: "demo" = auditor demostrativo (proxy por etiqueta + oráculo; el del video);
         #     "exp"  = auditor experimental sin oráculo (ventana + certificación LCB).
         if auditor_mode == "exp":
@@ -51,15 +64,22 @@ class HRPipeline:
 
     @property
     def agents(self):
-        return self.orch.agents
+        """Agentes REALES del sistema: el comité se expande a sus miembros (para el
+        ABox y la reputación por agente; el nodo ejecutable sigue siendo el comité)."""
+        out = []
+        for node in self.orch.agents:
+            out.extend(getattr(node, "members", [node]))
+        return out
 
     def warmup(self, candidates) -> int:
-        """Siembra la base de teorías del matcher con experiencia (Si → acción correcta)."""
+        """Siembra la base de teorías del/los matcher(s) con experiencia (Si → acción)."""
+        matchers = getattr(self.matcher, "members", [self.matcher])
         for c in candidates:
             si = build_si(normalize_profile(c))
             action = "ADVANCE" if c.true_qual >= 0.75 else "REJECT"
-            self.matcher.learn(si, action, {"outcome": action}, success=True, u=0.9)
-        return len(self.matcher.theories)
+            for m in matchers:
+                m.learn(si, action, {"outcome": action}, success=True, u=0.9)
+        return sum(len(m.theories) for m in matchers)
 
     def process(self, candidate: Candidate) -> dict:
         return self.orch.run({"candidate": candidate, "job": JOB})
