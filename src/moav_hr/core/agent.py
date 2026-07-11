@@ -85,15 +85,17 @@ class MOACVAgent:
         return alpha * acc + (1 - alpha) * fair
 
     # ---- región 5: aprendizaje ----
-    def learn(self, si: dict, a: str, sf: dict, success: bool, u: float = 0.0) -> Theory:
+    def learn(self, si: dict, a: str, sf: dict, success: bool,
+              u: Optional[float] = None) -> Theory:
+        """Registra/refuerza una teoría. Si no se pasa `u`, U := reliability (Laplace, A2)."""
         cand = Theory(si=si, a=a, sf=sf)
         existing = self.theories.find_equal(cand)
         if existing is not None:
             existing.reinforce(success)
-            existing.u = u or existing.u
+            existing.u = u if u is not None else existing.reliability
             return existing
         cand.reinforce(success)
-        cand.u = u
+        cand.u = u if u is not None else cand.reliability
         self.theories.add(cand)
         return cand
 

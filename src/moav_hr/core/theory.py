@@ -41,8 +41,14 @@ class Theory:
 
     @property
     def reliability(self) -> float:
-        """confiabilidad = P/K (Def. 3)."""
-        return self.p / self.k if self.k > 0 else 0.0
+        """
+        Confiabilidad con suavizado de Laplace (A2): (P+1)/(K+2).
+
+        Media posterior Beta(1,1) — definida en K=0 (→ 0.5), regulariza teorías con
+        pocos usos y converge a P/K cuando K crece. Reemplaza el estimador crudo P/K
+        de la Def. 3, que era indefinido en K=0 y sobreconfiado con K chico.
+        """
+        return (self.p + 1) / (self.k + 2)
 
     def reinforce(self, success: bool) -> None:
         self.k += 1
