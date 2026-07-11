@@ -104,29 +104,56 @@ class MOACVAgent:
     def record_window_fairness(self, fair_w: float) -> None:
         self._fair_history.append(fair_w)
 
-    def reputation(self, m: int = 5) -> float:
-        """rⱼ = promedio de fair(W) en las últimas m ventanas (Def. 9). 1.0 si no hay historia."""
+    @property
+    def windows_observed(self) -> int:
+        """Cantidad de ventanas de equidad observadas (historia real, A9)."""
+        return len(self._fair_history)
+
+    def reputation(self, m: int = 5, r0: Optional[float] = None) -> float:
+        """
+        rⱼ = promedio de fair(W) en las últimas m ventanas (Def. 9).
+
+        Arranque en frío (A9): sin historia devuelve el prior r0 (default 0.8 — el τ_r
+        del Monitor, DECLARADO como prior, no evidencia). Antes devolvía 1.0: un agente
+        recién nacido lucía con reputación perfecta. El prior habilita recibir; DONAR
+        exige además historia mínima (ver can_donate — regla asimétrica).
+        """
         if not self._fair_history:
-            return 1.0
+            return r0 if r0 is not None else 0.8
         last = self._fair_history[-m:]
         return round(sum(last) / len(last), 4)
 
+    def can_donate(self, m0: int = 3) -> bool:
+        """Historia mínima para DONAR conocimiento (A9): ≥ m0 ventanas observadas.
+        Recibir no exige historia; aportar sí."""
+        return self.windows_observed >= m0
+
     # ---- compartición (Def. 7, 8) condicionada por reputación (Def. 9) ----
-    def transfer_to(self, apprentice: "MOACVAgent", tau: float = 0.0) -> ShareReport:
-        """Colaboración maestro→aprendiz (Def. 8): requiere mismo rol y nivel estrictamente superior."""
+    def transfer_to(self, apprentice: "MOACVAgent", tau: float = 0.0,
+                    m0: int = 3) -> ShareReport:
+        """Colaboración maestro→aprendiz (Def. 8): requiere mismo rol, nivel
+        estrictamente superior y — A9 — historia mínima del donante."""
         if self.role != apprentice.role:
             raise ValueError(f"colaboración inválida: roles distintos ({self.role}→{apprentice.role})")
         if int(self.maturity) <= int(apprentice.maturity):
             raise ValueError("el colaborador debe tener nivel estrictamente superior (Def. 8)")
+        if not self.can_donate(m0):
+            raise ValueError(f"el donante no puede aportar sin historia de equidad "
+                             f"(A9: requiere ≥{m0} ventanas, tiene {self.windows_observed})")
         return collaborate(apprentice.theories, self.theories,
                            donor_reputation=self.reputation(), tau=tau)
 
-    def cooperate_with(self, peer: "MOACVAgent", tau: float = 0.0) -> ShareReport:
-        """Cooperación entre pares (Def. 7): mismo rol, mismo estado de evolución."""
+    def cooperate_with(self, peer: "MOACVAgent", tau: float = 0.0,
+                       m0: int = 3) -> ShareReport:
+        """Cooperación entre pares (Def. 7): mismo rol, mismo estado de evolución;
+        el donante (peer, cuya reputación gatea la fusión) exige historia mínima (A9)."""
         if self.role != peer.role:
             raise ValueError("cooperación inválida: roles distintos")
         if self.maturity != peer.maturity:
             raise ValueError("la cooperación requiere mismo estado de evolución (Def. 7)")
+        if not peer.can_donate(m0):
+            raise ValueError(f"el donante no puede aportar sin historia de equidad "
+                             f"(A9: requiere ≥{m0} ventanas, tiene {peer.windows_observed})")
         return cooperate(self.theories, peer.theories,
                          donor_reputation=peer.reputation(), tau=tau)
 
