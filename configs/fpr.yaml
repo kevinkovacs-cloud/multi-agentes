@@ -1,0 +1,7 @@
+# FPR del monitor bajo H0 (B6).
+sims: 2000
+n: 200
+rate: 0.5
+tau_b: 0.075
+delta: 0.05
+seed: 20260711

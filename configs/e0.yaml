@@ -1,0 +1,6 @@
+# E0 — validación del instrumento (B5).
+n: 2000
+lotes: 25
+replicas: 200
+n_boot: 999
+seed: 20260711

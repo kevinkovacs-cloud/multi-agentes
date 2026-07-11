@@ -1,0 +1,11 @@
+# Configuración del demo run_poc (C1). CLI > config > defaults del script.
+mode: sim
+criterion: demographic_parity
+attr: origin_group
+topology: chain          # chain | committee
+k: 3
+aggregation: mean        # mean | median | majority
+human: oracle            # oracle | noisy | biased
+epsilon: 0.1
+bh: 0.0
+seed: 0

@@ -43,13 +43,20 @@ def h0_window(rng: np.random.Generator, n_per_group: int, rate: float) -> list[d
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="FPR del monitor bajo H0 (B6)")
+    from moav_hr.core.runlog import load_config, log_run
+    pre = argparse.ArgumentParser(add_help=False)
+    pre.add_argument("--config", default=None, help="YAML de configs/ (C1)")
+    pre_args, _ = pre.parse_known_args()
+    ap = argparse.ArgumentParser(description="FPR del monitor bajo H0 (B6)",
+                                 parents=[pre])
     ap.add_argument("--sims", type=int, default=2000, help="ventanas H0 simuladas")
     ap.add_argument("--n", type=int, default=200, help="candidatos por grupo y ventana")
     ap.add_argument("--rate", type=float, default=0.5, help="tasa de avance común (H0)")
     ap.add_argument("--tau-b", type=float, default=0.075, help="umbral de bloqueo")
     ap.add_argument("--delta", type=float, default=0.05, help="nivel del certificado")
     ap.add_argument("--seed", type=int, default=20260711)
+    if pre_args.config:
+        ap.set_defaults(**load_config(pre_args.config))   # CLI > config > defaults
     args = ap.parse_args()
 
     mon = FairnessUtilityMonitor(disparity_threshold=args.tau_b)
@@ -79,6 +86,8 @@ def main() -> int:
     print(f"  VEREDICTO: certificado {'≤' if fpr_c <= args.delta else '>'} δ "
           f"{'y el puntual lo supera — la garantía hace su trabajo' if ok else '(revisar configuración: con n grande el puntual también puede quedar bajo δ)'}")
     print()
+    log_run(config={k: v for k, v in vars(args).items() if k != "config"},
+            metrics={"fpr_puntual": fpr_p, "fpr_certificado": fpr_c})
     return 0 if fpr_c <= args.delta else 1
 
 

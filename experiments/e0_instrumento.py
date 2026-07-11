@@ -104,12 +104,19 @@ def coverage_experiment(rng: np.random.Generator, b0: float, b_out_true: float,
 # ---------- main ----------
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="E0 — validación del instrumento (B5)")
+    from moav_hr.core.runlog import load_config, log_run
+    pre = argparse.ArgumentParser(add_help=False)
+    pre.add_argument("--config", default=None, help="YAML de configs/ (C1)")
+    pre_args, rest = pre.parse_known_args()
+    ap = argparse.ArgumentParser(description="E0 — validación del instrumento (B5)",
+                                 parents=[pre])
     ap.add_argument("--n", type=int, default=2000, help="candidatos por grupo y lote")
     ap.add_argument("--lotes", type=int, default=25)
     ap.add_argument("--replicas", type=int, default=200)
     ap.add_argument("--n-boot", type=int, default=999)
     ap.add_argument("--seed", type=int, default=20260711)
+    if pre_args.config:
+        ap.set_defaults(**load_config(pre_args.config))   # CLI > config > defaults
     args = ap.parse_args()
 
     # diseño (valores elegidos para conteos enteros con n=2000)
@@ -156,6 +163,9 @@ def main() -> int:
     print("  " + "─" * 76)
     print(f"  VEREDICTO: {'PASS — el instrumento recupera los valores de diseño' if ok else 'FAIL — ARREGLAR EL INSTRUMENTO antes de medir con LLMs'}")
     print()
+    log_run(config={k: v for k, v in vars(args).items() if k != "config"},
+            metrics={"mu_true": float(mu_true), "mu_hat": float(mu_hat),
+                     "coverage": float(cov), "pass": bool(ok)})
     return 0 if ok else 1
 
 

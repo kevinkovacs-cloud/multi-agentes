@@ -27,7 +27,11 @@ from moav_hr.core.sharing import ShareReport  # noqa: F401
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Demo PoC (v13)")
+    from moav_hr.core.runlog import load_config, log_run
+    pre = argparse.ArgumentParser(add_help=False)
+    pre.add_argument("--config", default=None, help="YAML de configs/ (C1)")
+    pre_args, _ = pre.parse_known_args()
+    ap = argparse.ArgumentParser(description="Demo PoC (v13)", parents=[pre])
     ap.add_argument("--mode", choices=["sim", "llm"], default="sim")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--criterion", choices=list(fairness.CRITERIA), default="demographic_parity")
@@ -43,6 +47,8 @@ def main() -> None:
     ap.add_argument("--epsilon", type=float, default=0.1, help="ruido del humano noisy")
     ap.add_argument("--bh", type=float, default=0.0, help="corrimiento de umbral del humano biased")
     ap.add_argument("--seed", type=int, default=0, help="seed del humano simulado")
+    if pre_args.config:
+        ap.set_defaults(**load_config(pre_args.config))   # CLI > config > defaults
     args = ap.parse_args()
 
     cands = CANDIDATES[: args.limit] if args.limit else CANDIDATES
@@ -105,6 +111,7 @@ def main() -> None:
     #     d̂_TV ≈ 0 certifica que ninguna etapa posterior puede discriminar por A.
     si_list = [st["parser"]["si"] for st in states]
     grupos = [st["candidate"].origin_group for st in states]
+    dtv = None
     try:
         dtv = fairness.dtv_lower_bound(si_list, grupos, seed=args.seed)
         nota = " (n chico: ilustrativo)" if len(si_list) < 100 else ""
@@ -161,6 +168,13 @@ def main() -> None:
         D = fairness.diversity(series)
         print(f"    Diversidad D ({len(series)} miembros)       : {D:.4f}  "
               f"(D_max(k)={fairness.d_max(len(series)):.3f})")
+
+    # C1: registro de la corrida (config canónico + git sha + métricas)
+    log_run(config={k: v for k, v in vars(args).items() if k not in ("config", "turtle")},
+            metrics={"fair_w": fair_w, "ventana_marcada": bool(audit.blocked),
+                     "dtv_parser": dtv,
+                     "e_rate": e_rate, "d_auto": d_auto, "d_total": d_total,
+                     "mu_rel_gap": amp_gap.mu, "falsos_rechazos_modelo": moacv_false_rej})
 
     # --- ontología RDF + SHACL + SPARQL (§2.5), sobre el lote completo ---
     g = abox.build_abox(states[0], agents=list(pipe.agents))
