@@ -25,7 +25,12 @@ def _finalize(state: dict) -> str:
 
 class HRPipeline:
     def __init__(self, mode: str = "sim", criterion: str = "demographic_parity",
-                 attr: str = "origin_group", threshold: float = 0.075):
+                 attr: str = "origin_group", threshold: float = 0.075,
+                 heterogeneous_reputation: bool = False):
+        # N3: reputación heterogénea para nodos transformadores (Parser ← 1−d̂_TV).
+        # Default OFF: decisión pendiente con la dirección; los decisores siempre
+        # acumulan fair(W) sobre SUS PROPIAS salidas (ver run_poc).
+        self.heterogeneous_reputation = heterogeneous_reputation
         self.backend = LLMBackend(mode)
         self.parser = ParserAgent()
         self.matcher = SemanticMatcherAgent(self.backend)
@@ -60,8 +65,20 @@ def run_baseline(candidate: Candidate) -> dict:
 
 
 def record_of(state: dict) -> dict:
-    """Record para métricas de fairness desde un estado procesado."""
+    """Record para métricas de fairness desde un estado procesado.
+
+    Incluye matcher_score (N3): permite computar la equidad ATRIBUIBLE al matcher
+    (decisión que sus scores implican por umbral), separada de la del pipeline final.
+    """
     c = state["candidate"]
     a = state["auditor"]
     return {"gender": c.gender, "origin_group": c.origin_group, "decision": state["decision"],
-            "true_qual": c.true_qual, "score": a["adjusted_score"], "bias_risk": c.bias_risk}
+            "true_qual": c.true_qual, "score": a["adjusted_score"], "bias_risk": c.bias_risk,
+            "matcher_score": state["matcher"]["score"]}
+
+
+def matcher_view(records: list[dict], threshold: float = 0.75) -> list[dict]:
+    """Vista de la ventana ATRIBUIDA al matcher (N3): la decisión de cada record se
+    reemplaza por la que implican sus propios scores (umbral), sin auditor ni humano."""
+    return [dict(r, decision=("ADVANCE" if r["matcher_score"] >= threshold else "REJECT"))
+            for r in records]

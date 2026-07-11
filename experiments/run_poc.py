@@ -17,7 +17,7 @@ from __future__ import annotations
 import argparse
 
 from moav_hr.instances.hr.synthetic import CANDIDATES, get
-from moav_hr.instances.hr.pipeline import HRPipeline, run_baseline, record_of
+from moav_hr.instances.hr.pipeline import HRPipeline, run_baseline, record_of, matcher_view
 from moav_hr.instances.hr.fidelity import measure_fidelity
 from moav_hr.core import fairness
 from moav_hr.core.ontology import abox, shapes, queries
@@ -63,11 +63,21 @@ def main() -> None:
               f"{st['matcher']['n_retrieved']:>9}   {b['decision']}→{st['decision']}")
     print("  " + "─" * 96)
 
-    # el Monitor Ω audita la ventana (región 4) y su fair(W) alimenta la reputación (Def. 9)
+    # el Monitor Ω audita la ventana global (región 4)
     audit = pipe.monitor.audit_window(moacv_recs)
     fair_w = audit.fair
-    for ag in pipe.agents:
-        ag.record_window_fairness(fair_w)
+    # N3: reputación POR AGENTE — cada decisor acumula fair(W) sobre SUS PROPIAS
+    # salidas, en subventanas (3 de 4: historia mínima m0 del donante, A9). El matcher
+    # se evalúa por las decisiones que implican sus scores; el auditor, por las finales.
+    # Parser/Explainer son transformadores: sin reputación propia (queda el prior r0;
+    # la variante 1−d̂_TV vive detrás de pipe.heterogeneous_reputation, default off).
+    W_SUB = max(1, len(moacv_recs) // 3)
+    for i in range(0, len(moacv_recs), W_SUB):
+        chunk = moacv_recs[i:i + W_SUB]
+        pipe.matcher.record_window_fairness(
+            fairness.fair_window(matcher_view(chunk), args.attr, args.criterion))
+        pipe.auditor.record_window_fairness(
+            fairness.fair_window(chunk, args.attr, args.criterion))
 
     # --- fairness por ventana (Def. 5, 6) — auditada por el Monitor Ω ---
     print("\n  FAIRNESS POR VENTANA (MODELO) — auditoría del Monitor Ω (región 4)")
@@ -129,7 +139,13 @@ def main() -> None:
     print(f"    Colaboración matcher(Trained)→novato(Born): {rep_collab.op} aceptada={rep_collab.accepted} "
           f"(refuerza={rep_collab.reinforced}, debilita={rep_collab.weakened}, nuevas={rep_collab.transferred})")
     peer = SemanticMatcherAgent(pipe.backend)            # Trained (mismo estado)
+    # el peer debe tener historia PROPIA para donar (A9): procesa el lote y acumula
+    # sus subventanas igual que el matcher principal (N3)
     pipe2 = HRPipeline(mode=args.mode); pipe2.warmup(cands)
+    recs2 = [record_of(pipe2.process(c)) for c in cands]
+    for i in range(0, len(recs2), W_SUB):
+        pipe2.matcher.record_window_fairness(
+            fairness.fair_window(matcher_view(recs2[i:i + W_SUB]), args.attr, args.criterion))
     rep_coop = pipe.matcher.cooperate_with(pipe2.matcher, tau=pipe.monitor.tau)
     print(f"    Cooperación matcher↔matcher (Trained)     : {rep_coop.op} aceptada={rep_coop.accepted} "
           f"(refuerza={rep_coop.reinforced}, debilita={rep_coop.weakened}, nuevas={rep_coop.transferred})")
