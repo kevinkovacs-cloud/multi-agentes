@@ -4,6 +4,9 @@ Documento honesto del alcance, para ser preciso en la reunión. Separa lo que el
 **demuestra hoy** (viabilidad del pipeline y de la ontología) de lo que es **investigación
 de la tesis** (Ejes 1–3). La fuente de verdad del modelo es el plan de tesis.
 
+> **La sección "✅ Hecho" describe `main`** (lo que sale el video). La branch
+> `eje1/formalizacion-v2` la extiende — ver la sección propia al final.
+
 ## ✅ Hecho y demostrable (corre y está testeado — 35 tests en verde)
 
 **Pipeline y ciclo de vida**
@@ -62,10 +65,41 @@ instrumental (sin validar la conjetura).
 - Persistencia del audit trail en backend (OpenTelemetry/Langfuse/Grafana en vivo); hoy es en memoria + export RDF.
 - **Triple store persistente:** hoy la trazabilidad es serialización RDF a Turtle (grafo `rdflib` en memoria), **no** un store persistente. El round-trip serializar→recuperar está testeado; montar un triple store real (p. ej. Fuseki/GraphDB) es trabajo futuro. *(Precisión pedida por Becerra: no llamar "triple store" a la serialización.)*
 
-## Cómo verificarlo
+## Cómo verificarlo (main)
 ```bash
 python scripts/check_env.py        # entorno + Ollama + smoke (pipeline + ontología SHACL)
-python -m pytest tests/ -q         # 35 tests
+python -m pytest tests/ -q         # 35 tests (main)
 python experiments/demo_caso.py    # caso §5 determinístico
 python experiments/run_poc.py      # pipeline completo + fairness + RDF + fidelidad
 ```
+
+---
+
+## Branch `eje1/formalizacion-v2` — formalización v2 e instrumento experimental
+
+Implementa las correcciones de la **auditoría matemática** (A1–A11/B1–B8) y la
+infraestructura que los Ejes 1–2 necesitan. **NO fabrica ni valida resultados; μ<1 sigue
+siendo hipótesis.** Un commit atómico por ítem; **`main` intacto** (el video sale de main).
+
+**Correcciones formales al core (Tier A):**
+- **A1** equivalencia por cuantización (`q_canonical`/`q_grid`): relación de equivalencia REAL (transitiva) → la fusión de bases es asociativa; separada de la recuperación por similitud.
+- **A2** confiabilidad con Laplace `(P+1)/(K+2)`; **A5+A10** desempate determinista (recencia, id).
+- **A7** equalized odds con ΔTPR y ΔFPR; **A3+N2** `D=(1−ρ̄)/2` sin clamp + `d_max(k)`; **B3** disparidad firmada + detector de inversión.
+- **B6+A8** `core/stats.py` + Monitor **certificado** (LCB Hoeffding ⇒ FPR ≤ δ; Def. 12 gate de evolución); **A9** arranque en frío (prior r0, `can_donate`); **N3** reputación por agente; **N1** μ→μ_rel + interfaz b_in.
+
+**Instrumento experimental (Tier B) — lo que los Ejes 1–2 no tenían:**
+- **B1** auditor experimental **sin oráculo** (`bias_auditor_exp`): estima disparidad por ventana, jamás lee `bias_risk`/`true_qual` ni ajusta scores. La demo con oráculo (video) queda intacta.
+- **B2** humano simulado (oracle/noisy/biased) → **μ_auto y μ_total** + tasa de escalamiento.
+- **B3** estimador `d_TV` del canal proxy (guardrail BIO auditable); **B4** topologías de **comité** (donde C2/diversidad tiene canal).
+- **B5** `e0_instrumento.py` — **GATE**: recupera μ, c_k, ι_k y la cobertura del IC (PASS). **B6** `e_fpr_monitor.py`: FPR puntual 12.2% vs certificado 0.0% ≤ δ.
+
+**Ingeniería (Tier C):** configs YAML + registro de corridas (`runlog`); CI (GitHub Actions) con gate E0; embeddings opcionales (`MOAV_SIMILARITY`); calibración TBO (Platt/isotónica/ECE).
+
+**Tests:** 35 (main) → **~103** (branch). **Deriva numérica de la demo:** ver `DERIVA_DEMO.md`
+— las 12 decisiones del lote y el caso Fátima (ESCALATE, ajuste 0.850) se mantienen; cambian
+magnitudes (matcher 0.820→0.812, μ_rel 0.703→0.606) por A1 (11 teorías vs 4) y A2.
+
+**Sigue pendiente (no en esta branch):** benchmark es-AR con SCM; empirical-Bernstein
+(transcribir constantes de Maurer & Pontil); triple store persistente; embeddings en corrida
+real; validación de la conjetura (Eje 1). Decisión al mergear: regrabar el bloque 2 del video
+con la corrida nueva, o mantener main congelado hasta la reunión (ver `DERIVA_DEMO.md`).
