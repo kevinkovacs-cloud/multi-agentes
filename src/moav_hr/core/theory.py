@@ -34,6 +34,8 @@ class Theory:
     p: int = 0                    # éxitos
     k: int = 0                    # usos
     u: float = 0.0                # utilidad U(t) = acc(t) ∈ [0,1]  (Def. 5)
+    created_at: int = 0           # contador monótono de la base (recencia; A5+A10)
+    id: int = 0                   # id autoincremental dentro de la base (A5+A10)
 
     def __post_init__(self):
         if self.p > self.k:
@@ -85,8 +87,12 @@ class TheoryBase:
         self.theories: list[Theory] = []
         self.sim: SimFn = sim or exact_sim
         self.delta = delta
+        self._seq = 0                 # contador monótono para recencia/id (A5+A10)
 
     def add(self, theory: Theory) -> None:
+        self._seq += 1
+        theory.id = self._seq
+        theory.created_at = self._seq
         self.theories.append(theory)
 
     def applicable(self, situation: dict[str, Any]) -> list[Theory]:
@@ -95,11 +101,19 @@ class TheoryBase:
                 if equivalent(t.si, situation, self.sim, self.delta)]
 
     def select(self, situation: dict[str, Any]) -> Optional[Theory]:
-        """Def. 4: argmax por orden lexicográfico (U desc, P desc, K asc)."""
+        """
+        Def. 4 con desempate determinista (A5+A10): orden lexicográfico
+        (U desc, P desc, K asc, recencia desc, id asc).
+
+        El desempate final es total y reproducible: ante (U, P, K) idénticos gana la
+        teoría más reciente y, de persistir el empate, la de menor id. Nota: bajo
+        Laplace (A2), si U := reliability, un empate en (Û, P) implica empate en K,
+        de modo que el criterio "menor K" queda subsumido y decide la recencia.
+        """
         cands = self.applicable(situation)
         if not cands:
             return None
-        cands.sort(key=lambda t: (-t.u, -t.p, t.k))
+        cands.sort(key=lambda t: (-t.u, -t.p, t.k, -t.created_at, t.id))
         return cands[0]
 
     def find_equal(self, theory: Theory) -> Optional[Theory]:
