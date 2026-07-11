@@ -47,8 +47,9 @@ class MOACVAgent:
         self.bio = bio or BIOLayer()
         self.tbo = tbo or TBOLayer()
         self.wio = wio or WIOLayer()
-        # la base usa la similitud semántica del retriever para la equivalencia (Def. 3)
-        self.theories = TheoryBase(sim=similarity, delta=delta)
+        # identidad de teorías por CUANTIZACIÓN (q_canonical, Def. 3/A1); la similitud
+        # continua y su umbral `delta` son SOLO de recuperación (retrieval, §2.2)
+        self.theories = TheoryBase()
         self.retriever = TheoryRetriever(self.theories, delta=delta, top_k=top_k)
         self._fair_history: list[float] = []   # fair(W) por ventana (para reputación)
 

@@ -38,41 +38,52 @@ class ShareReport:
 
 
 def _copy(t: Theory) -> Theory:
-    return Theory(si=t.si, a=t.a, sf=t.sf, p=t.p, k=t.k, u=t.u)
+    return Theory(si=t.si, a=t.a, sf=t.sf, p=t.p, k=t.k, u=t.u, k_own=t.k_own)
 
 
 def _merge(base_a: TheoryBase, base_b: TheoryBase, rep: ShareReport) -> list[Theory]:
     """
-    Dos pasadas del Alg. 4.9/4.10: recorre A contra B y luego B contra A.
-    Si hay varias similares, se usa la primera hallada (la fuente no desambigua).
+    Fusión por CELDAS (A1) — generaliza los Alg. 4.9/4.10 de la fuente (que tratan
+    pares) al caso n>2 variantes, como extensión declarada (SOLUCIONES_AUDITORIA §A1):
+
+      · celda = (Q(Si), A); variante = Q(Sf) dentro de la celda;
+      · teorías IGUALES (misma celda y variante) suman P y K propio;
+      · dentro de una celda, cada variante conserva SU P ("P del aportante") y el K
+        expuesto de todas es la SUMA de los K propios de todo el grupo;
+      · variantes sin correspondencia se copian tal cual.
+
+    El K PROPIO (k_own) es el contador aditivo que se conserva entre fusiones; el K
+    expuesto (k) se deriva por celda en cada fusión. Con eso la fusión es asociativa
+    y conmutativa a nivel de contadores (multiconjunto de (celda, variante, P, K_propio))
+    y deja de depender del orden de comparación ("primera hallada" del esquema viejo).
     """
+    if base_a.q is not base_b.q:
+        raise ValueError("las bases deben compartir la función de cuantización Q")
+    q = base_a.q
+    cells: "dict[tuple, dict]" = {}
+    for source, base in (("a", base_a), ("b", base_b)):
+        for t in base.theories:
+            cell = (q(t.si), t.a)
+            var = q(t.sf)
+            slot = cells.setdefault(cell, {}).setdefault(var, {
+                "si": t.si, "a": t.a, "sf": t.sf, "p": 0, "k_own": 0,
+                "u": t.u, "sources": set()})
+            slot["p"] += t.p
+            slot["k_own"] += t.k_own
+            slot["sources"].add(source)
+
     merged: list[Theory] = []
-    # pasada 1 — teorías de A contra B
-    for ta in base_a.theories:
-        tb = base_b.find_equal(ta)
-        if tb is not None:
-            merged.append(Theory(si=ta.si, a=ta.a, sf=ta.sf,
-                                 p=ta.p + tb.p, k=ta.k + tb.k, u=ta.u))
-            rep.reinforced += 1
-            continue
-        tb = base_b.find_similar(ta)
-        if tb is not None:
-            merged.append(Theory(si=ta.si, a=ta.a, sf=ta.sf,
-                                 p=ta.p, k=ta.k + tb.k, u=ta.u))   # P del aportante (A)
-            rep.weakened += 1
-            continue
-        merged.append(_copy(ta))
-    # pasada 2 — teorías de B contra A (las iguales ya entraron en la pasada 1)
-    for tb in base_b.theories:
-        if base_a.find_equal(tb) is not None:
-            continue
-        ta = base_a.find_similar(tb)
-        if ta is not None:
-            merged.append(Theory(si=tb.si, a=tb.a, sf=tb.sf,
-                                 p=tb.p, k=ta.k + tb.k, u=tb.u))   # P del aportante (B)
-            continue
-        merged.append(_copy(tb))
-        rep.transferred += 1
+    for variants in cells.values():
+        k_total = sum(v["k_own"] for v in variants.values())
+        for v in variants.values():
+            if v["sources"] == {"a", "b"}:
+                rep.reinforced += 1
+            merged.append(Theory(si=v["si"], a=v["a"], sf=v["sf"], p=v["p"],
+                                 k=k_total, u=v["u"], k_own=v["k_own"]))
+        if len(variants) > 1:
+            rep.weakened += len(variants) - 1
+        if all(v["sources"] == {"b"} for v in variants.values()):
+            rep.transferred += len(variants)
     return merged
 
 
@@ -88,8 +99,8 @@ def cooperate(base_i: TheoryBase, base_j: TheoryBase,
         rep.reason = f"reputación {donor_reputation:.3f} < τ {tau:.3f}"
         return rep
     merged = _merge(base_i, base_j, rep)
-    base_i.theories[:] = [_copy(t) for t in merged]   # in-place: preserva el binding
-    base_j.theories[:] = [_copy(t) for t in merged]   # del retriever de cada agente
+    base_i.replace_all([_copy(t) for t in merged])   # contenido común, copias por agente;
+    base_j.replace_all([_copy(t) for t in merged])   # replace_all re-indexa y re-estampa
     return rep
 
 
@@ -106,5 +117,5 @@ def collaborate(receptor: TheoryBase, colaborador: TheoryBase,
         rep.reason = f"reputación {donor_reputation:.3f} < τ {tau:.3f}"
         return rep
     merged = _merge(receptor, colaborador, rep)
-    receptor.theories[:] = merged
+    receptor.replace_all(merged)                     # solo el receptor (Alg. 4.10)
     return rep
