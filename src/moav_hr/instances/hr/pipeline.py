@@ -26,7 +26,7 @@ def _finalize(state: dict) -> str:
 class HRPipeline:
     def __init__(self, mode: str = "sim", criterion: str = "demographic_parity",
                  attr: str = "origin_group", threshold: float = 0.075,
-                 heterogeneous_reputation: bool = False):
+                 heterogeneous_reputation: bool = False, auditor_mode: str = "demo"):
         # N3: reputación heterogénea para nodos transformadores (Parser ← 1−d̂_TV).
         # Default OFF: decisión pendiente con la dirección; los decisores siempre
         # acumulan fair(W) sobre SUS PROPIAS salidas (ver run_poc).
@@ -34,7 +34,15 @@ class HRPipeline:
         self.backend = LLMBackend(mode)
         self.parser = ParserAgent()
         self.matcher = SemanticMatcherAgent(self.backend)
-        self.auditor = BiasAuditorAgent(threshold)
+        # B1: "demo" = auditor demostrativo (proxy por etiqueta + oráculo; el del video);
+        #     "exp"  = auditor experimental sin oráculo (ventana + certificación LCB).
+        if auditor_mode == "exp":
+            from moav_hr.instances.hr.bias_auditor_exp import ExperimentalBiasAuditor
+            self.auditor = ExperimentalBiasAuditor(threshold=threshold, attr=attr)
+        elif auditor_mode == "demo":
+            self.auditor = BiasAuditorAgent(threshold)
+        else:
+            raise ValueError("auditor_mode debe ser 'demo' o 'exp'")
         self.explainer = ExplainabilityAgent(self.backend)
         self.monitor = FairnessUtilityMonitor(criterion=criterion, attr=attr,
                                               disparity_threshold=threshold)

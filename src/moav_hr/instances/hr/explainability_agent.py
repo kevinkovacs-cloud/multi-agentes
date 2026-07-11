@@ -15,8 +15,12 @@ class ExplainabilityAgent(MOACVAgent):
         L1 = (f"Parser extrajo {len(p['skills_matched'])} skills relevantes; "
               f"Matcher calculó score {m['score']:.3f} (fuente {m['source']}, "
               f"{m['n_retrieved']} teorías recuperadas) sobre umbral 0.75.")
-        L2 = (f"Bias Auditor detectó {a['bias_type']} (Δ={a['bias_score']:.3f}); "
-              f"score ajustado a {a['adjusted_score']:.3f}.")
+        if a["bias_score"] is None:   # auditor experimental (B1): dictamen por ventana
+            L2 = (f"Auditoría de equidad por ventana ({a['bias_type']}): sin dictamen "
+                  f"por caso; score sin ajuste ({a['adjusted_score']:.3f}).")
+        else:
+            L2 = (f"Bias Auditor detectó {a['bias_type']} (Δ={a['bias_score']:.3f}); "
+                  f"score ajustado a {a['adjusted_score']:.3f}.")
         L3 = ("Decisión escalada a revisión humana (EU AI Act Art.14); audit trail RDF "
               "disponible para auditoría externa." if a["blocked"]
               else "Pipeline completado sin intervención humana; sesgo dentro de umbral (Art.13).")

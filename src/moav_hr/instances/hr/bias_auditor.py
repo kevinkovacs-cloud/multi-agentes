@@ -3,6 +3,12 @@ Bias Auditor (capa BIO inspector, regiones 4 y 7) — instancia HR del Monitor d
 de Equidad Ω (v13 §2.4). Mide el sesgo acumulado en la cadena Parser→Matcher y bloquea /
 escala si supera el umbral. La auditoría a nivel de ventana fair(W)/U_op(W) y la reputación
 las computa core.monitor.FairnessUtilityMonitor sobre el lote.
+
+⚠️ INSTRUMENTACIÓN DEMOSTRATIVA — JAMÁS USAR EN EXPERIMENTOS (B1). Este auditor asigna
+el sesgo por la etiqueta `bias_risk` del generador y ajusta hacia `true_qual` (oráculo):
+es legítimo para la demo del video (§5 del plan, declarado en ESTADO.md) y CIRCULAR para
+medir μ. Para experimentos usar ExperimentalBiasAuditor (bias_auditor_exp.py), que
+estima la disparidad SOLO de las decisiones observadas y nunca ajusta scores.
 """
 from __future__ import annotations
 
