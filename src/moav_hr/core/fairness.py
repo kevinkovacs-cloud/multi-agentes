@@ -160,6 +160,21 @@ def amplification(bias_in: float, bias_out: float) -> AmplificationResult:
     return AmplificationResult(round(bias_in, 4), round(bias_out, 4), round(mu, 4), regime)
 
 
+def bias_in_reference(reference_clf_scores: list[float], records: list[dict],
+                      attr: str, criterion: str) -> float:
+    """
+    b_in operacional (N1/B2 de la auditoría): disparidad del CLASIFICADOR DE REFERENCIA
+    sobre los observables — "el sesgo máximo extraíble de lo observable", coherente con
+    el lema d_TV (b_in ≤ d_TV de los observables condicionados al grupo).
+
+    Se llena con el benchmark del Eje 2 (SCM conocido → clasificador fuerte entrenado
+    sobre el generador). El μ de la Def. 10 se computa contra ESTE b_in, no contra el
+    caso basal (eso es μ_rel). Interfaz declarada; implementación pendiente del benchmark.
+    """
+    raise NotImplementedError(
+        "requiere el benchmark del Eje 2 (clasificador de referencia sobre observables)")
+
+
 def diversity(agent_bias_vectors: dict[str, list[float]], comparable: bool = True) -> float:
     """
     Def. 11 (corregida, A3) — D(M) = (1 − ρ̄) / 2 ∈ [0, 1], con ρ̄ la correlación media

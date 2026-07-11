@@ -98,7 +98,7 @@ def main() -> None:
     print(f"    Falsos rechazos de calificados : basal={base_false_rej} → modelo={moacv_false_rej}")
     print(f"    Brecha de trato por grupo      : basal={gap_base:.3f} → modelo={gap_moacv:.3f}")
 
-    # --- amplificación μ (Def. 10) ---
+    # --- amplificación relativa al basal (N1: esto es μ_rel, NO el μ de la Def. 10) ---
     amp_gap = fairness.amplification(gap_base, gap_moacv)
     amp_dp = fairness.amplification(
         abs(fairness.disparity(base_recs, args.attr, args.criterion)),
@@ -107,8 +107,10 @@ def main() -> None:
     # contiene están estructuralmente correlacionados y esa comparación no mide
     # diversidad. D se computa SOLO entre miembros de un comité (topology="committee").
     print("\n  COMPOSICIÓN DE SESGO EN LA CADENA (Eje 1 — instrumental, NO valida la conjetura)")
-    print(f"    μ por brecha-vs-ground-truth : {amp_gap}")
-    print(f"    μ por {args.criterion:<19}: {amp_dp}")
+    print(f"    μ_rel por brecha-vs-ground-truth : {amp_gap}")
+    print(f"    μ_rel por {args.criterion:<19}: {amp_dp}")
+    print("    μ_rel = b(modelo)/b(basal); el μ de la Def. 10 se computa contra la")
+    print("    ENTRADA (b_in del benchmark, Eje 2 — fairness.bias_in_reference).")
 
     # --- ontología RDF + SHACL + SPARQL (§2.5), sobre el lote completo ---
     g = abox.build_abox(states[0], agents=list(pipe.agents))
