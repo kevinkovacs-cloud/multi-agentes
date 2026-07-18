@@ -20,6 +20,9 @@ models/
 docs/GUIA_COMPLETA.md
 docs/propuesta_tesis.docx
 DEMO_GUION.md
+GUIA_UI_LOCAL.md
+LEGADO_FABLE5.md
 
 # Config local del harness / preview (paths de máquina, no va al repo)
 .claude/
+ONBOARDING_CLAUDE.md
