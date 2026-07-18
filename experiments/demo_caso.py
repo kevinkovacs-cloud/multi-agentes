@@ -106,6 +106,20 @@ def main():
           f"({len(ttl)} chars)")
     print(f"      → agente receptor reconstruye {len(receptor)} teorías desde el RDF "
           f"(sin compartir memoria)")
+
+    # --- serialización real de las teorías (obs. Becerra: mostrar cómo se comparten) ---
+    ttl_lines = ttl.splitlines()
+    print(f"\n      ── serialización RDF/Turtle · vocabulario estándar §2.5 / PROV-O ──")
+    for ln in ttl_lines[:3]:                              # @prefix … (namespace estándar)
+        print("      " + ln)
+    for i, ln in enumerate(ttl_lines):                   # una teoría completa ⟨Si,A,Sf,P,K,U⟩
+        if " a moacv:Teoria ;" in ln:
+            print("      ...")
+            for l in ttl_lines[i:i + 7]:
+                print("      " + l)
+            break
+    print(f"      ...  [serialización completa: {len(ttl_lines)} líneas · {len(ttl)} chars "
+          f"· {len(emisor)} teorías]")
     rule("═")
     print()
 
