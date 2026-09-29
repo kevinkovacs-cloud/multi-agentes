@@ -42,7 +42,7 @@ def test_gate_evolution_por_reputacion():
     alto = MOACVAgent("Alto", "matcher")
     alto.record_window_fairness(0.95)                           # r = 0.95 ≥ τ
     assert mon.gate_evolution(alto)
-    virgen = MOACVAgent("SinHistoria", "matcher")               # sin ventanas: r = 1.0
+    virgen = MOACVAgent("SinHistoria", "matcher")               # sin ventanas: r = r0 = 0.8 (prior declarado) ≥ τ_r = 0.8
     assert mon.gate_evolution(virgen)
 
 

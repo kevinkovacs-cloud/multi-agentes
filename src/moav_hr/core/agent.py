@@ -117,6 +117,10 @@ class MOACVAgent:
         del Monitor, DECLARADO como prior, no evidencia). Antes devolvía 1.0: un agente
         recién nacido lucía con reputación perfecta. El prior habilita recibir; DONAR
         exige además historia mínima (ver can_donate — regla asimétrica).
+
+        Con r0 == τ_r y comparación ≥, un agente sin historia aprueba el gate puntual y
+        approve_sharing; can_donate lo frena como donante. Comportamiento intencional
+        (testeado); frágil si τ_r > r0.
         """
         if not self._fair_history:
             return r0 if r0 is not None else 0.8
