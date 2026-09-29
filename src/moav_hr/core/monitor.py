@@ -16,6 +16,7 @@ comportamiento del demo del video.
 Es agnóstico del dominio: el criterio de equidad y el atributo protegido son configurables.
 """
 from __future__ import annotations
+import warnings
 from dataclasses import dataclass
 from typing import Optional
 
@@ -101,11 +102,22 @@ class FairnessUtilityMonitor:
         Puntual (default): media de fair(W) sobre las últimas m ventanas ≥ τ.
         Certificado (Def. 12): LCB_δ de esa media ≥ τ — exige historia suficiente
         (sin ventanas observadas no hay certificado: devuelve False).
+
+        Alcanzabilidad del certificado (bloque C · C7): aprobar exige
+        r̄ − sqrt(ln(2/δ)/(2n)) ≥ τ, o sea  n ≥ m_min(r̄) = ⌈ln(2/δ) / (2(r̄ − τ)²)⌉
+        (stats.m_min_gate). Aun con ventanas perfectas (r̄ = 1) hace falta m_min(1.0):
+        47 con τ = 0.8 y δ = 0.05. Con el default m = 5 el gate certificado NO puede
+        aprobar nunca → se emite un warning. El valor de retorno no cambia.
         """
         if not certified:
             return agent.reputation() >= self.tau
         window_values = agent._fair_history[-m:]
         n = len(window_values)
+        if self.tau < 1.0:
+            m_min = stats.m_min_gate(1.0, self.tau, delta)
+            if n < m_min:
+                warnings.warn(f"el gate certificado no puede aprobar con {n} ventanas; "
+                              f"mínimo m_min(1.0)={m_min}", stacklevel=2)
         if n == 0:
             return False
         mean = sum(window_values) / n

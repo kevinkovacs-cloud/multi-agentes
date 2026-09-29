@@ -69,6 +69,24 @@ def min_window(delta: float, margin: float) -> int:
     return math.ceil(2.0 * math.log(2.0 / delta) / (margin ** 2))
 
 
+def m_min_gate(rbar: float, tau: float, delta: float) -> int:
+    """
+    Ventanas mínimas para que el gate de evolución CERTIFICADO (Def. 12) pueda aprobar
+    (bloque C · C7). El gate exige  r̄ − t(n, δ) ≥ τ  con t(n, δ) = sqrt(ln(2/δ)/(2n))
+    (Hoeffding), así que hace falta
+
+        n ≥ m_min(r̄) = ⌈ ln(2/δ) / (2 (r̄ − τ)²) ⌉ .
+
+    Aun con ventanas perfectas (r̄ = 1), τ = 0.8 y δ = 0.05: m_min = 47 (con r̄ = 0.95:
+    82). Lanza ValueError si r̄ ≤ τ: ningún n alcanza.
+    """
+    if not (0 < delta < 1):
+        raise ValueError("delta debe estar en (0,1)")
+    if rbar <= tau:
+        raise ValueError("m_min_gate requiere rbar > tau: con rbar ≤ tau ningún n aprueba")
+    return math.ceil(math.log(2.0 / delta) / (2.0 * (rbar - tau) ** 2))
+
+
 def bootstrap_bca_log_mu(lotes_in: "list[float]", lotes_out: "list[float]",
                          n_boot: int = 2000, seed: Optional[int] = None,
                          confidence: float = 0.95):
