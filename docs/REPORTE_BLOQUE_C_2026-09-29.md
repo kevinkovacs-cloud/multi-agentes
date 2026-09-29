@@ -109,3 +109,87 @@
   - En **C8**: corrección del comentario pedida por la especificación.
   - En los dos casos es solo texto: **no cambió ninguna aserción ni la lógica**.
 - **Ningún otro test existente se modificó.** `test_sharing_fuente.py`, `test_laplace.py`, `test_m2m_teorias.py` y `test_certified_monitor.py` siguen verdes sin cambios.
+
+---
+
+## Apéndice — Cierre del bloque (C12–C15, 29/09/2026)
+
+Claude chat revisó el diff y **aprobó C0–C3 y C5–C11**; C4 (parcial) se cierra con C12. Se aplicaron las respuestas a las 9 preguntas (`HANDOFF_CLAUDE_CODE_bloqueC_respuestas_2026-09-29.md`) con las mismas reglas: sin push ni merge, `main` intacto, un commit por ítem y `pytest -q` después de cada uno.
+
+### A.1 `pytest -q` final
+
+| | Resultado |
+|---|---|
+| Fin de C11 | 129 passed, 1 xfailed |
+| **Fin del bloque (C15)** | **134 passed, 0 xfailed**, 0 failed, 2 warnings (los esperados de C7) |
+
+- El xfail de C4 pasó a test normal en C12.
+- Los +5 tests nuevos que pasan salen de dos ítems:
+  - C12: el caso exacto por Turtle, parametrizado con 2/3, 0.1 y 1/7; el datatype decimal; y el rechazo de SHACL.
+  - C13: el IRI corto y la clave recuperable.
+
+### A.2 Ítems C12–C15
+
+| Ítem | Commit | Archivos | Tests | Estado |
+|---|---|---|---|---|
+| C12 | `aa9ef0a` | `core/ontology/{abox,sharing_rdf,tbox}.py`, `tests/test_bloquec_rdf_u.py` | xfail → normal, parametrizado con 2/3, 0.1 y 1/7 (M2M y ABox por Turtle); datatype decimal en ABox, M2M y TBox; **SHACL rechaza U = 1.5** (`MaxInclusive`) | **Hecho.** `Literal(Decimal(repr(float(u))), datatype=XSD.decimal)`. TBox: U pasa a `XSD.decimal`. Al importar, `float(...)`. `confiabilidad` sin tocar. **C4 cerrado.** |
+| C13 | `8f0692e` | `abox.py`, `sharing_rdf.py`, `tbox.py`, `tests/test_bloquec_iris.py`, `ESTADO.md` | + IRI corto (16 hex); + `clave` parseada == `theory_key(t, q)` en ABox y M2M; se mantienen los casos de C3 (`replace_all`, `x-2`/`3` vs `x`/`2-3`, `/`) | **Hecho.** IRI `{kind}/{quote(agente)}/{h}` con `h = sha256(json.dumps([k1,k2,k3], ensure_ascii=False)).hexdigest()[:16]`; mismo `h` para Si/Sf. Literal `moacv:clave` (TBox `XSD.string`). Supuesto de unicidad anotado en `ESTADO.md`. |
+| C14 | `6b091c8` | `README.md`, `ESTADO.md` | — | **Hecho.** «Monitor de Equidad» en `README.md` (l. 33) y `ESTADO.md` (l. 17). Corregidos también, **sin commit** por estar ignorados: `DEMO_GUION.md`, `GUIA_UI_LOCAL.md` y `ONBOARDING_CLAUDE.md`. Además regeneré `src/moav_hr.egg-info` (generado e ignorado), que tenía una copia del README viejo del 03/07. |
+| C15 | este commit | `ESTADO.md`, `MAPPING.md`, este reporte | — | **Hecho.** Notas de las respuestas 3, 6, 7 y 9 en `ESTADO.md`. Refresqué las líneas que habían quedado desactualizadas (C4 «parcial», «IRIs largos», conteo de tests) en `ESTADO.md` y `MAPPING.md`, y rotulé b_in como decisión 3. Este apéndice. |
+
+### A.3 Verificación final
+
+- `pytest -q`: **134 passed, sin xfail** ✓
+- `demo_caso.py 3` y `run_poc.py`, también con `--window-escalation point` y `certified`: **exit 0** ✓. SHACL conforme: `True`.
+- `grep -rn "Utilidad de Equidad" README.md ESTADO.md src tests experiments`: **sin coincidencias** ✓
+
+**Efectos en las salidas, contra C11:**
+
+| Script | Cambio |
+|---|---|
+| `demo_caso.py` [7] | IRIs cortos por hash (`…/Teoria/Matcher/1f700496b9cdb3b6`); U como decimal (`0.9` en vez de `9e-01`); Turtle de 23.892 a **12.806** caracteres; tripletas de 278 a 289 (+11 `clave`). La teoría de ejemplo que se imprime es la misma. |
+| `run_poc.py` | Tripletas de 1070 a **1081** (+11 `clave`); el resto es idéntico. |
+
+Robustez de C12 verificada con valores chicos (de 1e-4 a 1e-8): rdflib normaliza el léxico decimal sin exponente y la vuelta es exacta, con datatype decimal.
+
+### A.4 Respuestas aplicadas
+
+1. U como `xsd:decimal` → C12.
+2. IRI por hash + literal `clave` → C13, con el supuesto de unicidad en `ESTADO.md`.
+3. «repr estable»: aprobado → anotado en `ESTADO.md` (C15).
+4. Nombre viejo → C14 (`README` y `ESTADO`, más los locales sin commit).
+5. Σ k_own = 0 no asociativo → sin cambios (documentado en `_merge`; decisión 2).
+6. Modo `certified` con n = 12 → anotado en `ESTADO.md` (C15).
+7. `config_sha` → anotado en `ESTADO.md` (C15): comparar por `metrics` + `git_sha`. Sin cambios de código.
+8. μ_rel = `None` → sin cambios. Ya estaba en la lista del Bloque B, ahora rotulado «decisión 3 (b_in)».
+9. Score del matcher tras una fusión → anotado en `ESTADO.md` (C15) como esperado y deseado.
+
+### A.5 Tests modificados en el cierre
+
+- **Ningún test anterior al bloque se modificó en C12–C15.**
+- Evolucionaron dos tests del propio bloque:
+  - `test_bloquec_rdf_u.py` (C12): el xfail pasó a normal. El test de «mejora ≤ 1e-7» se reemplazó, porque quedó superado por el exacto. Se agregaron el datatype y el rechazo de SHACL.
+  - `test_bloquec_iris.py` (C13): se agregaron el IRI corto y la clave recuperable; los casos de C3 se mantienen.
+
+### A.6 Observación (no bloquea)
+
+- En `ONBOARDING_CLAUDE.md` (local, ignorado), l. 40, dice «Born→**Novato**→Trained→Mature».
+- El comentario del axioma en `tbox.py` dice «Born ≺ Novato ≺ …».
+- Los dos quedan fuera de este bloque por la regla 6: los literales «novato» no se tocan. ¿Van en otro bloque?
+
+### A.7 `git diff --stat 23b7f53..6b091c8` (C12–C14)
+
+```
+ ESTADO.md                                |  3 +-
+ README.md                                |  2 +-
+ src/moav_hr/core/ontology/abox.py        | 39 ++++++++-----
+ src/moav_hr/core/ontology/sharing_rdf.py | 10 ++--
+ src/moav_hr/core/ontology/tbox.py        |  6 +-
+ tests/test_bloquec_iris.py               | 35 +++++++++---
+ tests/test_bloquec_rdf_u.py              | 94 +++++++++++++++++---------------
+ 7 files changed, 117 insertions(+), 72 deletions(-)
+```
+
+C15 agrega cambios en `ESTADO.md`, `MAPPING.md` y este reporte.
+
+**Estado:** la rama `eje1/bloque-c` quedó lista. **Sin push ni merge**: eso lo decide Kevin.

@@ -79,13 +79,14 @@ Correcciones objetivas de la auditoría Génesis v2 que no dependen de la direcc
 - **C0** nombre canónico: `core/monitor.FairnessMonitor` (alias de `FairnessUtilityMonitor`) — «Monitor de Equidad».
 - **C1** fusión conmutativa en U: `core/sharing._merge` (U = Σ k_own·u / Σ k_own; provisorio, decisión 2).
 - **C2** confiabilidad con usos propios: `core/theory.Theory.reliability` = (P+1)/(k_own+2) (provisorio, decisión 2).
-- **C3** IRIs por clave: `core/theory.theory_key` + `core/ontology/abox.theory_iri` (usados en `abox` y `sharing_rdf`).
-- **C4** U sin redondeo + `moacv:usos`: `core/ontology/{abox,sharing_rdf,tbox}` (Turtle de rdflib 7.6 limita `xsd:double` a 7 cifras — pendiente).
+- **C3 + C13** IRIs por clave: `core/theory.theory_key` + `core/ontology/abox.theory_iri` (IRI corto = 16 hex del sha256 de la clave) + `abox.theory_clave` (literal `moacv:clave` con la clave completa); usados en `abox` y `sharing_rdf`.
+- **C4 + C12** U exacta + `moacv:usos`: `core/ontology/{abox,sharing_rdf,tbox}`; U como `xsd:decimal` (`Decimal(repr(u))`) porque el Turtle de rdflib 7.6 abrevia `xsd:double` a 7 cifras.
 - **C5** Δ_esc: `core/fairness.escalation_disparity`; métricas en `experiments/run_poc.py` (`log_run`).
 - **C6** bloqueo de ventana: `instances/hr/pipeline.escalate_window` + `run_poc.py --window-escalation` (ver «Instrumento experimental»).
 - **C7** alcanzabilidad del gate certificado (Def. 12): `core/stats.m_min_gate` + warning en `core/monitor.gate_evolution`.
 - **C8** prior de reputación: docstring de `core/agent.MOACVAgent.reputation` (sin cambios de comportamiento).
 - **C9** desempate de la recuperación (Def. 4): `core/retrieval.TheoryRetriever.retrieve` = clave de `TheoryBase.select`.
 - **C10** potencia del certificado: `core/stats.n_power`; `min_window` = umbral de detectabilidad.
+- **C14** nombre «Monitor de Equidad» también en `README.md` y `ESTADO.md`.
 
 **Bloque B — pendiente de la dirección, NO implementado:** etiqueta UCB del Monitor; semántica de P/K e invariante I4 en SHACL; utilidad de tarea en `learn`; b_in; E(t) / trato–ruteo; escalamiento por ventana como default.

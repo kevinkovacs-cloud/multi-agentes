@@ -115,22 +115,31 @@ Rama `eje1/bloque-c` (desde `eje1/formalizacion-v2`), un commit por ítem, **sin
 - **C2** — `reliability = (P+1)/(k_own+2)`: tras fusionar, el K de la celda bajaba la confiabilidad sin evidencia nueva.
 - **C3** — IRIs de Teoria/Si/Sf por clave (agente + Q(Si) + A + Q(Sf)): los posicionales cambiaban al reordenar la base y rompían `prov:wasDerivedFrom` y la identificación M2M.
   - *C13:* el IRI es corto, `{kind}/{agente}/{h}` con `h` = 16 hex del sha256 de la clave JSON `[Q(Si), A, Q(Sf)]`; la clave completa queda en el literal `moacv:clave` (sin pérdida). **Supuesto: la clave es única por base** (una teoría por celda + variante); hoy lo garantizan `find_equal` (en `learn`) y `_merge`. Si se rompiera, dos teorías colapsarían en un mismo nodo RDF.
-- **C4** — U sin redondeo + propiedad `usos` (= k_own): la ida y vuelta RDF perdía precisión. **Parcial:** el Turtle de rdflib 7.6 abrevia `xsd:double` a 7 cifras (pregunta abierta).
+- **C4** — U sin redondeo + propiedad `usos` (= k_own): la ida y vuelta RDF perdía precisión.
+  - *C12:* el Turtle de rdflib 7.6 abrevia `xsd:double` a 7 cifras, así que **U pasa a `xsd:decimal`** (`Decimal(repr(u))`): ida y vuelta exacta por Turtle; el M2M y el paso [7] siguen en Turtle (pedido de Becerra). `confiabilidad` (derivada) queda en double.
 - **C5** — `escalation_disparity` (Δ_esc) + μ_rel en `log_run`: `ESCALATE_HUMAN` cuenta como favorable y Δ_DP no ve la derivación desigual.
 - **C6** — `escalate_window` + `--window-escalation` (off por defecto): el paper dice que Ω bloquea la **ventana**; el código solo la marcaba.
 - **C7** — `stats.m_min_gate` + warning en el gate certificado: con m = 5 no puede aprobar nunca (necesita ≥ 47 ventanas con τ = 0.8).
 - **C8** — comentario del prior de reputación (r0 = 0.8) + nota de fragilidad: el comentario decía r = 1.0.
 - **C9** — `retrieve` con la misma clave de desempate que `select`: en empates exactos elegía la teoría más antigua.
 - **C10** — docstring de `min_window` + `stats.n_power`: `min_window` es detectabilidad (potencia medida ≈ 0.37), no detección garantizada.
+- **C14** — nombre «Monitor de Equidad» también en `README.md` y en este archivo (y en los documentos locales ignorados).
 
-**Efectos visibles en la rama:** `demo_caso.py` [7] imprime IRIs largos (C3) y +11 tripletas `usos`
-(C4); `run_poc.py` imprime 1070 tripletas (antes 1059) y una línea nueva Δ_esc (C5); con
-`--window-escalation off` el resto de la salida no cambia. **Tests:** 103 → 129 + 1 xfail documentado (C4).
+**Notas de cierre (respuestas de Claude chat, C15):**
+- *Clave de C3 («repr estable»):* si `Q` devuelve `str` (`q_canonical`) se usa tal cual; `serialize` solo si no es `str` (p. ej. la tupla de `q_grid`). Aprobado así.
+- *C6:* el modo `certified` solo bloquea con n por grupo del orden de `n_power(margin)` (p. ej. 2383 para margin 0.10); con el lote de la PoC (n = 12) nunca bloquea. Con `point`, las métricas posteriores a B2 ven toda la ventana escalada.
+- *Registro de corridas:* desde C6, `vars(args)` incluye `window_escalation`, así que las corridas anteriores y posteriores **no son comparables por `config_sha`**: compararlas por `metrics` + `git_sha`.
+- *C2:* el score del matcher (`THEORY_NUDGE · reliability`) puede cambiar tras una fusión. Es esperado y deseado: se elimina una caída espuria de la confiabilidad.
+
+**Efectos visibles en la rama:** `demo_caso.py` [7] imprime IRIs cortos por hash (C13; Turtle de
+9284 → 12806 chars por los literales `usos`, `clave` y U en decimal) y +22 tripletas; `run_poc.py`
+imprime 1081 tripletas (antes 1059: +11 `usos`, +11 `clave`) y una línea nueva Δ_esc (C5); con
+`--window-escalation off` el resto de la salida no cambia. **Tests:** 103 → 134, sin xfail.
 
 **Pendiente de la dirección — Bloque B (NO implementado):**
 - etiqueta UCB del Monitor («certificado equitativo»);
 - semántica de P/K y el invariante I4 en SHACL (decisión 2: las reglas de C1/C2 son provisorias);
 - utilidad de tarea en `learn`;
-- b_in (con disparidad basal 0, μ_rel queda indefinido en la corrida por defecto);
+- b_in (decisión 3: con disparidad basal 0, μ_rel queda indefinido en la corrida por defecto);
 - E(t) / trato–ruteo;
 - escalamiento por ventana como default.
