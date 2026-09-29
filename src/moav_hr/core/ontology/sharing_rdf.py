@@ -13,6 +13,7 @@ la ontología puede consumir las teorías.
 """
 from __future__ import annotations
 import json
+from decimal import Decimal
 
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF, XSD
@@ -42,9 +43,9 @@ def theories_to_turtle(theories: list[Theory], agent: str = "AgenteEmisor",
         g.add((au, MOACV.registra, tu))
         g.add((tu, MOACV.P, Literal(int(t.p), datatype=XSD.integer)))
         g.add((tu, MOACV.K, Literal(int(t.k), datatype=XSD.integer)))
-        # U sin redondeo + usos propios (bloque C · C4). El Turtle de rdflib 7.6 abrevia
-        # xsd:double a 7 cifras ("%e"): la exactitud por Turtle queda pendiente (reporte C4).
-        g.add((tu, MOACV.U, Literal(float(t.u), datatype=XSD.double)))
+        # U como xsd:decimal + usos propios (bloque C · C4+C12): ida y vuelta exacta por
+        # Turtle (float(Decimal(repr(u))) == u); al importar se convierte con float(...).
+        g.add((tu, MOACV.U, Literal(Decimal(repr(float(t.u))), datatype=XSD.decimal)))
         g.add((tu, MOACV.usos, Literal(int(t.k_own), datatype=XSD.integer)))
         g.add((tu, MOACV.accion, Literal(t.a)))
         si = theory_iri(agent, t, q, kind="Si")

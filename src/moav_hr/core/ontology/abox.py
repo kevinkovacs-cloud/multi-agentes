@@ -6,6 +6,7 @@ Materializa teorías (región 5), decisiones y eventos de auditoría como triple
 OpenTelemetry al grafo de procedencia. Reusa PROV-O. Reemplaza la construcción manual.
 """
 from __future__ import annotations
+from decimal import Decimal
 from urllib.parse import quote
 
 from rdflib import Graph, Literal
@@ -86,10 +87,11 @@ def build_abox(state: dict, agents: list | None = None) -> Graph:
             g.add((au, MOACV.registra, tu))
             g.add((tu, MOACV.P, Literal(int(t.p), datatype=XSD.integer)))
             g.add((tu, MOACV.K, Literal(int(t.k), datatype=XSD.integer)))
-            # U sin redondeo (bloque C · C4): exacta en el grafo y en N-Triples/JSON-LD/XML.
-            # OJO: el serializador Turtle de rdflib 7.6 abrevia xsd:double con "%e" (7 cifras);
-            # la ida y vuelta exacta por Turtle queda como pregunta abierta (ver reporte C4).
-            g.add((tu, MOACV.U, Literal(float(t.u), datatype=XSD.double)))
+            # U como xsd:decimal (bloque C · C4+C12): el Turtle de rdflib 7.6 abrevia
+            # xsd:double a 7 cifras ("%e"); repr(float) es la representación más corta que
+            # vuelve exacta, así que float(Decimal(repr(u))) == u y la ida y vuelta por
+            # Turtle es exacta.
+            g.add((tu, MOACV.U, Literal(Decimal(repr(float(t.u))), datatype=XSD.decimal)))
             g.add((tu, MOACV.usos, Literal(int(t.k_own), datatype=XSD.integer)))
             g.add((tu, MOACV.confiabilidad, Literal(round(t.reliability, 4), datatype=XSD.double)))
             # acción A (Def. 3) como propiedad — completa la tupla ⟨Si,A,Sf,P,K,U⟩ en el RDF

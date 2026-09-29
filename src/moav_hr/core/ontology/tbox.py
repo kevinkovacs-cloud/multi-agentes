@@ -45,7 +45,8 @@ OBJECT_PROPS = {
 
 DATA_PROPS = {
     "estado": XSD.string, "capa": XSD.string, "P": XSD.integer, "K": XSD.integer,
-    "U": XSD.double, "confiabilidad": XSD.double, "reputacionEquidad": XSD.double,
+    # U como xsd:decimal (bloque C · C12): ida y vuelta exacta por Turtle
+    "U": XSD.decimal, "confiabilidad": XSD.double, "reputacionEquidad": XSD.double,
     "umbralEquidad": XSD.double, "umbralDiversidad": XSD.double, "fairW": XSD.double,
     "accW": XSD.double, "timestamp": XSD.double, "scoreMatching": XSD.double,
     "resultado": XSD.string, "criterioEquidad": XSD.string, "genero": XSD.string,
