@@ -6,11 +6,13 @@ Materializa teorías (región 5), decisiones y eventos de auditoría como triple
 OpenTelemetry al grafo de procedencia. Reusa PROV-O. Reemplaza la construcción manual.
 """
 from __future__ import annotations
+from urllib.parse import quote
+
 from rdflib import Graph, Literal
 from rdflib.namespace import RDF, XSD
 
 from moav_hr.core.ontology.ns import MOACV, PROV
-from moav_hr.core.theory import serialize
+from moav_hr.core.theory import q_canonical, serialize, theory_key
 
 EVENT_CLASS = {
     "EventoDecision": MOACV.EventoDecision,
@@ -22,6 +24,22 @@ EVENT_CLASS = {
 
 def _uri(kind: str, ident):
     return MOACV[f"{kind}/{ident}"]
+
+
+def theory_iri(agent_name: str, t, q, kind: str = "Teoria"):
+    """
+    IRI estable por CLAVE de la teoría (bloque C · C3): agente + Q(Si) + A + Q(Sf).
+
+    Reemplaza el IRI posicional {agente}-{i}, que cambiaba al reordenar la base
+    (replace_all, en toda fusión) y rompía prov:wasDerivedFrom y la identificación M2M.
+    Cada componente se escapa POR SEPARADO con quote(safe=''), incluido '/': el
+    separador '/' no puede aparecer dentro de un componente, así que el esquema es
+    inyectivo (el guion no se usa como separador). Mismo esquema para los nodos Si/Sf
+    (kind="Si"/"Sf").
+    """
+    k1, k2, k3 = theory_key(t, q)
+    return MOACV[f"{kind}/{quote(agent_name, safe='')}/{quote(k1, safe='')}"
+                 f"/{quote(k2, safe='')}/{quote(k3, safe='')}"]
 
 
 def _agent_node(g: Graph, name: str):
@@ -59,8 +77,9 @@ def build_abox(state: dict, agents: list | None = None) -> Graph:
         base = _uri("Base", a.name)
         g.add((base, RDF.type, MOACV.BaseDeConocimiento))
         g.add((au, MOACV.poseeBase, base))
-        for i, t in enumerate(a.theories.theories):
-            tu = _uri("Teoria", f"{a.name}-{i}")
+        q = getattr(a.theories, "q", q_canonical)
+        for t in a.theories.theories:
+            tu = theory_iri(a.name, t, q)
             g.add((tu, RDF.type, MOACV.Teoria))
             g.add((tu, RDF.type, PROV.Entity))
             g.add((base, MOACV.contieneTeoria, tu))
@@ -71,12 +90,12 @@ def build_abox(state: dict, agents: list | None = None) -> Graph:
             g.add((tu, MOACV.confiabilidad, Literal(round(t.reliability, 4), datatype=XSD.double)))
             # acción A (Def. 3) como propiedad — completa la tupla ⟨Si,A,Sf,P,K,U⟩ en el RDF
             g.add((tu, MOACV.accion, Literal(t.a)))
-            si = _uri("Si", f"{a.name}-{i}")
+            si = theory_iri(a.name, t, q, kind="Si")
             g.add((si, RDF.type, MOACV.SituacionInicial))
             g.add((si, MOACV.representacionJSON, Literal(serialize(t.si))))
             g.add((tu, MOACV.aplicaEn, si))
             # situación final Sf (Def. 3) — necesaria para reconstruir/compartir la teoría (M2M)
-            sf = _uri("Sf", f"{a.name}-{i}")
+            sf = theory_iri(a.name, t, q, kind="Sf")
             g.add((sf, RDF.type, MOACV.SituacionFinal))
             g.add((sf, MOACV.representacionJSON, Literal(serialize(t.sf))))
             g.add((tu, MOACV.aplicaEn, sf))
@@ -106,8 +125,9 @@ def build_abox(state: dict, agents: list | None = None) -> Graph:
             g.add((du, PROV.used, cand_uri))
         # procedencia: la decisión deriva de las teorías registradas por los agentes
         for a in (agents or []):
-            for i in range(len(a.theories.theories)):
-                g.add((du, PROV.wasDerivedFrom, _uri("Teoria", f"{a.name}-{i}")))
+            q = getattr(a.theories, "q", q_canonical)
+            for t in a.theories.theories:
+                g.add((du, PROV.wasDerivedFrom, theory_iri(a.name, t, q)))
 
     # eventos del audit trail (≡ spans OpenTelemetry)
     trail = state.get("trail")

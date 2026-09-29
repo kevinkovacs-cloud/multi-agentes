@@ -17,12 +17,17 @@ import json
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF, XSD
 
+from moav_hr.core.ontology.abox import theory_iri
 from moav_hr.core.ontology.ns import MOACV
-from moav_hr.core.theory import Theory, serialize
+from moav_hr.core.theory import Theory, q_canonical, serialize
 
 
-def theories_to_turtle(theories: list[Theory], agent: str = "AgenteEmisor") -> str:
-    """Serializa una base de teorías a RDF/Turtle con el vocabulario de §2.5."""
+def theories_to_turtle(theories: list[Theory], agent: str = "AgenteEmisor",
+                       q=q_canonical) -> str:
+    """Serializa una base de teorías a RDF/Turtle con el vocabulario de §2.5.
+
+    Los IRIs de Teoria/Si/Sf son estables por clave (bloque C · C3, abox.theory_iri);
+    `q` es la cuantización de la base de origen (default: la canónica)."""
     g = Graph()
     g.bind("moacv", MOACV)
     au = MOACV[f"Agente/{agent}"]
@@ -30,8 +35,8 @@ def theories_to_turtle(theories: list[Theory], agent: str = "AgenteEmisor") -> s
     g.add((au, RDF.type, MOACV.Agente))
     g.add((base, RDF.type, MOACV.BaseDeConocimiento))
     g.add((au, MOACV.poseeBase, base))
-    for i, t in enumerate(theories):
-        tu = MOACV[f"Teoria/{agent}-{i}"]
+    for t in theories:
+        tu = theory_iri(agent, t, q)
         g.add((tu, RDF.type, MOACV.Teoria))
         g.add((base, MOACV.contieneTeoria, tu))
         g.add((au, MOACV.registra, tu))
@@ -39,11 +44,11 @@ def theories_to_turtle(theories: list[Theory], agent: str = "AgenteEmisor") -> s
         g.add((tu, MOACV.K, Literal(int(t.k), datatype=XSD.integer)))
         g.add((tu, MOACV.U, Literal(round(float(t.u), 6), datatype=XSD.double)))
         g.add((tu, MOACV.accion, Literal(t.a)))
-        si = MOACV[f"Si/{agent}-{i}"]
+        si = theory_iri(agent, t, q, kind="Si")
         g.add((si, RDF.type, MOACV.SituacionInicial))
         g.add((si, MOACV.representacionJSON, Literal(serialize(t.si))))
         g.add((tu, MOACV.aplicaEn, si))
-        sf = MOACV[f"Sf/{agent}-{i}"]
+        sf = theory_iri(agent, t, q, kind="Sf")
         g.add((sf, RDF.type, MOACV.SituacionFinal))
         g.add((sf, MOACV.representacionJSON, Literal(serialize(t.sf))))
         g.add((tu, MOACV.aplicaEn, sf))

@@ -130,6 +130,24 @@ def theories_similar(t1: Theory, t2: Theory, q: QuantizationFn = q_canonical) ->
     return t1.a == t2.a and q(t1.si) == q(t2.si) and q(t1.sf) != q(t2.sf)
 
 
+def _key_part(x: Hashable) -> str:
+    """Representación estable de una situación cuantizada Q(·) como str: la cadena tal
+    cual si Q ya devuelve str (q_canonical: JSON canónico, evita doble codificación);
+    si no, su JSON canónico vía serialize (p. ej. la tupla de q_grid)."""
+    return x if isinstance(x, str) else serialize(x)
+
+
+def theory_key(t: Theory, q: QuantizationFn) -> tuple[str, str, str]:
+    """
+    Clave estable de una teoría (bloque C · C3): (Q(Si), A, Q(Sf)) como strings —
+    celda + variante, la misma identidad que usa la fusión (Def. 3, A1).
+
+    Determina el IRI de la teoría (core/ontology/abox.theory_iri): el IRI deja de ser
+    posicional y la misma teoría conserva su IRI aunque la base se reordene.
+    """
+    return (_key_part(q(t.si)), t.a, _key_part(q(t.sf)))
+
+
 class TheoryBase:
     """
     Base de conocimiento de teorías de un agente (θᵢ, Def. 1/2), indexada por celda.
