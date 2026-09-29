@@ -42,7 +42,10 @@ def theories_to_turtle(theories: list[Theory], agent: str = "AgenteEmisor",
         g.add((au, MOACV.registra, tu))
         g.add((tu, MOACV.P, Literal(int(t.p), datatype=XSD.integer)))
         g.add((tu, MOACV.K, Literal(int(t.k), datatype=XSD.integer)))
-        g.add((tu, MOACV.U, Literal(round(float(t.u), 6), datatype=XSD.double)))
+        # U sin redondeo + usos propios (bloque C · C4). El Turtle de rdflib 7.6 abrevia
+        # xsd:double a 7 cifras ("%e"): la exactitud por Turtle queda pendiente (reporte C4).
+        g.add((tu, MOACV.U, Literal(float(t.u), datatype=XSD.double)))
+        g.add((tu, MOACV.usos, Literal(int(t.k_own), datatype=XSD.integer)))
         g.add((tu, MOACV.accion, Literal(t.a)))
         si = theory_iri(agent, t, q, kind="Si")
         g.add((si, RDF.type, MOACV.SituacionInicial))
@@ -57,9 +60,10 @@ def theories_to_turtle(theories: list[Theory], agent: str = "AgenteEmisor",
 
 _Q_THEORIES = """
 PREFIX moacv: <https://moav-hr.diit.unlam.edu.ar/ontology/>
-SELECT ?t ?p ?k ?u ?accion ?siJson ?sfJson
+SELECT ?t ?p ?k ?u ?usos ?accion ?siJson ?sfJson
 WHERE {
   ?t a moacv:Teoria ; moacv:P ?p ; moacv:K ?k ; moacv:U ?u .
+  OPTIONAL { ?t moacv:usos ?usos }
   OPTIONAL { ?t moacv:accion ?accion }
   OPTIONAL { ?t moacv:aplicaEn ?si . ?si a moacv:SituacionInicial ; moacv:representacionJSON ?siJson }
   OPTIONAL { ?t moacv:aplicaEn ?sf . ?sf a moacv:SituacionFinal   ; moacv:representacionJSON ?sfJson }
@@ -79,6 +83,8 @@ def theories_from_turtle(source: "Graph | str") -> list[Theory]:
         si = json.loads(str(row.siJson)) if row.siJson is not None else {}
         sf = json.loads(str(row.sfJson)) if row.sfJson is not None else {}
         a = str(row.accion) if row.accion is not None else ""
+        # k_own desde `usos` si el RDF lo trae (C4); si no, Theory lo iguala a K
+        k_own = int(row.usos) if row.usos is not None else None
         out.append(Theory(si=si, a=a, sf=sf,
-                          p=int(row.p), k=int(row.k), u=float(row.u)))
+                          p=int(row.p), k=int(row.k), u=float(row.u), k_own=k_own))
     return out

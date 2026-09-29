@@ -58,6 +58,9 @@ DATA_PROPS = {
     # acción A de la teoría ⟨Si,A,Sf,P,K,U⟩, para reconstruirla desde el RDF y
     # compartirla entre agentes de forma estándar / M2M (obs. Becerra).
     "accion": XSD.string,
+    # usos PROPIOS de la teoría (k_own, contador aditivo entre fusiones) — bloque C · C4.
+    # K se sigue exportando igual; qué se hace con K es la decisión 2 del director.
+    "usos": XSD.integer,
 }
 
 

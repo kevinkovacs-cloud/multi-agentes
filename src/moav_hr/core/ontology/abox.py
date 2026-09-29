@@ -86,7 +86,11 @@ def build_abox(state: dict, agents: list | None = None) -> Graph:
             g.add((au, MOACV.registra, tu))
             g.add((tu, MOACV.P, Literal(int(t.p), datatype=XSD.integer)))
             g.add((tu, MOACV.K, Literal(int(t.k), datatype=XSD.integer)))
-            g.add((tu, MOACV.U, Literal(round(float(t.u), 4), datatype=XSD.double)))
+            # U sin redondeo (bloque C · C4): exacta en el grafo y en N-Triples/JSON-LD/XML.
+            # OJO: el serializador Turtle de rdflib 7.6 abrevia xsd:double con "%e" (7 cifras);
+            # la ida y vuelta exacta por Turtle queda como pregunta abierta (ver reporte C4).
+            g.add((tu, MOACV.U, Literal(float(t.u), datatype=XSD.double)))
+            g.add((tu, MOACV.usos, Literal(int(t.k_own), datatype=XSD.integer)))
             g.add((tu, MOACV.confiabilidad, Literal(round(t.reliability, 4), datatype=XSD.double)))
             # acción A (Def. 3) como propiedad — completa la tupla ⟨Si,A,Sf,P,K,U⟩ en el RDF
             g.add((tu, MOACV.accion, Literal(t.a)))
