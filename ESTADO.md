@@ -84,6 +84,7 @@ siendo hipótesis.** Un commit atómico por ítem; **`main` intacto** (el video 
 **Correcciones formales al core (Tier A):**
 - **A1** equivalencia por cuantización (`q_canonical`/`q_grid`): relación de equivalencia REAL (transitiva) → la fusión de bases es asociativa; separada de la recuperación por similitud.
 - **A2** confiabilidad con Laplace `(P+1)/(K+2)`; **A5+A10** desempate determinista (recencia, id).
+  - *Bloque C · C9:* `retrieve` (RAG) usa la misma clave que `select` `(−U, −P, K, −recencia, id)` — cambio de desempate en empates exactos; el demo de main no cambia.
 - **A7** equalized odds con ΔTPR y ΔFPR; **A3+N2** `D=(1−ρ̄)/2` sin clamp + `d_max(k)`; **B3** disparidad firmada + detector de inversión.
 - **B6+A8** `core/stats.py` + Monitor **certificado** (LCB Hoeffding ⇒ FPR ≤ δ; Def. 12 gate de evolución); **A9** arranque en frío (prior r0, `can_donate`); **N3** reputación por agente; **N1** μ→μ_rel + interfaz b_in.
 

@@ -75,7 +75,11 @@ class TheoryRetriever:
     def retrieve(self, situation: dict) -> list[Theory]:
         scored = [(similarity(situation, t.si), t) for t in self.base.theories]
         near = [(s, t) for s, t in scored if s >= self.delta]      # cuantización Def. 3
-        near.sort(key=lambda st: (-st[1].u, -st[1].p, st[1].k))    # ranking Def. 4
+        # ranking Def. 4 con la MISMA clave completa que TheoryBase.select (A5+A10):
+        # (U desc, P desc, K asc, recencia desc, id asc). Antes faltaban recencia e id y el
+        # sort estable dejaba primero la teoría más ANTIGUA en empates exactos (bloque C · C9).
+        near.sort(key=lambda st: (-st[1].u, -st[1].p, st[1].k,
+                                  -st[1].created_at, st[1].id))
         return [t for _, t in near[: self.top_k]]
 
     @staticmethod
