@@ -104,3 +104,32 @@ magnitudes (matcher 0.820→0.812, μ_rel 0.703→0.606) por A1 (11 teorías vs 
 (transcribir constantes de Maurer & Pontil); triple store persistente; embeddings en corrida
 real; validación de la conjetura (Eje 1). Decisión al mergear: regrabar el bloque 2 del video
 con la corrida nueva, o mantener main congelado hasta la reunión (ver `DERIVA_DEMO.md`).
+
+## Bloque C (29/09/2026) — correcciones que no dependen de la dirección
+
+Rama `eje1/bloque-c` (desde `eje1/formalizacion-v2`), un commit por ítem, **sin push ni merge**;
+`main` intacto. Origen: auditoría matemática Génesis v2 (28/09). **No fabrica ni valida resultados.**
+
+- **C0** — renombre a «Monitor de Equidad» en docstrings + alias `FairnessMonitor`: nombre canónico del componente.
+- **C1** — `_merge`: la U de la variante fusionada es el promedio ponderado por K propio: con la U de la primera fuente, `cooperate(A,B) ≠ cooperate(B,A)` y cambiaba la acción elegida.
+- **C2** — `reliability = (P+1)/(k_own+2)`: tras fusionar, el K de la celda bajaba la confiabilidad sin evidencia nueva.
+- **C3** — IRIs de Teoria/Si/Sf por clave (agente + Q(Si) + A + Q(Sf)): los posicionales cambiaban al reordenar la base y rompían `prov:wasDerivedFrom` y la identificación M2M.
+- **C4** — U sin redondeo + propiedad `usos` (= k_own): la ida y vuelta RDF perdía precisión. **Parcial:** el Turtle de rdflib 7.6 abrevia `xsd:double` a 7 cifras (pregunta abierta).
+- **C5** — `escalation_disparity` (Δ_esc) + μ_rel en `log_run`: `ESCALATE_HUMAN` cuenta como favorable y Δ_DP no ve la derivación desigual.
+- **C6** — `escalate_window` + `--window-escalation` (off por defecto): el paper dice que Ω bloquea la **ventana**; el código solo la marcaba.
+- **C7** — `stats.m_min_gate` + warning en el gate certificado: con m = 5 no puede aprobar nunca (necesita ≥ 47 ventanas con τ = 0.8).
+- **C8** — comentario del prior de reputación (r0 = 0.8) + nota de fragilidad: el comentario decía r = 1.0.
+- **C9** — `retrieve` con la misma clave de desempate que `select`: en empates exactos elegía la teoría más antigua.
+- **C10** — docstring de `min_window` + `stats.n_power`: `min_window` es detectabilidad (potencia medida ≈ 0.37), no detección garantizada.
+
+**Efectos visibles en la rama:** `demo_caso.py` [7] imprime IRIs largos (C3) y +11 tripletas `usos`
+(C4); `run_poc.py` imprime 1070 tripletas (antes 1059) y una línea nueva Δ_esc (C5); con
+`--window-escalation off` el resto de la salida no cambia. **Tests:** 103 → 129 + 1 xfail documentado (C4).
+
+**Pendiente de la dirección — Bloque B (NO implementado):**
+- etiqueta UCB del Monitor («certificado equitativo»);
+- semántica de P/K y el invariante I4 en SHACL (decisión 2: las reglas de C1/C2 son provisorias);
+- utilidad de tarea en `learn`;
+- b_in (con disparidad basal 0, μ_rel queda indefinido en la corrida por defecto);
+- E(t) / trato–ruteo;
+- escalamiento por ventana como default.
