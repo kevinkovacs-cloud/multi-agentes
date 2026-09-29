@@ -1,11 +1,15 @@
 """
-Bloque C · C3 — IRIs de teorías (y de sus Si/Sf) estables por CLAVE.
+Bloque C · C3 + C13 — IRIs de teorías (y de sus Si/Sf) estables por CLAVE.
 
-Antes el IRI era posicional ({agente}-{i}, con i = índice en la base): replace_all
+C3: antes el IRI era posicional ({agente}-{i}, con i = índice en la base): replace_all
 (que corre en toda fusión) reordena la base y la MISMA teoría cambiaba de IRI, lo que
-rompía prov:wasDerivedFrom y la identificación M2M. Ahora el IRI lo determina la clave
-agente + Q(Si) + A + Q(Sf), con cada componente escapado por separado (inyectivo).
+rompía prov:wasDerivedFrom y la identificación M2M.
+C13: la clave completa escapada hacía IRIs muy largos; ahora el IRI es
+{kind}/{agente}/{h}, con h = 16 hex del sha256 de la clave JSON [Q(Si), A, Q(Sf)], y la
+clave completa queda en el literal moacv:clave (sin pérdida).
 """
+import json
+import re
 from types import SimpleNamespace
 
 from rdflib import Graph
@@ -13,7 +17,7 @@ from rdflib import Graph
 from moav_hr.core.ontology import abox
 from moav_hr.core.ontology.ns import MOACV
 from moav_hr.core.ontology.sharing_rdf import theories_from_turtle, theories_to_turtle
-from moav_hr.core.theory import Theory, TheoryBase
+from moav_hr.core.theory import Theory, TheoryBase, q_canonical, theory_key
 
 
 def _agent(base, name="Matcher"):
@@ -56,16 +60,33 @@ def test_iri_inyectivo_con_guiones_y_barras():
 
     # con '-' como separador, "x-2"+"3" y "x"+"2-3" colisionaban
     assert abox.theory_iri("a", T("x-2", "3"), q) != abox.theory_iri("a", T("x", "2-3"), q)
-    # '/' dentro de un componente se escapa: no se confunde con el separador
+    # '/' dentro de un componente no se confunde con un separador
     assert abox.theory_iri("a", T("x/2", "3"), q) != abox.theory_iri("a", T("x", "2/3"), q)
     assert abox.theory_iri("a/b", T("c", "3"), q) != abox.theory_iri("a", T("b/c", "3"), q)
     # la misma teoría (misma clave) da el mismo IRI
     assert abox.theory_iri("a", T("x", "1"), q) == abox.theory_iri("a", T("x", "1"), q)
-    # Si/Sf usan el mismo esquema con otro prefijo de tipo
+    # Si/Sf usan el mismo hash con otro prefijo de tipo
     t = T("x", "1")
     teoria = str(abox.theory_iri("a", t, q)).split("/Teoria/")[1]
     assert str(abox.theory_iri("a", t, q, kind="Si")).split("/Si/")[1] == teoria
     assert str(abox.theory_iri("a", t, q, kind="Sf")).split("/Sf/")[1] == teoria
+
+
+def test_iri_corto_por_hash():
+    t = Theory(si={"edu": "Doctorado", "exp_band": "senior", "skills_match": 0},
+               a="ADVANCE", sf={"outcome": "ADVANCE"})
+    iri = str(abox.theory_iri("Matcher", t, q_canonical))
+    assert re.fullmatch(r".*/Teoria/Matcher/[0-9a-f]{16}", iri)
+
+
+def test_clave_recuperable_igual_a_theory_key():
+    base = _base()
+    for g in (abox.build_abox({}, [_agent(base)]),
+              Graph().parse(data=theories_to_turtle(base.theories, agent="Matcher"),
+                            format="turtle")):
+        claves = {str(g.value(s, MOACV.accion)): tuple(json.loads(str(o)))
+                  for s, o in g.subject_objects(MOACV.clave)}
+        assert claves == {t.a: theory_key(t, q_canonical) for t in base.theories}
 
 
 def test_ida_y_vuelta_m2m_con_iris_por_clave():

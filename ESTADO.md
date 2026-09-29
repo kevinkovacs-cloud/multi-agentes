@@ -114,6 +114,7 @@ Rama `eje1/bloque-c` (desde `eje1/formalizacion-v2`), un commit por ítem, **sin
 - **C1** — `_merge`: la U de la variante fusionada es el promedio ponderado por K propio: con la U de la primera fuente, `cooperate(A,B) ≠ cooperate(B,A)` y cambiaba la acción elegida.
 - **C2** — `reliability = (P+1)/(k_own+2)`: tras fusionar, el K de la celda bajaba la confiabilidad sin evidencia nueva.
 - **C3** — IRIs de Teoria/Si/Sf por clave (agente + Q(Si) + A + Q(Sf)): los posicionales cambiaban al reordenar la base y rompían `prov:wasDerivedFrom` y la identificación M2M.
+  - *C13:* el IRI es corto, `{kind}/{agente}/{h}` con `h` = 16 hex del sha256 de la clave JSON `[Q(Si), A, Q(Sf)]`; la clave completa queda en el literal `moacv:clave` (sin pérdida). **Supuesto: la clave es única por base** (una teoría por celda + variante); hoy lo garantizan `find_equal` (en `learn`) y `_merge`. Si se rompiera, dos teorías colapsarían en un mismo nodo RDF.
 - **C4** — U sin redondeo + propiedad `usos` (= k_own): la ida y vuelta RDF perdía precisión. **Parcial:** el Turtle de rdflib 7.6 abrevia `xsd:double` a 7 cifras (pregunta abierta).
 - **C5** — `escalation_disparity` (Δ_esc) + μ_rel en `log_run`: `ESCALATE_HUMAN` cuenta como favorable y Δ_DP no ve la derivación desigual.
 - **C6** — `escalate_window` + `--window-escalation` (off por defecto): el paper dice que Ω bloquea la **ventana**; el código solo la marcaba.

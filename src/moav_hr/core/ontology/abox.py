@@ -6,6 +6,8 @@ Materializa teorías (región 5), decisiones y eventos de auditoría como triple
 OpenTelemetry al grafo de procedencia. Reusa PROV-O. Reemplaza la construcción manual.
 """
 from __future__ import annotations
+import hashlib
+import json
 from decimal import Decimal
 from urllib.parse import quote
 
@@ -27,20 +29,27 @@ def _uri(kind: str, ident):
     return MOACV[f"{kind}/{ident}"]
 
 
+def theory_clave(t, q) -> str:
+    """Clave completa de la teoría (bloque C · C13): JSON de [Q(Si), A, Q(Sf)]. Va como
+    literal moacv:clave en el nodo Teoria, así el IRI puede ser corto sin perder nada."""
+    return json.dumps(list(theory_key(t, q)), ensure_ascii=False)
+
+
 def theory_iri(agent_name: str, t, q, kind: str = "Teoria"):
     """
-    IRI estable por CLAVE de la teoría (bloque C · C3): agente + Q(Si) + A + Q(Sf).
+    IRI estable por CLAVE de la teoría: {kind}/{agente}/{h}.
 
-    Reemplaza el IRI posicional {agente}-{i}, que cambiaba al reordenar la base
+    C3: reemplazó el IRI posicional {agente}-{i}, que cambiaba al reordenar la base
     (replace_all, en toda fusión) y rompía prov:wasDerivedFrom y la identificación M2M.
-    Cada componente se escapa POR SEPARADO con quote(safe=''), incluido '/': el
-    separador '/' no puede aparecer dentro de un componente, así que el esquema es
-    inyectivo (el guion no se usa como separador). Mismo esquema para los nodos Si/Sf
-    (kind="Si"/"Sf").
+    C13: la clave completa escapada hacía IRIs muy largos; ahora h = los primeros 16 hex
+    (64 bits) del sha256 de la clave JSON [Q(Si), A, Q(Sf)] — corto, estable y
+    prácticamente inyectivo — y la clave completa queda recuperable en el literal
+    moacv:clave (theory_clave). El agente va escapado aparte con quote(safe='').
+    Mismo h para los nodos Si/Sf (kind="Si"/"Sf").
+    Supuesto: la clave es única por base (hoy lo garantizan find_equal y _merge).
     """
-    k1, k2, k3 = theory_key(t, q)
-    return MOACV[f"{kind}/{quote(agent_name, safe='')}/{quote(k1, safe='')}"
-                 f"/{quote(k2, safe='')}/{quote(k3, safe='')}"]
+    h = hashlib.sha256(theory_clave(t, q).encode()).hexdigest()[:16]
+    return MOACV[f"{kind}/{quote(agent_name, safe='')}/{h}"]
 
 
 def _agent_node(g: Graph, name: str):
@@ -85,6 +94,8 @@ def build_abox(state: dict, agents: list | None = None) -> Graph:
             g.add((tu, RDF.type, PROV.Entity))
             g.add((base, MOACV.contieneTeoria, tu))
             g.add((au, MOACV.registra, tu))
+            # clave completa de la teoría (C13): el IRI es un hash corto de esta clave
+            g.add((tu, MOACV.clave, Literal(theory_clave(t, q))))
             g.add((tu, MOACV.P, Literal(int(t.p), datatype=XSD.integer)))
             g.add((tu, MOACV.K, Literal(int(t.k), datatype=XSD.integer)))
             # U como xsd:decimal (bloque C · C4+C12): el Turtle de rdflib 7.6 abrevia

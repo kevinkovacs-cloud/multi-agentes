@@ -18,7 +18,7 @@ from decimal import Decimal
 from rdflib import Graph, Literal, URIRef
 from rdflib.namespace import RDF, XSD
 
-from moav_hr.core.ontology.abox import theory_iri
+from moav_hr.core.ontology.abox import theory_clave, theory_iri
 from moav_hr.core.ontology.ns import MOACV
 from moav_hr.core.theory import Theory, q_canonical, serialize
 
@@ -39,6 +39,7 @@ def theories_to_turtle(theories: list[Theory], agent: str = "AgenteEmisor",
     for t in theories:
         tu = theory_iri(agent, t, q)
         g.add((tu, RDF.type, MOACV.Teoria))
+        g.add((tu, MOACV.clave, Literal(theory_clave(t, q))))   # clave completa (C13)
         g.add((base, MOACV.contieneTeoria, tu))
         g.add((au, MOACV.registra, tu))
         g.add((tu, MOACV.P, Literal(int(t.p), datatype=XSD.integer)))

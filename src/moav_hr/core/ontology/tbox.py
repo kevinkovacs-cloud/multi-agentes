@@ -62,6 +62,9 @@ DATA_PROPS = {
     # usos PROPIOS de la teoría (k_own, contador aditivo entre fusiones) — bloque C · C4.
     # K se sigue exportando igual; qué se hace con K es la decisión 2 del director.
     "usos": XSD.integer,
+    # clave completa de la teoría, JSON de [Q(Si), A, Q(Sf)] — bloque C · C13: el IRI de
+    # la teoría es un hash corto de esta clave; acá queda recuperable sin pérdida.
+    "clave": XSD.string,
 }
 
 
