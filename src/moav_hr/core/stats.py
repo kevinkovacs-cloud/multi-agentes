@@ -60,13 +60,34 @@ def empirical_bernstein_halfwidth(n: int, var_hat: float, delta: float) -> float
 
 def min_window(delta: float, margin: float) -> int:
     """
-    Tamaño mínimo de ventana (por grupo) para que el certificado sea informativo:
-    n ≥ 2·ln(2/δ) / margin². Detección garantizada requiere que la disparidad real
-    supere el umbral por al menos `margin` (Δ_true − τ_b ≥ margin).
+    Tamaño de ventana (por grupo) desde el cual el certificado es informativo:
+    n ≥ 2·ln(2/δ) / margin², con margin = Δ_true − τ_b.
+
+    Es un UMBRAL DE DETECTABILIDAD (potencia ≈ 50 % con la cota apareada), no de
+    detección garantizada; para potencia 1−ν usar n_power (bloque C · C10). El valor
+    de retorno no cambia.
     """
     if not (0 < delta < 1) or margin <= 0:
         raise ValueError("delta ∈ (0,1) y margin > 0")
     return math.ceil(2.0 * math.log(2.0 / delta) / (margin ** 2))
+
+
+def n_power(margin: float, delta: float = 0.05, nu: float = 0.05) -> int:
+    """
+    Tamaño de ventana POR GRUPO para que el bloqueo certificado detecte con potencia
+    1−ν (bloque C · C10): con |Δ| = τ_b + margin,
+    P( lcb_abs_diff_rates(...) > τ_b ) ≥ 1 − ν  si
+
+        n ≥ ( sqrt(2·ln(4/δ)) + sqrt(ln(2/ν)) )² / margin² .
+
+    (2·sqrt(ln(4/δ)/(2n)) es el semiancho de la LCB con δ/2 por grupo; sqrt(ln(2/ν)/n)
+    acota el desvío de la diferencia de tasas con prob. ≥ 1−ν.) Con δ = ν = 0.05:
+    margin 0.05 → 9530; margin 0.10 → 2383.
+    """
+    if not (0 < delta < 1) or not (0 < nu < 1) or margin <= 0:
+        raise ValueError("delta, nu ∈ (0,1) y margin > 0")
+    return math.ceil((math.sqrt(2.0 * math.log(4.0 / delta))
+                      + math.sqrt(math.log(2.0 / nu))) ** 2 / margin ** 2)
 
 
 def m_min_gate(rbar: float, tau: float, delta: float) -> int:
