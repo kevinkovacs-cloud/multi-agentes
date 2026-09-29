@@ -14,7 +14,7 @@ de la tesis** (Ejes 1–3). La fuente de verdad del modelo es el plan de tesis.
 - Teorías ⟨Si,A,Sf,P,K,U⟩: selección por ranking U>P>K (Def. 4), equivalencia por cuantización (Def. 3).
 - Compartición: cooperación (Def. 7) y colaboración maestro→aprendiz (Def. 8), con gating por reputación r/τ (Def. 9).
   **Verificadas contra la fuente** (Ierache 2010, Alg. 4.9/4.10, SEDICI): la cooperación genera base común aplicada por ambos; en similares cada variante conserva su P con K sumado. Test: `tests/test_sharing_fuente.py`.
-- Monitor de Utilidad de Equidad Ω: `fair(W)`, bloqueo/escalado por umbral, regiones 4 y 7. (§2.4)
+- Monitor de Equidad Ω: `fair(W)`, bloqueo/escalado por umbral, regiones 4 y 7. (§2.4)
   Cableado y ejercitado en `run_poc.py`: auditoría por ventana (`audit_window`), aprobación de compartición (`approve_sharing`, Def. 9) y gate de evolución (`gate_evolution`, región 7). Tests: `tests/test_monitor.py`.
 - Integración teorías↔LLM: recuperación por similitud + few-shot, punto de inyección explícito. (§2.2)
 
