@@ -90,7 +90,8 @@ def build_tbox() -> Graph:
     # axioma documentado: orden total de evolución (para lectura humana)
     g.add((MOACV.ordenEvolucion, RDF.type, RDFS.Literal))
     g.add((MOACV.ordenEvolucion, RDFS.comment,
-           Literal("Born ≺ Novato ≺ Trained ≺ Mature (orden total)")))
+           Literal("Born ≺ Novice ≺ Trained ≺ Mature (orden total; en código el estado "
+                   "Novice tiene el literal «novato»)")))
     return g
 
 

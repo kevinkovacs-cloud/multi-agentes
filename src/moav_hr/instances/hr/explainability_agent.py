@@ -7,7 +7,7 @@ from moav_hr.core.llm import LLMBackend
 
 class ExplainabilityAgent(MOACVAgent):
     def __init__(self, backend: LLMBackend):
-        super().__init__("ExplainabilityAgent", "explainer", tbo=TBOLayer(training_runs=1))  # → Novato
+        super().__init__("ExplainabilityAgent", "explainer", tbo=TBOLayer(training_runs=1))  # → Novice (literal "novato")
         self.backend = backend
 
     def run(self, state: dict) -> dict:

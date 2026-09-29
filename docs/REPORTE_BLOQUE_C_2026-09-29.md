@@ -192,4 +192,9 @@ Robustez de C12 verificada con valores chicos (de 1e-4 a 1e-8): rdflib normaliza
 
 C15 agrega cambios en `ESTADO.md`, `MAPPING.md` y este reporte.
 
+### A.8 C16 — estado Novice en la prosa
+
+- «Novato» → «Novice» en `README.md` (l. 25, 45 y 64; «del agente novato» → «del agente receptor»), en el `rdfs:comment` de `moacv:ordenEvolucion` de la TBox, en el docstring y el comentario de `lifecycle.py`, en el comentario de `explainability_agent.py` y en la fila de la Def. 2 de `MAPPING.md`, donde queda documentado el literal de código. Sin commit (ignorados): `ONBOARDING_CLAUDE.md` y `docs/GUIA_COMPLETA.md` (solo la prosa).
+- No se tocaron: el literal `"novato"` (`MaturityState.NOVATO`, `sh:in`, ABox, tests) ni la variable `novato` de `run_poc.py`. `grep "Novato"` da sin resultados; `pytest -q` → 134 passed.
+
 **Estado:** la rama `eje1/bloque-c` quedó lista. **Sin push ni merge**: eso lo decide Kevin.

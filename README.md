@@ -22,7 +22,7 @@ El framework aborda tres vacancias concretas del estado del arte:
 
 1. **Teórico-formal** — No existe teoría formal de amplificación/atenuación de sesgo en cadenas de agentes coordinados. El modelo extiende BiasAmp→ (Wang & Russakovsky, ICML 2021) a grafos dirigidos acíclicos de agentes (DAG-MAS).
 
-2. **Metodológico** — Los sistemas MAS existentes no incorporan ciclo de vida de agentes. Cada agente posee su propio ciclo de vida individual (Born→Novato→Trained→Mature) y su propia base de conocimiento de teorías ⟨Si, A, Sf, P, K, U⟩.
+2. **Metodológico** — Los sistemas MAS existentes no incorporan ciclo de vida de agentes. Cada agente posee su propio ciclo de vida individual (Born→Novice→Trained→Mature) y su propia base de conocimiento de teorías ⟨Si, A, Sf, P, K, U⟩.
 
 3. **Empírico-aplicado** — No existe un benchmark en español de sistemas multiagente para selección de personal con ground-truth demográfico. El modelo propone construirlo.
 
@@ -42,7 +42,7 @@ El sistema se compone de cinco agentes especializados por rol:
 | **Explainability Agent** | Genera explicaciones tri-nivel (agente / inter-agente / ecosistema). |
 | **Orchestrator** | Coordina el DAG, registra el audit trail y escala a revisión humana. |
 
-**Punto clave (corrección incorporada):** las capas BIO/TBO/WIO **no son una propiedad fija de cada agente**, sino las etapas del ciclo de vida que cada agente recorre individualmente. Todo agente nace (Born) con sus operadores BIO, se entrena (TBO) hasta el estado Trained, y aprende en producción (WIO) hasta madurar (Mature). Un agente Mature de un rol transfiere su base de teorías a un agente Novato del mismo rol mediante el mecanismo de colaboración del LLC.
+**Punto clave (corrección incorporada):** las capas BIO/TBO/WIO **no son una propiedad fija de cada agente**, sino las etapas del ciclo de vida que cada agente recorre individualmente. Todo agente nace (Born) con sus operadores BIO, se entrena (TBO) hasta el estado Trained, y aprende en producción (WIO) hasta madurar (Mature). Un agente Mature de un rol transfiere su base de teorías a un agente Novice del mismo rol mediante el mecanismo de colaboración del LLC.
 
 ## El modelo de teorías de aprendizaje
 
@@ -61,7 +61,7 @@ U  = Función de utilidad (pondera precisión predictiva y equidad)
 
 **Selección de teoría:** mayor U; ante empate, mayor P; luego menor K.
 
-**Transferencia maestro→aprendiz:** cuando un agente Mature colabora con un Novato del mismo rol, refuerza P y K de las teorías exitosas y pondera la utilidad U, acelerando la maduración del agente novato sin reentrenar desde cero.
+**Transferencia maestro→aprendiz:** cuando un agente Mature colabora con un Novice del mismo rol, refuerza P y K de las teorías exitosas y pondera la utilidad U, acelerando la maduración del agente receptor sin reentrenar desde cero.
 
 **Figura 2.** Ciclo de vida del aprendizaje (LLC) adaptado a agentes LLM, vista en planta. El agente auditor Ω es un nodo supervisor externo que actúa en las regiones 4 y 7 y pondera la compartición de teorías (§5 del plan de tesis).
 

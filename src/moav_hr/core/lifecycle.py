@@ -2,7 +2,7 @@
 Ciclo de vida del agente: estados de evolución, capas de operadores y las 7 regiones.
 
 v13 §2.1 (capas BIO/TBO/WIO como fases), Def. 2 (estado y capa activa), §3 (7 regiones).
-El orden Born ≺ Novato ≺ Trained ≺ Mature es TOTAL (axioma de §2.5 / Def. 8).
+El orden Born ≺ Novice ≺ Trained ≺ Mature es TOTAL (axioma de §2.5 / Def. 8).
 """
 from __future__ import annotations
 from enum import Enum, IntEnum
@@ -11,7 +11,7 @@ from enum import Enum, IntEnum
 class MaturityState(IntEnum):
     """Estados de evolución (orden total por el valor entero)."""
     BORN = 0
-    NOVATO = 1
+    NOVATO = 1   # estado Novice de la tesis («newbie» en Ierache 2010, §4.2); literal de código "novato"
     TRAINED = 2
     MATURE = 3
 

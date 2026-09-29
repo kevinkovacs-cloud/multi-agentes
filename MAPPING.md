@@ -13,7 +13,7 @@ del documento (§2, §2bis, §2.5, §3, §4) se materializan en el código.
 | Documento | Código |
 |---|---|
 | Def. 1 — sistema `M = ⟨G, Θ, Φ, Ω⟩` | `core/orchestrator.Orchestrator` (Φ orden topológico) + `core/monitor.FairnessUtilityMonitor` (Ω) |
-| Def. 2 — agente `aᵢ = ⟨θᵢ, sᵢ, Lᵢ⟩` | `core/agent.MOACVAgent` (`theories`, `maturity`, `layer`) |
+| Def. 2 — agente `aᵢ = ⟨θᵢ, sᵢ, Lᵢ⟩` | `core/agent.MOACVAgent` (`theories`, `maturity`, `layer`); estado Novice = `MaturityState.NOVATO` / literal `"novato"` (ABox `moacv:estado`, SHACL `sh:in`); se conserva el literal para no cambiar la salida RDF ni los tests |
 | Def. 3 — teoría + equivalencia por **cuantización** (A1) | `core/theory.Theory`; identidad por celda `(Q(Si),A[,Q(Sf)])` con `q_canonical` (default, caso simbólico) / `q_grid`; `theories_equal/similar` y `TheoryBase` indexada por celda. La similitud continua (`core/retrieval.similarity`, umbral δ) es SOLO recuperación, no identidad |
 | Def. 4 — selección por ranking (U,P,K) + **desempate determinista** (A5+A10) | `core/theory.TheoryBase.select` (orden `-U,-P,K,-recencia,id`; `created_at`/`id` estampados por la base) |
 | Def. 5 / 6 — `fair(W)`, `U_op(W)`; **confiabilidad con Laplace** (A2) | `core/fairness.fair_window/acc_window/u_op`; `Theory.reliability = (P+1)/(K+2)` (def. en K=0); `agent.learn` fija `U := reliability` si no se pasa `u` |
