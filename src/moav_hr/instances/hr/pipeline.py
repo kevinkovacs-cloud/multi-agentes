@@ -110,3 +110,13 @@ def matcher_view(records: list[dict], threshold: float = 0.75) -> list[dict]:
     reemplaza por la que implican sus propios scores (umbral), sin auditor ni humano."""
     return [dict(r, decision=("ADVANCE" if r["matcher_score"] >= threshold else "REJECT"))
             for r in records]
+
+
+def escalate_window(records: list[dict], blocked: bool) -> list[dict]:
+    """Bloqueo de VENTANA (bloque C · C6), como dice el paper (§Monitor): si Ω bloquea la
+    ventana, se suspende la decisión automática sobre TODO el conjunto de casos y se
+    envía a revisión humana → devuelve copias con decision = "ESCALATE_HUMAN" para todos.
+    Si no está bloqueada, devuelve los records sin cambios. No muta la entrada."""
+    if not blocked:
+        return list(records)
+    return [dict(r, decision="ESCALATE_HUMAN") for r in records]

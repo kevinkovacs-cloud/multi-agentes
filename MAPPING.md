@@ -43,6 +43,7 @@ Cada evento del audit trail lleva `region=N` (1–7). Región 1 = Parser; 2 = Ma
 - **Certificación estadística** (B6+A8): `core/stats.py` — `hoeffding_halfwidth`, `lcb_abs_diff_rates`, `min_window`, `bootstrap_bca_log_mu`; `empirical_bernstein_halfwidth` es stub (constantes de Maurer & Pontil a transcribir). `monitor.audit_window(certified=True)` bloquea por LCB ⇒ FPR ≤ δ.
 - **Auditor sin oráculo** (B1): `instances/hr/bias_auditor_exp.ExperimentalBiasAuditor` — modelo de acceso declarado (`observable_view`, nunca lee `bias_risk`/`true_qual`), estima la disparidad por ventana, no ajusta scores. `HRPipeline(auditor_mode="exp")`.
 - **Humano simulado** (B2): `instances/hr/human_sim.resolve` (oracle/noisy/biased) → μ_auto vs μ_total + tasa de escalamiento e.
+- **Bloqueo de ventana** (bloque C · C6): Paper §Monitor: bloqueo de ventana → `escalate_window` + `--window-escalation` (off por defecto; el demo no cambia).
 - **Canal proxy** (B3): `fairness.dtv_lower_bound` — cota inferior de d_TV vía clasificador A-vs-A′ (guardrail BIO auditable).
 - **Comités** (B4): `core/committee.Committee` (mean/median/majority); `HRPipeline(topology="committee", k, aggregation)`.
 - **E0 / FPR** (B5/B6): `experiments/e0_instrumento.py` (gate: recupera μ, c_k, ι_k, cobertura del IC) y `experiments/e_fpr_monitor.py`.

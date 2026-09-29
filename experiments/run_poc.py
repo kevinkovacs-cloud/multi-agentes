@@ -17,7 +17,8 @@ from __future__ import annotations
 import argparse
 
 from moav_hr.instances.hr.synthetic import CANDIDATES, get
-from moav_hr.instances.hr.pipeline import HRPipeline, run_baseline, record_of, matcher_view
+from moav_hr.instances.hr.pipeline import (HRPipeline, run_baseline, record_of, matcher_view,
+                                           escalate_window)
 from moav_hr.instances.hr.human_sim import resolve as human_resolve, MODES as HUMAN_MODES
 from moav_hr.instances.hr.fidelity import measure_fidelity
 from moav_hr.core import fairness
@@ -47,6 +48,10 @@ def main() -> None:
     ap.add_argument("--epsilon", type=float, default=0.1, help="ruido del humano noisy")
     ap.add_argument("--bh", type=float, default=0.0, help="corrimiento de umbral del humano biased")
     ap.add_argument("--seed", type=int, default=0, help="seed del humano simulado")
+    ap.add_argument("--window-escalation", choices=["off", "point", "certified"], default="off",
+                    help="bloque C · C6: bloqueo de VENTANA del paper — si Ω bloquea la ventana, "
+                         "toda va a revisión humana (point: |Δ|>τ_b · certified: LCB>τ_b). "
+                         "Default off: el demo no cambia")
     if pre_args.config:
         ap.set_defaults(**load_config(pre_args.config))   # CLI > config > defaults
     args = ap.parse_args()
@@ -130,6 +135,20 @@ def main() -> None:
     print(f"    Falsos rechazos de calificados : basal={base_false_rej} → modelo={moacv_false_rej}")
     print(f"    Brecha de trato por grupo      : basal={gap_base:.3f} → modelo={gap_moacv:.3f}")
 
+    # --- bloque C · C6: bloqueo de VENTANA como dice el paper (§Monitor): Ω «bloquea la
+    #     ventana (suspende la decisión automática sobre ese conjunto de casos) y la envía a
+    #     revisión humana». Detrás de --window-escalation (default off: salida idéntica).
+    #     Se aplica ANTES de B2, así el humano simulado resuelve toda la ventana.
+    win_blocked = False
+    if args.window_escalation != "off":
+        if args.window_escalation == "point":
+            win_blocked = bool(audit.blocked)
+        else:   # certified
+            win_blocked = bool(pipe.monitor.audit_window(moacv_recs, certified=True,
+                                                         delta=0.05).blocked)
+        if win_blocked:
+            moacv_recs = escalate_window(moacv_recs, True)
+
     # --- B2: flujo automatizado vs total — el humano simulado resuelve las derivaciones.
     #     Siempre JUNTOS: reportar solo el flujo censurado (μ_auto) esconde la derivación;
     #     solo el total esconde el costo (tasa de escalamiento e).
@@ -187,7 +206,10 @@ def main() -> None:
                      "delta_esc": d_esc,
                      "mu_rel_auto": amp_auto.mu, "mu_rel_total": amp_total.mu,
                      "d_modelo_pos_incluye_escalados":
-                         abs(fairness.disparity(moacv_recs, args.attr, args.criterion))})
+                         abs(fairness.disparity(moacv_recs, args.attr, args.criterion)),
+                     # bloque C · C6 — modo del bloqueo de ventana y si bloqueó
+                     "window_escalation": {"mode": args.window_escalation,
+                                           "blocked": win_blocked}})
 
     # --- ontología RDF + SHACL + SPARQL (§2.5), sobre el lote completo ---
     g = abox.build_abox(states[0], agents=list(pipe.agents))
