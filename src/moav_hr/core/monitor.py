@@ -1,5 +1,5 @@
 """
-Monitor de Utilidad de Equidad Ω — componente genérico del LLC (v13 §2.4, Def. 1).
+Monitor de Equidad Ω — componente genérico del LLC (v13 §2.4, Def. 1).
 
 Supervisa la dimensión de equidad de la utilidad operativa en tres puntos del ciclo de
 vida de los demás agentes:
@@ -110,3 +110,8 @@ class FairnessUtilityMonitor:
             return False
         mean = sum(window_values) / n
         return (mean - stats.hoeffding_halfwidth(n, delta)) >= self.tau
+
+
+# Nombre canónico del componente («Monitor de Equidad»). FairnessUtilityMonitor queda
+# por compatibilidad con el código y los tests existentes; no se renombra la clase.
+FairnessMonitor = FairnessUtilityMonitor

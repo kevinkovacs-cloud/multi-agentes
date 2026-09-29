@@ -4,7 +4,7 @@ Caso de demostración del PoC (Plan §5) — determinístico y narrado.
 
 Reproduce SIEMPRE igual el caso ilustrativo: un candidato calificado al que el caso
 basal (un único agente) RECHAZA por subestimación, y que el modelo deriva a REVISIÓN HUMANA
-cuando el Monitor de Utilidad de Equidad detecta sesgo por encima del umbral.
+cuando el Monitor de Equidad detecta sesgo por encima del umbral.
 
 Muestra el flujo de los 5 agentes, el audit trail, el grafo RDF (validado con SHACL)
 y una consulta SPARQL.

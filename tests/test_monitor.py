@@ -1,5 +1,5 @@
 """
-Monitor de Utilidad de Equidad Ω (v13 §2.4) — ejercita explícitamente sus tres puntos
+Monitor de Equidad Ω (v13 §2.4) — ejercita explícitamente sus tres puntos
 de actuación: auditoría por ventana (región 4), gate de evolución (región 7) y
 aprobación de compartición (Def. 9). Antes estos métodos existían sin llamadores.
 """

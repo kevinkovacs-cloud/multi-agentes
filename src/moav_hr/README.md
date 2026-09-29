@@ -11,7 +11,7 @@ La equivalencia código ↔ documento está en [`MAPPING.md`](../../MAPPING.md).
 - `retrieval.py` — recuperación por similitud + few-shot (§2.2).
 - `sharing.py` — cooperación (Def. 7), colaboración (Def. 8), gating por reputación (Def. 9).
 - `fairness.py` — `fair(W)`, `U_op(W)` (Def. 5/6), amplificación `μ` (Def. 10), diversidad `D` (Def. 11).
-- `monitor.py` — Monitor de Utilidad de Equidad Ω (§2.4): regiones 4/7 y compartición.
+- `monitor.py` — Monitor de Equidad Ω (§2.4): regiones 4/7 y compartición.
 - `orchestrator.py` — orquestación del DAG (Def. 1, orden topológico).
 - `audit/` — audit trail sobre OpenTelemetry (spans → eventos).
 - `ontology/` — TBox (§2.5) + ABox automático + SHACL + SPARQL, con alineación PROV-O.

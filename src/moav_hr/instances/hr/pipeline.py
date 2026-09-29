@@ -1,6 +1,6 @@
 """
 Pipeline de selección de personal (v13 §4.1): cablea los 5 agentes sobre core.Orchestrator
-con el Monitor de Utilidad de Equidad. Incluye warmup (siembra de teorías, región 5),
+con el Monitor de Equidad. Incluye warmup (siembra de teorías, región 5),
 caso basal y helpers de métricas.
 """
 from __future__ import annotations
