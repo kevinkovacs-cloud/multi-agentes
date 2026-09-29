@@ -197,4 +197,18 @@ C15 agrega cambios en `ESTADO.md`, `MAPPING.md` y este reporte.
 - «Novato» → «Novice» en `README.md` (l. 25, 45 y 64; «del agente novato» → «del agente receptor»), en el `rdfs:comment` de `moacv:ordenEvolucion` de la TBox, en el docstring y el comentario de `lifecycle.py`, en el comentario de `explainability_agent.py` y en la fila de la Def. 2 de `MAPPING.md`, donde queda documentado el literal de código. Sin commit (ignorados): `ONBOARDING_CLAUDE.md` y `docs/GUIA_COMPLETA.md` (solo la prosa).
 - No se tocaron: el literal `"novato"` (`MaturityState.NOVATO`, `sh:in`, ABox, tests) ni la variable `novato` de `run_poc.py`. `grep "Novato"` da sin resultados; `pytest -q` → 134 passed.
 
+### A.9 C17 — alcance: dos vacancias, benchmark en español fuera de alcance
+
+- `README.md`:
+  - l. 21–27 reemplazado por las dos vacancias de la §2.3 del plan oficial. El ítem 2 viejo («los MAS no incorporan ciclo de vida») no era la vacancia (ii) y además la afirmaba en absoluto.
+  - l. 76: «FairCVtest, JobFair y la metodología FINDHR».
+  - Borrado el casillero «Benchmark sintético en español».
+- `ESTADO.md`:
+  - l. 62: el Eje 2 pasa a FairCVtest, JobFair y la metodología FINDHR.
+  - l. 103: el generador SCM queda para validar el instrumento, y el benchmark en español fuera de alcance.
+- `grep -rn -i "benchmark" README.md ESTADO.md`: quedan 2, **sin tocar** porque son uso legítimo.
+  - `ESTADO.md` l. 47: «oráculo del benchmark» (= ground-truth del conjunto de datos).
+  - `ESTADO.md` l. 103: la propia frase de fuera de alcance.
+  - En el README no queda ninguna.
+
 **Estado:** la rama `eje1/bloque-c` quedó lista. **Sin push ni merge**: eso lo decide Kevin.

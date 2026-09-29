@@ -18,13 +18,11 @@ El **caso de aplicación** es la selección de personal, elegido por la disponib
 
 ## Aporte original
 
-El framework aborda tres vacancias concretas del estado del arte:
+El framework aborda dos vacancias identificadas en la literatura revisada (plan de tesis, §2.3):
 
-1. **Teórico-formal** — No existe teoría formal de amplificación/atenuación de sesgo en cadenas de agentes coordinados. El modelo extiende BiasAmp→ (Wang & Russakovsky, ICML 2021) a grafos dirigidos acíclicos de agentes (DAG-MAS).
+1. **Teórico-formal** — La teoría de composición de fairness existente supone componentes fijos que filtran; no se ha identificado un marco formal que prediga el régimen de amplificación o atenuación en cadenas de agentes LLM que transforman, aprenden y comparten experiencia. El modelo extiende BiasAmp→ (Wang & Russakovsky, ICML 2021) a grafos dirigidos acíclicos de agentes (DAG-MAS).
 
-2. **Metodológico** — Los sistemas MAS existentes no incorporan ciclo de vida de agentes. Cada agente posee su propio ciclo de vida individual (Born→Novice→Trained→Mature) y su propia base de conocimiento de teorías ⟨Si, A, Sf, P, K, U⟩.
-
-3. **Empírico-aplicado** — No existe un benchmark en español de sistemas multiagente para selección de personal con ground-truth demográfico. El modelo propone construirlo.
+2. **Control en tiempo de ejecución** — No existe un mecanismo de control de equidad en tiempo de ejecución integrado al ciclo de vida del agente (los mecanismos existentes entrenan el deferral o monitorean sin gobernar el aprendizaje). Cada agente posee su propio ciclo de vida individual (Born→Novice→Trained→Mature) y su propia base de teorías ⟨Si, A, Sf, P, K, U⟩; el Monitor de Equidad gobierna bloqueo, evolución y compartición.
 
 ## Arquitectura
 
@@ -73,7 +71,7 @@ U  = Función de utilidad (pondera precisión predictiva y equidad)
 - **LLMs:** Llama 3.1 8B / Mistral 7B vía Ollama (inferencia local, sin costo de API)
 - **Fairness:** Fairlearn, AIF360, métricas pipeline-level propias
 - **Trazabilidad:** OpenTelemetry + Langfuse + Grafana Tempo, logging JSON-LD con ontología propia
-- **Datos:** FairCVtest, JobFair, benchmark sintético propio en español (metodología FINDHR)
+- **Datos:** FairCVtest, JobFair y la metodología FINDHR
 
 ## Marco regulatorio
 
@@ -170,7 +168,6 @@ Alcance hecho/futuro en [`ESTADO.md`](ESTADO.md) · mapeo código↔documento en
 **Año 1 · 2.º sem**
 - [~] Framework con LLMs reales (LangGraph/Ollama) — pipeline operativo; calibración TBO en curso
 - [ ] Caso basal sobre FairCVtest / JobFair
-- [ ] Benchmark sintético en español
 
 **Año 2 · 1.º sem**
 - [ ] Experimentos de amplificación/atenuación en topologías simples

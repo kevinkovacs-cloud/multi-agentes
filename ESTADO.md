@@ -59,7 +59,7 @@ instrumental (sin validar la conjetura).
 ## 🔬 Trabajo futuro (tesis — NO incluido en el PoC, no fabricado)
 
 - **Eje 1 (teórico):** demostrar/­refutar la conjetura de atenuación μ<1 bajo C1/C2/C3; teoremas de composición. *(El PoC mide μ pero NO la valida — riesgo alto declarado en el plan.)*
-- **Eje 2 (experimental):** benchmark sintético en español; experimentos de amplificación/atenuación en topologías; LLMs calibrados (fine-tuning/RLHF, capa TBO — hoy los scores `llm` están sin calibrar).
+- **Eje 2 (experimental):** experimentos de amplificación/atenuación en topologías sobre FairCVtest, JobFair y la metodología FINDHR; LLMs calibrados (fine-tuning/RLHF, capa TBO — hoy los scores `llm` están sin calibrar).
 - **Eje 3 (validación):** medición sistemática de fidelidad de teorías; validación de utilidad del audit trail con usuarios reales (n≥30).
 - Embeddings reales para la similitud de teorías (hoy proxy cosine sobre tokens clave=valor).
 - Persistencia del audit trail en backend (OpenTelemetry/Langfuse/Grafana en vivo); hoy es en memoria + export RDF.
@@ -100,7 +100,7 @@ siendo hipótesis.** Un commit atómico por ítem; **`main` intacto** (el video 
 — las 12 decisiones del lote y el caso Fátima (ESCALATE, ajuste 0.850) se mantienen; cambian
 magnitudes (matcher 0.820→0.812, μ_rel 0.703→0.606) por A1 (11 teorías vs 4) y A2.
 
-**Sigue pendiente (no en esta branch):** benchmark es-AR con SCM; empirical-Bernstein
+**Sigue pendiente (no en esta branch):** generador SCM para validar el instrumento sobre sistemas sintéticos de parámetros conocidos (plan, Tema 1; E0); el benchmark en español quedó fuera de alcance; empirical-Bernstein
 (transcribir constantes de Maurer & Pontil); triple store persistente; embeddings en corrida
 real; validación de la conjetura (Eje 1). Decisión al mergear: regrabar el bloque 2 del video
 con la corrida nueva, o mantener main congelado hasta la reunión (ver `DERIVA_DEMO.md`).
