@@ -88,13 +88,20 @@ class Theory:
     @property
     def reliability(self) -> float:
         """
-        Confiabilidad con suavizado de Laplace (A2): (P+1)/(K+2).
+        Confiabilidad con suavizado de Laplace (A2): (P+1)/(K_propio+2).
 
         Media posterior Beta(1,1) — definida en K=0 (→ 0.5), regulariza teorías con
         pocos usos y converge a P/K cuando K crece. Reemplaza el estimador crudo P/K
         de la Def. 3, que era indefinido en K=0 y sobreconfiado con K chico.
+
+        Denominador = usos propios (k_own), no el K expuesto (bloque C · C2): tras una
+        fusión el K expuesto pasa a ser el K de toda la celda, y la confiabilidad caía
+        sin evidencia nueva (p. ej. (P, K_propio) = (3, 4): de 4/6 a 4/12). P y k_own se
+        incrementan juntos en reinforce y se suman juntos en _merge, así que P ≤ k_own
+        se preserva. Sin fusiones k == k_own y el valor no cambia. Provisorio hasta la
+        decisión 2 del director (semántica de P y K).
         """
-        return (self.p + 1) / (self.k + 2)
+        return (self.p + 1) / (self.k_own + 2)
 
     def reinforce(self, success: bool) -> None:
         self.k += 1
