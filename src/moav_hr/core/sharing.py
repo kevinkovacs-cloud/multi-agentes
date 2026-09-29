@@ -17,7 +17,8 @@ aplicada por RA y RB" — acá se materializa como contenido idéntico replicado
 agente (copias por agente, para no acoplar mutaciones posteriores entre bases).
 En colaboración (Def. 8) la base resultante (BCCRR) se asigna SOLO al receptor.
 La U no participa del intercambio en la fuente (se recalcula en la región 4); se
-conserva la U propia de cada teoría que entra.
+conserva la U propia de cada teoría que entra. Si la MISMA variante llega de ambas
+bases, su U es el promedio ponderado por K propio (bloque C · C1, provisorio: ver _merge).
 
 Def. 9: toda compartición se condiciona a la reputación del donante (rⱼ ≥ τ).
 """
@@ -56,6 +57,14 @@ def _merge(base_a: TheoryBase, base_b: TheoryBase, rep: ShareReport) -> list[The
     expuesto (k) se deriva por celda en cada fusión. Con eso la fusión es asociativa
     y conmutativa a nivel de contadores (multiconjunto de (celda, variante, P, K_propio))
     y deja de depender del orden de comparación ("primera hallada" del esquema viejo).
+
+    U de la variante fusionada (bloque C · C1): PROMEDIO PONDERADO POR EVIDENCIA,
+    u = Σ_f k_own_f·u_f / Σ_f k_own_f sobre las teorías que traen la variante; así la
+    fusión también es conmutativa en u (antes quedaba la u de la PRIMERA fuente y
+    cooperate(A,B) ≠ cooperate(B,A)). Una variante aportada por una sola teoría conserva
+    su u literal. Si Σ k_own = 0 (sin evidencia) se usa el promedio simple; ese caso de
+    borde no es asociativo. REGLA PROVISORIA hasta la decisión 2 del director (semántica
+    de P y K).
     """
     if base_a.q is not base_b.q:
         raise ValueError("las bases deben compartir la función de cuantización Q")
@@ -67,9 +76,12 @@ def _merge(base_a: TheoryBase, base_b: TheoryBase, rep: ShareReport) -> list[The
             var = q(t.sf)
             slot = cells.setdefault(cell, {}).setdefault(var, {
                 "si": t.si, "a": t.a, "sf": t.sf, "p": 0, "k_own": 0,
-                "u": t.u, "sources": set()})
+                "u_num": 0.0, "u_den": 0, "u_list": [], "sources": set()})
             slot["p"] += t.p
             slot["k_own"] += t.k_own
+            slot["u_num"] += t.k_own * t.u
+            slot["u_den"] += t.k_own
+            slot["u_list"].append(t.u)
             slot["sources"].add(source)
 
     merged: list[Theory] = []
@@ -78,8 +90,14 @@ def _merge(base_a: TheoryBase, base_b: TheoryBase, rep: ShareReport) -> list[The
         for v in variants.values():
             if v["sources"] == {"a", "b"}:
                 rep.reinforced += 1
+            if len(v["u_list"]) == 1:
+                u = v["u_list"][0]
+            elif v["u_den"] > 0:
+                u = v["u_num"] / v["u_den"]
+            else:
+                u = sum(v["u_list"]) / len(v["u_list"])
             merged.append(Theory(si=v["si"], a=v["a"], sf=v["sf"], p=v["p"],
-                                 k=k_total, u=v["u"], k_own=v["k_own"]))
+                                 k=k_total, u=u, k_own=v["k_own"]))
         if len(variants) > 1:
             rep.weakened += len(variants) - 1
         if all(v["sources"] == {"b"} for v in variants.values()):
