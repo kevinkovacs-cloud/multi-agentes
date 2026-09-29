@@ -148,6 +148,14 @@ def main() -> None:
     print(f"    tasa de escalamiento e       : {e_rate:.3f}  ({len(escalated)}/{len(moacv_recs)})")
     print(f"    Δ_auto  (solo no derivados)  : {d_auto:.3f}   μ_rel_auto : {fairness.amplification(d_base, d_auto)}")
     print(f"    Δ_total (derivados resueltos): {d_total:.3f}   μ_rel_total: {fairness.amplification(d_base, d_total)}")
+    # bloque C · C5: disparidad de la TASA DE ESCALAMIENTO entre grupos (ESCALATE_HUMAN
+    # cuenta como favorable en POSITIVE, así que Δ_DP no la ve). Los dos amplification de
+    # arriba se recalculan en variables (función pura) para registrarlos en log_run sin
+    # tocar las líneas impresas existentes.
+    d_esc = fairness.escalation_disparity(moacv_recs, args.attr)
+    amp_auto = fairness.amplification(d_base, d_auto)
+    amp_total = fairness.amplification(d_base, d_total)
+    print(f"    Δ_esc   (tasa de escalam.)   : {d_esc:.3f}   (brecha entre grupos de ESCALATE_HUMAN)")
 
     # --- amplificación relativa al basal (N1: esto es μ_rel, NO el μ de la Def. 10) ---
     amp_gap = fairness.amplification(gap_base, gap_moacv)
@@ -174,7 +182,12 @@ def main() -> None:
             metrics={"fair_w": fair_w, "ventana_marcada": bool(audit.blocked),
                      "dtv_parser": dtv,
                      "e_rate": e_rate, "d_auto": d_auto, "d_total": d_total,
-                     "mu_rel_gap": amp_gap.mu, "falsos_rechazos_modelo": moacv_false_rej})
+                     "mu_rel_gap": amp_gap.mu, "falsos_rechazos_modelo": moacv_false_rej,
+                     # bloque C · C5 — métricas honestas de μ
+                     "delta_esc": d_esc,
+                     "mu_rel_auto": amp_auto.mu, "mu_rel_total": amp_total.mu,
+                     "d_modelo_pos_incluye_escalados":
+                         abs(fairness.disparity(moacv_recs, args.attr, args.criterion))})
 
     # --- ontología RDF + SHACL + SPARQL (§2.5), sobre el lote completo ---
     g = abox.build_abox(states[0], agents=list(pipe.agents))

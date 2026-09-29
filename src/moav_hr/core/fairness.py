@@ -32,6 +32,23 @@ def demographic_parity_delta(records: list[dict], attr: str) -> float:
     return round(max(rates) - min(rates), 4) if len(rates) >= 2 else 0.0
 
 
+def escalation_disparity(records: list[dict], attr: str) -> float:
+    """
+    Δ^esc (bloque C · C5): disparidad de la TASA DE ESCALAMIENTO entre grupos — tasa de
+    ESCALATE_HUMAN del grupo con mayor tasa menos la del grupo con menor tasa. Misma
+    forma que demographic_parity_delta (simétrica en los grupos; 0.0 con < 2 grupos).
+
+    Hace falta porque ESCALATE_HUMAN ∈ POSITIVE: la paridad demográfica cuenta el
+    escalamiento como favorable y puede ocultar que un grupo es derivado a revisión
+    humana mucho más que otro (p. ej. efecto Simpson entre ventanas).
+    """
+    groups: dict[str, list[str]] = {}
+    for r in records:
+        groups.setdefault(str(r[attr]), []).append(r["decision"])
+    rates = [sum(1 for d in ds if d == "ESCALATE_HUMAN") / len(ds) for ds in groups.values()]
+    return round(max(rates) - min(rates), 4) if len(rates) >= 2 else 0.0
+
+
 def equalized_odds_components(records: list[dict], attr: str) -> dict:
     """
     Componentes de equalized odds (A7): ΔTPR y ΔFPR entre grupos.
