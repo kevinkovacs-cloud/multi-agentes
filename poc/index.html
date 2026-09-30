@@ -366,7 +366,7 @@ select.inp { background: var(--surface2); color: var(--text); border: 1px solid 
       <b>Corrección incorporada al marco:</b> las capas BIO/TBO/WIO <b>no son un nivel fijo</b> de cada agente,
       sino las etapas que cada agente recorre individualmente. Todo agente nace <b>Born</b> (solo BIO), se entrena hasta
       <b>Trained</b> (BIO+TBO) y aprende en producción hasta <b>Mature</b> (BIO+TBO+WIO). Un agente Mature transfiere su
-      base de teorías a un Novato del mismo rol, acelerando su maduración sin reentrenar desde cero.
+      base de teorías a un Novice del mismo rol, acelerando su maduración sin reentrenar desde cero.
     </div>
 
     <div class="section-label">Estado de madurez de cada agente del DAG</div>
@@ -374,7 +374,7 @@ select.inp { background: var(--surface2); color: var(--text); border: 1px solid 
 
     <div class="card">
       <div class="card-title">Transferencia de conocimiento (colaboración del LLC)</div>
-      <div class="card-sub">Un <b>Bias Auditor Mature</b> transfiere su base de teorías a un <b>Bias Auditor Novato</b> del mismo rol.
+      <div class="card-sub">Un <b>Bias Auditor Mature</b> transfiere su base de teorías a un <b>Bias Auditor Novice</b> del mismo rol.
         Algoritmo: teoría igual → refuerza P y K · teoría similar → debilita (suma solo K) · teoría nueva → se transfiere.</div>
       <div class="transfer-row">
         <div class="trf-agent maestro" id="trf-maestro"></div>
@@ -841,9 +841,9 @@ function renderBatch() {
    ============================================================ */
 const MATURITY = {
   born:    {label:'Born',    color:'#64748b', idx:0, note:'Solo operadores BIO (innatos): system prompt + guardrails.'},
-  novato:  {label:'Novato',  color:'#3b82f6', idx:1, note:'BIO + TBO parcial. Primer fine-tuning iniciado.'},
+  novato:  {label:'Novice',  color:'#3b82f6', idx:1, note:'BIO + TBO parcial. Primer fine-tuning iniciado.'},
   trained: {label:'Trained', color:'#06b6d4', idx:2, note:'BIO + TBO completo. Validado sobre benchmark de fairness.'},
-  mature:  {label:'Mature',  color:'#10b981', idx:3, note:'BIO + TBO + WIO. Aprende en producción y transfiere a novatos.'},
+  mature:  {label:'Mature',  color:'#10b981', idx:3, note:'BIO + TBO + WIO. Aprende en producción y transfiere a agentes Novice.'},
 };
 const MAT_STEPS = ['born','novato','trained','mature'];
 
@@ -869,7 +869,7 @@ function renderLifecycle() {
         <span class="mat-pill" style="margin-left:auto;background:${MATURITY[a.maturity].color}22;color:${MATURITY[a.maturity].color}">${MATURITY[a.maturity].label}</span>
       </div>
       <div class="lc-track">${steps}</div>
-      <div class="lc-labels"><span>Born</span><span>Novato</span><span>Trained</span><span>Mature</span></div>
+      <div class="lc-labels"><span>Born</span><span>Novice</span><span>Trained</span><span>Mature</span></div>
       <div class="lc-layers">capas activas: ${['BIO','BIO+TBO','BIO+TBO','BIO+TBO+WIO'][cur]}</div>
       <div class="lc-note">${a.note}</div>
     </div>`;
@@ -919,7 +919,7 @@ function renderTransfer() {
     <div class="trf-stat"><span>confiab. media</span><b>${(mSum.p/mSum.k).toFixed(2)}</b></div>`;
 
   document.getElementById('trf-novato').innerHTML = `
-    <div class="trf-title" style="color:${transferred?'#34d399':'#94a3b8'}">Bias Auditor · NOVATO <span class="mat-pill" style="background:${MATURITY[novMat].color}22;color:${MATURITY[novMat].color}">${MATURITY[novMat].label}</span></div>
+    <div class="trf-title" style="color:${transferred?'#34d399':'#94a3b8'}">Bias Auditor · NOVICE <span class="mat-pill" style="background:${MATURITY[novMat].color}22;color:${MATURITY[novMat].color}">${MATURITY[novMat].label}</span></div>
     <div class="trf-stat"><span>teorías</span><b>${novatoTheories.length}</b></div>
     <div class="trf-stat"><span>ΣP (éxitos)</span><b>${nSum.p}</b></div>
     <div class="trf-stat"><span>ΣK (usos)</span><b>${nSum.k}</b></div>
@@ -943,7 +943,7 @@ function doTransfer() {
   transferred = true;
   const novMat = maturityFromBase(novatoTheories);
   document.getElementById('trf-log').innerHTML = log.join('<br>') +
-    `<br><br><b style="color:#6ee7b7">Resultado:</b> el novato pasó de 2 a ${novatoTheories.length} teorías y maduró a <b style="color:${MATURITY[novMat].color}">${MATURITY[novMat].label}</b> sin reentrenar desde cero.`;
+    `<br><br><b style="color:#6ee7b7">Resultado:</b> el agente Novice pasó de 2 a ${novatoTheories.length} teorías y maduró a <b style="color:${MATURITY[novMat].color}">${MATURITY[novMat].label}</b> sin reentrenar desde cero.`;
   renderTransfer();
 }
 
