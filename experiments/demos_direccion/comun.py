@@ -24,6 +24,7 @@ from moav_hr.core import fairness  # noqa: E402
 from moav_hr.core.theory import Theory, TheoryBase  # noqa: E402
 from moav_hr.instances.hr.parser_agent import build_si, normalize_profile  # noqa: E402
 from moav_hr.instances.hr.pipeline import HRPipeline, matcher_view, record_of  # noqa: E402
+from moav_hr.instances.hr.scoring import sim_match_score  # noqa: E402
 
 ROTULO_SIM = "ilustrativo, modo sim; no es evidencia experimental"
 ROTULO_SEM = ("semántica actual del código; puede cambiar con las decisiones 2 y 5 "
@@ -188,6 +189,8 @@ def ejecutar_tarea(pipe: HRPipeline, candidatos, tarea: int,
         st = pipe.process(c)
         assert st["matcher"]["n_retrieved"] == len(recuperadas)
         accion = "ADVANCE" if st["matcher"]["score"] >= UMBRAL else "REJECT"
+        sin_teoria = sim_match_score(c)             # contrafáctico: score sin teoría (modo sim)
+        accion_sin_teoria = "ADVANCE" if sin_teoria >= UMBRAL else "REJECT"
         correcta = accion_correcta(c)
         sf = {"outcome": correcta}
         es_nueva = m.theories.find_equal(Theory(si=si, a=accion, sf=sf)) is None
@@ -199,6 +202,8 @@ def ejecutar_tarea(pipe: HRPipeline, candidatos, tarea: int,
             "tarea": tarea, "candidato_id": c.id, "grupo": c.origin_group,
             "si": si, "n_recuperadas": len(recuperadas), "seleccionada": sel_info,
             "score_matcher": st["matcher"]["score"], "accion": accion,
+            "score_sin_teoria": sin_teoria, "accion_sin_teoria": accion_sin_teoria,
+            "la_teoria_cambio_la_accion": accion != accion_sin_teoria,
             "accion_correcta": correcta, "acierto": accion == correcta,
             "decision_pipeline": st["decision"], "teoria_aprendida": t.id,
             "teoria_nueva": es_nueva, "nombre": c.name,

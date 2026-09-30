@@ -143,3 +143,55 @@ imprime 1081 tripletas (antes 1059: +11 `usos`, +11 `clave`) y una línea nueva 
 - b_in (decisión 3: con disparidad basal 0, μ_rel queda indefinido en la corrida por defecto);
 - E(t) / trato–ruteo;
 - escalamiento por ventana como default.
+
+## Bloque D (29/09/2026) — demos para los pedidos de la dirección
+
+Rama `eje1/bloque-d` (desde `eje1/formalizacion-v2`), un commit por ítem. Son **scripts
+reproducibles, datos y figuras** para las placas que arma Claude chat; no son placas. Todo corre
+en modo sim y cada salida lleva dos rótulos: *ilustrativo, modo sim; no es evidencia
+experimental* y *semántica actual del código; puede cambiar con las decisiones 2 y 5 de la
+dirección*. **Ningún número está escrito a mano:** los números para las placas están en
+`docs/demos_direccion/NUMEROS_PARA_PLACAS.md`, generado por el código.
+
+Scripts en `experiments/demos_direccion/`; salidas (JSON y PNG) en `docs/demos_direccion/`;
+tests en `tests/test_bloqued_*.py`.
+
+- **D1 · `d1_embeddings.py`** (P3, Ierache 08/09) — selección de teoría por embeddings: base del
+  Matcher tras el lote de la PoC y consulta = Si de Fátima; similitud con embeddings
+  (`MOAV_SIMILARITY=embeddings`, extra `.[embeddings]`) y con token-cosine; δ que rige (el del
+  retriever del Matcher) y orden de `retrieve`. Figuras: espacio PCA con ampliación y barras de
+  similitud. Sin modelo (extra o red), corre solo con token-cosine y registra el fallo.
+- **D2 · `d2_ciclo_teoria.py`** (P1) — creación e iteración de una teoría: el Matcher arranca con
+  la base vacía y recorre la tarea 1 (lote de la PoC) y la tarea 2 (`tarea2.py`, determinista,
+  mismo puesto, Si repetidas; no toca `synthetic.py`). Sigue la teoría usada para el caso de
+  Fátima (nacimiento, P, K, U y puesto en su celda) y cuenta las teorías nuevas por tarea
+  (región 7). Convención del aprendizaje en línea: Sf = resultado observado (acción correcta
+  según la calificación real del harness), sin pasar `u` (U de Laplace).
+- **D3 · `d3_transferencia.py`** (P2) — transferencia maestro→aprendiz del mismo rol con
+  `transfer_to` / `collaborate`: donante = Matcher de la PoC con sus ventanas; receptor en Born
+  con base propia; cada teoría clasificada igual / similar / nueva con su P y K; contraejemplos
+  con r < τ y sin historia (`can_donate`).
+- **D4a · `MOACVAgent.advance(monitor, certified=False, trail=None, **gate_kwargs)`** — único
+  cambio de código del bloque: ejecuta el siguiente paso del ciclo solo si
+  `monitor.gate_evolution` aprueba (Def. 12) y registra el intento en la región 7 del trail.
+  El cálculo de `maturity` no cambia; `advance` solo avanza (no hay regresión de estado).
+- **D4b · `d4_maduracion.py`** (P4) — un Matcher en Born recorre las dos tareas, cierra ventanas
+  de 4 casos e intenta `advance` en cada una, con el gate puntual y con el certificado
+  (`m_min(1,0)`: la historia larga es propiedad del certificado, no un defecto).
+- **D5 · `d5_diversidad.py`** (I5, Ierache 26/06) — comités de k = 3 con sesgos **programados**
+  (homogéneo, diverso, diverso con piso común) sobre `core/committee.Committee`: D(M), d_max(3),
+  disparidad por miembro y del comité. Rótulo obligatorio: *parámetros programados: ilustra el
+  mecanismo de la condición C2 (diversidad); no es evidencia de la conjetura de atenuación*.
+- **D6** — `poc/index.html` dice «Novice» en los textos visibles (la clave interna `novato` queda).
+- **D7 · `generar_todo.py`** — corre D1 a D5 y escribe `NUMEROS_PARA_PLACAS.md` (números clave,
+  figura, leyenda y rótulos por demo, más los resultados que no fueron los esperados).
+
+**Regenerar todo** (con el extra de embeddings instalado; sin él, D1 cae a token-cosine):
+
+```bash
+pip install -e ".[embeddings]"
+python experiments/demos_direccion/generar_todo.py
+```
+
+Cada demo corre también por separado (`python experiments/demos_direccion/d1_embeddings.py`,
+etc.; `--out DIR` para escribir en otra carpeta). `demo_caso.py` y `run_poc.py` no cambian.
