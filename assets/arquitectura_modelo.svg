@@ -147,7 +147,7 @@
 
 <!-- ── Sección 3 · Transferencia de teorías (Def. 8) ── -->
 <text class="th" x="40" y="452">Transferencia de teorías (colaboración maestro → aprendiz, Def. 8)</text>
-<text class="ts" x="40" y="470">Entre instancias sucesivas del mismo rol: un Matcher Mature transfiere su base a un Matcher Novato</text>
+<text class="ts" x="40" y="470">Entre instancias sucesivas del mismo rol: un Matcher Mature transfiere su base a un Matcher Novice</text>
 
 <rect class="blue" x="40" y="486" width="180" height="56" rx="10" stroke-width="0.5"/>
 <text class="th tblue" x="130" y="508" text-anchor="middle">Matcher Mature</text>
@@ -157,7 +157,7 @@
 <line x1="220" y1="514" x2="440" y2="514" class="arr" marker-end="url(#arrow)"/>
 
 <rect class="gray" x="440" y="486" width="180" height="56" rx="10" stroke-width="0.5"/>
-<text class="th tgray" x="530" y="508" text-anchor="middle">Matcher Novato</text>
+<text class="th tgray" x="530" y="508" text-anchor="middle">Matcher Novice</text>
 <text class="ts tgraysub" x="530" y="526" text-anchor="middle">hereda y acelera maduración</text>
 
 <text class="tsm" x="330" y="562" text-anchor="middle">igual → refuerza P, K    ·    similar → suma K (debilita)    ·    nueva → transfiere íntegra</text>
