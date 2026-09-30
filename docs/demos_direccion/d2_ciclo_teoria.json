@@ -1,0 +1,1181 @@
+{
+  "rotulos": [
+    "ilustrativo, modo sim; no es evidencia experimental",
+    "semántica actual del código; puede cambiar con las decisiones 2 y 5 de la dirección"
+  ],
+  "demo": "D2 — creación e iteración de una teoría en dos tareas (P1)",
+  "convencion": {
+    "base_inicial": "vacía (sin warmup): las teorías nacen en la región 5 de cada caso",
+    "accion": "ADVANCE si el score del Matcher ≥ 0,75, si no REJECT (matcher_view)",
+    "sf": "{'outcome': acción correcta según la calificación real del harness}",
+    "acierto": "acción del Matcher == Sf['outcome']",
+    "u": "learn sin `u` → U = confiabilidad de Laplace (P+1)/(K_propio+2)",
+    "similitud": "token-cosine (default del código)"
+  },
+  "tarea_2_generador": {
+    "modulo": "experiments/demos_direccion/tarea2.py",
+    "semilla": 20260929,
+    "candidatos": [
+      {
+        "id": 101,
+        "plantilla_tarea_1": 7,
+        "gender": "M",
+        "origin": "IN",
+        "exp": 5,
+        "edu": "Maestría",
+        "skills": [
+          "Python",
+          "CV",
+          "CUDA"
+        ],
+        "match_score": 0.8,
+        "true_qual": 0.89,
+        "bias_risk": "high"
+      },
+      {
+        "id": 102,
+        "plantilla_tarea_1": 8,
+        "gender": "F",
+        "origin": "CL",
+        "exp": 11,
+        "edu": "Maestría",
+        "skills": [
+          "Spark",
+          "Kafka",
+          "Scala"
+        ],
+        "match_score": 0.83,
+        "true_qual": 0.85,
+        "bias_risk": "low"
+      },
+      {
+        "id": 103,
+        "plantilla_tarea_1": 8,
+        "gender": "M",
+        "origin": "AR",
+        "exp": 12,
+        "edu": "Maestría",
+        "skills": [
+          "Spark",
+          "Kafka",
+          "Scala"
+        ],
+        "match_score": 0.85,
+        "true_qual": 0.85,
+        "bias_risk": "med"
+      },
+      {
+        "id": 104,
+        "plantilla_tarea_1": 3,
+        "gender": "M",
+        "origin": "AR",
+        "exp": 3,
+        "edu": "Licenciatura",
+        "skills": [
+          "Python",
+          "NLP",
+          "PyTorch"
+        ],
+        "match_score": 0.79,
+        "true_qual": 0.87,
+        "bias_risk": "low"
+      },
+      {
+        "id": 105,
+        "plantilla_tarea_1": 3,
+        "gender": "F",
+        "origin": "EG",
+        "exp": 2,
+        "edu": "Licenciatura",
+        "skills": [
+          "Python",
+          "NLP",
+          "PyTorch"
+        ],
+        "match_score": 0.75,
+        "true_qual": 0.84,
+        "bias_risk": "high"
+      },
+      {
+        "id": 106,
+        "plantilla_tarea_1": 12,
+        "gender": "M",
+        "origin": "CL",
+        "exp": 19,
+        "edu": "Doctorado",
+        "skills": [
+          "C++",
+          "Embedded",
+          "IoT"
+        ],
+        "match_score": 0.77,
+        "true_qual": 0.78,
+        "bias_risk": "low"
+      },
+      {
+        "id": 107,
+        "plantilla_tarea_1": 1,
+        "gender": "M",
+        "origin": "AR",
+        "exp": 6,
+        "edu": "Licenciatura",
+        "skills": [
+          "Python",
+          "ML",
+          "SQL"
+        ],
+        "match_score": 0.87,
+        "true_qual": 0.9,
+        "bias_risk": "low"
+      },
+      {
+        "id": 108,
+        "plantilla_tarea_1": 10,
+        "gender": "M",
+        "origin": "SY",
+        "exp": 4,
+        "edu": "Licenciatura",
+        "skills": [
+          "Python",
+          "BI",
+          "PowerBI"
+        ],
+        "match_score": 0.75,
+        "true_qual": 0.78,
+        "bias_risk": "high"
+      },
+      {
+        "id": 109,
+        "plantilla_tarea_1": 8,
+        "gender": "F",
+        "origin": "AR",
+        "exp": 11,
+        "edu": "Maestría",
+        "skills": [
+          "Spark",
+          "Kafka",
+          "Scala"
+        ],
+        "match_score": 0.87,
+        "true_qual": 0.88,
+        "bias_risk": "low"
+      },
+      {
+        "id": 110,
+        "plantilla_tarea_1": 3,
+        "gender": "F",
+        "origin": "IN",
+        "exp": 2,
+        "edu": "Licenciatura",
+        "skills": [
+          "Python",
+          "NLP",
+          "PyTorch"
+        ],
+        "match_score": 0.8,
+        "true_qual": 0.86,
+        "bias_risk": "high"
+      },
+      {
+        "id": 111,
+        "plantilla_tarea_1": 4,
+        "gender": "F",
+        "origin": "AR",
+        "exp": 16,
+        "edu": "Doctorado",
+        "skills": [
+          "R",
+          "Stats",
+          "Spark"
+        ],
+        "match_score": 0.82,
+        "true_qual": 0.87,
+        "bias_risk": "low"
+      },
+      {
+        "id": 112,
+        "plantilla_tarea_1": 9,
+        "gender": "M",
+        "origin": "AR",
+        "exp": 10,
+        "edu": "Especialización",
+        "skills": [
+          "Scrum",
+          "PM",
+          "Jira"
+        ],
+        "match_score": 0.86,
+        "true_qual": 0.8,
+        "bias_risk": "med"
+      }
+    ]
+  },
+  "tarea_1": {
+    "n_casos": 12,
+    "teorias_nuevas": 11,
+    "casos_que_refuerzan_una_teoria_existente": 1,
+    "casos_con_teorias_recuperadas": 8,
+    "aciertos_del_matcher": 12,
+    "fair_w_por_ventana": [
+      1.0,
+      1.0,
+      0.5
+    ]
+  },
+  "tarea_2": {
+    "n_casos": 12,
+    "teorias_nuevas": 1,
+    "casos_que_refuerzan_una_teoria_existente": 11,
+    "casos_con_teorias_recuperadas": 12,
+    "aciertos_del_matcher": 10,
+    "fair_w_por_ventana": [
+      1.0,
+      0.6667,
+      0.0
+    ]
+  },
+  "teorias_nuevas_por_tarea": [
+    11,
+    1
+  ],
+  "teorias_nuevas_decrecen": true,
+  "teoria_seguida": {
+    "id": 1,
+    "si": {
+      "skills_match": 2,
+      "exp_band": "mid",
+      "edu": "Licenciatura",
+      "seniority_ok": true
+    },
+    "a": "ADVANCE",
+    "sf": {
+      "outcome": "ADVANCE"
+    },
+    "regla_de_eleccion": "la teoría que el Matcher selecciona (★) para decidir el caso de Fátima en la tarea 1",
+    "nacimiento": {
+      "tarea": 1,
+      "candidato_id": 1,
+      "nombre": "Ana García",
+      "p": 1,
+      "k": 1,
+      "u": 0.6667
+    },
+    "usos": [
+      {
+        "n_uso": 1,
+        "tarea": 1,
+        "candidato_id": 1,
+        "nombre": "Ana García",
+        "acierto": true,
+        "p": 1,
+        "k": 1,
+        "u": 0.6667,
+        "puesto": 1,
+        "n_celda": 1
+      },
+      {
+        "n_uso": 2,
+        "tarea": 1,
+        "candidato_id": 6,
+        "nombre": "Diego Ríos",
+        "acierto": true,
+        "p": 2,
+        "k": 2,
+        "u": 0.75,
+        "puesto": 1,
+        "n_celda": 1
+      },
+      {
+        "n_uso": 3,
+        "tarea": 2,
+        "candidato_id": 107,
+        "nombre": "Postulante T2-07",
+        "acierto": true,
+        "p": 3,
+        "k": 3,
+        "u": 0.8,
+        "puesto": 1,
+        "n_celda": 1
+      }
+    ],
+    "seleccionada_para_decidir": [
+      {
+        "tarea": 1,
+        "candidato_id": 3,
+        "nombre": "Fátima Al-Hassan",
+        "accion": "ADVANCE",
+        "acierto": true
+      },
+      {
+        "tarea": 1,
+        "candidato_id": 7,
+        "nombre": "Priya Sharma",
+        "accion": "ADVANCE",
+        "acierto": true
+      },
+      {
+        "tarea": 1,
+        "candidato_id": 10,
+        "nombre": "Ahmed El-Sayed",
+        "accion": "ADVANCE",
+        "acierto": true
+      },
+      {
+        "tarea": 2,
+        "candidato_id": 101,
+        "nombre": "Postulante T2-01",
+        "accion": "ADVANCE",
+        "acierto": true
+      },
+      {
+        "tarea": 2,
+        "candidato_id": 104,
+        "nombre": "Postulante T2-04",
+        "accion": "ADVANCE",
+        "acierto": true
+      },
+      {
+        "tarea": 2,
+        "candidato_id": 108,
+        "nombre": "Postulante T2-08",
+        "accion": "ADVANCE",
+        "acierto": true
+      }
+    ]
+  },
+  "base_final": [
+    {
+      "id": 1,
+      "si": {
+        "skills_match": 2,
+        "exp_band": "mid",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "p": 3,
+      "k": 3,
+      "k_propio": 3,
+      "u": 0.8
+    },
+    {
+      "id": 2,
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "p": 1,
+      "k": 1,
+      "k_propio": 1,
+      "u": 0.6667
+    },
+    {
+      "id": 3,
+      "si": {
+        "skills_match": 3,
+        "exp_band": "mid",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "p": 2,
+      "k": 2,
+      "k_propio": 2,
+      "u": 0.75
+    },
+    {
+      "id": 4,
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Doctorado",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "p": 2,
+      "k": 2,
+      "k_propio": 2,
+      "u": 0.75
+    },
+    {
+      "id": 5,
+      "si": {
+        "skills_match": 0,
+        "exp_band": "mid",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "p": 1,
+      "k": 1,
+      "k_propio": 1,
+      "u": 0.6667
+    },
+    {
+      "id": 6,
+      "si": {
+        "skills_match": 2,
+        "exp_band": "mid",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "p": 2,
+      "k": 2,
+      "k_propio": 2,
+      "u": 0.75
+    },
+    {
+      "id": 7,
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "p": 4,
+      "k": 4,
+      "k_propio": 4,
+      "u": 0.8333
+    },
+    {
+      "id": 8,
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Especialización",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "p": 2,
+      "k": 2,
+      "k_propio": 2,
+      "u": 0.75
+    },
+    {
+      "id": 9,
+      "si": {
+        "skills_match": 1,
+        "exp_band": "mid",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "p": 2,
+      "k": 2,
+      "k_propio": 2,
+      "u": 0.75
+    },
+    {
+      "id": 10,
+      "si": {
+        "skills_match": 0,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "a": "REJECT",
+      "sf": {
+        "outcome": "REJECT"
+      },
+      "p": 1,
+      "k": 1,
+      "k_propio": 1,
+      "u": 0.6667
+    },
+    {
+      "id": 11,
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Doctorado",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "p": 2,
+      "k": 2,
+      "k_propio": 2,
+      "u": 0.75
+    },
+    {
+      "id": 12,
+      "si": {
+        "skills_match": 3,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "a": "REJECT",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "p": 0,
+      "k": 2,
+      "k_propio": 2,
+      "u": 0.25
+    }
+  ],
+  "casos": [
+    {
+      "tarea": 1,
+      "candidato_id": 1,
+      "grupo": "AR",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "mid",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 0,
+      "seleccionada": null,
+      "score_matcher": 0.87,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 1,
+      "teoria_nueva": true,
+      "nombre": "Ana García"
+    },
+    {
+      "tarea": 1,
+      "candidato_id": 2,
+      "grupo": "AR",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 0,
+      "seleccionada": null,
+      "score_matcher": 0.93,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 2,
+      "teoria_nueva": true,
+      "nombre": "Carlos Méndez"
+    },
+    {
+      "tarea": 1,
+      "candidato_id": 3,
+      "grupo": "no-AR",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "mid",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 1,
+      "seleccionada": {
+        "id": 1,
+        "a": "ADVANCE",
+        "p": 1,
+        "k": 1,
+        "u": 0.6667
+      },
+      "score_matcher": 0.81,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ESCALATE_HUMAN",
+      "teoria_aprendida": 3,
+      "teoria_nueva": true,
+      "nombre": "Fátima Al-Hassan"
+    },
+    {
+      "tarea": 1,
+      "candidato_id": 4,
+      "grupo": "AR",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Doctorado",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 0,
+      "seleccionada": null,
+      "score_matcher": 0.85,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 4,
+      "teoria_nueva": true,
+      "nombre": "Miguel Torres"
+    },
+    {
+      "tarea": 1,
+      "candidato_id": 5,
+      "grupo": "no-AR",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "mid",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 1,
+      "seleccionada": {
+        "id": 2,
+        "a": "ADVANCE",
+        "p": 1,
+        "k": 1,
+        "u": 0.6667
+      },
+      "score_matcher": 0.92,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 5,
+      "teoria_nueva": true,
+      "nombre": "Valentina Cruz"
+    },
+    {
+      "tarea": 1,
+      "candidato_id": 6,
+      "grupo": "AR",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "mid",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 2,
+      "seleccionada": {
+        "id": 3,
+        "a": "ADVANCE",
+        "p": 1,
+        "k": 1,
+        "u": 0.6667
+      },
+      "score_matcher": 0.78,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 1,
+      "teoria_nueva": false,
+      "nombre": "Diego Ríos"
+    },
+    {
+      "tarea": 1,
+      "candidato_id": 7,
+      "grupo": "no-AR",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "mid",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 2,
+      "seleccionada": {
+        "id": 1,
+        "a": "ADVANCE",
+        "p": 2,
+        "k": 2,
+        "u": 0.75
+      },
+      "score_matcher": 0.862,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 6,
+      "teoria_nueva": true,
+      "nombre": "Priya Sharma"
+    },
+    {
+      "tarea": 1,
+      "candidato_id": 8,
+      "grupo": "no-AR",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 2,
+      "seleccionada": {
+        "id": 4,
+        "a": "ADVANCE",
+        "p": 1,
+        "k": 1,
+        "u": 0.6667
+      },
+      "score_matcher": 0.89,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 7,
+      "teoria_nueva": true,
+      "nombre": "Roberto Silva"
+    },
+    {
+      "tarea": 1,
+      "candidato_id": 9,
+      "grupo": "AR",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Especialización",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 1,
+      "seleccionada": {
+        "id": 2,
+        "a": "ADVANCE",
+        "p": 1,
+        "k": 1,
+        "u": 0.6667
+      },
+      "score_matcher": 0.82,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 8,
+      "teoria_nueva": true,
+      "nombre": "Laura Benítez"
+    },
+    {
+      "tarea": 1,
+      "candidato_id": 10,
+      "grupo": "no-AR",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "mid",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 2,
+      "seleccionada": {
+        "id": 1,
+        "a": "ADVANCE",
+        "p": 2,
+        "k": 2,
+        "u": 0.75
+      },
+      "score_matcher": 0.762,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ESCALATE_HUMAN",
+      "teoria_aprendida": 9,
+      "teoria_nueva": true,
+      "nombre": "Ahmed El-Sayed"
+    },
+    {
+      "tarea": 1,
+      "candidato_id": 11,
+      "grupo": "AR",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "n_recuperadas": 0,
+      "seleccionada": null,
+      "score_matcher": 0.66,
+      "accion": "REJECT",
+      "accion_correcta": "REJECT",
+      "acierto": true,
+      "decision_pipeline": "REJECT",
+      "teoria_aprendida": 10,
+      "teoria_nueva": true,
+      "nombre": "Camila Ponce"
+    },
+    {
+      "tarea": 1,
+      "candidato_id": 12,
+      "grupo": "no-AR",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Doctorado",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 3,
+      "seleccionada": {
+        "id": 8,
+        "a": "ADVANCE",
+        "p": 1,
+        "k": 1,
+        "u": 0.6667
+      },
+      "score_matcher": 0.82,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 11,
+      "teoria_nueva": true,
+      "nombre": "Sebastián Mora"
+    },
+    {
+      "tarea": 2,
+      "candidato_id": 101,
+      "grupo": "no-AR",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "mid",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 3,
+      "seleccionada": {
+        "id": 1,
+        "a": "ADVANCE",
+        "p": 2,
+        "k": 2,
+        "u": 0.75
+      },
+      "score_matcher": 0.842,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ESCALATE_HUMAN",
+      "teoria_aprendida": 6,
+      "teoria_nueva": false,
+      "nombre": "Postulante T2-01"
+    },
+    {
+      "tarea": 2,
+      "candidato_id": 102,
+      "grupo": "no-AR",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 3,
+      "seleccionada": {
+        "id": 7,
+        "a": "ADVANCE",
+        "p": 1,
+        "k": 1,
+        "u": 0.6667
+      },
+      "score_matcher": 0.87,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 7,
+      "teoria_nueva": false,
+      "nombre": "Postulante T2-02"
+    },
+    {
+      "tarea": 2,
+      "candidato_id": 103,
+      "grupo": "AR",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 3,
+      "seleccionada": {
+        "id": 7,
+        "a": "ADVANCE",
+        "p": 2,
+        "k": 2,
+        "u": 0.75
+      },
+      "score_matcher": 0.892,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 7,
+      "teoria_nueva": false,
+      "nombre": "Postulante T2-03"
+    },
+    {
+      "tarea": 2,
+      "candidato_id": 104,
+      "grupo": "AR",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "mid",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 3,
+      "seleccionada": {
+        "id": 1,
+        "a": "ADVANCE",
+        "p": 2,
+        "k": 2,
+        "u": 0.75
+      },
+      "score_matcher": 0.812,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 3,
+      "teoria_nueva": false,
+      "nombre": "Postulante T2-04"
+    },
+    {
+      "tarea": 2,
+      "candidato_id": 105,
+      "grupo": "no-AR",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "n_recuperadas": 1,
+      "seleccionada": {
+        "id": 10,
+        "a": "REJECT",
+        "p": 1,
+        "k": 1,
+        "u": 0.6667
+      },
+      "score_matcher": 0.68,
+      "accion": "REJECT",
+      "accion_correcta": "ADVANCE",
+      "acierto": false,
+      "decision_pipeline": "ESCALATE_HUMAN",
+      "teoria_aprendida": 12,
+      "teoria_nueva": true,
+      "nombre": "Postulante T2-05"
+    },
+    {
+      "tarea": 2,
+      "candidato_id": 106,
+      "grupo": "no-AR",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Doctorado",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 3,
+      "seleccionada": {
+        "id": 11,
+        "a": "ADVANCE",
+        "p": 1,
+        "k": 1,
+        "u": 0.6667
+      },
+      "score_matcher": 0.81,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 11,
+      "teoria_nueva": false,
+      "nombre": "Postulante T2-06"
+    },
+    {
+      "tarea": 2,
+      "candidato_id": 107,
+      "grupo": "AR",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "mid",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 3,
+      "seleccionada": {
+        "id": 6,
+        "a": "ADVANCE",
+        "p": 2,
+        "k": 2,
+        "u": 0.75
+      },
+      "score_matcher": 0.892,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 1,
+      "teoria_nueva": false,
+      "nombre": "Postulante T2-07"
+    },
+    {
+      "tarea": 2,
+      "candidato_id": 108,
+      "grupo": "no-AR",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "mid",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 3,
+      "seleccionada": {
+        "id": 1,
+        "a": "ADVANCE",
+        "p": 3,
+        "k": 3,
+        "u": 0.8
+      },
+      "score_matcher": 0.774,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ESCALATE_HUMAN",
+      "teoria_aprendida": 9,
+      "teoria_nueva": false,
+      "nombre": "Postulante T2-08"
+    },
+    {
+      "tarea": 2,
+      "candidato_id": 109,
+      "grupo": "AR",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 3,
+      "seleccionada": {
+        "id": 7,
+        "a": "ADVANCE",
+        "p": 3,
+        "k": 3,
+        "u": 0.8
+      },
+      "score_matcher": 0.914,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 7,
+      "teoria_nueva": false,
+      "nombre": "Postulante T2-09"
+    },
+    {
+      "tarea": 2,
+      "candidato_id": 110,
+      "grupo": "no-AR",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "n_recuperadas": 2,
+      "seleccionada": {
+        "id": 10,
+        "a": "REJECT",
+        "p": 1,
+        "k": 1,
+        "u": 0.6667
+      },
+      "score_matcher": 0.73,
+      "accion": "REJECT",
+      "accion_correcta": "ADVANCE",
+      "acierto": false,
+      "decision_pipeline": "ESCALATE_HUMAN",
+      "teoria_aprendida": 12,
+      "teoria_nueva": false,
+      "nombre": "Postulante T2-10"
+    },
+    {
+      "tarea": 2,
+      "candidato_id": 111,
+      "grupo": "AR",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Doctorado",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 3,
+      "seleccionada": {
+        "id": 7,
+        "a": "ADVANCE",
+        "p": 4,
+        "k": 4,
+        "u": 0.8333
+      },
+      "score_matcher": 0.865,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 4,
+      "teoria_nueva": false,
+      "nombre": "Postulante T2-11"
+    },
+    {
+      "tarea": 2,
+      "candidato_id": 112,
+      "grupo": "AR",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Especialización",
+        "seniority_ok": true
+      },
+      "n_recuperadas": 3,
+      "seleccionada": {
+        "id": 11,
+        "a": "ADVANCE",
+        "p": 2,
+        "k": 2,
+        "u": 0.75
+      },
+      "score_matcher": 0.882,
+      "accion": "ADVANCE",
+      "accion_correcta": "ADVANCE",
+      "acierto": true,
+      "decision_pipeline": "ADVANCE",
+      "teoria_aprendida": 8,
+      "teoria_nueva": false,
+      "nombre": "Postulante T2-12"
+    }
+  ],
+  "figuras": [
+    "d2_evolucion_PKU.png"
+  ]
+}

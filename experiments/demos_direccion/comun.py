@@ -166,13 +166,14 @@ def pipeline_vacio(nacido: bool = False) -> HRPipeline:
 
 
 def ejecutar_tarea(pipe: HRPipeline, candidatos, tarea: int,
-                   al_cerrar_ventana=None) -> dict:
+                   al_cerrar_ventana=None, despues_de_caso=None) -> dict:
     """
     Recorre un lote con el Matcher del pipeline: recupera y decide (región 2), el
     pipeline completa el caso, y el Matcher aprende (región 5) con learn(Si, A, Sf,
     acierto) sin pasar `u` (U := Laplace). Cada TAM_VENTANA casos cierra una ventana:
     fair(W) de las decisiones que implican los scores del Matcher (matcher_view, N3),
     registrado en su historia; si se pasa `al_cerrar_ventana`, se llama después.
+    `despues_de_caso(caso, teoria)` se llama al terminar cada caso (para instantáneas).
     """
     m = pipe.matcher
     casos, ventanas, pendientes = [], [], []
@@ -200,8 +201,10 @@ def ejecutar_tarea(pipe: HRPipeline, candidatos, tarea: int,
             "score_matcher": st["matcher"]["score"], "accion": accion,
             "accion_correcta": correcta, "acierto": accion == correcta,
             "decision_pipeline": st["decision"], "teoria_aprendida": t.id,
-            "teoria_nueva": es_nueva,
+            "teoria_nueva": es_nueva, "nombre": c.name,
         })
+        if despues_de_caso is not None:
+            despues_de_caso(casos[-1], t)
         pendientes.append(record_of(st))
         if len(pendientes) == TAM_VENTANA:
             fw = fairness.fair_window(matcher_view(pendientes), ATTR, CRITERIO)
