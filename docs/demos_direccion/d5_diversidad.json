@@ -1,0 +1,94 @@
+{
+  "rotulos": [
+    "ilustrativo, modo sim; no es evidencia experimental",
+    "semántica actual del código; puede cambiar con las decisiones 2 y 5 de la dirección"
+  ],
+  "demo": "D5 — diversidad en comité con sesgos programados (I5)",
+  "rotulo_obligatorio": "parámetros programados: ilustra el mecanismo de la condición C2 (diversidad); no es evidencia de la conjetura de atenuación",
+  "parametros_programados": {
+    "semilla": 20260929,
+    "candidatos_por_grupo": 200,
+    "true_qual_uniforme": [
+      0.6,
+      0.95
+    ],
+    "beta": 0.1,
+    "piso_phi": 0.08,
+    "sigma": 0.03,
+    "sigma_individual_homogeneo": 0.005,
+    "k": 3,
+    "agregacion": "mean",
+    "umbral_decision": 0.75,
+    "criterio": "demographic_parity",
+    "atributo": "origin_group"
+  },
+  "disparidad_de_la_calificacion_real": 0.095,
+  "comites": {
+    "homogeneo": {
+      "descripcion": "(a) homogéneo: los tres miembros penalizan al grupo no-AR con −β·z y el ruido es casi todo común",
+      "D": 0.0036,
+      "d_max": 0.75,
+      "rho_medio": 0.9928,
+      "disparidad_miembros": [
+        0.4,
+        0.39,
+        0.4
+      ],
+      "disparidad_miembros_firmada_ref_AR": [
+        0.4,
+        0.39,
+        0.4
+      ],
+      "disparidad_comite": 0.395,
+      "disparidad_comite_firmada_ref_AR": 0.395,
+      "media_disparidad_miembros": 0.3967,
+      "relacion_comite_sobre_media_miembros": 0.9958,
+      "relacion_comite_sobre_max_miembro": 0.9875
+    },
+    "diverso": {
+      "descripcion": "(b) diverso: sesgos de grupo en direcciones distintas (−β·z, +β·z, 0) y ruido independiente",
+      "D": 0.6217,
+      "d_max": 0.75,
+      "rho_medio": -0.2434,
+      "disparidad_miembros": [
+        0.36,
+        0.265,
+        0.09
+      ],
+      "disparidad_miembros_firmada_ref_AR": [
+        0.36,
+        -0.265,
+        0.09
+      ],
+      "disparidad_comite": 0.08,
+      "disparidad_comite_firmada_ref_AR": 0.08,
+      "media_disparidad_miembros": 0.2383,
+      "relacion_comite_sobre_media_miembros": 0.3357,
+      "relacion_comite_sobre_max_miembro": 0.2222
+    },
+    "diverso_con_piso": {
+      "descripcion": "(c) diverso con componente compartida: (b) más un piso común −φ·z",
+      "D": 0.4733,
+      "d_max": 0.75,
+      "rho_medio": 0.0534,
+      "disparidad_miembros": [
+        0.545,
+        0.03,
+        0.315
+      ],
+      "disparidad_miembros_firmada_ref_AR": [
+        0.545,
+        -0.03,
+        0.315
+      ],
+      "disparidad_comite": 0.32,
+      "disparidad_comite_firmada_ref_AR": 0.32,
+      "media_disparidad_miembros": 0.2967,
+      "relacion_comite_sobre_media_miembros": 1.0787,
+      "relacion_comite_sobre_max_miembro": 0.5872
+    }
+  },
+  "figuras": [
+    "d5_diversidad.png"
+  ]
+}
