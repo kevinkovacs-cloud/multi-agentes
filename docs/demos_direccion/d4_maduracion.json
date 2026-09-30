@@ -1,0 +1,217 @@
+{
+  "rotulos": [
+    "ilustrativo, modo sim; no es evidencia experimental",
+    "semántica actual del código; puede cambiar con las decisiones 2 y 5 de la dirección"
+  ],
+  "demo": "D4 — maduración sobre el caso y segunda tarea (P4)",
+  "mecanismo": "MOACVAgent.advance(monitor, certified) → gate_evolution (Def. 12); Born→Novice: una corrida TBO · Novice→Trained: training_runs = 3 · Trained→Mature: feedback de producción",
+  "gate": {
+    "tau": 0.8,
+    "delta": 0.05,
+    "m_puntual": 5,
+    "m_certificado": "todas las ventanas observadas"
+  },
+  "m_min_ventanas_perfectas": 47,
+  "media_de_todas_las_ventanas": 0.6944,
+  "m_min_con_la_media_observada": "no alcanzable: m_min_gate requiere rbar > tau: con rbar ≤ tau ningún n aprueba",
+  "puntual": {
+    "linea_de_tiempo": [
+      {
+        "ventana": 1,
+        "tarea": 1,
+        "fair_w": 1.0,
+        "reputacion_puntual": 1.0,
+        "media_todas": 1.0,
+        "lcb_todas": -0.3581,
+        "estado_antes": "born",
+        "estado_despues": "novato",
+        "avanzo": true,
+        "aviso": null
+      },
+      {
+        "ventana": 2,
+        "tarea": 1,
+        "fair_w": 1.0,
+        "reputacion_puntual": 1.0,
+        "media_todas": 1.0,
+        "lcb_todas": 0.0397,
+        "estado_antes": "novato",
+        "estado_despues": "trained",
+        "avanzo": true,
+        "aviso": null
+      },
+      {
+        "ventana": 3,
+        "tarea": 1,
+        "fair_w": 0.5,
+        "reputacion_puntual": 0.8333,
+        "media_todas": 0.8333,
+        "lcb_todas": 0.0492,
+        "estado_antes": "trained",
+        "estado_despues": "mature",
+        "avanzo": true,
+        "aviso": null
+      },
+      {
+        "ventana": 4,
+        "tarea": 2,
+        "fair_w": 1.0,
+        "reputacion_puntual": 0.875,
+        "media_todas": 0.875,
+        "lcb_todas": 0.1959,
+        "estado_antes": "mature",
+        "estado_despues": "mature",
+        "avanzo": false,
+        "aviso": null
+      },
+      {
+        "ventana": 5,
+        "tarea": 2,
+        "fair_w": 0.6667,
+        "reputacion_puntual": 0.8333,
+        "media_todas": 0.8333,
+        "lcb_todas": 0.226,
+        "estado_antes": "mature",
+        "estado_despues": "mature",
+        "avanzo": false,
+        "aviso": null
+      },
+      {
+        "ventana": 6,
+        "tarea": 2,
+        "fair_w": 0.0,
+        "reputacion_puntual": 0.6333,
+        "media_todas": 0.6944,
+        "lcb_todas": 0.14,
+        "estado_antes": "mature",
+        "estado_despues": "mature",
+        "avanzo": false,
+        "aviso": null
+      }
+    ],
+    "estado_final": "mature",
+    "ventana_en_que_llega_a_mature": 3,
+    "eventos_region_7": 3,
+    "transiciones": [
+      {
+        "ventana": 1,
+        "de": "born",
+        "a": "novato"
+      },
+      {
+        "ventana": 2,
+        "de": "novato",
+        "a": "trained"
+      },
+      {
+        "ventana": 3,
+        "de": "trained",
+        "a": "mature"
+      }
+    ]
+  },
+  "certificado": {
+    "linea_de_tiempo": [
+      {
+        "ventana": 1,
+        "tarea": 1,
+        "fair_w": 1.0,
+        "reputacion_puntual": 1.0,
+        "media_todas": 1.0,
+        "lcb_todas": -0.3581,
+        "estado_antes": "born",
+        "estado_despues": "born",
+        "avanzo": false,
+        "aviso": "el gate certificado no puede aprobar con 1 ventanas; mínimo m_min(1.0)=47"
+      },
+      {
+        "ventana": 2,
+        "tarea": 1,
+        "fair_w": 1.0,
+        "reputacion_puntual": 1.0,
+        "media_todas": 1.0,
+        "lcb_todas": 0.0397,
+        "estado_antes": "born",
+        "estado_despues": "born",
+        "avanzo": false,
+        "aviso": "el gate certificado no puede aprobar con 2 ventanas; mínimo m_min(1.0)=47"
+      },
+      {
+        "ventana": 3,
+        "tarea": 1,
+        "fair_w": 0.5,
+        "reputacion_puntual": 0.8333,
+        "media_todas": 0.8333,
+        "lcb_todas": 0.0492,
+        "estado_antes": "born",
+        "estado_despues": "born",
+        "avanzo": false,
+        "aviso": "el gate certificado no puede aprobar con 3 ventanas; mínimo m_min(1.0)=47"
+      },
+      {
+        "ventana": 4,
+        "tarea": 2,
+        "fair_w": 1.0,
+        "reputacion_puntual": 0.875,
+        "media_todas": 0.875,
+        "lcb_todas": 0.1959,
+        "estado_antes": "born",
+        "estado_despues": "born",
+        "avanzo": false,
+        "aviso": "el gate certificado no puede aprobar con 4 ventanas; mínimo m_min(1.0)=47"
+      },
+      {
+        "ventana": 5,
+        "tarea": 2,
+        "fair_w": 0.6667,
+        "reputacion_puntual": 0.8333,
+        "media_todas": 0.8333,
+        "lcb_todas": 0.226,
+        "estado_antes": "born",
+        "estado_despues": "born",
+        "avanzo": false,
+        "aviso": "el gate certificado no puede aprobar con 5 ventanas; mínimo m_min(1.0)=47"
+      },
+      {
+        "ventana": 6,
+        "tarea": 2,
+        "fair_w": 0.0,
+        "reputacion_puntual": 0.6333,
+        "media_todas": 0.6944,
+        "lcb_todas": 0.14,
+        "estado_antes": "born",
+        "estado_despues": "born",
+        "avanzo": false,
+        "aviso": "el gate certificado no puede aprobar con 6 ventanas; mínimo m_min(1.0)=47"
+      }
+    ],
+    "estado_final": "born",
+    "ventana_en_que_llega_a_mature": null,
+    "eventos_region_7": 6,
+    "transiciones": []
+  },
+  "tarea_1": {
+    "casos": 12,
+    "casos_con_teorias_recuperadas": 8,
+    "casos_cuya_teoria_seleccionada_tenia_aciertos": 8,
+    "aciertos_del_matcher_en_esos_casos": 8,
+    "aciertos_del_matcher_total": 12,
+    "teorias_nuevas": 11
+  },
+  "tarea_2_reutiliza_teorias": {
+    "casos": 12,
+    "casos_con_teorias_recuperadas": 12,
+    "casos_cuya_teoria_seleccionada_tenia_aciertos": 12,
+    "aciertos_del_matcher_en_esos_casos": 10,
+    "aciertos_del_matcher_total": 10,
+    "teorias_nuevas": 1
+  },
+  "el_estado_cambia_las_decisiones_del_matcher": false,
+  "puntual_retrocede_si_r_cae_bajo_tau": false,
+  "ventanas_en_mature_con_r_bajo_tau": [
+    6
+  ],
+  "figuras": [
+    "d4_linea_de_tiempo.png"
+  ]
+}
