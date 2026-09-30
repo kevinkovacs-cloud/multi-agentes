@@ -1,0 +1,936 @@
+{
+  "rotulos": [
+    "ilustrativo, modo sim; no es evidencia experimental",
+    "semántica actual del código; puede cambiar con las decisiones 2 y 5 de la dirección"
+  ],
+  "demo": "D3 — transferencia maestro→aprendiz del mismo rol con gating por reputación (P2)",
+  "operador": "MOACVAgent.transfer_to → core.sharing.collaborate (Def. 8, Alg. 4.10); la base resultante se asigna solo al receptor",
+  "tau": 0.8,
+  "cuantizacion": "q_canonical",
+  "donante_A": {
+    "estado": "trained",
+    "fair_w": [
+      1.0,
+      1.0,
+      0.5
+    ],
+    "reputacion": 0.8333,
+    "can_donate": true,
+    "aprobacion_omega": true,
+    "base": [
+      {
+        "id": 1,
+        "si": {
+          "skills_match": 2,
+          "exp_band": "mid",
+          "edu": "Licenciatura",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 2,
+        "k": 2,
+        "k_propio": 2,
+        "u": 0.9
+      },
+      {
+        "id": 2,
+        "si": {
+          "skills_match": 0,
+          "exp_band": "senior",
+          "edu": "Maestría",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.9
+      },
+      {
+        "id": 3,
+        "si": {
+          "skills_match": 3,
+          "exp_band": "mid",
+          "edu": "Licenciatura",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.9
+      },
+      {
+        "id": 4,
+        "si": {
+          "skills_match": 1,
+          "exp_band": "senior",
+          "edu": "Doctorado",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.9
+      },
+      {
+        "id": 5,
+        "si": {
+          "skills_match": 0,
+          "exp_band": "mid",
+          "edu": "Maestría",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.9
+      },
+      {
+        "id": 6,
+        "si": {
+          "skills_match": 2,
+          "exp_band": "mid",
+          "edu": "Maestría",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.9
+      },
+      {
+        "id": 7,
+        "si": {
+          "skills_match": 1,
+          "exp_band": "senior",
+          "edu": "Maestría",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.9
+      },
+      {
+        "id": 8,
+        "si": {
+          "skills_match": 0,
+          "exp_band": "senior",
+          "edu": "Especialización",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.9
+      },
+      {
+        "id": 9,
+        "si": {
+          "skills_match": 1,
+          "exp_band": "mid",
+          "edu": "Licenciatura",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.9
+      },
+      {
+        "id": 10,
+        "si": {
+          "skills_match": 0,
+          "exp_band": "junior",
+          "edu": "Licenciatura",
+          "seniority_ok": false
+        },
+        "a": "REJECT",
+        "sf": {
+          "outcome": "REJECT"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.9
+      },
+      {
+        "id": 11,
+        "si": {
+          "skills_match": 0,
+          "exp_band": "senior",
+          "edu": "Doctorado",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.9
+      }
+    ]
+  },
+  "receptor_B": {
+    "estado_antes": "born",
+    "estado_despues": "born",
+    "base_antes": [
+      {
+        "id": 1,
+        "si": {
+          "skills_match": 2,
+          "exp_band": "mid",
+          "edu": "Maestría",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.6667
+      },
+      {
+        "id": 2,
+        "si": {
+          "skills_match": 1,
+          "exp_band": "senior",
+          "edu": "Maestría",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 3,
+        "k": 3,
+        "k_propio": 3,
+        "u": 0.8
+      },
+      {
+        "id": 3,
+        "si": {
+          "skills_match": 3,
+          "exp_band": "mid",
+          "edu": "Licenciatura",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.6667
+      },
+      {
+        "id": 4,
+        "si": {
+          "skills_match": 3,
+          "exp_band": "junior",
+          "edu": "Licenciatura",
+          "seniority_ok": false
+        },
+        "a": "REJECT",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 0,
+        "k": 2,
+        "k_propio": 2,
+        "u": 0.25
+      },
+      {
+        "id": 5,
+        "si": {
+          "skills_match": 0,
+          "exp_band": "senior",
+          "edu": "Doctorado",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.6667
+      },
+      {
+        "id": 6,
+        "si": {
+          "skills_match": 2,
+          "exp_band": "mid",
+          "edu": "Licenciatura",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.6667
+      },
+      {
+        "id": 7,
+        "si": {
+          "skills_match": 1,
+          "exp_band": "mid",
+          "edu": "Licenciatura",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.6667
+      },
+      {
+        "id": 8,
+        "si": {
+          "skills_match": 1,
+          "exp_band": "senior",
+          "edu": "Doctorado",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.6667
+      },
+      {
+        "id": 9,
+        "si": {
+          "skills_match": 0,
+          "exp_band": "senior",
+          "edu": "Especialización",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.6667
+      }
+    ],
+    "base_despues": [
+      {
+        "id": 1,
+        "si": {
+          "skills_match": 2,
+          "exp_band": "mid",
+          "edu": "Maestría",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 2,
+        "k": 2,
+        "k_propio": 2,
+        "u": 0.7833
+      },
+      {
+        "id": 2,
+        "si": {
+          "skills_match": 1,
+          "exp_band": "senior",
+          "edu": "Maestría",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 4,
+        "k": 4,
+        "k_propio": 4,
+        "u": 0.825
+      },
+      {
+        "id": 3,
+        "si": {
+          "skills_match": 3,
+          "exp_band": "mid",
+          "edu": "Licenciatura",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 2,
+        "k": 2,
+        "k_propio": 2,
+        "u": 0.7833
+      },
+      {
+        "id": 4,
+        "si": {
+          "skills_match": 3,
+          "exp_band": "junior",
+          "edu": "Licenciatura",
+          "seniority_ok": false
+        },
+        "a": "REJECT",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 0,
+        "k": 2,
+        "k_propio": 2,
+        "u": 0.25
+      },
+      {
+        "id": 5,
+        "si": {
+          "skills_match": 0,
+          "exp_band": "senior",
+          "edu": "Doctorado",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 2,
+        "k": 2,
+        "k_propio": 2,
+        "u": 0.7833
+      },
+      {
+        "id": 6,
+        "si": {
+          "skills_match": 2,
+          "exp_band": "mid",
+          "edu": "Licenciatura",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 3,
+        "k": 3,
+        "k_propio": 3,
+        "u": 0.8222
+      },
+      {
+        "id": 7,
+        "si": {
+          "skills_match": 1,
+          "exp_band": "mid",
+          "edu": "Licenciatura",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 2,
+        "k": 2,
+        "k_propio": 2,
+        "u": 0.7833
+      },
+      {
+        "id": 8,
+        "si": {
+          "skills_match": 1,
+          "exp_band": "senior",
+          "edu": "Doctorado",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 2,
+        "k": 2,
+        "k_propio": 2,
+        "u": 0.7833
+      },
+      {
+        "id": 9,
+        "si": {
+          "skills_match": 0,
+          "exp_band": "senior",
+          "edu": "Especialización",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 2,
+        "k": 2,
+        "k_propio": 2,
+        "u": 0.7833
+      },
+      {
+        "id": 10,
+        "si": {
+          "skills_match": 0,
+          "exp_band": "senior",
+          "edu": "Maestría",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.9
+      },
+      {
+        "id": 11,
+        "si": {
+          "skills_match": 0,
+          "exp_band": "mid",
+          "edu": "Maestría",
+          "seniority_ok": true
+        },
+        "a": "ADVANCE",
+        "sf": {
+          "outcome": "ADVANCE"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.9
+      },
+      {
+        "id": 12,
+        "si": {
+          "skills_match": 0,
+          "exp_band": "junior",
+          "edu": "Licenciatura",
+          "seniority_ok": false
+        },
+        "a": "REJECT",
+        "sf": {
+          "outcome": "REJECT"
+        },
+        "p": 1,
+        "k": 1,
+        "k_propio": 1,
+        "u": 0.9
+      }
+    ]
+  },
+  "principal": {
+    "donante": "A: Matcher de la PoC",
+    "estado_donante": "trained",
+    "ventanas_donante": 3,
+    "fair_w_donante": [
+      1.0,
+      1.0,
+      0.5
+    ],
+    "reputacion_donante": 0.8333,
+    "tau": 0.8,
+    "can_donate": true,
+    "aceptada": true,
+    "motivo": "r ≥ τ",
+    "iguales_reforzadas": 8,
+    "similares": 0,
+    "nuevas": 3,
+    "base_receptor_antes": 9,
+    "base_receptor_despues": 12,
+    "estado_receptor_antes": "born",
+    "estado_receptor_despues": "born",
+    "donante_corto": "A",
+    "motivo_corto": ""
+  },
+  "teorias_de_A_en_B": [
+    {
+      "id": 1,
+      "si": {
+        "skills_match": 2,
+        "exp_band": "mid",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "categoria": "igual",
+      "en_A": {
+        "p": 2,
+        "k": 2
+      },
+      "en_B_antes": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_despues": {
+        "p": 3,
+        "k": 3
+      }
+    },
+    {
+      "id": 2,
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "categoria": "nueva",
+      "en_A": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_antes": null,
+      "en_B_despues": {
+        "p": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": 3,
+      "si": {
+        "skills_match": 3,
+        "exp_band": "mid",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "categoria": "igual",
+      "en_A": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_antes": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_despues": {
+        "p": 2,
+        "k": 2
+      }
+    },
+    {
+      "id": 4,
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Doctorado",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "categoria": "igual",
+      "en_A": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_antes": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_despues": {
+        "p": 2,
+        "k": 2
+      }
+    },
+    {
+      "id": 5,
+      "si": {
+        "skills_match": 0,
+        "exp_band": "mid",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "categoria": "nueva",
+      "en_A": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_antes": null,
+      "en_B_despues": {
+        "p": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": 6,
+      "si": {
+        "skills_match": 2,
+        "exp_band": "mid",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "categoria": "igual",
+      "en_A": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_antes": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_despues": {
+        "p": 2,
+        "k": 2
+      }
+    },
+    {
+      "id": 7,
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Maestría",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "categoria": "igual",
+      "en_A": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_antes": {
+        "p": 3,
+        "k": 3
+      },
+      "en_B_despues": {
+        "p": 4,
+        "k": 4
+      }
+    },
+    {
+      "id": 8,
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Especialización",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "categoria": "igual",
+      "en_A": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_antes": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_despues": {
+        "p": 2,
+        "k": 2
+      }
+    },
+    {
+      "id": 9,
+      "si": {
+        "skills_match": 1,
+        "exp_band": "mid",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "categoria": "igual",
+      "en_A": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_antes": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_despues": {
+        "p": 2,
+        "k": 2
+      }
+    },
+    {
+      "id": 10,
+      "si": {
+        "skills_match": 0,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "a": "REJECT",
+      "sf": {
+        "outcome": "REJECT"
+      },
+      "categoria": "nueva",
+      "en_A": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_antes": null,
+      "en_B_despues": {
+        "p": 1,
+        "k": 1
+      }
+    },
+    {
+      "id": 11,
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Doctorado",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "outcome": "ADVANCE"
+      },
+      "categoria": "igual",
+      "en_A": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_antes": {
+        "p": 1,
+        "k": 1
+      },
+      "en_B_despues": {
+        "p": 2,
+        "k": 2
+      }
+    }
+  ],
+  "conteo_por_categoria": {
+    "igual": 8,
+    "similar": 0,
+    "nueva": 3
+  },
+  "nota_similares": "ninguna teoría de A comparte celda (Si, A) con una teoría de B que tenga otro Sf: en estos lotes, la misma Si con la misma acción tuvo siempre el mismo resultado",
+  "contraejemplo_r_bajo": {
+    "donante": "C: Matcher con historia de fair(W) baja",
+    "estado_donante": "trained",
+    "ventanas_donante": 6,
+    "fair_w_donante": [
+      1.0,
+      1.0,
+      0.5,
+      1.0,
+      0.6667,
+      0.0
+    ],
+    "reputacion_donante": 0.6333,
+    "tau": 0.8,
+    "can_donate": true,
+    "aceptada": false,
+    "motivo": "reputación 0.633 < τ 0.800",
+    "iguales_reforzadas": 0,
+    "similares": 0,
+    "nuevas": 0,
+    "base_receptor_antes": 9,
+    "base_receptor_despues": 9,
+    "estado_receptor_antes": "born",
+    "estado_receptor_despues": "born",
+    "aprobacion_omega": false,
+    "donante_corto": "C",
+    "motivo_corto": "r = 0,633 < τ = 0,8"
+  },
+  "contraejemplo_sin_historia": {
+    "donante": "A∅: Matcher de la PoC sin ventanas observadas",
+    "estado_donante": "trained",
+    "ventanas_donante": 0,
+    "fair_w_donante": [],
+    "reputacion_donante": 0.8,
+    "tau": 0.8,
+    "can_donate": false,
+    "aceptada": false,
+    "motivo": "transfer_to lanza ValueError: el donante no puede aportar sin historia de equidad (A9: requiere ≥3 ventanas, tiene 0)",
+    "base_receptor_antes": 9,
+    "base_receptor_despues": 9,
+    "estado_receptor_antes": "born",
+    "estado_receptor_despues": "born",
+    "aprobacion_omega": true,
+    "nota": "approve_sharing solo mira r ≥ τ y, sin historia, r es el prior r0; can_donate (A9) es el que frena al donante sin historia",
+    "ventanas_minimas_para_donar": 3,
+    "donante_corto": "A∅",
+    "motivo_corto": "can_donate = False (0 ventanas; hacen falta 3)"
+  },
+  "cambia_el_estado_de_B": false,
+  "figuras": [
+    "d3_transferencia.png"
+  ]
+}
