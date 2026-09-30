@@ -144,6 +144,25 @@ imprime 1081 tripletas (antes 1059: +11 `usos`, +11 `clave`) y una línea nueva 
 - E(t) / trato–ruteo;
 - escalamiento por ventana como default.
 
+**Pendientes registrados tras el Bloque D (30/09/2026):**
+- **Sujeto a la decisión 2 — recuperación sin restricción de Si:** `TheoryRetriever.retrieve`
+  filtra por δ y ordena por (U, P, K, recencia, id) sin restringir a la misma Si; el
+  planificador del LLC solo usa teorías de la misma Si. Evidencia: D1 (con la Si de Fátima,
+  `retrieve` elige T1 y la teoría con la misma Si queda 3.ª con token-cosine y 10.ª con
+  embeddings). **No modificar hasta la respuesta de la dirección.**
+- **Trabajo futuro — δ con embeddings:** sobre la Si serializada en JSON el coseno de
+  embeddings es ≥ 0,898 en la base de la PoC, así que δ = 0,7 no discrimina (D1: pasan las 11
+  teorías). Calibrar δ por backend o representar la Si en lenguaje natural.
+- **D8, después de la decisión 2 — regla «similar»:** un lote rotulado «construido para
+  ejercitar la regla», con la misma celda (Si, A) y distinta Sf, para mostrar la regla
+  «similar» del Alg. 4.10 (en D3 los lotes de la PoC dieron 0 similares). La fusión de
+  variantes es regla provisoria hasta esa decisión (docstring de `sharing._merge`).
+- **Punto de diseño de la tesis — madurez y decisión:** en modo sim el estado de madurez no
+  cambia las decisiones del Matcher (D4: mismas acciones con el gate puntual y con el
+  certificado). El ciclo sigue monótono (sin degradación, como en el LLC): a un Mature con r
+  bajo, Ω lo frena negándole compartir teorías y, con `--window-escalation`, bloqueándole las
+  ventanas (C6).
+
 ## Bloque D (29/09/2026) — demos para los pedidos de la dirección
 
 Rama `eje1/bloque-d` (desde `eje1/formalizacion-v2`), un commit por ítem. Son **scripts
