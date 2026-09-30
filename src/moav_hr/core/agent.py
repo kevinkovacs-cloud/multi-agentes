@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
-from moav_hr.core.lifecycle import MaturityState, active_layer, layers_active
+from moav_hr.core.lifecycle import MaturityState, Region, active_layer, layers_active
 from moav_hr.core.theory import Theory, TheoryBase
 from moav_hr.core.retrieval import TheoryRetriever, similarity
 from moav_hr.core.sharing import collaborate, cooperate, ShareReport
@@ -131,6 +131,42 @@ class MOACVAgent:
         """Historia mínima para DONAR conocimiento (A9): ≥ m0 ventanas observadas.
         Recibir no exige historia; aportar sí."""
         return self.windows_observed >= m0
+
+    # ---- región 7: evolución gobernada por Ω (Def. 12) ----
+    def advance(self, monitor, certified: bool = False, trail=None, **gate_kwargs) -> bool:
+        """
+        Ejecuta el SIGUIENTE paso del ciclo de vida solo si Ω lo aprueba
+        (monitor.gate_evolution, Def. 12). Devuelve si el agente avanzó.
+
+          · Born → Novice: una corrida TBO (training_runs + 1);
+          · Novice → Trained: completar el TBO (training_runs = 3);
+          · Trained → Mature: registrar feedback de producción (WIO).
+
+        El estado sigue siendo DERIVADO de tbo/wio (el cálculo de `maturity` no cambia):
+        advance solo decide si el paso se ejecuta. Mature es el tope: devuelve False sin
+        consultar el gate. Con `trail` (AuditTrail) registra el intento en la región 7,
+        aprobado o no. `gate_kwargs` pasa a gate_evolution (p. ej. m, delta).
+        """
+        antes = self.maturity
+        if antes == MaturityState.MATURE:
+            return False
+        aprobado = bool(monitor.gate_evolution(self, certified=certified, **gate_kwargs))
+        if aprobado:
+            if antes == MaturityState.BORN:
+                self.tbo.training_runs += 1
+            elif antes == MaturityState.NOVATO:
+                self.tbo.training_runs = 3
+            else:                                          # TRAINED
+                self.wio.production_feedback.append(
+                    {"origen": "advance", "gate": "certificado" if certified else "puntual"})
+        despues = self.maturity
+        if trail is not None:
+            trail.record(self.name, active_layer(antes).value,
+                         "transicion_de_estado" if despues != antes else "transicion_denegada",
+                         region=int(Region.EVOLUTION), desde=antes.label, hacia=despues.label,
+                         aprobado=aprobado, certificado=certified,
+                         reputacion=self.reputation(), ventanas=self.windows_observed)
+        return despues != antes
 
     # ---- compartición (Def. 7, 8) condicionada por reputación (Def. 9) ----
     def transfer_to(self, apprentice: "MOACVAgent", tau: float = 0.0,
