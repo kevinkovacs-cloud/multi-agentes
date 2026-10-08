@@ -4,6 +4,9 @@
     "semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección"
   ],
   "demo": "P2b — ranking y recuperación de la teoría propia",
+  "version": "v1",
+  "utilidad_teoria": "u_tarea",
+  "validez": "u_tarea_mayor_que_0",
   "agente": {
     "estado": "Born",
     "capa": "BIO",

@@ -1,8 +1,10 @@
-# P2b · Ranking y recuperación de la teoría propia
+# P2b · Ranking y recuperación de la teoría propia (pre-registro v1)
 
 > *Ilustrativo, entorno simulado (modo sim); no es evidencia experimental.* · *Semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección.*
 
 > Generado por código: ningún número de este documento está escrito a mano.
+
+**U de la teoría:** u_tarea de la variante; plan válido si u_tarea > 0.
 
 **Agente:** el de P1 al terminar su corrida: estado Born, capa BIO, 19 teorías, 60 ciclos.
 
@@ -10,13 +12,13 @@
 
 ## (i) Un caso con la misma Si que T*
 
-| Puesto | Teoría | A | Sf | u_tarea | U para ordenar | P | K |
+| Puesto | Teoría | A | Sf | U de la teoría | U para ordenar | P | K |
 |---|---|---|---|---|---|---|---|
 | 1 | T14 | REJECT | {"calificado": false} | 1,00 | 1,000 | 2 | 3 |
 | 2 | T1 | ADVANCE | {"calificado": false} | 0,00 | 0,000 | 1 | 1 |
 | 3 | T18 | REJECT | {"calificado": true} | 0,00 | 0,000 | 1 | 3 |
 
-**Elegida (α = 1):** REJECT (T14). Por qué: es la primera del orden (U, P, K) en la celda y su u_tarea > 0.
+**Elegida (α = 1):** REJECT (T14). Por qué: es la primera del orden (U, P, K) en la celda y es plan válido.
 Regla de validez aplicada: no. Desacuerdo Fig. 4.21 / Alg. 4.7: no.
 
 **E(t) de cada candidata** (plano de auditoría; decisiones en las que fue el plan): T1: sin usos como plan; T14: {"no-AR": {"aciertos": 1, "usos": 2}}; T18: sin usos como plan.
@@ -25,13 +27,13 @@ Regla de validez aplicada: no. Desacuerdo Fig. 4.21 / Alg. 4.7: no.
 
 ## (ii) Un caso con una Si nueva: respaldo por similitud (extensión declarada)
 
-Si {"edu": "Licenciatura", "exp_band": "mid", "seniority_ok": true, "skills_match": 0} (celda vacía; similitud máxima con una teoría de u_tarea > 0 = 0,750; δ = 0,7).
+Si {"edu": "Licenciatura", "exp_band": "mid", "seniority_ok": true, "skills_match": 0} (celda vacía; similitud máxima con una teoría que es plan válido = 0,750; δ = 0,7).
 
-| Puesto | Teoría | A | Sf | u_tarea | U para ordenar | P | K | Similitud |
+| Puesto | Teoría | A | Sf | U de la teoría | U para ordenar | P | K | Similitud |
 |---|---|---|---|---|---|---|---|---|
 | 1 | T14 | REJECT | {"calificado": false} | 1,00 | 1,000 | 2 | 3 | 0,750 |
 
-**Elegida con el respaldo activado:** REJECT (T14). Por qué: la celda está vacía y es la primera, en el orden (U, P, K), entre las teorías con similitud ≥ δ y u_tarea > 0 (extensión declarada).
+**Elegida con el respaldo activado:** REJECT (T14). Por qué: la celda está vacía y es la primera, en el orden (U, P, K), entre las teorías con similitud ≥ δ que son plan válido (extensión declarada).
 **Como en P1 (respaldo desactivado):** ADVANCE — no hay plan válido: «azar» del planificador, primera acción no probada en la celda (orden fijo).
 
 ## (iii) Un caso sin nada aplicable

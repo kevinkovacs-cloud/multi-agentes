@@ -1,4 +1,4 @@
-# P1 · Traza región por región del ciclo 1
+# P1 · Traza región por región del ciclo 1 (pre-registro v1)
 
 > *Ilustrativo, entorno simulado (modo sim); no es evidencia experimental.* · *Semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección.*
 
@@ -12,7 +12,7 @@
 | R2 (R2_accion) | Acción: el planificador por ranking (Fig. 4.21) elige el plan; sin plan válido, «azar». | accion = ADVANCE; motivo = azar_no_probada; es_azar = True; teoria_plan = None; candidatas = []; validez_aplicada = False; desacuerdo_alg47 = None; accion_bio = REJECT |
 | R3 (R3_situacion_final) | Situación final: el entorno responde después de la acción (Sf). | sf = {"calificado": false}; fuente = etiqueta del escenario de entrenamiento |
 | R4 (R4_utilidad) | Utilidad: u_tarea de la acción para el resultado observado. | u_tarea = 0.0; alpha = 1.0 |
-| R5 (R5_aprendizaje) | Aprendizaje: registro de la teoría y ponderación de P y K (Fig. 4.13). | teoria = 1; registro = nueva; p = 1; k = 1; u = 0.0; clave = ["{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 0}", "ADVANCE", "{\"calificado\": false}"] |
+| R5 (R5_aprendizaje) | Aprendizaje: registro de la teoría y ponderación de P y K (Fig. 4.13). | teoria = 1; registro = nueva; p = 1; k = 1; u = 0.0; u_tarea_del_ciclo = 0.0; utilidad_teoria = u_tarea; clave = ["{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 0}", "ADVANCE", "{\"calificado\": false}"] |
 | R6 (R6_estadisticas) | Estadísticas de aprendizaje (§4.4.9). | ciclos = 1; situaciones = 1; teorias_acumuladas = 1; teorias_por_intervalo_u = [0, 0, 0, 0]; teorias_exitosas = 0; teorias_nuevas = 1; ciclos_exitosos = 0; planes = 0; planes_exitosos = 0; azares = 1; pk_por_intervalo_u = [null, null, null, null]; pk_general = 1.0 |
 | R7 (R7_evolucion) | Evolución: se evalúa al cierre de cada intervalo (Fig. 4.28 ∧ gate de Ω). | evaluada = False; proxima_evaluacion = 20 |
 

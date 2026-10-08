@@ -1,0 +1,211 @@
+{
+  "rotulos": [
+    "ilustrativo, entorno simulado (modo sim); no es evidencia experimental",
+    "semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección"
+  ],
+  "demo": "P2b — ranking y recuperación de la teoría propia",
+  "version": "v2",
+  "utilidad_teoria": "accion",
+  "validez": "u_mayor_o_igual_0_5",
+  "agente": {
+    "estado": "Mature",
+    "capa": "WIO",
+    "teorias": 40,
+    "ciclos": 100
+  },
+  "teoria_estrella": {
+    "id": 1,
+    "si": {
+      "skills_match": 0,
+      "exp_band": "senior",
+      "edu": "Licenciatura",
+      "seniority_ok": true
+    },
+    "a": "ADVANCE",
+    "sf": {
+      "calificado": false
+    },
+    "p": 1,
+    "k": 1,
+    "u": 0.3333333333333333
+  },
+  "caso_i_misma_si": {
+    "si": {
+      "skills_match": 0,
+      "exp_band": "senior",
+      "edu": "Licenciatura",
+      "seniority_ok": true
+    },
+    "si_igual_a_t_estrella": true,
+    "accion_bio": "REJECT",
+    "alpha_1": {
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria": 23,
+      "validez_aplicada": false,
+      "desacuerdo_alg47": null,
+      "equidad_usada": false,
+      "candidatas": [
+        {
+          "puesto": 1,
+          "id": 23,
+          "a": "REJECT",
+          "sf": {
+            "calificado": false
+          },
+          "u_tarea": 0.8571428571428571,
+          "u_orden": 0.857143,
+          "e": null,
+          "p": 5,
+          "k": 5
+        },
+        {
+          "puesto": 2,
+          "id": 1,
+          "a": "ADVANCE",
+          "sf": {
+            "calificado": false
+          },
+          "u_tarea": 0.3333333333333333,
+          "u_orden": 0.333333,
+          "e": null,
+          "p": 1,
+          "k": 1
+        }
+      ]
+    },
+    "alpha_05": {
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria": 23,
+      "validez_aplicada": false,
+      "desacuerdo_alg47": null,
+      "equidad_usada": false,
+      "candidatas": [
+        {
+          "puesto": 1,
+          "id": 23,
+          "a": "REJECT",
+          "sf": {
+            "calificado": false
+          },
+          "u_tarea": 0.8571428571428571,
+          "u_orden": 0.857143,
+          "e": null,
+          "p": 5,
+          "k": 5
+        },
+        {
+          "puesto": 2,
+          "id": 1,
+          "a": "ADVANCE",
+          "sf": {
+            "calificado": false
+          },
+          "u_tarea": 0.3333333333333333,
+          "u_orden": 0.333333,
+          "e": null,
+          "p": 1,
+          "k": 1
+        }
+      ]
+    },
+    "e_t_por_candidata": {
+      "1": {},
+      "23": {
+        "AR": {
+          "usos": 2,
+          "aciertos": 2
+        },
+        "no-AR": {
+          "usos": 2,
+          "aciertos": 2
+        }
+      }
+    },
+    "alpha_cambia_la_elegida": false
+  },
+  "caso_ii_si_nueva_con_similitud": {
+    "si": {
+      "skills_match": 0,
+      "exp_band": "mid",
+      "edu": "Licenciatura",
+      "seniority_ok": true
+    },
+    "similitud_maxima": 0.75,
+    "con_respaldo": {
+      "accion": "REJECT",
+      "motivo": "similitud",
+      "es_azar": false,
+      "teoria": 23,
+      "validez_aplicada": false,
+      "desacuerdo_alg47": null,
+      "equidad_usada": false,
+      "candidatas": [
+        {
+          "puesto": 1,
+          "id": 23,
+          "a": "REJECT",
+          "sf": {
+            "calificado": false
+          },
+          "u_tarea": 0.8571428571428571,
+          "u_orden": 0.857143,
+          "e": null,
+          "p": 5,
+          "k": 5,
+          "similitud": 0.75
+        }
+      ]
+    },
+    "sin_respaldo_como_en_p1": {
+      "accion": "REJECT",
+      "motivo": "azar_bio",
+      "es_azar": true,
+      "teoria": null,
+      "validez_aplicada": false,
+      "desacuerdo_alg47": null,
+      "equidad_usada": false,
+      "candidatas": []
+    }
+  },
+  "caso_iii_sin_nada_aplicable": {
+    "si": {
+      "skills_match": 0,
+      "exp_band": "mid",
+      "edu": "Doctorado",
+      "seniority_ok": true
+    },
+    "accion_bio": "REJECT",
+    "similitud_maxima": 0.5,
+    "en_la_capa_del_agente": {
+      "capa": "WIO",
+      "accion": "REJECT",
+      "motivo": "azar_bio",
+      "es_azar": true,
+      "teoria": null,
+      "validez_aplicada": false,
+      "desacuerdo_alg47": null,
+      "equidad_usada": false,
+      "candidatas": []
+    },
+    "en_wio": {
+      "accion": "REJECT",
+      "motivo": "azar_bio",
+      "es_azar": true,
+      "teoria": null,
+      "validez_aplicada": false,
+      "desacuerdo_alg47": null,
+      "equidad_usada": false,
+      "candidatas": []
+    }
+  },
+  "alpha_en_todas_las_celdas": {
+    "celdas": 20,
+    "celdas_con_e_estimable": 0,
+    "m_min_por_grupo": 5,
+    "cambios": []
+  }
+}

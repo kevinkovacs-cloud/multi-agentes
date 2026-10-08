@@ -1,4 +1,4 @@
-# E2 · Punto de control del Bloque E (puntos 1 y 2b del pedido)
+# E2 · Punto de control del Bloque E, pre-registro v1 (puntos 1 y 2b del pedido)
 
 > *Ilustrativo, entorno simulado (modo sim); no es evidencia experimental.* · *Semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección.*
 
@@ -15,24 +15,26 @@ Rama `eje1/bloque-e`, sin push. Decisiones aplicadas: `docs/parada_tecnica/E0_RE
 
 ```bash
 python experiments/parada_tecnica/preregistro.py
-python experiments/parada_tecnica/p1_teoria_punto_a_punto.py
-python experiments/parada_tecnica/p2b_planificador.py
-python experiments/parada_tecnica/informe_e2.py
+python experiments/parada_tecnica/p1_teoria_punto_a_punto.py --version v1
+python experiments/parada_tecnica/p2b_planificador.py --version v1
+python experiments/parada_tecnica/informe_e2.py --version v1
 ```
 
 ## P1 · El ciclo de vida punto a punto
 
 - **Resultado:** estado final **Born** tras 60 ciclos; capas recorridas: BIO (60 ciclos, sin promoción).
-- **Traza región por región del ciclo 1:** `docs/parada_tecnica/p1_traza_ciclo1.md`. T* = T1 (`https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/3e30cf25cc66c1f1`), nace en R5 con P = 1, K = 1, U = 0,00.
-- **Línea de tiempo:** `docs/parada_tecnica/p1_linea_de_tiempo.png`.
+- **Traza región por región del ciclo 1:** `docs/parada_tecnica/v1/p1_traza_ciclo1.md`. T* = T1 (`https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/3e30cf25cc66c1f1`), nace en R5 con P = 1, K = 1, U = 0,00.
+- **Línea de tiempo:** `docs/parada_tecnica/v1/p1_linea_de_tiempo.png`.
 
 ### Evaluaciones de la región 7 (al cierre de cada intervalo)
 
-| Capa | Ciclo | CE_a | CE_0 | %CEA (≥ %RCE) | %TN (≤ %RTN) | fair(W) | r | Gate Ω puntual | Certificado (informado) | Promueve | Estado después |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| BIO | 20 | 14 | 11 | 27,3 % (sí) | no aplica | 0,70 | 0,700 | rechaza | rechaza | no | Born |
-| BIO | 40 | 17 | 9 | 88,9 % (sí) | no aplica | 0,70 | 0,700 | rechaza | rechaza | no | Born |
-| BIO | 60 | 12 | 13 | -7,7 % (no) | no aplica | 0,90 | 0,767 | rechaza | rechaza | no | Born |
+CE_a y CE_0 del intervalo.
+
+| Capa | Ciclo | CE_a | CE_0 | %CEA (≥ %RCE) | %TN (≤ %RTN) | fair(W) | r | Gate Ω puntual | LCB de la capa (v2) | Ω decide | Certificado (informado) | Promueve | Estado después |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| BIO | 20 | 14 | 11 | 27,3 % (sí) | no aplica | 0,70 | 0,700 | rechaza | — | niega | rechaza | no | Born |
+| BIO | 40 | 17 | 9 | 88,9 % (sí) | no aplica | 0,70 | 0,700 | rechaza | — | niega | rechaza | no | Born |
+| BIO | 60 | 12 | 13 | -7,7 % (no) | no aplica | 0,90 | 0,767 | rechaza | — | niega | rechaza | no | Born |
 
 %RCE = 25, %RTN = 20, τ = 0,8, n = 20.
 
@@ -49,7 +51,7 @@ Situaciones 8 · teorías acumuladas 19 · teorías exitosas 8 · ciclos exitoso
 
 ## P2b · Ranking y recuperación de la teoría propia
 
-Detalle: `docs/parada_tecnica/p2b_planificador.md`.
+Detalle: `docs/parada_tecnica/v1/p2b_planificador.md`.
 
 - **(i) misma Si que T\*:** elige REJECT (T14, plan de la celda (Fig. 4.21)); con α = 0,5 no cambia.
 - **(ii) Si nueva:** con el respaldo activado, respaldo por similitud (extensión) → REJECT; como en P1, azar: primera acción no probada → ADVANCE.
@@ -63,9 +65,11 @@ Detalle: `docs/parada_tecnica/p2b_planificador.md`.
 3. **Bloqueo por U binaria en el orden de la Fig. 4.21.** Si {"edu": "Licenciatura", "exp_band": "junior", "seniority_ok": false, "skills_match": 0}: el plan repitió ADVANCE con 0 aciertos y 6 fracasos; la otra acción nunca se probó. Una sola observación favorable deja la variante (Si, A, Sf) con U = 1, y como U es la primera clave del orden, queda primera aunque la acción fracase después; la regla de validez solo actúa si la primera del orden tiene u_tarea = 0.
 4. **El agente acierta menos que el SAR neutro en algún intervalo:** ciclo 60 (CE_a = 12, CE_0 = 13).
 5. **α = 0,5 no se pudo evaluar:** ninguna teoría juntó 5 usos como plan en cada grupo, así que U_rol cae en α = 1 en todas las celdas.
-6. **T\* nace de un fracaso** (U = 0): en el ciclo 1 la celda estaba vacía, el agente exploró la primera acción del orden fijo y no era la correcta. Es la teoría que E3 tiene que compartir.
+6. **T\* nace de un fracaso** (u_tarea del ciclo 1 = 0; U al nacer = 0,000): en el ciclo 1 la celda estaba vacía, el agente exploró la primera acción del orden fijo y no era la correcta. Es la teoría que E3 tiene que compartir.
 
 ## Para decidir antes de seguir (no se cambió nada: son reglas pre-registradas)
+
+*Decidido después por Claude chat en `E2_RESPUESTA_ClaudeChat_2026-10-08.md` → pre-registro v2.*
 
 - **Gate de Ω y tamaño de ventana.** Con n = 20 la reputación queda dominada por el ruido de muestreo. Opciones: mantenerlo y reportarlo; evaluar el gate sobre más ventanas o ventanas más grandes; o exigir el gate solo cuando la ventana tiene el tamaño de detección (`stats.n_power`).
 - **U binaria por variante.** Opciones: mantener el orden literal de la Fig. 4.21 y reportar el bloqueo; extender la regla de validez (por ejemplo, plan válido solo si la acción no acumula más fracasos que aciertos en la celda); o calcular u_tarea sobre (Si, A), como el método de utilidad basado en la acción de la tesis, que compara la acción de la teoría con la del robot reactivo en esa situación (§4.4.3.2, pp. 89–90).
