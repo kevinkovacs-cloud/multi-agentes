@@ -258,3 +258,10 @@ Ierache (2010). Diagnóstico: `docs/parada_tecnica/E0_DIAGNOSTICO.md`; decisione
   `queries_llc.py`. Demo `experiments/parada_tecnica/p4_traza.py`; informe
   `docs/parada_tecnica/E4_PUNTO_DE_CONTROL.md`, con los resultados no esperados y seis preguntas para
   Claude chat.
+- **E5 · Equipos DAG: un equipo maduro hace madurar a otro (punto 3).** Decisiones de Claude chat sobre E4
+  (`docs/parada_tecnica/E4_RESPUESTA_ClaudeChat_2026-10-08.md`) en un pre-registro propio antes de correr
+  (`docs/parada_tecnica/E5_PREREGISTRO.md`): Bias Auditor sin estados ganados, exploración en WIO solo para
+  el Explainer, Si del Explainer tipo · destinatario. Son opciones nuevas; E4 no cambia. Equipos A, B
+  (colaboración de A al nacer), B0 (control), BC (cooperación con C en Novice), C y N (SAR neutro de L-3) en
+  `experiments/parada_tecnica/p3_equipos_dag.py`; cálculo literal de L-3 entre configuraciones; muestreo del
+  resultado 5 de E4 en `e4_muestreo.py`. Informe `docs/parada_tecnica/E5_PUNTO_DE_CONTROL.md`.
