@@ -43,8 +43,17 @@ def clasificar(donante_base: TheoryBase, receptor_base: TheoryBase) -> dict:
     return out
 
 
+def historia_en_decisiones(decs: list[dict], attr: str, minimo: int, ambos: bool) -> dict:
+    """A9 en decisiones (pre-registro corto de E3): ≥ `minimo` decisiones propias y, si
+    `ambos`, los dos grupos del atributo protegido presentes."""
+    grupos = {str(d[attr]) for d in decs}
+    ok = len(decs) >= minimo and (not ambos or len(grupos) >= 2)
+    return {"decisiones": len(decs), "grupos": sorted(grupos), "minimo": minimo, "ok": ok}
+
+
 def compartir(op: str, donante, receptor, monitor, decisiones: dict, m0: int,
-              delta: float, es_acierto: Optional[Callable] = None) -> dict:
+              delta: float, es_acierto: Optional[Callable] = None, a9: str = "ventanas",
+              a9_min: int = 20, a9_ambos: bool = True) -> dict:
     """
     op = "colaboracion": `donante` (colaborador) → `receptor`; la base queda en el receptor.
     op = "cooperacion": `donante` y `receptor` son pares; los dos aportan y la base común
@@ -59,6 +68,9 @@ def compartir(op: str, donante, receptor, monitor, decisiones: dict, m0: int,
         ev = monitor.gate_evidencia_sesgo(decisiones.get(ag.name, []), 1, delta)
         omega[ag.name] = {"can_donate": ag.can_donate(m0), "ventanas": ag.windows_observed,
                           "reputacion_informada": ag.reputation(), "evidencia_sesgo": ev}
+        if a9 == "decisiones":
+            omega[ag.name]["a9_decisiones"] = historia_en_decisiones(
+                decisiones.get(ag.name, []), monitor.attr, a9_min, a9_ambos)
     estados = {"donante": donante.maturity.label, "receptor": receptor.maturity.label}
     antes_r = {theory_key(t, receptor.theories.q): (t.p, t.k) for t in receptor.theories.theories}
     clasif = clasificar(donante.theories, receptor.theories)
@@ -69,6 +81,14 @@ def compartir(op: str, donante, receptor, monitor, decisiones: dict, m0: int,
     res = {"op": op, "donante": donante.name, "receptor": receptor.name, "estados": estados,
            "omega": omega, "base_receptor_antes": len(receptor.theories),
            "base_donante": len(donante.theories)}
+    res["a9"] = a9
+    if a9 == "decisiones":
+        sin = [n for n, o in omega.items() if not o["a9_decisiones"]["ok"]]
+        if sin:
+            res.update(aceptada=False, motivo=f"A9 en decisiones: {', '.join(sin)} sin historia "
+                       f"suficiente (≥{a9_min} decisiones y los dos grupos)")
+            return res
+        m0 = 0                                         # A9 ya verificado en decisiones
     gate_ok = all(o["evidencia_sesgo"]["aprueba"] for o in omega.values())
     if not gate_ok:
         res.update(aceptada=False, motivo="Ω: evidencia de sesgo en las decisiones del donante")

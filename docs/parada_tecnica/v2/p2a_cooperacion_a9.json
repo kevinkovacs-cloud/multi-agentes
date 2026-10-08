@@ -1,0 +1,447 @@
+{
+  "rotulos": [
+    "ilustrativo, entorno simulado (modo sim); no es evidencia experimental",
+    "semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección"
+  ],
+  "demo": "E3 — cooperación B ↔ C con A9 en decisiones",
+  "resultado": {
+    "op": "cooperacion",
+    "donante": "SemanticMatcher_B",
+    "receptor": "SemanticMatcher_C",
+    "estados": {
+      "donante": "novato",
+      "receptor": "novato"
+    },
+    "omega": {
+      "SemanticMatcher_B": {
+        "can_donate": false,
+        "ventanas": 2,
+        "reputacion_informada": 1.0,
+        "evidencia_sesgo": {
+          "tau_b": 0.075,
+          "delta": 0.05,
+          "n_cierres": 1,
+          "delta_efectivo": 0.05,
+          "n_por_grupo": {
+            "AR": 20,
+            "no-AR": 20
+          },
+          "brecha": 0.0,
+          "lcb": 0.0,
+          "niega": false,
+          "aprueba": true,
+          "motivo": "sin evidencia de sesgo"
+        },
+        "a9_decisiones": {
+          "decisiones": 40,
+          "grupos": [
+            "AR",
+            "no-AR"
+          ],
+          "minimo": 20,
+          "ok": true
+        }
+      },
+      "SemanticMatcher_C": {
+        "can_donate": false,
+        "ventanas": 1,
+        "reputacion_informada": 0.9,
+        "evidencia_sesgo": {
+          "tau_b": 0.075,
+          "delta": 0.05,
+          "n_cierres": 1,
+          "delta_efectivo": 0.05,
+          "n_por_grupo": {
+            "AR": 10,
+            "no-AR": 10
+          },
+          "brecha": 0.1,
+          "lcb": 0.0,
+          "niega": false,
+          "aprueba": true,
+          "motivo": "sin evidencia de sesgo"
+        },
+        "a9_decisiones": {
+          "decisiones": 20,
+          "grupos": [
+            "AR",
+            "no-AR"
+          ],
+          "minimo": 20,
+          "ok": true
+        }
+      }
+    },
+    "base_receptor_antes": 12,
+    "base_donante": 16,
+    "a9": "decisiones",
+    "aceptada": true,
+    "motivo": "axiomas, can_donate y Ω sin evidencia de sesgo",
+    "reporte": {
+      "reforzadas": 10,
+      "debilitadas": 5,
+      "transferidas": 1
+    },
+    "conteo": {
+      "igual": 10,
+      "similar": 3,
+      "nueva": 3
+    },
+    "teorias": [
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 1}",
+          "ADVANCE",
+          "{\"calificado\": true}"
+        ],
+        "categoria": "igual",
+        "en_donante": {
+          "p": 7,
+          "k": 7,
+          "u": 0.8889
+        },
+        "en_receptor_antes": {
+          "p": 4,
+          "k": 4,
+          "u": 0.8333
+        },
+        "en_receptor_despues": {
+          "p": 11,
+          "k": 11,
+          "u": 0.9231
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 2}",
+          "ADVANCE",
+          "{\"calificado\": true}"
+        ],
+        "categoria": "igual",
+        "en_donante": {
+          "p": 9,
+          "k": 9,
+          "u": 0.9091
+        },
+        "en_receptor_antes": {
+          "p": 2,
+          "k": 2,
+          "u": 0.75
+        },
+        "en_receptor_despues": {
+          "p": 11,
+          "k": 11,
+          "u": 0.9231
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 3}",
+          "ADVANCE",
+          "{\"calificado\": true}"
+        ],
+        "categoria": "igual",
+        "en_donante": {
+          "p": 3,
+          "k": 4,
+          "u": 0.6667
+        },
+        "en_receptor_antes": {
+          "p": 3,
+          "k": 3,
+          "u": 0.8
+        },
+        "en_receptor_despues": {
+          "p": 6,
+          "k": 7,
+          "u": 0.7778
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 1}",
+          "ADVANCE",
+          "{\"calificado\": true}"
+        ],
+        "categoria": "nueva",
+        "en_donante": {
+          "p": 1,
+          "k": 3,
+          "u": 0.4
+        },
+        "en_receptor_antes": null,
+        "en_receptor_despues": {
+          "p": 1,
+          "k": 3,
+          "u": 0.4
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 0}",
+          "ADVANCE",
+          "{\"calificado\": false}"
+        ],
+        "categoria": "igual",
+        "en_donante": {
+          "p": 1,
+          "k": 1,
+          "u": 0.3333
+        },
+        "en_receptor_antes": {
+          "p": 1,
+          "k": 1,
+          "u": 0.3333
+        },
+        "en_receptor_despues": {
+          "p": 2,
+          "k": 2,
+          "u": 0.25
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 3}",
+          "ADVANCE",
+          "{\"calificado\": true}"
+        ],
+        "categoria": "similar",
+        "en_donante": {
+          "p": 2,
+          "k": 4,
+          "u": 0.5
+        },
+        "en_receptor_antes": null,
+        "en_receptor_despues": {
+          "p": 2,
+          "k": 5,
+          "u": 0.4286
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 3}",
+          "ADVANCE",
+          "{\"calificado\": false}"
+        ],
+        "categoria": "igual",
+        "en_donante": {
+          "p": 2,
+          "k": 4,
+          "u": 0.5
+        },
+        "en_receptor_antes": {
+          "p": 1,
+          "k": 1,
+          "u": 0.3333
+        },
+        "en_receptor_despues": {
+          "p": 3,
+          "k": 5,
+          "u": 0.4286
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 0}",
+          "ADVANCE",
+          "{\"calificado\": false}"
+        ],
+        "categoria": "igual",
+        "en_donante": {
+          "p": 1,
+          "k": 1,
+          "u": 0.3333
+        },
+        "en_receptor_antes": {
+          "p": 1,
+          "k": 1,
+          "u": 0.3333
+        },
+        "en_receptor_despues": {
+          "p": 2,
+          "k": 2,
+          "u": 0.25
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 1}",
+          "ADVANCE",
+          "{\"calificado\": false}"
+        ],
+        "categoria": "nueva",
+        "en_donante": {
+          "p": 2,
+          "k": 3,
+          "u": 0.4
+        },
+        "en_receptor_antes": null,
+        "en_receptor_despues": {
+          "p": 2,
+          "k": 3,
+          "u": 0.4
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 0}",
+          "REJECT",
+          "{\"calificado\": true}"
+        ],
+        "categoria": "similar",
+        "en_donante": {
+          "p": 2,
+          "k": 3,
+          "u": 0.4
+        },
+        "en_receptor_antes": null,
+        "en_receptor_despues": {
+          "p": 2,
+          "k": 4,
+          "u": 0.5
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 0}",
+          "REJECT",
+          "{\"calificado\": false}"
+        ],
+        "categoria": "igual",
+        "en_donante": {
+          "p": 4,
+          "k": 4,
+          "u": 0.8333
+        },
+        "en_receptor_antes": {
+          "p": 1,
+          "k": 1,
+          "u": 0.6667
+        },
+        "en_receptor_despues": {
+          "p": 5,
+          "k": 5,
+          "u": 0.8571
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 2}",
+          "ADVANCE",
+          "{\"calificado\": false}"
+        ],
+        "categoria": "igual",
+        "en_donante": {
+          "p": 1,
+          "k": 1,
+          "u": 0.3333
+        },
+        "en_receptor_antes": {
+          "p": 1,
+          "k": 1,
+          "u": 0.3333
+        },
+        "en_receptor_despues": {
+          "p": 2,
+          "k": 2,
+          "u": 0.25
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 1}",
+          "REJECT",
+          "{\"calificado\": false}"
+        ],
+        "categoria": "nueva",
+        "en_donante": {
+          "p": 1,
+          "k": 1,
+          "u": 0.6667
+        },
+        "en_receptor_antes": null,
+        "en_receptor_despues": {
+          "p": 1,
+          "k": 1,
+          "u": 0.6667
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 2}",
+          "REJECT",
+          "{\"calificado\": false}"
+        ],
+        "categoria": "igual",
+        "en_donante": {
+          "p": 2,
+          "k": 2,
+          "u": 0.75
+        },
+        "en_receptor_antes": {
+          "p": 3,
+          "k": 4,
+          "u": 0.6667
+        },
+        "en_receptor_despues": {
+          "p": 5,
+          "k": 6,
+          "u": 0.75
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 3}",
+          "ADVANCE",
+          "{\"calificado\": false}"
+        ],
+        "categoria": "similar",
+        "en_donante": {
+          "p": 1,
+          "k": 4,
+          "u": 0.6667
+        },
+        "en_receptor_antes": null,
+        "en_receptor_despues": {
+          "p": 1,
+          "k": 7,
+          "u": 0.7778
+        }
+      },
+      {
+        "clave": [
+          "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 0}",
+          "REJECT",
+          "{\"calificado\": false}"
+        ],
+        "categoria": "igual",
+        "en_donante": {
+          "p": 1,
+          "k": 3,
+          "u": 0.4
+        },
+        "en_receptor_antes": {
+          "p": 1,
+          "k": 1,
+          "u": 0.6667
+        },
+        "en_receptor_despues": {
+          "p": 2,
+          "k": 4,
+          "u": 0.5
+        }
+      }
+    ],
+    "base_receptor_despues": 18,
+    "invariante_receptor": true,
+    "invariante_donante": true,
+    "claves_receptor_antes": 12,
+    "base_comun_a_los_dos": true,
+    "conteo_sentido_C_en_B": {
+      "igual": 10,
+      "similar": 1,
+      "nueva": 1
+    }
+  }
+}
