@@ -116,7 +116,11 @@ imagen de la página, porque la capa de texto pierde los símbolos de comparaci�
 - **Métodos:** hay dos. El aplicado es el **basado en la acción** (p. 87): compara la velocidad de la
   acción de la teoría con la que daría el robot reactivo de Braitenberg para esa situación, y normaliza a
   [−1, 1] (pp. 89–90, Alg. 4.2).
-- **Consecuencia:** U depende de (Si, A), no de cuántas veces se usó la teoría.
+- **Lo que dice el texto** (revisado el 08/10, punto 3 de P3): «El parámetro U, utilidad (U), indica la
+  utilidad de la teoría en función de la tarea asociada al SAR. Se calcula con una fórmula, que indica si
+  los resultados de la teoría fueron o no fructíferos para el robot» (p. 61). Se calcula en la región 4,
+  después de la situación final (p. 62). En el método aplicado, la fórmula compara la velocidad de la
+  acción de la teoría con la que daría el robot reactivo en esa situación (pp. 89–90).
 - **Teoría exitosa:** 0,75 < U ≤ 1 (p. 63; p. 89; p. 120).
 - **SAR born reactivo:** se mueve con la regla de su creador «sin necesidad de adquirir más conocimientos»
   (p. 91). El SAR reactivo «se emplea para generar una base de conocimiento de teorías iniciales» (p. 84).
@@ -286,7 +290,9 @@ cumplir, el agente **queda** en su estado. ¿Ok?
 
 **P3 · Utilidad de tarea por teoría** (consecuencia de DE-1). Con Sf dentro de la identidad, u_tarea queda
 fija para cada teoría: para el Matcher vale 1 si A coincide con el resultado observado en Sf y 0 si no.
-Entonces U(t) es constante por teoría, como en el LLC, donde U depende de (Si, A) (p. 89). En una celda, el
+Entonces U(t) es constante por teoría. (Revisado el 08/10, punto 3 de P3: en la tesis U «indica la
+utilidad de la teoría en función de la tarea asociada al SAR» y se calcula después de observar el
+resultado, pp. 61–62; ver la sección 1.4.) En una celda, el
 ranking U → P → K elige entre las variantes con U = 1 la de mayor P, es decir, el resultado observado más
 frecuente. Es la lectura fiel; se confirma en E2 con la traza.
 
