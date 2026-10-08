@@ -27,7 +27,7 @@ Genérico: el dominio entra por un objeto «rol» (RolLLC). No importa `instance
 """
 from __future__ import annotations
 import warnings
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Any, Optional, Protocol
 
 from moav_hr.core import fairness
@@ -146,11 +146,21 @@ class _Intervalo:
     registros_fair: list = field(default_factory=list)
 
 
+@dataclass
+class _EstadoCapa:
+    """Ciclos del agente en una capa: intervalo en curso y acumulado desde el inicio."""
+    capa: str
+    j: int = 0
+    iv: _Intervalo = field(default_factory=_Intervalo)
+    acum: _Intervalo = field(default_factory=_Intervalo)
+
+
 class MotorLLC:
     def __init__(self, agente: AgenteLLC, rol: RolLLC, monitor, cfg: ConfigCiclo,
                  trail: Optional[AuditTrail] = None, registro_e: Optional[RegistroE] = None):
         self.agente, self.rol, self.monitor, self.cfg = agente, rol, monitor, cfg
-        self.trail = trail or AuditTrail("TRC-LLC")
+        # `is None`, no `or`: un AuditTrail vacío es falso (len 0) y el equipo comparte uno
+        self.trail = trail if trail is not None else AuditTrail("TRC-LLC")
         self.registro_e = registro_e if registro_e is not None else RegistroE()
         self.planificador = PlanificadorLLC(
             agente.theories, cfg.acciones_orden or rol.acciones,
@@ -162,6 +172,7 @@ class MotorLLC:
         self.ciclos: list[dict] = []
         self.evaluaciones: list[dict] = []
         self.recibio_colaboracion: dict[str, bool] = {c: False for c in CAPAS}
+        self._ec: Optional[_EstadoCapa] = None        # capa en curso en el modo equipo (paso)
 
     @staticmethod
     def parametros_validez(cfg: ConfigCiclo) -> dict:
@@ -191,6 +202,10 @@ class MotorLLC:
                      caso=self.rol.describir(caso), si=serialize(si))
         bio = self.rol.accion_bio(si, caso)                                       # R2
         plan = self.planificador.planificar(si, capa, bio)
+        if getattr(self.rol, "accion_por_regla", False):
+            # DE-6: decide la regla (operador BIO); las candidatas quedan en la traza
+            plan = replace(plan, accion=bio, motivo="regla_certificada", teoria=None,
+                           es_azar=False)
         self._evento(Region.ACTION, "R2_accion", capa, estado, accion=plan.accion,
                      motivo=plan.motivo, es_azar=plan.es_azar,
                      teoria_plan=None if plan.teoria is None else plan.teoria.id,
@@ -223,7 +238,13 @@ class MotorLLC:
                                              plan_valido, plan_exitoso)
         foto = self.stats.instantanea(self.agente.theories)
         self._evento(Region.STATISTICS, "R6_estadisticas", capa, estado, **foto)
-        acierto_bio = self.rol.utilidad(si, bio, sf) > self.cfg.umbral_exitoso
+        # CE_0: el SAR neutro con el operador BIO sobre el mismo caso. Si la Sf no depende de
+        # la acción (Matcher, Auditor), es la misma Sf; si depende (Parser, Explainer), el rol
+        # da la Sf contrafáctica del operador BIO, sin efectos sobre el caso.
+        contrafactico = getattr(self.rol, "sf_contrafactica", None)
+        sf_bio = sf if contrafactico is None or bio == plan.accion else \
+            contrafactico(caso, bio, capa)
+        acierto_bio = self.rol.utilidad(si, bio, sf_bio) > self.cfg.umbral_exitoso
         reg = {"ciclo": self.ciclo, "capa": capa, "ciclo_capa": ciclo_capa, "estado": estado,
                "caso": self.rol.describir(caso), "si": si, "accion": plan.accion,
                "motivo": plan.motivo, "es_azar": plan.es_azar,
@@ -277,32 +298,77 @@ class MotorLLC:
         self.evaluaciones.append(ev)
         return ev
 
+    def _registros_equidad(self, caso: Any, reg: dict) -> list[dict]:
+        """Registros del plano de auditoría para Ω. Sin `resultado_equidad` en el rol (el
+        Matcher), la decisión del ciclo, como en v1 y v2. Con él (E4), `decision` = ADVANCE
+        codifica el resultado favorable del rol (perfil completo, explicación completa,
+        ventana derivada) y lo demás, REJECT."""
+        f = getattr(self.rol, "resultado_equidad", None)
+        if f is None:
+            return [{self.cfg.attr: reg["grupo"], "decision": reg["accion"]}]
+        return [{self.cfg.attr: g, "decision": "ADVANCE" if favorable else "REJECT"}
+                for g, favorable in f(caso, reg)]
+
+    def _lecturas_equidad(self, caso: Any, reg: dict) -> list[tuple[str, bool]]:
+        """(grupo, resultado favorable) del ciclo, para la ABox del equipo (e_rol)."""
+        return [(str(r[self.cfg.attr]), r["decision"] in fairness.POSITIVE)
+                for r in self._registros_equidad(caso, reg)]
+
+    def _paso_en_capa(self, caso: Any, ec: "_EstadoCapa") -> tuple[dict, Optional[dict]]:
+        """Un ciclo en la capa `ec.capa` y, al cierre del intervalo, la región 7."""
+        ec.j += 1
+        j = ec.j
+        reg = self.ciclo_llc(caso, ec.capa, j)
+        for x in (ec.iv, ec.acum):
+            x.ce_a += reg["exitoso"]
+            x.ce_0 += reg["acierto_bio"]
+            x.nuevas += reg["registro"] in ("nueva", "similar")
+            x.registros_fair.extend(self._registros_equidad(caso, reg))
+        if j % self.cfg.n_intervalo == 0:
+            ev = self._evaluar(ec.capa, j, ec.iv, ec.acum, reg["estado"])
+            self._evento(Region.EVOLUTION, "R7_evolucion", ec.capa, reg["estado"],
+                         evaluada=True, **{k: v for k, v in ev.items()
+                                           if k not in ("ciclo", "capa")})
+            ec.iv = _Intervalo()
+            return reg, ev
+        self._evento(Region.EVOLUTION, "R7_evolucion", ec.capa, reg["estado"],
+                     evaluada=False, proxima_evaluacion=(
+                         (j // self.cfg.n_intervalo) + 1) * self.cfg.n_intervalo)
+        return reg, None
+
     def correr_capa(self, capa: str, casos: list) -> dict:
         n_ciclos = self.cfg.ciclos_por_capa[capa]
         if len(casos) < n_ciclos:
             raise ValueError(f"la capa {capa} necesita {n_ciclos} casos")
-        iv, acum = _Intervalo(), _Intervalo()          # ventana del intervalo y acumulado
+        ec = _EstadoCapa(capa)                         # ventana del intervalo y acumulado
         for j in range(1, n_ciclos + 1):
-            reg = self.ciclo_llc(casos[j - 1], capa, j)
-            for x in (iv, acum):
-                x.ce_a += reg["exitoso"]
-                x.ce_0 += reg["acierto_bio"]
-                x.nuevas += reg["registro"] in ("nueva", "similar")
-                x.registros_fair.append({self.cfg.attr: reg["grupo"],
-                                         "decision": reg["accion"]})
-            if j % self.cfg.n_intervalo == 0:
-                ev = self._evaluar(capa, j, iv, acum, reg["estado"])
-                self._evento(Region.EVOLUTION, "R7_evolucion", capa, reg["estado"],
-                             evaluada=True, **{k: v for k, v in ev.items()
-                                               if k not in ("ciclo", "capa")})
-                iv = _Intervalo()
-                if ev["promueve"]:
-                    return {"capa": capa, "promovido": True, "ciclos": j}
-            else:
-                self._evento(Region.EVOLUTION, "R7_evolucion", capa, reg["estado"],
-                             evaluada=False, proxima_evaluacion=(
-                                 (j // self.cfg.n_intervalo) + 1) * self.cfg.n_intervalo)
+            _, ev = self._paso_en_capa(casos[j - 1], ec)
+            if ev is not None and ev["promueve"]:
+                return {"capa": capa, "promovido": True, "ciclos": j}
         return {"capa": capa, "promovido": False, "ciclos": n_ciclos}
+
+    def paso(self, caso: Any) -> dict:
+        """Un ciclo del rol dentro de un equipo (E4): la capa es la del estado ganado del
+        agente y los contadores, intervalos y región 7 son propios del rol. Con la capa
+        agotada sin promoción, o en Mature, el rol sigue actuando y aprendiendo (regiones
+        1 a 6) sin evaluar la región 7 (pre-registro E4)."""
+        capa = self.agente.layer.value
+        if self._ec is None or self._ec.capa != capa:
+            self._ec = _EstadoCapa(capa)
+        ec = self._ec
+        final = self.agente.maturity == MaturityState.MATURE
+        if final or ec.j >= self.cfg.ciclos_por_capa[capa]:
+            ec.j += 1
+            reg = self.ciclo_llc(caso, capa, ec.j)
+            motivo = "estado final (Mature)" if final else "capa agotada sin promoción"
+            self._evento(Region.EVOLUTION, "R7_evolucion", capa, reg["estado"],
+                         evaluada=False, sin_r7=motivo)
+            reg.update(evolucion=None, sin_r7=motivo,
+                       equidad=self._lecturas_equidad(caso, reg))
+            return reg
+        reg, ev = self._paso_en_capa(caso, ec)
+        reg.update(evolucion=ev, sin_r7=None, equidad=self._lecturas_equidad(caso, reg))
+        return reg
 
     def correr(self, escenarios: dict) -> dict:
         """Recorre BIO → TBO → WIO desde el estado actual del agente."""
