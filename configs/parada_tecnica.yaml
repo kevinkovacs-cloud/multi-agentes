@@ -110,3 +110,48 @@ equipo_e4:
     BIO: 41
     TBO: 81
     WIO: 81
+
+# Pre-registro E5 (08/10/2026): equipos DAG, un equipo maduro hace madurar a otro (punto 3).
+# Se commitea ANTES de correr P3, junto con docs/parada_tecnica/E4_RESPUESTA_ClaudeChat_2026-10-08.md.
+# Vale todo lo de equipo_e4 salvo lo que se cambia acá. Ningún cambio es de parámetros numéricos.
+# Los resultados de E4 quedan como están (no se vuelve a correr P4).
+equipo_e5:
+  base: equipo_e4
+  # decisión 1 (E4_RESPUESTA): el Bias Auditor no tiene estados ganados; rol supervisor de configuración
+  # BIO fija, como el Orchestrator (DE-7). Conserva su base («teorías de sesgo») y las regiones 1 a 6; no
+  # aplica la región 7. Motivo: su acción la fija la regla certificada (DE-6), que no aprende (§4.4.10).
+  auditor_evoluciona: false
+  # decisión 3: en WIO explora solo el rol cuya acción no puede cambiar la decisión sobre la persona.
+  # El Explainer actúa después de la decisión; P3 («azar» solo en BIO y TBO) se mantiene para los demás.
+  explora_en_wio: [explainer]
+  # decisión 6: la Si del Explainer queda tipo · destinatario (6 celdas). La regla 10 del entorno no cambia:
+  # los requisitos siguen dependiendo de los motivos del caso, que el Explainer ya no percibe.
+  si_explainer: [tipo, destinatario]
+  equipos:                         # semillas de casos, documentos y destinatario (como A en E4: +1 y +2)
+    A:  {casos: 20261008, documentos: 20261009, destinatario: 20261010}   # el flujo de E4, con las reglas de E5
+    B:  {casos: 20261108, documentos: 20261109, destinatario: 20261110}   # recibe colaboración de A al nacer
+    B0: {casos: 20261108, documentos: 20261109, destinatario: 20261110}   # control: los mismos casos, sin compartir
+    BC: {casos: 20261108, documentos: 20261109, destinatario: 20261110}   # los mismos casos; coopera con C en Novice
+    C:  {casos: 20261208, documentos: 20261209, destinatario: 20261210}   # par de la cooperación, en paralelo con BC
+    N:  {casos: 20261108, documentos: 20261109, destinatario: 20261110}   # SAR neutro de L-3: solo el operador BIO
+  compartir_e5:
+    roles: [parser, matcher, explainer]   # el Bias Auditor no comparte: sin estados, los axiomas de §4.3.1 no aplican
+    gate: evidencia_de_sesgo     # Ω sobre TODAS las decisiones del donante (resultado favorable del rol, como en E4)
+    a9: decisiones               # pre-registro corto de E3: ≥ 20 decisiones propias y los dos grupos
+    a9_min_decisiones: 20
+    a9_ambos_grupos: true
+    colaboracion: al_nacer_B     # A → B rol por rol, antes del primer caso de B (B en Born)
+    estado_minimo_donante: novice   # axioma [b]: estrictamente superior a Born
+    si_falta_un_estado: detener_y_avisar
+    cooperacion: ventana_a_ventana   # BC y C procesan sus ventanas en paralelo; al cierre de cada ventana se
+                                     # intenta, rol por rol, mientras el rol de BC esté en Novice y no haya
+                                     # cooperado; procede si el rol de C también está en Novice (axioma [a])
+    tn_por_cooperacion: false    # %TN ≤ %RTN se exige solo si el rol recibió colaboración (Fig. 4.28, p. 123)
+  l3:                            # cálculo literal entre configuraciones (Anexo L-3, Tablas L-16 y L-17, pp. 267–270)
+    configuraciones: [N, B0, B, BC]   # el promedio es el de estas cuatro; el mínimo de ciclos exitosos, el neutro
+    evaluada: B                  # la configuración con colaboración (también se informa BC)
+    roles: [parser, matcher, explainer]
+  muestreo_e4:                   # pedido de E4_RESPUESTA sobre el resultado 5 de E4 (no cambia la semilla)
+    semillas_extra: 200          # semillas 20261008 + 1000·k, k = 1..200, para la distribución de la diferencia
+    permutaciones: 10000
+    semilla_permutaciones: 20261008
