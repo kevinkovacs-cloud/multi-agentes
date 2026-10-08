@@ -52,8 +52,25 @@ _CUMULATIVE = {
 }
 
 
+# Capa que TRANSITA cada estado según el LLC (Ierache 2010, §4.2, p. 62): Born recorre el
+# escenario BIO hasta Newbie; Novice (newbie), el TBO hasta Trained; Trained, el WIO hasta
+# Mature. Mature ya terminó WIO y sigue operando en el mundo (WIO). Bloque E · G3: es el mapa
+# del modo LLC; `_ACTIVE` (Trained → TBO) se conserva para el modo anterior y sus tests.
+_CAPA_LLC = {
+    MaturityState.BORN: Layer.BIO,
+    MaturityState.NOVATO: Layer.TBO,
+    MaturityState.TRAINED: Layer.WIO,
+    MaturityState.MATURE: Layer.WIO,
+}
+
+
 def active_layer(state: MaturityState) -> Layer:
     return _ACTIVE[state]
+
+
+def capa_llc(state: MaturityState) -> Layer:
+    """Capa que transita el estado en el LLC (modo nuevo, bloque E)."""
+    return _CAPA_LLC[state]
 
 
 def layers_active(state: MaturityState) -> str:

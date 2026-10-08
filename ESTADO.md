@@ -229,3 +229,13 @@ Ierache (2010). Diagnóstico: `docs/parada_tecnica/E0_DIAGNOSTICO.md`; decisione
   `run_poc.py`, `demo_caso.py` y los demos del Bloque D no cambian. Un test verifica que, en el lote de la
   PoC, ambos orquestadores dan las mismas decisiones y los mismos eventos en el mismo orden. El fuente de
   junio queda en la rama local `rescate/langgraph-junio` (`b267323`).
+- **E2 · Núcleo del ciclo de vida (modo LLC, opcional).** `core/theory.registrar_llc` (Fig. 4.13, ΣP = K),
+  `core/planificador.py` (Fig. 4.21 con validez del plan y «azar» sin decisiones aleatorias),
+  `core/estadisticas.py` (región 6, §4.4.9), `core/ciclo_llc.py` (motor de las 7 regiones, `AgenteLLC` con
+  estado ganado y regla de evolución de P1 ∧ gate de Ω), `core/equidad_roles.py` (E(t), ê(t), U_rol) e
+  `instances/hr/entorno.py` + `roles_llc.py` (escenarios BIO/TBO/WIO pre-registrados; rol Matcher).
+  Parámetros pre-registrados en `configs/parada_tecnica.yaml` antes de correr.
+- **Regiones del registro (G12).** En el modo anterior (pipeline de `main`, `run_poc.py`, demos) el registro
+  rotula la explicación del Explainer como región 6 y la decisión final del Orchestrator como región 7; en el
+  LLC la 6 son las estadísticas y la 7, la evolución (Ierache 2010, p. 63). No se cambian esas salidas; en el
+  motor nuevo (`core/ciclo_llc.py`) cada región lleva el número que le corresponde en el LLC.
