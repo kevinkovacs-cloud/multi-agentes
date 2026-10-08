@@ -1,0 +1,5159 @@
+{
+  "rotulos": [
+    "ilustrativo, entorno simulado (modo sim); no es evidencia experimental",
+    "semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección"
+  ],
+  "config_e5": {
+    "auditor_evoluciona": false,
+    "explora_en_wio": [
+      "explainer"
+    ],
+    "si_explainer": [
+      "tipo",
+      "destinatario"
+    ],
+    "equipos": {
+      "A": {
+        "casos": 20261008,
+        "documentos": 20261009,
+        "destinatario": 20261010
+      },
+      "B": {
+        "casos": 20261108,
+        "documentos": 20261109,
+        "destinatario": 20261110
+      },
+      "B0": {
+        "casos": 20261108,
+        "documentos": 20261109,
+        "destinatario": 20261110
+      },
+      "BC": {
+        "casos": 20261108,
+        "documentos": 20261109,
+        "destinatario": 20261110
+      },
+      "C": {
+        "casos": 20261208,
+        "documentos": 20261209,
+        "destinatario": 20261210
+      },
+      "N": {
+        "casos": 20261108,
+        "documentos": 20261109,
+        "destinatario": 20261110
+      }
+    },
+    "compartir_e5": {
+      "roles": [
+        "parser",
+        "matcher",
+        "explainer"
+      ],
+      "gate": "evidencia_de_sesgo",
+      "a9": "decisiones",
+      "a9_min_decisiones": 20,
+      "a9_ambos_grupos": true,
+      "colaboracion": "al_nacer_B",
+      "estado_minimo_donante": "novice",
+      "si_falta_un_estado": "detener_y_avisar",
+      "cooperacion": "ventana_a_ventana",
+      "tn_por_cooperacion": false
+    },
+    "l3": {
+      "configuraciones": [
+        "N",
+        "B0",
+        "B",
+        "BC"
+      ],
+      "evaluada": "B",
+      "roles": [
+        "parser",
+        "matcher",
+        "explainer"
+      ]
+    }
+  },
+  "equipos": [
+    "A",
+    "B",
+    "B0",
+    "BC",
+    "C",
+    "N"
+  ],
+  "colaboracion": [
+    {
+      "op": "colaboracion",
+      "rol": "parser",
+      "donante": "A-Parser",
+      "receptor": "B-Parser",
+      "estados": {
+        "donante": "mature",
+        "receptor": "born"
+      },
+      "aceptada": true,
+      "motivo": "axiomas, can_donate y Ω sin evidencia de sesgo",
+      "axioma": null,
+      "omega": {
+        "A-Parser": {
+          "lcb": 0.0,
+          "brecha": 0.0308,
+          "n_por_grupo": {
+            "AR": 130,
+            "no-AR": 130
+          },
+          "aprueba": true,
+          "a9_decisiones": {
+            "decisiones": 260,
+            "grupos": [
+              "AR",
+              "no-AR"
+            ],
+            "minimo": 20,
+            "ok": true
+          }
+        }
+      },
+      "conteo": {
+        "igual": 0,
+        "similar": 0,
+        "nueva": 16
+      },
+      "base_receptor_antes": 0,
+      "base_receptor_despues": 16,
+      "base_donante": 16,
+      "invariante_receptor": true,
+      "invariante_donante": true
+    },
+    {
+      "op": "colaboracion",
+      "rol": "matcher",
+      "donante": "A-SemanticMatcher",
+      "receptor": "B-SemanticMatcher",
+      "estados": {
+        "donante": "trained",
+        "receptor": "born"
+      },
+      "aceptada": true,
+      "motivo": "axiomas, can_donate y Ω sin evidencia de sesgo",
+      "axioma": null,
+      "omega": {
+        "A-SemanticMatcher": {
+          "lcb": 0.0,
+          "brecha": 0.1538,
+          "n_por_grupo": {
+            "AR": 130,
+            "no-AR": 130
+          },
+          "aprueba": true,
+          "a9_decisiones": {
+            "decisiones": 260,
+            "grupos": [
+              "AR",
+              "no-AR"
+            ],
+            "minimo": 20,
+            "ok": true
+          }
+        }
+      },
+      "conteo": {
+        "igual": 0,
+        "similar": 0,
+        "nueva": 69
+      },
+      "base_receptor_antes": 0,
+      "base_receptor_despues": 69,
+      "base_donante": 69,
+      "invariante_receptor": true,
+      "invariante_donante": true
+    },
+    {
+      "op": "colaboracion",
+      "rol": "explainer",
+      "donante": "A-Explainer",
+      "receptor": "B-Explainer",
+      "estados": {
+        "donante": "mature",
+        "receptor": "born"
+      },
+      "aceptada": true,
+      "motivo": "axiomas, can_donate y Ω sin evidencia de sesgo",
+      "axioma": null,
+      "omega": {
+        "A-Explainer": {
+          "lcb": 0.0,
+          "brecha": 0.0385,
+          "n_por_grupo": {
+            "AR": 130,
+            "no-AR": 130
+          },
+          "aprueba": true,
+          "a9_decisiones": {
+            "decisiones": 260,
+            "grupos": [
+              "AR",
+              "no-AR"
+            ],
+            "minimo": 20,
+            "ok": true
+          }
+        }
+      },
+      "conteo": {
+        "igual": 0,
+        "similar": 0,
+        "nueva": 9
+      },
+      "base_receptor_antes": 0,
+      "base_receptor_despues": 9,
+      "base_donante": 9,
+      "invariante_receptor": true,
+      "invariante_donante": true
+    }
+  ],
+  "cooperacion": {
+    "parser": {
+      "bc_en_novice": [
+        {
+          "ventana": "BIO-W01",
+          "estado_C": "Novice"
+        }
+      ],
+      "intentos": [
+        {
+          "op": "cooperacion",
+          "rol": "parser",
+          "donante": "BC-Parser",
+          "receptor": "C-Parser",
+          "estados": {
+            "donante": "novato",
+            "receptor": "novato"
+          },
+          "aceptada": true,
+          "motivo": "axiomas, can_donate y Ω sin evidencia de sesgo",
+          "axioma": null,
+          "omega": {
+            "BC-Parser": {
+              "lcb": 0.0,
+              "brecha": 0.0,
+              "n_por_grupo": {
+                "AR": 10,
+                "no-AR": 10
+              },
+              "aprueba": true,
+              "a9_decisiones": {
+                "decisiones": 20,
+                "grupos": [
+                  "AR",
+                  "no-AR"
+                ],
+                "minimo": 20,
+                "ok": true
+              }
+            },
+            "C-Parser": {
+              "lcb": 0.0,
+              "brecha": 0.1,
+              "n_por_grupo": {
+                "AR": 10,
+                "no-AR": 10
+              },
+              "aprueba": true,
+              "a9_decisiones": {
+                "decisiones": 20,
+                "grupos": [
+                  "AR",
+                  "no-AR"
+                ],
+                "minimo": 20,
+                "ok": true
+              }
+            }
+          },
+          "conteo": {
+            "igual": 8,
+            "similar": 2,
+            "nueva": 0
+          },
+          "base_receptor_antes": 9,
+          "base_receptor_despues": 11,
+          "base_donante": 10,
+          "invariante_receptor": true,
+          "invariante_donante": true,
+          "ventana": "BIO-W01",
+          "casos": 20
+        }
+      ],
+      "coopero": true
+    },
+    "matcher": {
+      "bc_en_novice": [
+        {
+          "ventana": "BIO-W01",
+          "estado_C": "Born"
+        }
+      ],
+      "intentos": [],
+      "coopero": false
+    },
+    "explainer": {
+      "bc_en_novice": [
+        {
+          "ventana": "BIO-W01",
+          "estado_C": "Novice"
+        }
+      ],
+      "intentos": [
+        {
+          "op": "cooperacion",
+          "rol": "explainer",
+          "donante": "BC-Explainer",
+          "receptor": "C-Explainer",
+          "estados": {
+            "donante": "novato",
+            "receptor": "novato"
+          },
+          "aceptada": true,
+          "motivo": "axiomas, can_donate y Ω sin evidencia de sesgo",
+          "axioma": null,
+          "omega": {
+            "BC-Explainer": {
+              "lcb": 0.0,
+              "brecha": 0.2,
+              "n_por_grupo": {
+                "AR": 10,
+                "no-AR": 10
+              },
+              "aprueba": true,
+              "a9_decisiones": {
+                "decisiones": 20,
+                "grupos": [
+                  "AR",
+                  "no-AR"
+                ],
+                "minimo": 20,
+                "ok": true
+              }
+            },
+            "C-Explainer": {
+              "lcb": 0.0,
+              "brecha": 0.1,
+              "n_por_grupo": {
+                "AR": 10,
+                "no-AR": 10
+              },
+              "aprueba": true,
+              "a9_decisiones": {
+                "decisiones": 20,
+                "grupos": [
+                  "AR",
+                  "no-AR"
+                ],
+                "minimo": 20,
+                "ok": true
+              }
+            }
+          },
+          "conteo": {
+            "igual": 4,
+            "similar": 0,
+            "nueva": 0
+          },
+          "base_receptor_antes": 9,
+          "base_receptor_despues": 9,
+          "base_donante": 4,
+          "invariante_receptor": true,
+          "invariante_donante": true,
+          "ventana": "BIO-W01",
+          "casos": 20
+        }
+      ],
+      "coopero": true
+    }
+  },
+  "metricas": {
+    "A": {
+      "parser": {
+        "agente": "A-Parser",
+        "estado_final": "Mature",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 16,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          },
+          {
+            "ciclo": 60,
+            "de": "Trained",
+            "a": "Mature"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 15,
+            "ce_0": 8,
+            "pct_cea": 87.5,
+            "teorias_nuevas": 9,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 40,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 18,
+            "ce_0": 7,
+            "pct_cea": 157.14,
+            "teorias_nuevas": 3,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 7,
+            "pct_cea": 185.71,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 20,
+            "nuevas": 9,
+            "exitosos": 15,
+            "pct_tn": 45.0
+          },
+          "TBO": {
+            "ciclos": 20,
+            "nuevas": 3,
+            "exitosos": 18,
+            "pct_tn": 15.0
+          },
+          "WIO": {
+            "ciclos": 220,
+            "nuevas": 4,
+            "exitosos": 199,
+            "pct_tn": 1.82
+          }
+        },
+        "ciclos_exitosos": 232,
+        "ciclos_exitosos_operador_bio": 112,
+        "teorias_nuevas": 16,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 0.8
+          }
+        ],
+        "fair_w_media": 0.9077,
+        "fair_w_min": 0.8,
+        "tasa_favorable": {
+          "AR": 0.9077,
+          "no-AR": 0.8769
+        },
+        "brecha_favorable": 0.0308,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "azar_no_probada": 9,
+            "celda": 11
+          },
+          "TBO": {
+            "azar_no_probada": 1,
+            "celda": 18,
+            "azar_bio": 1
+          },
+          "WIO": {
+            "celda": 218,
+            "azar_bio": 2
+          }
+        }
+      },
+      "matcher": {
+        "agente": "A-SemanticMatcher",
+        "estado_final": "Trained",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 69,
+        "promociones": [
+          {
+            "ciclo": 40,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 120,
+            "de": "Novice",
+            "a": "Trained"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 13,
+            "ce_0": 11,
+            "pct_cea": 18.18,
+            "teorias_nuevas": 15,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 40,
+            "capa": "BIO",
+            "ciclo_capa": 40,
+            "ce_a": 29,
+            "ce_0": 20,
+            "pct_cea": 45.0,
+            "teorias_nuevas": 20,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 16,
+            "ce_0": 13,
+            "pct_cea": 23.08,
+            "teorias_nuevas": 5,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 80,
+            "capa": "TBO",
+            "ciclo_capa": 40,
+            "ce_a": 27,
+            "ce_0": 26,
+            "pct_cea": 3.85,
+            "teorias_nuevas": 16,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 100,
+            "capa": "TBO",
+            "ciclo_capa": 60,
+            "ce_a": 45,
+            "ce_0": 37,
+            "pct_cea": 21.62,
+            "teorias_nuevas": 23,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 120,
+            "capa": "TBO",
+            "ciclo_capa": 80,
+            "ce_a": 63,
+            "ce_0": 49,
+            "pct_cea": 28.57,
+            "teorias_nuevas": 25,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 140,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 16,
+            "ce_0": 14,
+            "pct_cea": 14.29,
+            "teorias_nuevas": 2,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 160,
+            "capa": "WIO",
+            "ciclo_capa": 40,
+            "ce_a": 29,
+            "ce_0": 28,
+            "pct_cea": 3.57,
+            "teorias_nuevas": 6,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 180,
+            "capa": "WIO",
+            "ciclo_capa": 60,
+            "ce_a": 44,
+            "ce_0": 39,
+            "pct_cea": 12.82,
+            "teorias_nuevas": 12,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 200,
+            "capa": "WIO",
+            "ciclo_capa": 80,
+            "ce_a": 58,
+            "ce_0": 50,
+            "pct_cea": 16.0,
+            "teorias_nuevas": 17,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 220,
+            "capa": "WIO",
+            "ciclo_capa": 100,
+            "ce_a": 75,
+            "ce_0": 66,
+            "pct_cea": 13.64,
+            "teorias_nuevas": 19,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 40,
+            "nuevas": 20,
+            "exitosos": 29,
+            "pct_tn": 50.0
+          },
+          "TBO": {
+            "ciclos": 80,
+            "nuevas": 25,
+            "exitosos": 63,
+            "pct_tn": 31.25
+          },
+          "WIO": {
+            "ciclos": 140,
+            "nuevas": 24,
+            "exitosos": 104,
+            "pct_tn": 17.14
+          }
+        },
+        "ciclos_exitosos": 196,
+        "ciclos_exitosos_operador_bio": 155,
+        "teorias_nuevas": 69,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 0.6
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 0.6
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 0.8
+          }
+        ],
+        "fair_w_media": 0.8154,
+        "fair_w_min": 0.6,
+        "tasa_favorable": {
+          "AR": 0.5231,
+          "no-AR": 0.3692
+        },
+        "brecha_favorable": 0.1538,
+        "celdas_nunca_resueltas": [
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "—",
+              "seniority_ok": false
+            },
+            "ciclos": 5,
+            "fracasos": 5
+          },
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "Doctorado",
+              "seniority_ok": false
+            },
+            "ciclos": 3,
+            "fracasos": 2
+          },
+          {
+            "si": {
+              "skills_match": 1,
+              "exp_band": "senior",
+              "edu": "Doctorado",
+              "seniority_ok": true
+            },
+            "ciclos": 2,
+            "fracasos": 2
+          }
+        ],
+        "motivos": {
+          "BIO": {
+            "azar_no_probada": 15,
+            "celda": 23,
+            "azar_bio": 2
+          },
+          "TBO": {
+            "celda": 58,
+            "azar_no_probada": 19,
+            "azar_bio": 3
+          },
+          "WIO": {
+            "celda": 117,
+            "azar_bio": 23
+          }
+        }
+      },
+      "bias_auditor": {
+        "agente": "A-BiasAuditor",
+        "estado_final": "Born",
+        "evoluciona": false,
+        "ciclos": 13,
+        "teorias": 7,
+        "promociones": [],
+        "evaluaciones": [],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 13,
+            "nuevas": 7,
+            "exitosos": 13,
+            "pct_tn": 53.85
+          }
+        },
+        "ciclos_exitosos": 13,
+        "ciclos_exitosos_operador_bio": 13,
+        "teorias_nuevas": 7,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 1.0,
+        "fair_w_min": 1.0,
+        "tasa_favorable": {
+          "AR": 0.0,
+          "no-AR": 0.0
+        },
+        "brecha_favorable": 0.0,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "regla_certificada": 13
+          }
+        }
+      },
+      "explainer": {
+        "agente": "A-Explainer",
+        "estado_final": "Mature",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 9,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          },
+          {
+            "ciclo": 60,
+            "de": "Trained",
+            "a": "Mature"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 15,
+            "ce_0": 7,
+            "pct_cea": 114.29,
+            "teorias_nuevas": 9,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 40,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 8,
+            "pct_cea": 150.0,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 3,
+            "pct_cea": 566.67,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 20,
+            "nuevas": 9,
+            "exitosos": 15,
+            "pct_tn": 45.0
+          },
+          "TBO": {
+            "ciclos": 20,
+            "nuevas": 0,
+            "exitosos": 20,
+            "pct_tn": 0.0
+          },
+          "WIO": {
+            "ciclos": 220,
+            "nuevas": 0,
+            "exitosos": 220,
+            "pct_tn": 0.0
+          }
+        },
+        "ciclos_exitosos": 255,
+        "ciclos_exitosos_operador_bio": 60,
+        "teorias_nuevas": 9,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 0.5
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 0.9615,
+        "fair_w_min": 0.5,
+        "tasa_favorable": {
+          "AR": 1.0,
+          "no-AR": 0.9615
+        },
+        "brecha_favorable": 0.0385,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "azar_no_probada": 9,
+            "celda": 11
+          },
+          "TBO": {
+            "celda": 20
+          },
+          "WIO": {
+            "celda": 220
+          }
+        }
+      }
+    },
+    "B": {
+      "parser": {
+        "agente": "B-Parser",
+        "estado_final": "Mature",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 16,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          },
+          {
+            "ciclo": 60,
+            "de": "Trained",
+            "a": "Mature"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 19,
+            "ce_0": 9,
+            "pct_cea": 111.11,
+            "teorias_nuevas": 0,
+            "pct_tn": 0.0,
+            "tn_aplica": true,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 40,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 11,
+            "pct_cea": 81.82,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 18,
+            "ce_0": 11,
+            "pct_cea": 63.64,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 20,
+            "nuevas": 0,
+            "exitosos": 19,
+            "pct_tn": 0.0
+          },
+          "TBO": {
+            "ciclos": 20,
+            "nuevas": 0,
+            "exitosos": 20,
+            "pct_tn": 0.0
+          },
+          "WIO": {
+            "ciclos": 220,
+            "nuevas": 0,
+            "exitosos": 202,
+            "pct_tn": 0.0
+          }
+        },
+        "ciclos_exitosos": 241,
+        "ciclos_exitosos_operador_bio": 122,
+        "teorias_nuevas": 0,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 0.9,
+        "fair_w_min": 0.7,
+        "tasa_favorable": {
+          "AR": 0.9692,
+          "no-AR": 0.8846
+        },
+        "brecha_favorable": 0.0846,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "celda": 20
+          },
+          "TBO": {
+            "celda": 20
+          },
+          "WIO": {
+            "celda": 220
+          }
+        }
+      },
+      "matcher": {
+        "agente": "B-SemanticMatcher",
+        "estado_final": "Mature",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 75,
+        "promociones": [
+          {
+            "ciclo": 40,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 80,
+            "de": "Novice",
+            "a": "Trained"
+          },
+          {
+            "ciclo": 100,
+            "de": "Trained",
+            "a": "Mature"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 17,
+            "ce_0": 14,
+            "pct_cea": 21.43,
+            "teorias_nuevas": 0,
+            "pct_tn": 0.0,
+            "tn_aplica": true,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 40,
+            "capa": "BIO",
+            "ciclo_capa": 40,
+            "ce_a": 34,
+            "ce_0": 24,
+            "pct_cea": 41.67,
+            "teorias_nuevas": 0,
+            "pct_tn": 0.0,
+            "tn_aplica": true,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 18,
+            "ce_0": 15,
+            "pct_cea": 20.0,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 80,
+            "capa": "TBO",
+            "ciclo_capa": 40,
+            "ce_a": 37,
+            "ce_0": 27,
+            "pct_cea": 37.04,
+            "teorias_nuevas": 1,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 100,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 17,
+            "ce_0": 13,
+            "pct_cea": 30.77,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 40,
+            "nuevas": 0,
+            "exitosos": 34,
+            "pct_tn": 0.0
+          },
+          "TBO": {
+            "ciclos": 40,
+            "nuevas": 1,
+            "exitosos": 37,
+            "pct_tn": 2.5
+          },
+          "WIO": {
+            "ciclos": 180,
+            "nuevas": 5,
+            "exitosos": 133,
+            "pct_tn": 2.78
+          }
+        },
+        "ciclos_exitosos": 204,
+        "ciclos_exitosos_operador_bio": 161,
+        "teorias_nuevas": 6,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 0.8
+          }
+        ],
+        "fair_w_media": 0.8,
+        "fair_w_min": 0.7,
+        "tasa_favorable": {
+          "AR": 0.4154,
+          "no-AR": 0.4615
+        },
+        "brecha_favorable": 0.0462,
+        "celdas_nunca_resueltas": [
+          {
+            "si": {
+              "skills_match": 2,
+              "exp_band": "junior",
+              "edu": "Doctorado",
+              "seniority_ok": false
+            },
+            "ciclos": 5,
+            "fracasos": 4
+          },
+          {
+            "si": {
+              "skills_match": 1,
+              "exp_band": "senior",
+              "edu": "Doctorado",
+              "seniority_ok": true
+            },
+            "ciclos": 3,
+            "fracasos": 2
+          },
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "Doctorado",
+              "seniority_ok": false
+            },
+            "ciclos": 3,
+            "fracasos": 2
+          }
+        ],
+        "motivos": {
+          "BIO": {
+            "celda": 40
+          },
+          "TBO": {
+            "celda": 39,
+            "azar_no_probada": 1
+          },
+          "WIO": {
+            "celda": 170,
+            "azar_bio": 10
+          }
+        }
+      },
+      "bias_auditor": {
+        "agente": "B-BiasAuditor",
+        "estado_final": "Born",
+        "evoluciona": false,
+        "ciclos": 13,
+        "teorias": 3,
+        "promociones": [],
+        "evaluaciones": [],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 13,
+            "nuevas": 3,
+            "exitosos": 13,
+            "pct_tn": 23.08
+          }
+        },
+        "ciclos_exitosos": 13,
+        "ciclos_exitosos_operador_bio": 13,
+        "teorias_nuevas": 3,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 1.0,
+        "fair_w_min": 1.0,
+        "tasa_favorable": {
+          "AR": 0.0,
+          "no-AR": 0.0
+        },
+        "brecha_favorable": 0.0,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "regla_certificada": 13
+          }
+        }
+      },
+      "explainer": {
+        "agente": "B-Explainer",
+        "estado_final": "Mature",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 9,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          },
+          {
+            "ciclo": 60,
+            "de": "Trained",
+            "a": "Mature"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 10,
+            "pct_cea": 100.0,
+            "teorias_nuevas": 0,
+            "pct_tn": 0.0,
+            "tn_aplica": true,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 40,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 4,
+            "pct_cea": 400.0,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 3,
+            "pct_cea": 566.67,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 20,
+            "nuevas": 0,
+            "exitosos": 20,
+            "pct_tn": 0.0
+          },
+          "TBO": {
+            "ciclos": 20,
+            "nuevas": 0,
+            "exitosos": 20,
+            "pct_tn": 0.0
+          },
+          "WIO": {
+            "ciclos": 220,
+            "nuevas": 0,
+            "exitosos": 220,
+            "pct_tn": 0.0
+          }
+        },
+        "ciclos_exitosos": 260,
+        "ciclos_exitosos_operador_bio": 63,
+        "teorias_nuevas": 0,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 1.0,
+        "fair_w_min": 1.0,
+        "tasa_favorable": {
+          "AR": 1.0,
+          "no-AR": 1.0
+        },
+        "brecha_favorable": 0.0,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "celda": 20
+          },
+          "TBO": {
+            "celda": 20
+          },
+          "WIO": {
+            "celda": 220
+          }
+        }
+      }
+    },
+    "B0": {
+      "parser": {
+        "agente": "B0-Parser",
+        "estado_final": "Mature",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 15,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          },
+          {
+            "ciclo": 60,
+            "de": "Trained",
+            "a": "Mature"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 16,
+            "ce_0": 9,
+            "pct_cea": 77.78,
+            "teorias_nuevas": 10,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 40,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 11,
+            "pct_cea": 81.82,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 18,
+            "ce_0": 11,
+            "pct_cea": 63.64,
+            "teorias_nuevas": 2,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 20,
+            "nuevas": 10,
+            "exitosos": 16,
+            "pct_tn": 50.0
+          },
+          "TBO": {
+            "ciclos": 20,
+            "nuevas": 0,
+            "exitosos": 20,
+            "pct_tn": 0.0
+          },
+          "WIO": {
+            "ciclos": 220,
+            "nuevas": 5,
+            "exitosos": 202,
+            "pct_tn": 2.27
+          }
+        },
+        "ciclos_exitosos": 238,
+        "ciclos_exitosos_operador_bio": 122,
+        "teorias_nuevas": 15,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 0.9077,
+        "fair_w_min": 0.7,
+        "tasa_favorable": {
+          "AR": 0.9538,
+          "no-AR": 0.8769
+        },
+        "brecha_favorable": 0.0769,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "azar_no_probada": 9,
+            "celda": 11
+          },
+          "TBO": {
+            "celda": 20
+          },
+          "WIO": {
+            "celda": 220
+          }
+        }
+      },
+      "matcher": {
+        "agente": "B0-SemanticMatcher",
+        "estado_final": "Trained",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 60,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 16,
+            "ce_0": 11,
+            "pct_cea": 45.45,
+            "teorias_nuevas": 11,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 40,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 14,
+            "ce_0": 10,
+            "pct_cea": 40.0,
+            "teorias_nuevas": 7,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 12,
+            "ce_0": 13,
+            "pct_cea": -7.69,
+            "teorias_nuevas": 3,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 80,
+            "capa": "WIO",
+            "ciclo_capa": 40,
+            "ce_a": 27,
+            "ce_0": 28,
+            "pct_cea": -3.57,
+            "teorias_nuevas": 11,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 100,
+            "capa": "WIO",
+            "ciclo_capa": 60,
+            "ce_a": 41,
+            "ce_0": 41,
+            "pct_cea": 0.0,
+            "teorias_nuevas": 15,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 120,
+            "capa": "WIO",
+            "ciclo_capa": 80,
+            "ce_a": 52,
+            "ce_0": 53,
+            "pct_cea": -1.89,
+            "teorias_nuevas": 19,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 140,
+            "capa": "WIO",
+            "ciclo_capa": 100,
+            "ce_a": 64,
+            "ce_0": 63,
+            "pct_cea": 1.59,
+            "teorias_nuevas": 24,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 20,
+            "nuevas": 11,
+            "exitosos": 16,
+            "pct_tn": 55.0
+          },
+          "TBO": {
+            "ciclos": 20,
+            "nuevas": 7,
+            "exitosos": 14,
+            "pct_tn": 35.0
+          },
+          "WIO": {
+            "ciclos": 220,
+            "nuevas": 42,
+            "exitosos": 143,
+            "pct_tn": 19.09
+          }
+        },
+        "ciclos_exitosos": 173,
+        "ciclos_exitosos_operador_bio": 159,
+        "teorias_nuevas": 60,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 0.6
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 0.6
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 0.6
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 0.9
+          }
+        ],
+        "fair_w_media": 0.8154,
+        "fair_w_min": 0.6,
+        "tasa_favorable": {
+          "AR": 0.5692,
+          "no-AR": 0.5692
+        },
+        "brecha_favorable": 0.0,
+        "celdas_nunca_resueltas": [
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "Licenciatura",
+              "seniority_ok": false
+            },
+            "ciclos": 12,
+            "fracasos": 8
+          },
+          {
+            "si": {
+              "skills_match": 2,
+              "exp_band": "junior",
+              "edu": "Maestría",
+              "seniority_ok": false
+            },
+            "ciclos": 8,
+            "fracasos": 5
+          },
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "Maestría",
+              "seniority_ok": false
+            },
+            "ciclos": 8,
+            "fracasos": 7
+          },
+          {
+            "si": {
+              "skills_match": 1,
+              "exp_band": "senior",
+              "edu": "Maestría",
+              "seniority_ok": true
+            },
+            "ciclos": 7,
+            "fracasos": 5
+          },
+          {
+            "si": {
+              "skills_match": 2,
+              "exp_band": "junior",
+              "edu": "Doctorado",
+              "seniority_ok": false
+            },
+            "ciclos": 5,
+            "fracasos": 4
+          },
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "—",
+              "seniority_ok": false
+            },
+            "ciclos": 3,
+            "fracasos": 2
+          },
+          {
+            "si": {
+              "skills_match": 1,
+              "exp_band": "senior",
+              "edu": "Doctorado",
+              "seniority_ok": true
+            },
+            "ciclos": 3,
+            "fracasos": 2
+          },
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "Doctorado",
+              "seniority_ok": false
+            },
+            "ciclos": 3,
+            "fracasos": 2
+          }
+        ],
+        "motivos": {
+          "BIO": {
+            "azar_no_probada": 9,
+            "celda": 11
+          },
+          "TBO": {
+            "azar_no_probada": 5,
+            "celda": 14,
+            "azar_bio": 1
+          },
+          "WIO": {
+            "azar_bio": 50,
+            "celda": 170
+          }
+        }
+      },
+      "bias_auditor": {
+        "agente": "B0-BiasAuditor",
+        "estado_final": "Born",
+        "evoluciona": false,
+        "ciclos": 13,
+        "teorias": 8,
+        "promociones": [],
+        "evaluaciones": [],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 13,
+            "nuevas": 8,
+            "exitosos": 13,
+            "pct_tn": 61.54
+          }
+        },
+        "ciclos_exitosos": 13,
+        "ciclos_exitosos_operador_bio": 13,
+        "teorias_nuevas": 8,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 1.0,
+        "fair_w_min": 1.0,
+        "tasa_favorable": {
+          "AR": 0.0,
+          "no-AR": 0.0
+        },
+        "brecha_favorable": 0.0,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "regla_certificada": 13
+          }
+        }
+      },
+      "explainer": {
+        "agente": "B0-Explainer",
+        "estado_final": "Mature",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 9,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          },
+          {
+            "ciclo": 60,
+            "de": "Trained",
+            "a": "Mature"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 18,
+            "ce_0": 13,
+            "pct_cea": 38.46,
+            "teorias_nuevas": 4,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 40,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 17,
+            "ce_0": 5,
+            "pct_cea": 240.0,
+            "teorias_nuevas": 5,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 4,
+            "pct_cea": 400.0,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 20,
+            "nuevas": 4,
+            "exitosos": 18,
+            "pct_tn": 20.0
+          },
+          "TBO": {
+            "ciclos": 20,
+            "nuevas": 5,
+            "exitosos": 17,
+            "pct_tn": 25.0
+          },
+          "WIO": {
+            "ciclos": 220,
+            "nuevas": 0,
+            "exitosos": 220,
+            "pct_tn": 0.0
+          }
+        },
+        "ciclos_exitosos": 255,
+        "ciclos_exitosos_operador_bio": 75,
+        "teorias_nuevas": 9,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 0.9769,
+        "fair_w_min": 0.8,
+        "tasa_favorable": {
+          "AR": 0.9846,
+          "no-AR": 0.9769
+        },
+        "brecha_favorable": 0.0077,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "azar_no_probada": 4,
+            "celda": 16
+          },
+          "TBO": {
+            "azar_no_probada": 5,
+            "celda": 15
+          },
+          "WIO": {
+            "celda": 220
+          }
+        }
+      }
+    },
+    "BC": {
+      "parser": {
+        "agente": "BC-Parser",
+        "estado_final": "Mature",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 15,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          },
+          {
+            "ciclo": 60,
+            "de": "Trained",
+            "a": "Mature"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 16,
+            "ce_0": 9,
+            "pct_cea": 77.78,
+            "teorias_nuevas": 10,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 40,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 11,
+            "pct_cea": 81.82,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 18,
+            "ce_0": 11,
+            "pct_cea": 63.64,
+            "teorias_nuevas": 1,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 20,
+            "nuevas": 10,
+            "exitosos": 16,
+            "pct_tn": 50.0
+          },
+          "TBO": {
+            "ciclos": 20,
+            "nuevas": 0,
+            "exitosos": 20,
+            "pct_tn": 0.0
+          },
+          "WIO": {
+            "ciclos": 220,
+            "nuevas": 4,
+            "exitosos": 202,
+            "pct_tn": 1.82
+          }
+        },
+        "ciclos_exitosos": 238,
+        "ciclos_exitosos_operador_bio": 122,
+        "teorias_nuevas": 14,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 0.9077,
+        "fair_w_min": 0.7,
+        "tasa_favorable": {
+          "AR": 0.9538,
+          "no-AR": 0.8769
+        },
+        "brecha_favorable": 0.0769,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "azar_no_probada": 9,
+            "celda": 11
+          },
+          "TBO": {
+            "celda": 20
+          },
+          "WIO": {
+            "celda": 220
+          }
+        }
+      },
+      "matcher": {
+        "agente": "BC-SemanticMatcher",
+        "estado_final": "Trained",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 60,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 16,
+            "ce_0": 11,
+            "pct_cea": 45.45,
+            "teorias_nuevas": 11,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 40,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 14,
+            "ce_0": 10,
+            "pct_cea": 40.0,
+            "teorias_nuevas": 7,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 12,
+            "ce_0": 13,
+            "pct_cea": -7.69,
+            "teorias_nuevas": 3,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 80,
+            "capa": "WIO",
+            "ciclo_capa": 40,
+            "ce_a": 27,
+            "ce_0": 28,
+            "pct_cea": -3.57,
+            "teorias_nuevas": 11,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 100,
+            "capa": "WIO",
+            "ciclo_capa": 60,
+            "ce_a": 41,
+            "ce_0": 41,
+            "pct_cea": 0.0,
+            "teorias_nuevas": 15,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 120,
+            "capa": "WIO",
+            "ciclo_capa": 80,
+            "ce_a": 52,
+            "ce_0": 53,
+            "pct_cea": -1.89,
+            "teorias_nuevas": 19,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 140,
+            "capa": "WIO",
+            "ciclo_capa": 100,
+            "ce_a": 64,
+            "ce_0": 63,
+            "pct_cea": 1.59,
+            "teorias_nuevas": 24,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 20,
+            "nuevas": 11,
+            "exitosos": 16,
+            "pct_tn": 55.0
+          },
+          "TBO": {
+            "ciclos": 20,
+            "nuevas": 7,
+            "exitosos": 14,
+            "pct_tn": 35.0
+          },
+          "WIO": {
+            "ciclos": 220,
+            "nuevas": 42,
+            "exitosos": 143,
+            "pct_tn": 19.09
+          }
+        },
+        "ciclos_exitosos": 173,
+        "ciclos_exitosos_operador_bio": 159,
+        "teorias_nuevas": 60,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 0.6
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 0.6
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 0.6
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 0.9
+          }
+        ],
+        "fair_w_media": 0.8154,
+        "fair_w_min": 0.6,
+        "tasa_favorable": {
+          "AR": 0.5692,
+          "no-AR": 0.5692
+        },
+        "brecha_favorable": 0.0,
+        "celdas_nunca_resueltas": [
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "Licenciatura",
+              "seniority_ok": false
+            },
+            "ciclos": 12,
+            "fracasos": 8
+          },
+          {
+            "si": {
+              "skills_match": 2,
+              "exp_band": "junior",
+              "edu": "Maestría",
+              "seniority_ok": false
+            },
+            "ciclos": 8,
+            "fracasos": 5
+          },
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "Maestría",
+              "seniority_ok": false
+            },
+            "ciclos": 8,
+            "fracasos": 7
+          },
+          {
+            "si": {
+              "skills_match": 1,
+              "exp_band": "senior",
+              "edu": "Maestría",
+              "seniority_ok": true
+            },
+            "ciclos": 7,
+            "fracasos": 5
+          },
+          {
+            "si": {
+              "skills_match": 2,
+              "exp_band": "junior",
+              "edu": "Doctorado",
+              "seniority_ok": false
+            },
+            "ciclos": 5,
+            "fracasos": 4
+          },
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "—",
+              "seniority_ok": false
+            },
+            "ciclos": 3,
+            "fracasos": 2
+          },
+          {
+            "si": {
+              "skills_match": 1,
+              "exp_band": "senior",
+              "edu": "Doctorado",
+              "seniority_ok": true
+            },
+            "ciclos": 3,
+            "fracasos": 2
+          },
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "Doctorado",
+              "seniority_ok": false
+            },
+            "ciclos": 3,
+            "fracasos": 2
+          }
+        ],
+        "motivos": {
+          "BIO": {
+            "azar_no_probada": 9,
+            "celda": 11
+          },
+          "TBO": {
+            "azar_no_probada": 5,
+            "celda": 14,
+            "azar_bio": 1
+          },
+          "WIO": {
+            "azar_bio": 50,
+            "celda": 170
+          }
+        }
+      },
+      "bias_auditor": {
+        "agente": "BC-BiasAuditor",
+        "estado_final": "Born",
+        "evoluciona": false,
+        "ciclos": 13,
+        "teorias": 8,
+        "promociones": [],
+        "evaluaciones": [],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 13,
+            "nuevas": 8,
+            "exitosos": 13,
+            "pct_tn": 61.54
+          }
+        },
+        "ciclos_exitosos": 13,
+        "ciclos_exitosos_operador_bio": 13,
+        "teorias_nuevas": 8,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 1.0,
+        "fair_w_min": 1.0,
+        "tasa_favorable": {
+          "AR": 0.0,
+          "no-AR": 0.0
+        },
+        "brecha_favorable": 0.0,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "regla_certificada": 13
+          }
+        }
+      },
+      "explainer": {
+        "agente": "BC-Explainer",
+        "estado_final": "Mature",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 9,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          },
+          {
+            "ciclo": 60,
+            "de": "Trained",
+            "a": "Mature"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 18,
+            "ce_0": 13,
+            "pct_cea": 38.46,
+            "teorias_nuevas": 4,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 40,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 5,
+            "pct_cea": 300.0,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 4,
+            "pct_cea": 400.0,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 20,
+            "nuevas": 4,
+            "exitosos": 18,
+            "pct_tn": 20.0
+          },
+          "TBO": {
+            "ciclos": 20,
+            "nuevas": 0,
+            "exitosos": 20,
+            "pct_tn": 0.0
+          },
+          "WIO": {
+            "ciclos": 220,
+            "nuevas": 0,
+            "exitosos": 220,
+            "pct_tn": 0.0
+          }
+        },
+        "ciclos_exitosos": 258,
+        "ciclos_exitosos_operador_bio": 75,
+        "teorias_nuevas": 4,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 0.9846,
+        "fair_w_min": 0.8,
+        "tasa_favorable": {
+          "AR": 1.0,
+          "no-AR": 0.9846
+        },
+        "brecha_favorable": 0.0154,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "azar_no_probada": 4,
+            "celda": 16
+          },
+          "TBO": {
+            "celda": 20
+          },
+          "WIO": {
+            "celda": 220
+          }
+        }
+      }
+    },
+    "C": {
+      "parser": {
+        "agente": "C-Parser",
+        "estado_final": "Mature",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 15,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          },
+          {
+            "ciclo": 60,
+            "de": "Trained",
+            "a": "Mature"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 15,
+            "ce_0": 7,
+            "pct_cea": 114.29,
+            "teorias_nuevas": 9,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 40,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 18,
+            "ce_0": 11,
+            "pct_cea": 63.64,
+            "teorias_nuevas": 2,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 19,
+            "ce_0": 10,
+            "pct_cea": 90.0,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 20,
+            "nuevas": 9,
+            "exitosos": 15,
+            "pct_tn": 45.0
+          },
+          "TBO": {
+            "ciclos": 20,
+            "nuevas": 2,
+            "exitosos": 18,
+            "pct_tn": 10.0
+          },
+          "WIO": {
+            "ciclos": 220,
+            "nuevas": 2,
+            "exitosos": 194,
+            "pct_tn": 0.91
+          }
+        },
+        "ciclos_exitosos": 227,
+        "ciclos_exitosos_operador_bio": 116,
+        "teorias_nuevas": 13,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 0.9154,
+        "fair_w_min": 0.8,
+        "tasa_favorable": {
+          "AR": 0.8769,
+          "no-AR": 0.8692
+        },
+        "brecha_favorable": 0.0077,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "azar_no_probada": 9,
+            "celda": 10,
+            "azar_bio": 1
+          },
+          "TBO": {
+            "celda": 20
+          },
+          "WIO": {
+            "celda": 220
+          }
+        }
+      },
+      "matcher": {
+        "agente": "C-SemanticMatcher",
+        "estado_final": "Born",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 63,
+        "promociones": [],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 10,
+            "ce_0": 11,
+            "pct_cea": -9.09,
+            "teorias_nuevas": 15,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 40,
+            "capa": "BIO",
+            "ciclo_capa": 40,
+            "ce_a": 27,
+            "ce_0": 27,
+            "pct_cea": 0.0,
+            "teorias_nuevas": 21,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          },
+          {
+            "ciclo": 60,
+            "capa": "BIO",
+            "ciclo_capa": 60,
+            "ce_a": 41,
+            "ce_0": 39,
+            "pct_cea": 5.13,
+            "teorias_nuevas": 24,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": false
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 260,
+            "nuevas": 63,
+            "exitosos": 204,
+            "pct_tn": 24.23
+          }
+        },
+        "ciclos_exitosos": 204,
+        "ciclos_exitosos_operador_bio": 159,
+        "teorias_nuevas": 63,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 0.4
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 0.6
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 0.8
+          }
+        ],
+        "fair_w_media": 0.8,
+        "fair_w_min": 0.4,
+        "tasa_favorable": {
+          "AR": 0.5077,
+          "no-AR": 0.5077
+        },
+        "brecha_favorable": 0.0,
+        "celdas_nunca_resueltas": [
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "Licenciatura",
+              "seniority_ok": false
+            },
+            "ciclos": 12,
+            "fracasos": 11
+          },
+          {
+            "si": {
+              "skills_match": 2,
+              "exp_band": "junior",
+              "edu": "Doctorado",
+              "seniority_ok": false
+            },
+            "ciclos": 4,
+            "fracasos": 4
+          },
+          {
+            "si": {
+              "skills_match": 1,
+              "exp_band": "junior",
+              "edu": "Doctorado",
+              "seniority_ok": false
+            },
+            "ciclos": 2,
+            "fracasos": 2
+          },
+          {
+            "si": {
+              "skills_match": 0,
+              "exp_band": "junior",
+              "edu": "Doctorado",
+              "seniority_ok": false
+            },
+            "ciclos": 1,
+            "fracasos": 1
+          }
+        ],
+        "motivos": {
+          "BIO": {
+            "azar_no_probada": 51,
+            "celda": 195,
+            "azar_bio": 14
+          }
+        }
+      },
+      "bias_auditor": {
+        "agente": "C-BiasAuditor",
+        "estado_final": "Born",
+        "evoluciona": false,
+        "ciclos": 13,
+        "teorias": 5,
+        "promociones": [],
+        "evaluaciones": [],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 13,
+            "nuevas": 5,
+            "exitosos": 13,
+            "pct_tn": 38.46
+          }
+        },
+        "ciclos_exitosos": 13,
+        "ciclos_exitosos_operador_bio": 13,
+        "teorias_nuevas": 5,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 1.0,
+        "fair_w_min": 1.0,
+        "tasa_favorable": {
+          "AR": 0.0,
+          "no-AR": 0.0
+        },
+        "brecha_favorable": 0.0,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "regla_certificada": 13
+          }
+        }
+      },
+      "explainer": {
+        "agente": "C-Explainer",
+        "estado_final": "Mature",
+        "evoluciona": true,
+        "ciclos": 260,
+        "teorias": 9,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          },
+          {
+            "ciclo": 60,
+            "de": "Trained",
+            "a": "Mature"
+          }
+        ],
+        "evaluaciones": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "ce_a": 15,
+            "ce_0": 5,
+            "pct_cea": 200.0,
+            "teorias_nuevas": 9,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 40,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 6,
+            "pct_cea": 233.33,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          },
+          {
+            "ciclo": 60,
+            "capa": "WIO",
+            "ciclo_capa": 20,
+            "ce_a": 20,
+            "ce_0": 7,
+            "pct_cea": 185.71,
+            "teorias_nuevas": 0,
+            "pct_tn": null,
+            "tn_aplica": false,
+            "gate_omega": true,
+            "promueve": true
+          }
+        ],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 20,
+            "nuevas": 9,
+            "exitosos": 15,
+            "pct_tn": 45.0
+          },
+          "TBO": {
+            "ciclos": 20,
+            "nuevas": 0,
+            "exitosos": 20,
+            "pct_tn": 0.0
+          },
+          "WIO": {
+            "ciclos": 220,
+            "nuevas": 0,
+            "exitosos": 220,
+            "pct_tn": 0.0
+          }
+        },
+        "ciclos_exitosos": 255,
+        "ciclos_exitosos_operador_bio": 67,
+        "teorias_nuevas": 9,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 0.9923,
+        "fair_w_min": 0.9,
+        "tasa_favorable": {
+          "AR": 0.9846,
+          "no-AR": 0.9769
+        },
+        "brecha_favorable": 0.0077,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "azar_no_probada": 9,
+            "celda": 11
+          },
+          "TBO": {
+            "celda": 20
+          },
+          "WIO": {
+            "celda": 220
+          }
+        }
+      }
+    },
+    "N": {
+      "parser": {
+        "agente": "N-Parser",
+        "estado_final": "Born",
+        "evoluciona": false,
+        "ciclos": 260,
+        "teorias": 9,
+        "promociones": [],
+        "evaluaciones": [],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 260,
+            "nuevas": 9,
+            "exitosos": 122,
+            "pct_tn": 3.46
+          }
+        },
+        "ciclos_exitosos": 122,
+        "ciclos_exitosos_operador_bio": 122,
+        "teorias_nuevas": 9,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 0.5
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 0.5
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 0.6
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 0.6
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 0.7
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 0.9
+          }
+        ],
+        "fair_w_media": 0.7385,
+        "fair_w_min": 0.5,
+        "tasa_favorable": {
+          "AR": 0.5846,
+          "no-AR": 0.3538
+        },
+        "brecha_favorable": 0.2308,
+        "celdas_nunca_resueltas": [
+          {
+            "si": {
+              "formato": "html",
+              "estructura": "etiquetado",
+              "etiquetas": "sinonimos"
+            },
+            "ciclos": 62,
+            "fracasos": 62
+          },
+          {
+            "si": {
+              "formato": "json",
+              "estructura": "plano",
+              "etiquetas": "sinonimos"
+            },
+            "ciclos": 38,
+            "fracasos": 38
+          },
+          {
+            "si": {
+              "formato": "texto",
+              "estructura": "libre",
+              "etiquetas": "ninguna"
+            },
+            "ciclos": 25,
+            "fracasos": 25
+          }
+        ],
+        "motivos": {
+          "BIO": {
+            "operador_bio": 260
+          }
+        }
+      },
+      "matcher": {
+        "agente": "N-SemanticMatcher",
+        "estado_final": "Born",
+        "evoluciona": false,
+        "ciclos": 260,
+        "teorias": 39,
+        "promociones": [],
+        "evaluaciones": [],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 260,
+            "nuevas": 39,
+            "exitosos": 156,
+            "pct_tn": 15.0
+          }
+        },
+        "ciclos_exitosos": 156,
+        "ciclos_exitosos_operador_bio": 156,
+        "teorias_nuevas": 39,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 0.6
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 0.8692,
+        "fair_w_min": 0.6,
+        "tasa_favorable": {
+          "AR": 0.3231,
+          "no-AR": 0.2538
+        },
+        "brecha_favorable": 0.0692,
+        "celdas_nunca_resueltas": [
+          {
+            "si": {
+              "skills_match": 1,
+              "exp_band": "senior",
+              "edu": "Licenciatura",
+              "seniority_ok": true
+            },
+            "ciclos": 10,
+            "fracasos": 9
+          },
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "Licenciatura",
+              "seniority_ok": false
+            },
+            "ciclos": 8,
+            "fracasos": 7
+          },
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "Maestría",
+              "seniority_ok": false
+            },
+            "ciclos": 7,
+            "fracasos": 6
+          },
+          {
+            "si": {
+              "skills_match": 2,
+              "exp_band": "junior",
+              "edu": "Maestría",
+              "seniority_ok": false
+            },
+            "ciclos": 5,
+            "fracasos": 4
+          },
+          {
+            "si": {
+              "skills_match": 2,
+              "exp_band": "junior",
+              "edu": "Doctorado",
+              "seniority_ok": false
+            },
+            "ciclos": 5,
+            "fracasos": 5
+          },
+          {
+            "si": {
+              "skills_match": 2,
+              "exp_band": "junior",
+              "edu": "Licenciatura",
+              "seniority_ok": false
+            },
+            "ciclos": 4,
+            "fracasos": 3
+          },
+          {
+            "si": {
+              "skills_match": 1,
+              "exp_band": "senior",
+              "edu": "Maestría",
+              "seniority_ok": true
+            },
+            "ciclos": 4,
+            "fracasos": 4
+          },
+          {
+            "si": {
+              "skills_match": 3,
+              "exp_band": "junior",
+              "edu": "—",
+              "seniority_ok": false
+            },
+            "ciclos": 3,
+            "fracasos": 3
+          },
+          {
+            "si": {
+              "skills_match": 1,
+              "exp_band": "senior",
+              "edu": "—",
+              "seniority_ok": true
+            },
+            "ciclos": 2,
+            "fracasos": 2
+          }
+        ],
+        "motivos": {
+          "BIO": {
+            "operador_bio": 260
+          }
+        }
+      },
+      "bias_auditor": {
+        "agente": "N-BiasAuditor",
+        "estado_final": "Born",
+        "evoluciona": false,
+        "ciclos": 13,
+        "teorias": 6,
+        "promociones": [],
+        "evaluaciones": [],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 13,
+            "nuevas": 6,
+            "exitosos": 13,
+            "pct_tn": 46.15
+          }
+        },
+        "ciclos_exitosos": 13,
+        "ciclos_exitosos_operador_bio": 13,
+        "teorias_nuevas": 6,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 1.0
+          }
+        ],
+        "fair_w_media": 1.0,
+        "fair_w_min": 1.0,
+        "tasa_favorable": {
+          "AR": 0.0,
+          "no-AR": 0.0
+        },
+        "brecha_favorable": 0.0,
+        "celdas_nunca_resueltas": [],
+        "motivos": {
+          "BIO": {
+            "operador_bio": 13
+          }
+        }
+      },
+      "explainer": {
+        "agente": "N-Explainer",
+        "estado_final": "Born",
+        "evoluciona": false,
+        "ciclos": 260,
+        "teorias": 4,
+        "promociones": [],
+        "evaluaciones": [],
+        "teorias_nuevas_por_capa": {
+          "BIO": {
+            "ciclos": 260,
+            "nuevas": 4,
+            "exitosos": 37,
+            "pct_tn": 1.54
+          }
+        },
+        "ciclos_exitosos": 37,
+        "ciclos_exitosos_operador_bio": 37,
+        "teorias_nuevas": 4,
+        "fair_w": [
+          {
+            "ventana": "BIO-W01",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "BIO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "TBO-W02",
+            "fair_w": 1.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W04",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "TBO-W05",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W01",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W02",
+            "fair_w": 0.8
+          },
+          {
+            "ventana": "WIO-W03",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W04",
+            "fair_w": 0.9
+          },
+          {
+            "ventana": "WIO-W05",
+            "fair_w": 0.9
+          }
+        ],
+        "fair_w_media": 0.9,
+        "fair_w_min": 0.8,
+        "tasa_favorable": {
+          "AR": 0.1462,
+          "no-AR": 0.1385
+        },
+        "brecha_favorable": 0.0077,
+        "celdas_nunca_resueltas": [
+          {
+            "si": {
+              "tipo": "rechaza",
+              "destinatario": "usuario"
+            },
+            "ciclos": 94,
+            "fracasos": 94
+          },
+          {
+            "si": {
+              "tipo": "rechaza",
+              "destinatario": "regulador"
+            },
+            "ciclos": 91,
+            "fracasos": 91
+          },
+          {
+            "si": {
+              "tipo": "avanza",
+              "destinatario": "regulador"
+            },
+            "ciclos": 38,
+            "fracasos": 38
+          }
+        ],
+        "motivos": {
+          "BIO": {
+            "operador_bio": 260
+          }
+        }
+      }
+    }
+  },
+  "l3": {
+    "parser": {
+      "ciclos_exitosos": {
+        "N": 122,
+        "B0": 238,
+        "B": 241,
+        "BC": 238
+      },
+      "teorias_nuevas": {
+        "N": 9,
+        "B0": 15,
+        "B": 0,
+        "BC": 14
+      },
+      "ce_neutro": 122,
+      "ce_promedio": 209.75,
+      "tn_maximo": 15,
+      "tn_promedio": 9.5,
+      "neutro_es_el_minimo": true,
+      "evaluadas": {
+        "B": {
+          "pct_cea": 97.54,
+          "pct_rce": 71.93,
+          "pct_tna": 100.0,
+          "pct_rtn": 100.0,
+          "es_el_maximo_de_ce": true,
+          "evoluciona": true
+        },
+        "BC": {
+          "pct_cea": 95.08,
+          "pct_rce": 71.93,
+          "pct_tna": -47.37,
+          "pct_rtn": 6.67,
+          "es_el_maximo_de_ce": false,
+          "evoluciona": true
+        }
+      }
+    },
+    "matcher": {
+      "ciclos_exitosos": {
+        "N": 156,
+        "B0": 173,
+        "B": 204,
+        "BC": 173
+      },
+      "teorias_nuevas": {
+        "N": 39,
+        "B0": 60,
+        "B": 6,
+        "BC": 60
+      },
+      "ce_neutro": 156,
+      "ce_promedio": 176.5,
+      "tn_maximo": 60,
+      "tn_promedio": 41.25,
+      "neutro_es_el_minimo": true,
+      "evaluadas": {
+        "B": {
+          "pct_cea": 30.77,
+          "pct_rce": 13.14,
+          "pct_tna": 85.45,
+          "pct_rtn": 90.0,
+          "es_el_maximo_de_ce": true,
+          "evoluciona": true
+        },
+        "BC": {
+          "pct_cea": 10.9,
+          "pct_rce": 13.14,
+          "pct_tna": -45.45,
+          "pct_rtn": 0.0,
+          "es_el_maximo_de_ce": false,
+          "evoluciona": false
+        }
+      }
+    },
+    "explainer": {
+      "ciclos_exitosos": {
+        "N": 37,
+        "B0": 255,
+        "B": 260,
+        "BC": 258
+      },
+      "teorias_nuevas": {
+        "N": 4,
+        "B0": 9,
+        "B": 0,
+        "BC": 4
+      },
+      "ce_neutro": 37,
+      "ce_promedio": 202.5,
+      "tn_maximo": 9,
+      "tn_promedio": 4.25,
+      "neutro_es_el_minimo": true,
+      "evaluadas": {
+        "B": {
+          "pct_cea": 602.7,
+          "pct_rce": 447.3,
+          "pct_tna": 100.0,
+          "pct_rtn": 100.0,
+          "es_el_maximo_de_ce": true,
+          "evoluciona": true
+        },
+        "BC": {
+          "pct_cea": 597.3,
+          "pct_rce": 447.3,
+          "pct_tna": 5.88,
+          "pct_rtn": 55.56,
+          "es_el_maximo_de_ce": false,
+          "evoluciona": true
+        }
+      }
+    }
+  },
+  "lineas_de_tiempo": {
+    "A": [
+      {
+        "ventana": "BIO-W01",
+        "casos": 20,
+        "estados": {
+          "parser": "Novice",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Novice"
+        }
+      },
+      {
+        "ventana": "BIO-W02",
+        "casos": 40,
+        "estados": {
+          "parser": "Trained",
+          "matcher": "Novice",
+          "bias_auditor": "Born",
+          "explainer": "Trained"
+        }
+      },
+      {
+        "ventana": "BIO-W03",
+        "casos": 60,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Novice",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W01",
+        "casos": 80,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Novice",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W02",
+        "casos": 100,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Novice",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W03",
+        "casos": 120,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W04",
+        "casos": 140,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W05",
+        "casos": 160,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W01",
+        "casos": 180,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W02",
+        "casos": 200,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W03",
+        "casos": 220,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W04",
+        "casos": 240,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W05",
+        "casos": 260,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      }
+    ],
+    "B": [
+      {
+        "ventana": "BIO-W01",
+        "casos": 20,
+        "estados": {
+          "parser": "Novice",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Novice"
+        }
+      },
+      {
+        "ventana": "BIO-W02",
+        "casos": 40,
+        "estados": {
+          "parser": "Trained",
+          "matcher": "Novice",
+          "bias_auditor": "Born",
+          "explainer": "Trained"
+        }
+      },
+      {
+        "ventana": "BIO-W03",
+        "casos": 60,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Novice",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W01",
+        "casos": 80,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W02",
+        "casos": 100,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Mature",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W03",
+        "casos": 120,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Mature",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W04",
+        "casos": 140,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Mature",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W05",
+        "casos": 160,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Mature",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W01",
+        "casos": 180,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Mature",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W02",
+        "casos": 200,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Mature",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W03",
+        "casos": 220,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Mature",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W04",
+        "casos": 240,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Mature",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W05",
+        "casos": 260,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Mature",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      }
+    ],
+    "B0": [
+      {
+        "ventana": "BIO-W01",
+        "casos": 20,
+        "estados": {
+          "parser": "Novice",
+          "matcher": "Novice",
+          "bias_auditor": "Born",
+          "explainer": "Novice"
+        }
+      },
+      {
+        "ventana": "BIO-W02",
+        "casos": 40,
+        "estados": {
+          "parser": "Trained",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Trained"
+        }
+      },
+      {
+        "ventana": "BIO-W03",
+        "casos": 60,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W01",
+        "casos": 80,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W02",
+        "casos": 100,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W03",
+        "casos": 120,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W04",
+        "casos": 140,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W05",
+        "casos": 160,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W01",
+        "casos": 180,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W02",
+        "casos": 200,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W03",
+        "casos": 220,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W04",
+        "casos": 240,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W05",
+        "casos": 260,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      }
+    ],
+    "BC": [
+      {
+        "ventana": "BIO-W01",
+        "casos": 20,
+        "estados": {
+          "parser": "Novice",
+          "matcher": "Novice",
+          "bias_auditor": "Born",
+          "explainer": "Novice"
+        }
+      },
+      {
+        "ventana": "BIO-W02",
+        "casos": 40,
+        "estados": {
+          "parser": "Trained",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Trained"
+        }
+      },
+      {
+        "ventana": "BIO-W03",
+        "casos": 60,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W01",
+        "casos": 80,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W02",
+        "casos": 100,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W03",
+        "casos": 120,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W04",
+        "casos": 140,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W05",
+        "casos": 160,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W01",
+        "casos": 180,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W02",
+        "casos": 200,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W03",
+        "casos": 220,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W04",
+        "casos": 240,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W05",
+        "casos": 260,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Trained",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      }
+    ],
+    "C": [
+      {
+        "ventana": "BIO-W01",
+        "casos": 20,
+        "estados": {
+          "parser": "Novice",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Novice"
+        }
+      },
+      {
+        "ventana": "BIO-W02",
+        "casos": 40,
+        "estados": {
+          "parser": "Trained",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Trained"
+        }
+      },
+      {
+        "ventana": "BIO-W03",
+        "casos": 60,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W01",
+        "casos": 80,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W02",
+        "casos": 100,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W03",
+        "casos": 120,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W04",
+        "casos": 140,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "TBO-W05",
+        "casos": 160,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W01",
+        "casos": 180,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W02",
+        "casos": 200,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W03",
+        "casos": 220,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W04",
+        "casos": 240,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      },
+      {
+        "ventana": "WIO-W05",
+        "casos": 260,
+        "estados": {
+          "parser": "Mature",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Mature"
+        }
+      }
+    ],
+    "N": [
+      {
+        "ventana": "BIO-W01",
+        "casos": 20,
+        "estados": {
+          "parser": "Born",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Born"
+        }
+      },
+      {
+        "ventana": "BIO-W02",
+        "casos": 40,
+        "estados": {
+          "parser": "Born",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Born"
+        }
+      },
+      {
+        "ventana": "BIO-W03",
+        "casos": 60,
+        "estados": {
+          "parser": "Born",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Born"
+        }
+      },
+      {
+        "ventana": "TBO-W01",
+        "casos": 80,
+        "estados": {
+          "parser": "Born",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Born"
+        }
+      },
+      {
+        "ventana": "TBO-W02",
+        "casos": 100,
+        "estados": {
+          "parser": "Born",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Born"
+        }
+      },
+      {
+        "ventana": "TBO-W03",
+        "casos": 120,
+        "estados": {
+          "parser": "Born",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Born"
+        }
+      },
+      {
+        "ventana": "TBO-W04",
+        "casos": 140,
+        "estados": {
+          "parser": "Born",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Born"
+        }
+      },
+      {
+        "ventana": "TBO-W05",
+        "casos": 160,
+        "estados": {
+          "parser": "Born",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Born"
+        }
+      },
+      {
+        "ventana": "WIO-W01",
+        "casos": 180,
+        "estados": {
+          "parser": "Born",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Born"
+        }
+      },
+      {
+        "ventana": "WIO-W02",
+        "casos": 200,
+        "estados": {
+          "parser": "Born",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Born"
+        }
+      },
+      {
+        "ventana": "WIO-W03",
+        "casos": 220,
+        "estados": {
+          "parser": "Born",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Born"
+        }
+      },
+      {
+        "ventana": "WIO-W04",
+        "casos": 240,
+        "estados": {
+          "parser": "Born",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Born"
+        }
+      },
+      {
+        "ventana": "WIO-W05",
+        "casos": 260,
+        "estados": {
+          "parser": "Born",
+          "matcher": "Born",
+          "bias_auditor": "Born",
+          "explainer": "Born"
+        }
+      }
+    ]
+  },
+  "b_antes_que_b0": {
+    "parser": {
+      "B": {
+        "Novice": 20,
+        "Trained": 40,
+        "Mature": 60
+      },
+      "B0": {
+        "Novice": 20,
+        "Trained": 40,
+        "Mature": 60
+      }
+    },
+    "matcher": {
+      "B": {
+        "Novice": 40,
+        "Trained": 80,
+        "Mature": 100
+      },
+      "B0": {
+        "Novice": 20,
+        "Trained": 40,
+        "Mature": null
+      }
+    },
+    "explainer": {
+      "B": {
+        "Novice": 20,
+        "Trained": 40,
+        "Mature": 60
+      },
+      "B0": {
+        "Novice": 20,
+        "Trained": 40,
+        "Mature": 60
+      }
+    }
+  },
+  "figura": "p3_maduracion_equipos.png"
+}

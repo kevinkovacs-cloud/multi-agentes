@@ -1,0 +1,67 @@
+{
+  "rotulos": [
+    "ilustrativo, entorno simulado (modo sim); no es evidencia experimental",
+    "semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección"
+  ],
+  "demo": "E4 · resultado 5: tasa de calificados por grupo",
+  "flujo_e4": {
+    "semilla": 20261008,
+    "conteo": {
+      "AR": {
+        "n": 130,
+        "calificados": 58
+      },
+      "no-AR": {
+        "n": 130,
+        "calificados": 39
+      }
+    },
+    "tasas": {
+      "AR": 0.4462,
+      "no-AR": 0.3
+    },
+    "diferencia": 0.1462,
+    "z": 2.436,
+    "p_z_bilateral": 0.0148,
+    "p_fisher_bilateral": 0.0208,
+    "p_permutacion": 0.0206,
+    "permutaciones": 10000,
+    "independencia_grupo_celda": {
+      "chi2": 31.042,
+      "gl": 23,
+      "p": 0.1218,
+      "celdas": 24,
+      "esperado_minimo": 1.0
+    }
+  },
+  "semillas_extra": {
+    "n": 200,
+    "primera": 20262008,
+    "ultima": 20461008,
+    "diferencia_media": -0.0012,
+    "diferencia_desvio": 0.0557,
+    "fraccion_abs_mayor_o_igual_que_e4": 0.02,
+    "percentil_e4": 100.0,
+    "juntas": {
+      "conteo": {
+        "AR": {
+          "n": 26000,
+          "calificados": 10426
+        },
+        "no-AR": {
+          "n": 26000,
+          "calificados": 10458
+        }
+      },
+      "diferencia": -0.0012,
+      "p_fisher_grupo_verdad": 0.7815,
+      "independencia_grupo_celda": {
+        "chi2": 29.696,
+        "gl": 23,
+        "p": 0.1583,
+        "celdas": 24,
+        "esperado_minimo": 398.5
+      }
+    }
+  }
+}
