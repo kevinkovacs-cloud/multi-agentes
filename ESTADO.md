@@ -264,4 +264,13 @@ Ierache (2010). Diagnóstico: `docs/parada_tecnica/E0_DIAGNOSTICO.md`; decisione
   el Explainer, Si del Explainer tipo · destinatario. Son opciones nuevas; E4 no cambia. Equipos A, B
   (colaboración de A al nacer), B0 (control), BC (cooperación con C en Novice), C y N (SAR neutro de L-3) en
   `experiments/parada_tecnica/p3_equipos_dag.py`; cálculo literal de L-3 entre configuraciones; muestreo del
-  resultado 5 de E4 en `e4_muestreo.py`. Informe `docs/parada_tecnica/E5_PUNTO_DE_CONTROL.md`.
+  resultado 5 de E4 en `e4_muestreo.py`. Informe `docs/parada_tecnica/E5_PUNTO_DE_CONTROL.md`, con las
+  métricas descriptivas que pidió Claude chat (`p3_descriptivas.py`: desempeño frente al equipo neutro y
+  curvas de aprendizaje sin piso, sobre las mismas corridas).
+- **E6 · Métricas de equidad por rol (punto 5).** Pre-registro propio antes de correr
+  (`docs/parada_tecnica/E6_PREREGISTRO.md`, con `E5_RESPUESTA_ClaudeChat_2026-10-08.md`). Métricas por rol
+  y las dos reglas del Auditor sobre un flujo en `core/equidad_roles.py`; contrafáctico α = 1 en el
+  planificador; condición con sesgo programado por un proxy (regla 11 de `instances/hr/entorno.py`,
+  `RolMatcherSesgo`; «parámetros programados»). Demo `experiments/parada_tecnica/p5_metricas_equidad.py`;
+  documento para la dirección `docs/parada_tecnica/METRICAS_EQUIDAD_POR_ROL.md`; informe
+  `docs/parada_tecnica/E6_PUNTO_DE_CONTROL.md`.
