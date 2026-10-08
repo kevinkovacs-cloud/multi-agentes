@@ -91,3 +91,17 @@ def test_muestreo_e4(tmp_path):
     assert c["AR"]["n"] == c["no-AR"]["n"] == 130
     assert r["semillas_extra"]["n"] == cargar_config()["equipo_e5"]["muestreo_e4"]["semillas_extra"]
     assert (tmp_path / "e4_muestreo_calificados.md").exists()
+
+
+def test_descriptivas_sobre_la_misma_corrida(tmp_path):
+    import p3_descriptivas
+    r = p3_descriptivas.correr(tmp_path)
+    assert r["misma_corrida"].startswith("p3_equipos.json reconstruido idéntico")
+    fn = r["frente_al_neutro"]
+    assert fn["casos"] == 260 and set(fn) >= {"N", "B", "B0", "BC"}
+    for e in ("B", "B0", "BC"):
+        for rol in ("parser", "matcher", "explainer"):
+            filas = r["regla_en_cada_ciclo"][e][rol]
+            assert all(f["primer_ciclo_que_cumple"] is None or f["promocion_real"] is None
+                       or f["primer_ciclo_que_cumple"] <= f["promocion_real"] for f in filas)
+    assert (tmp_path / "p3_curvas_aprendizaje.png").exists()

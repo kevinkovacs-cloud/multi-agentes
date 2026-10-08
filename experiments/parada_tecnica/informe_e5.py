@@ -55,9 +55,89 @@ def defectos_por_grupo(cfg: dict, equipo: str, extra: int = 0) -> dict:
     return res
 
 
+def descriptivas(desc: dict, cv: dict) -> list[str]:
+    """Sección de las métricas descriptivas 1 y 2 (E5_RESPUESTA): no cambian ninguna regla."""
+    fn = desc["frente_al_neutro"]
+    L = ["## Métricas descriptivas agregadas después del punto de control (E5_RESPUESTA, "
+         "decisiones 1 y 2)", "",
+         "Calculadas sobre las mismas corridas de E5: `p3_descriptivas.py` las reconstruye en "
+         "memoria y verifica que `p3_equipos.json` sale idéntico byte a byte antes de medir. No "
+         "cambian ninguna regla ni ninguna promoción. Datos: `p3_descriptivas.json`; figura: "
+         "`p3_curvas_aprendizaje.png`.", "",
+         "### 1 · Desempeño frente al equipo neutro N", "",
+         "Para la promoción (región 7) se mantiene el contrafáctico sobre las propias entradas "
+         "del rol, como está pre-registrado: aísla lo que aprendió ese agente. Para comparar "
+         "equipos se agrega esta métrica: aciertos de cada rol con las entradas de su propio "
+         "equipo, frente a los del rol neutro con las entradas del equipo neutro (mismos "
+         f"{fn['casos']} casos). «Equipo» = casos resueltos de punta a punta (perfil completo, "
+         "decisión correcta y explicación completa).", "",
+         "| Rol | N | B | B0 | BC |", "|---|---|---|---|---|"]
+    for r in ("parser", "matcher", "explainer", "equipo"):
+        nombre = TITULO.get(r, "Equipo")
+        L.append(f"| {nombre} | {fn['N'][r]} | " + " | ".join(
+            f"{fn[e][r]['aciertos']} ({'+' if fn[e][r]['mejora_pct'] >= 0 else ''}"
+            f"{num(fn[e][r]['mejora_pct'], 1)} %)" for e in ("B", "B0", "BC")) + " |")
+    L += ["", "> «La regla de evolución mide lo que aprende cada agente, no el resultado del "
+          "equipo; cuando un rol de arriba mejora, el de abajo tiene que superar una referencia "
+          "más exigente.»", "",
+          f"El Matcher de B promovió más lento que el de B0 porque su vara era más alta. Aun "
+          f"así, el equipo B acertó más que B0 ({fn['B']['matcher']['aciertos']} frente a "
+          f"{fn['B0']['matcher']['aciertos']} decisiones correctas; "
+          f"{fn['B']['equipo']['aciertos']} frente a {fn['B0']['equipo']['aciertos']} casos "
+          "resueltos de punta a punta) y solo el Matcher de B llegó a Mature.", "",
+          "### 2 · Curvas de aprendizaje sin piso", "",
+          "> «Con intervalos de 20 ciclos, la promoción tiene un piso de 20 ciclos por estado; "
+          "para Parser y Explainer ese piso domina y la colaboración no puede adelantarla. Las "
+          "curvas muestran el efecto que el piso oculta.»", "",
+          "| Rol | Ciclos exitosos al ciclo " + f"{cv['n_intervalo']} (B · B0 · C) | "
+          f"Teorías nuevas al ciclo {cv['n_intervalo']} (B · B0 · C) | Al final (B · B0 · C) |",
+          "|---|---|---|---|"]
+    cur, k = desc["curvas"], cv["n_intervalo"] - 1
+    for r in ("parser", "matcher", "explainer"):
+        def v(e, clave, i):
+            return str(cur[e][r][clave][i])
+        L.append(f"| {TITULO[r]} | " + " · ".join(v(e, "exitosos_acumulados", k)
+                                                 for e in ("B", "B0", "C"))
+                 + " | " + " · ".join(v(e, "teorias_nuevas_acumuladas", k)
+                                     for e in ("B", "B0", "C"))
+                 + " | " + " · ".join(f"{v(e, 'exitosos_acumulados', -1)} exitosos, "
+                                     f"{v(e, 'teorias_nuevas_acumuladas', -1)} nuevas"
+                                     for e in ("B", "B0", "C")) + " |")
+    L += ["", "**Primer ciclo en que se cumpliría la regla** si se evaluara en cada ciclo "
+          "(acumulada en la capa, como la v2), y desde qué ciclo se cumple sin interrupción "
+          "hasta el cierre real. Descriptivo: la promoción real sigue siendo al cierre. Con muy "
+          "pocos ciclos la regla es inestable (un acierto frente a un fallo del operador BIO ya "
+          "da %CEA = 100), por eso se informa también el cumplimiento sostenido.", "",
+          "| Equipo | Rol | Capa: primer ciclo · sostenido desde · promoción real |",
+          "|---|---|---|"]
+    for e, roles_e in desc["regla_en_cada_ciclo"].items():
+        for r, filas in roles_e.items():
+            L.append(f"| {e} | {TITULO[r]} | " + "; ".join(
+                f"{f['capa']}: {_c(f['primer_ciclo_que_cumple'])} · "
+                f"{_c(f['cumple_sin_interrupcion_desde'])} · {_c(f['promocion_real'])}"
+                for f in filas) + " |")
+    rc = desc["regla_en_cada_ciclo"]
+
+    def sost(e, r):
+        return _c(next((f["cumple_sin_interrupcion_desde"] for f in rc[e][r]
+                        if f["capa"] == "BIO"), None))
+    L += ["", "En BIO, la regla se cumple sin interrupción desde el ciclo "
+          + f"{sost('B', 'parser')} en el Parser de B y desde el {sost('B0', 'parser')} en el de "
+          + f"B0; en el Explainer, desde el {sost('B', 'explainer')} y el {sost('B0', 'explainer')}. "
+          "Es el efecto de la colaboración que el piso de 20 ciclos oculta en la promoción.",
+          "", "### 3 · El Matcher de C no coopera", "",
+          "Es el axioma funcionando: solo cooperan SAR en el mismo estado (§4.3.1 [a], p. 70). "
+          "El Matcher de C no superó al neutro en BIO, siguió en Born y no puede cooperar con un "
+          "Novice. La cooperación entre Matchers ya está demostrada en P2a (E3, con A9 en "
+          "decisiones). En E5 la cooperación de equipo se ve en Parser y Explainer.", ""]
+    return L
+
+
 def escribir(out=None) -> str:
     base = out_dir(out)
     d = json.loads((base / "p3_equipos.json").read_text(encoding="utf-8"))
+    ruta_desc = base / "p3_descriptivas.json"
+    desc = (json.loads(ruta_desc.read_text(encoding="utf-8")) if ruta_desc.exists() else None)
     mu = json.loads((base / "e4_muestreo_calificados.json").read_text(encoding="utf-8"))
     p4 = json.loads((base / "p4_equipo.json").read_text(encoding="utf-8"))
     cfg = cargar_config()
@@ -187,7 +267,10 @@ def escribir(out=None) -> str:
           f"verdad (Fisher p = {num(x['juntas']['p_fisher_grupo_verdad'], 4)}) y de la celda de "
           f"Si (χ² p = {num(x['juntas']['independencia_grupo_celda']['p'], 4)}). Detalle: "
           "`docs/parada_tecnica/e4_muestreo_calificados.md`. La semilla no se cambió.", "",
-          "## Resultados que no fueron los esperados", ""]
+          ]
+    if desc is not None:
+        L += descriptivas(desc, cv)
+    L += ["## Resultados que no fueron los esperados", ""]
     mb, mb0 = m["B"]["matcher"], m["B0"]["matcher"]
     ev_b, ev_b0 = mb["evaluaciones"][0], mb0["evaluaciones"][0]
     L += [f"1. **El Matcher de B gana Novice y Trained más tarde que el de B0** (Novice en el "
@@ -219,6 +302,10 @@ def escribir(out=None) -> str:
           "la brecha de paridad del Matcher en E4 viene de una diferencia de calificados que "
           "aparece en pocas semillas.", "",
           "## Preguntas para Claude chat (y, si corresponde, para la dirección)", "",
+          "Respondidas en `docs/parada_tecnica/E5_RESPUESTA_ClaudeChat_2026-10-08.md` (ver las "
+          "métricas descriptivas de arriba). Queda para el encuentro: ¿la evolución de un agente "
+          "dentro de un equipo se mide contra sus propias entradas o contra el equipo neutro?",
+          "",
           "1. **Punto de comparación de %CEA dentro de un equipo** (resultado 1). Hoy CE_0 es el "
           "operador BIO sobre la Si que le llega al rol, así que el aprendizaje de un rol de "
           "arriba sube la vara del de abajo. ¿Se mantiene (es el contrafáctico pre-registrado) "

@@ -40,10 +40,16 @@ def out_dir(path: "str | Path | None") -> Path:
     return p
 
 
+def texto_json(data: dict) -> str:
+    """El texto exacto que escribe `guardar_json` (para verificar una corrida contra lo
+    commiteado sin escribir nada)."""
+    return json.dumps({"rotulos": list(ROTULOS), **data}, ensure_ascii=False, indent=2,
+                      default=str) + "\n"
+
+
 def guardar_json(data: dict, nombre: str, destino: Path) -> Path:
     ruta = destino / nombre
-    ruta.write_text(json.dumps({"rotulos": list(ROTULOS), **data}, ensure_ascii=False,
-                               indent=2, default=str) + "\n", encoding="utf-8")
+    ruta.write_text(texto_json(data), encoding="utf-8")
     return ruta
 
 

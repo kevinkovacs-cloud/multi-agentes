@@ -79,6 +79,61 @@ En la tesis, los porcentajes se determinan comparando configuraciones de SAR (An
 
 Calificados en el flujo de E4: 0,446 (AR) y 0,300 (no-AR). z = 2,44; Fisher exacto p = 0,0208; permutación p = 0,0206. En 200 semillas más, la diferencia media es -0,0012 y solo 2,0 % de las semillas tiene una diferencia de igual o mayor tamaño. Con todas juntas, el grupo es independiente de la verdad (Fisher p = 0,7815) y de la celda de Si (χ² p = 0,1583). Detalle: `docs/parada_tecnica/e4_muestreo_calificados.md`. La semilla no se cambió.
 
+## Métricas descriptivas agregadas después del punto de control (E5_RESPUESTA, decisiones 1 y 2)
+
+Calculadas sobre las mismas corridas de E5: `p3_descriptivas.py` las reconstruye en memoria y verifica que `p3_equipos.json` sale idéntico byte a byte antes de medir. No cambian ninguna regla ni ninguna promoción. Datos: `p3_descriptivas.json`; figura: `p3_curvas_aprendizaje.png`.
+
+### 1 · Desempeño frente al equipo neutro N
+
+Para la promoción (región 7) se mantiene el contrafáctico sobre las propias entradas del rol, como está pre-registrado: aísla lo que aprendió ese agente. Para comparar equipos se agrega esta métrica: aciertos de cada rol con las entradas de su propio equipo, frente a los del rol neutro con las entradas del equipo neutro (mismos 260 casos). «Equipo» = casos resueltos de punta a punta (perfil completo, decisión correcta y explicación completa).
+
+| Rol | N | B | B0 | BC |
+|---|---|---|---|---|
+| Parser | 122 | 241 (+97,5 %) | 238 (+95,1 %) | 238 (+95,1 %) |
+| Semantic Matcher | 156 | 204 (+30,8 %) | 173 (+10,9 %) | 173 (+10,9 %) |
+| Explainer | 37 | 260 (+602,7 %) | 255 (+589,2 %) | 258 (+597,3 %) |
+| Equipo | 21 | 190 (+804,8 %) | 158 (+652,4 %) | 160 (+661,9 %) |
+
+> «La regla de evolución mide lo que aprende cada agente, no el resultado del equipo; cuando un rol de arriba mejora, el de abajo tiene que superar una referencia más exigente.»
+
+El Matcher de B promovió más lento que el de B0 porque su vara era más alta. Aun así, el equipo B acertó más que B0 (204 frente a 173 decisiones correctas; 190 frente a 158 casos resueltos de punta a punta) y solo el Matcher de B llegó a Mature.
+
+### 2 · Curvas de aprendizaje sin piso
+
+> «Con intervalos de 20 ciclos, la promoción tiene un piso de 20 ciclos por estado; para Parser y Explainer ese piso domina y la colaboración no puede adelantarla. Las curvas muestran el efecto que el piso oculta.»
+
+| Rol | Ciclos exitosos al ciclo 20 (B · B0 · C) | Teorías nuevas al ciclo 20 (B · B0 · C) | Al final (B · B0 · C) |
+|---|---|---|---|
+| Parser | 19 · 16 · 15 | 0 · 10 · 9 | 241 exitosos, 0 nuevas · 238 exitosos, 15 nuevas · 227 exitosos, 13 nuevas |
+| Semantic Matcher | 17 · 16 · 10 | 0 · 11 · 15 | 204 exitosos, 6 nuevas · 173 exitosos, 60 nuevas · 204 exitosos, 63 nuevas |
+| Explainer | 20 · 18 · 15 | 0 · 4 · 9 | 260 exitosos, 0 nuevas · 255 exitosos, 9 nuevas · 255 exitosos, 9 nuevas |
+
+**Primer ciclo en que se cumpliría la regla** si se evaluara en cada ciclo (acumulada en la capa, como la v2), y desde qué ciclo se cumple sin interrupción hasta el cierre real. Descriptivo: la promoción real sigue siendo al cierre. Con muy pocos ciclos la regla es inestable (un acierto frente a un fallo del operador BIO ya da %CEA = 100), por eso se informa también el cumplimiento sostenido.
+
+| Equipo | Rol | Capa: primer ciclo · sostenido desde · promoción real |
+|---|---|---|
+| A | Parser | BIO: 5 · 10 · 20; TBO: 1 · 1 · 20; WIO: 1 · 1 · 20 |
+| A | Semantic Matcher | BIO: 9 · 28 · 40; TBO: 1 · 69 · 80; WIO: 16 · — · — |
+| A | Explainer | BIO: 7 · 7 · 20; TBO: 1 · 1 · 20; WIO: 1 · 1 · 20 |
+| B | Parser | BIO: 5 · 5 · 20; TBO: 2 · 2 · 20; WIO: 2 · 2 · 20 |
+| B | Semantic Matcher | BIO: 1 · 24 · 40; TBO: 9 · 21 · 40; WIO: 1 · 20 · 20 |
+| B | Explainer | BIO: 4 · 4 · 20; TBO: 1 · 1 · 20; WIO: 1 · 1 · 20 |
+| B0 | Parser | BIO: 6 · 11 · 20; TBO: 2 · 2 · 20; WIO: 2 · 2 · 20 |
+| B0 | Semantic Matcher | BIO: 1 · 1 · 20; TBO: 7 · 12 · 20; WIO: — · — · — |
+| B0 | Explainer | BIO: 10 · 19 · 20; TBO: 4 · 4 · 20; WIO: 1 · 1 · 20 |
+| BC | Parser | BIO: 6 · 11 · 20; TBO: 2 · 2 · 20; WIO: 2 · 2 · 20 |
+| BC | Semantic Matcher | BIO: 1 · 1 · 20; TBO: 7 · 12 · 20; WIO: — · — · — |
+| BC | Explainer | BIO: 10 · 19 · 20; TBO: 1 · 1 · 20; WIO: 1 · 1 · 20 |
+| C | Parser | BIO: 4 · 4 · 20; TBO: 1 · 1 · 20; WIO: 3 · 3 · 20 |
+| C | Semantic Matcher | BIO: 9 · — · — |
+| C | Explainer | BIO: 5 · 5 · 20; TBO: 2 · 2 · 20; WIO: 1 · 1 · 20 |
+
+En BIO, la regla se cumple sin interrupción desde el ciclo 5 en el Parser de B y desde el 11 en el de B0; en el Explainer, desde el 4 y el 19. Es el efecto de la colaboración que el piso de 20 ciclos oculta en la promoción.
+
+### 3 · El Matcher de C no coopera
+
+Es el axioma funcionando: solo cooperan SAR en el mismo estado (§4.3.1 [a], p. 70). El Matcher de C no superó al neutro en BIO, siguió en Born y no puede cooperar con un Novice. La cooperación entre Matchers ya está demostrada en P2a (E3, con A9 en decisiones). En E5 la cooperación de equipo se ve en Parser y Explainer.
+
 ## Resultados que no fueron los esperados
 
 1. **El Matcher de B gana Novice y Trained más tarde que el de B0** (Novice en el ciclo 40 frente a 20; Trained en el 80 frente a 40), **pero llega a Mature** (ciclo 100) y el de B0 queda en Trained. En la primera evaluación, B acertó 17 de 20 frente a 16 de B0, pero su CE_0 fue 14 frente a 11: %CEA 21,4 frente a 45,5. CE_0 es el operador BIO sobre la Si que le llega al Matcher, y en B esa Si viene de un Parser que ya extrae bien desde el primer caso (recibió las teorías de A). Un Parser mejor sube el punto de comparación del Matcher. En toda la corrida, el Matcher de B acertó 204 frente a 173 de B0.
@@ -88,6 +143,8 @@ Calificados en el flujo de E4: 0,446 (AR) y 0,300 (no-AR). z = 2,44; Fisher exac
 5. **La semilla de E4 es poco frecuente** (p ≈ 0,02): la brecha de paridad del Matcher en E4 viene de una diferencia de calificados que aparece en pocas semillas.
 
 ## Preguntas para Claude chat (y, si corresponde, para la dirección)
+
+Respondidas en `docs/parada_tecnica/E5_RESPUESTA_ClaudeChat_2026-10-08.md` (ver las métricas descriptivas de arriba). Queda para el encuentro: ¿la evolución de un agente dentro de un equipo se mide contra sus propias entradas o contra el equipo neutro?
 
 1. **Punto de comparación de %CEA dentro de un equipo** (resultado 1). Hoy CE_0 es el operador BIO sobre la Si que le llega al rol, así que el aprendizaje de un rol de arriba sube la vara del de abajo. ¿Se mantiene (es el contrafáctico pre-registrado) o, para comparar equipos, se informa también contra el equipo neutro N?
 2. **Efecto techo de la promoción por intervalos** (resultado 2). Con n = 20, Parser y Explainer ya promueven en cada primer cierre posible sin compartir. ¿Se informa así, o se agrega una métrica de maduración que no tenga piso (por ejemplo, ciclos hasta una tasa de aciertos dada)? No se cambia nada sin decisión.

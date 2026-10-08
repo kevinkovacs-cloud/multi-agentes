@@ -210,7 +210,7 @@ def figura(eqs: dict, coop: dict, destino) -> str:
     pie_rotulos(fig, ["Mismos casos para B, B0 y BC (semilla de B). Las líneas están levemente "
                       "desplazadas en vertical para que no se tapen. El Bias Auditor no tiene "
                       "estados (E5, decisión 1)."], ancho=98)
-    ruta = destino / "p3_maduracion_equipos.png"
+    ruta = destino / FIGURA
     fig.savefig(ruta, dpi=200, facecolor="white")
     plt.close(fig)
     return ruta.name
@@ -302,19 +302,17 @@ def escribir_md(res: dict, destino) -> None:
 
 
 # ------------------------------ corrida ------------------------------
-def correr(out=None) -> dict:
-    cfg = cargar_config()
-    destino = out_dir(out)
+def ejecutar(cfg: dict) -> dict:
+    """Corre los equipos pre-registrados. Devuelve los equipos, la colaboración y la
+    cooperación; si algún rol de A queda en Born, {"detenido": ...} (pre-registro)."""
     e5 = cfg["equipo_e5"]
     S, comp, delta = e5["equipos"], e5["compartir_e5"], cfg["omega"]["delta"]
     eqs = {"A": EquipoLLC("A", cfg, SECCION, S["A"])}
     eqs["A"].correr()
     faltan = [r for r in comp["roles"] if eqs["A"].agentes[r].maturity == MaturityState.BORN]
     if faltan:                                               # pre-registro: detener y avisar
-        res = {"detenido": True, "motivo": "roles de A en Born: " + ", ".join(faltan),
-               "estados_A": eqs["A"].estados()}
-        guardar_json(res, "p3_equipos.json", destino)
-        return res
+        return {"detenido": {"detenido": True, "motivo": "roles de A en Born: " + ", ".join(faltan),
+                             "estados_A": eqs["A"].estados()}}
     eqs["B"] = EquipoLLC("B", cfg, SECCION, S["B"])
     colaboracion = []
     for r in comp["roles"]:                                  # A → B, rol por rol, al nacer B
@@ -345,17 +343,39 @@ def correr(out=None) -> dict:
             x.update(ventana=vbc.id, casos=len(eqs["BC"].casos))
             coop[r]["intentos"].append(x)
             coop[r]["coopero"] = x["aceptada"]
+    return {"eqs": eqs, "colaboracion": colaboracion, "cooperacion": coop}
+
+
+def resultados(cfg: dict, corrida: dict) -> dict:
+    """El contenido de p3_equipos.json (sin la figura) a partir de una corrida."""
+    e5, comp = cfg["equipo_e5"], cfg["equipo_e5"]["compartir_e5"]
+    eqs = corrida["eqs"]
     orden = ["A", "B", "B0", "BC", "C", "N"]
     met = {e: metricas(eqs[e]) for e in orden}
-    res = {"config_e5": {k: e5[k] for k in ("auditor_evoluciona", "explora_en_wio",
-                                             "si_explainer", "equipos", "compartir_e5", "l3")},
-           "equipos": orden, "colaboracion": colaboracion, "cooperacion": coop,
-           "metricas": met, "l3": l3(met, e5["l3"]["configuraciones"], e5["l3"]["roles"]),
-           "lineas_de_tiempo": {e: eqs[e].linea_de_tiempo for e in orden},
-           "b_antes_que_b0": {r: {"B": {a: _ciclo_de(met["B"][r], a) for a in ORDEN_ESTADO[1:]},
-                                  "B0": {a: _ciclo_de(met["B0"][r], a) for a in ORDEN_ESTADO[1:]}}
-                              for r in comp["roles"]}}
-    res["figura"] = figura(eqs, coop, destino)
+    return {"config_e5": {k: e5[k] for k in ("auditor_evoluciona", "explora_en_wio",
+                                              "si_explainer", "equipos", "compartir_e5", "l3")},
+            "equipos": orden, "colaboracion": corrida["colaboracion"],
+            "cooperacion": corrida["cooperacion"], "metricas": met,
+            "l3": l3(met, e5["l3"]["configuraciones"], e5["l3"]["roles"]),
+            "lineas_de_tiempo": {e: eqs[e].linea_de_tiempo for e in orden},
+            "b_antes_que_b0": {r: {"B": {a: _ciclo_de(met["B"][r], a) for a in ORDEN_ESTADO[1:]},
+                                   "B0": {a: _ciclo_de(met["B0"][r], a)
+                                          for a in ORDEN_ESTADO[1:]}}
+                               for r in comp["roles"]}}
+
+
+FIGURA = "p3_maduracion_equipos.png"
+
+
+def correr(out=None) -> dict:
+    cfg = cargar_config()
+    destino = out_dir(out)
+    corrida = ejecutar(cfg)
+    if "detenido" in corrida:
+        guardar_json(corrida["detenido"], "p3_equipos.json", destino)
+        return corrida["detenido"]
+    res = resultados(cfg, corrida)
+    res["figura"] = figura(corrida["eqs"], corrida["cooperacion"], destino)
     guardar_json(res, "p3_equipos.json", destino)
     escribir_md(res, destino)
     return res
