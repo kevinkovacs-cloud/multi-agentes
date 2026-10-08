@@ -61,7 +61,14 @@ entorno:
 
 compartir:                        # E3 (punto 2a), pre-registrado en v2 antes de correr
   gate: evidencia_de_sesgo        # se rechaza al donante si LCB_δ(|Δ_DP|) > τ_b sobre TODAS sus decisiones (una evaluación por operación: sin Bonferroni)
-  m0_historia_minima: 3           # can_donate: al menos 3 ventanas observadas (A9)
+  m0_historia_minima: 3           # A9 en ventanas (corrida original de E3; se conserva para el código heredado)
+  # Pre-registro corto de E3 (08/10/2026, E3_RESPUESTA de Claude chat), commiteado antes de correr: A9 se mide
+  # en DECISIONES. Motivo: con el gate v2 (LCB) la cantidad de decisiones ya entra en la cota; a A9 solo le
+  # queda garantizar que haya decisiones de los dos grupos sobre las cuales calcularla. En el LLC se coopera
+  # entre SARs recién nacidos (Ierache 2010, p. 124). Nada más cambia.
+  a9: decisiones                  # «ventanas» (original) | «decisiones» (pre-registro corto de E3)
+  a9_min_decisiones: 20           # al menos un intervalo de decisiones propias
+  a9_ambos_grupos: true           # cada grupo del atributo protegido representado (sin los dos no hay LCB)
   equipos:                        # un Matcher por equipo; cada uno recorre su propio escenario con su semilla
     A: 20261008                   # el agente de P1 v2 (donante de la colaboración si gana Trained o Mature)
     B: 20261108                   # recorre BIO con su semilla hasta ganar Novice (receptor; par de la cooperación)
