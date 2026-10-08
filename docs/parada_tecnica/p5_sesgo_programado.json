@@ -1,0 +1,2732 @@
+{
+  "rotulos": [
+    "ilustrativo, entorno simulado (modo sim); no es evidencia experimental",
+    "semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección"
+  ],
+  "demo": "P5 · corrida 2: sesgo programado por un proxy",
+  "rotulo_programado": "parámetros programados",
+  "rotulo_atenuacion": "ilustra el mecanismo; no es evidencia de la conjetura de atenuación",
+  "calificados_del_flujo": {
+    "n": {
+      "AR": 300,
+      "no-AR": 300
+    },
+    "tasas": {
+      "AR": 0.4233,
+      "no-AR": 0.32
+    },
+    "brecha": 0.1033
+  },
+  "figura": "p5_sesgo_programado.png",
+  "detectable": {
+    "p_local": {
+      "AR": 0.9,
+      "no-AR": 0.1
+    },
+    "brecha_operador_esperada": 0.4,
+    "dtv_si_matcher": 0.7667,
+    "configuraciones": {
+      "neutro": {
+        "estado_final": "Born",
+        "brecha_toda_la_corrida": 0.4367,
+        "brecha_por_tercio": [
+          0.51,
+          0.38,
+          0.42
+        ],
+        "odds_igualadas": {
+          "tpr": {
+            "AR": 0.5748,
+            "no-AR": 0.0729
+          },
+          "fpr": {
+            "AR": 0.4277,
+            "no-AR": 0.0441
+          },
+          "n_pos": {
+            "AR": 127,
+            "no-AR": 96
+          },
+          "n_neg": {
+            "AR": 173,
+            "no-AR": 204
+          },
+          "delta_tpr": 0.5019,
+          "delta_fpr": 0.3836,
+          "eo": 0.5019
+        },
+        "aciertos_por_grupo": {
+          "n": {
+            "AR": 300,
+            "no-AR": 300
+          },
+          "tasas": {
+            "AR": 0.5733,
+            "no-AR": 0.6733
+          },
+          "brecha": 0.1
+        },
+        "por_ventana": [
+          {
+            "id": "W01",
+            "capa": "BIO",
+            "brecha_firmada": 0.6,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W02",
+            "capa": "BIO",
+            "brecha_firmada": 0.5,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W03",
+            "capa": "BIO",
+            "brecha_firmada": 0.6,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W04",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W05",
+            "capa": "BIO",
+            "brecha_firmada": 0.8,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.022
+          },
+          {
+            "id": "W06",
+            "capa": "BIO",
+            "brecha_firmada": 0.6,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.074
+          },
+          {
+            "id": "W07",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.0856
+          },
+          {
+            "id": "W08",
+            "capa": "BIO",
+            "brecha_firmada": 0.6,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1214
+          },
+          {
+            "id": "W09",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1063
+          },
+          {
+            "id": "W10",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1155
+          },
+          {
+            "id": "W11",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1238
+          },
+          {
+            "id": "W12",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1148
+          },
+          {
+            "id": "W13",
+            "capa": "BIO",
+            "brecha_firmada": 0.5,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1309
+          },
+          {
+            "id": "W14",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.138
+          },
+          {
+            "id": "W15",
+            "capa": "BIO",
+            "brecha_firmada": 0.5,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1512
+          },
+          {
+            "id": "W16",
+            "capa": "BIO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1506
+          },
+          {
+            "id": "W17",
+            "capa": "BIO",
+            "brecha_firmada": 0.6,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.168
+          },
+          {
+            "id": "W18",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1726
+          },
+          {
+            "id": "W19",
+            "capa": "BIO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1717
+          },
+          {
+            "id": "W20",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.166
+          },
+          {
+            "id": "W21",
+            "capa": "BIO",
+            "brecha_firmada": 0.7,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1849
+          },
+          {
+            "id": "W22",
+            "capa": "BIO",
+            "brecha_firmada": 0.6,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1976
+          },
+          {
+            "id": "W23",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1877
+          },
+          {
+            "id": "W24",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1912
+          },
+          {
+            "id": "W25",
+            "capa": "BIO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1905
+          },
+          {
+            "id": "W26",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.1938
+          },
+          {
+            "id": "W27",
+            "capa": "BIO",
+            "brecha_firmada": 0.5,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.2006
+          },
+          {
+            "id": "W28",
+            "capa": "BIO",
+            "brecha_firmada": 0.5,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.2071
+          },
+          {
+            "id": "W29",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.2028
+          },
+          {
+            "id": "W30",
+            "capa": "BIO",
+            "brecha_firmada": 0.5,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": true,
+            "lcb_acumulada": 0.2089
+          }
+        ],
+        "ventanas_derivadas_regla_ventana": [],
+        "ventanas_derivadas_regla_acumulada": [
+          "W07",
+          "W08",
+          "W09",
+          "W10",
+          "W11",
+          "W12",
+          "W13",
+          "W14",
+          "W15",
+          "W16",
+          "W17",
+          "W18",
+          "W19",
+          "W20",
+          "W21",
+          "W22",
+          "W23",
+          "W24",
+          "W25",
+          "W26",
+          "W27",
+          "W28",
+          "W29",
+          "W30"
+        ],
+        "evolucion": [],
+        "teorias": {
+          "en_E": 0,
+          "llegan_a_m_min": 0,
+          "e_min": null,
+          "e_media": null
+        },
+        "teorias_sin_titulo_local": {
+          "en_E": 0,
+          "llegan_a_m_min": 0,
+          "lecturas_AR": 0,
+          "lecturas_no_AR": 0
+        }
+      },
+      "alpha_1": {
+        "estado_final": "Novice",
+        "brecha_toda_la_corrida": 0.16,
+        "brecha_por_tercio": [
+          0.18,
+          0.14,
+          0.16
+        ],
+        "odds_igualadas": {
+          "tpr": {
+            "AR": 0.8504,
+            "no-AR": 0.7292
+          },
+          "fpr": {
+            "AR": 0.1965,
+            "no-AR": 0.1176
+          },
+          "n_pos": {
+            "AR": 127,
+            "no-AR": 96
+          },
+          "n_neg": {
+            "AR": 173,
+            "no-AR": 204
+          },
+          "delta_tpr": 0.1212,
+          "delta_fpr": 0.0789,
+          "eo": 0.1212
+        },
+        "aciertos_por_grupo": {
+          "n": {
+            "AR": 300,
+            "no-AR": 300
+          },
+          "tasas": {
+            "AR": 0.8233,
+            "no-AR": 0.8333
+          },
+          "brecha": 0.01
+        },
+        "por_ventana": [
+          {
+            "id": "W01",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.5,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W02",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.45,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W03",
+            "capa": "TBO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.45,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W04",
+            "capa": "TBO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W05",
+            "capa": "TBO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W06",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.8,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W07",
+            "capa": "TBO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.8,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W08",
+            "capa": "TBO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W09",
+            "capa": "TBO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.5,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W10",
+            "capa": "TBO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.5,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W11",
+            "capa": "TBO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 0.85,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W12",
+            "capa": "TBO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W13",
+            "capa": "TBO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W14",
+            "capa": "TBO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W15",
+            "capa": "TBO",
+            "brecha_firmada": -0.3,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W16",
+            "capa": "TBO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W17",
+            "capa": "TBO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.8,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W18",
+            "capa": "TBO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W19",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W20",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W21",
+            "capa": "TBO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.75,
+            "actua_el_operador": 0.15,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W22",
+            "capa": "TBO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 0.75,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W23",
+            "capa": "TBO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W24",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.8,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W25",
+            "capa": "TBO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W26",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W27",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W28",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.85,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W29",
+            "capa": "TBO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W30",
+            "capa": "TBO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          }
+        ],
+        "ventanas_derivadas_regla_ventana": [],
+        "ventanas_derivadas_regla_acumulada": [],
+        "evolucion": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "pct_cea": 0.0,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Born",
+            "lcb": 0.0,
+            "brecha": 0.4,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 40,
+            "capa": "BIO",
+            "ciclo_capa": 40,
+            "pct_cea": 31.82,
+            "gate_omega": true,
+            "promueve": true,
+            "estado_despues": "Novice",
+            "lcb": 0.0,
+            "brecha": 0.4,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 60,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "pct_cea": 7.69,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Novice",
+            "lcb": 0.0,
+            "brecha": 0.1,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 80,
+            "capa": "TBO",
+            "ciclo_capa": 40,
+            "pct_cea": -20.0,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Novice",
+            "lcb": 0.0,
+            "brecha": 0.0,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 100,
+            "capa": "TBO",
+            "ciclo_capa": 60,
+            "pct_cea": -7.5,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Novice",
+            "lcb": 0.0,
+            "brecha": 0.0333,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 120,
+            "capa": "TBO",
+            "ciclo_capa": 80,
+            "pct_cea": -1.82,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Novice",
+            "lcb": 0.0,
+            "brecha": 0.075,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 140,
+            "capa": "TBO",
+            "ciclo_capa": 100,
+            "pct_cea": 4.35,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Novice",
+            "lcb": 0.0,
+            "brecha": 0.14,
+            "niega_omega": false
+          }
+        ],
+        "teorias": {
+          "en_E": 55,
+          "llegan_a_m_min": 0,
+          "e_min": null,
+          "e_media": null
+        },
+        "teorias_sin_titulo_local": {
+          "en_E": 25,
+          "llegan_a_m_min": 0,
+          "lecturas_AR": 17,
+          "lecturas_no_AR": 215
+        },
+        "comparticion": {
+          "donante": "Matcher-detectable-alpha_1",
+          "estados": {
+            "donante": "novato",
+            "receptor": "born"
+          },
+          "aceptada": true,
+          "motivo": "axiomas, can_donate y Ω sin evidencia de sesgo",
+          "axioma": null,
+          "omega_donante": {
+            "brecha": 0.16,
+            "lcb": 0.0,
+            "niega": false,
+            "n_por_grupo": {
+              "AR": 300,
+              "no-AR": 300
+            }
+          },
+          "conteo": {
+            "igual": 0,
+            "similar": 0,
+            "nueva": 117
+          }
+        }
+      },
+      "alpha_0_5": {
+        "estado_final": "Novice",
+        "brecha_toda_la_corrida": 0.16,
+        "brecha_por_tercio": [
+          0.18,
+          0.14,
+          0.16
+        ],
+        "odds_igualadas": {
+          "tpr": {
+            "AR": 0.8504,
+            "no-AR": 0.7292
+          },
+          "fpr": {
+            "AR": 0.1965,
+            "no-AR": 0.1176
+          },
+          "n_pos": {
+            "AR": 127,
+            "no-AR": 96
+          },
+          "n_neg": {
+            "AR": 173,
+            "no-AR": 204
+          },
+          "delta_tpr": 0.1212,
+          "delta_fpr": 0.0789,
+          "eo": 0.1212
+        },
+        "aciertos_por_grupo": {
+          "n": {
+            "AR": 300,
+            "no-AR": 300
+          },
+          "tasas": {
+            "AR": 0.8233,
+            "no-AR": 0.8333
+          },
+          "brecha": 0.01
+        },
+        "por_ventana": [
+          {
+            "id": "W01",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.5,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W02",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.45,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W03",
+            "capa": "TBO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.45,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W04",
+            "capa": "TBO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W05",
+            "capa": "TBO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W06",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.8,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W07",
+            "capa": "TBO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.8,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W08",
+            "capa": "TBO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W09",
+            "capa": "TBO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.5,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W10",
+            "capa": "TBO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.5,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W11",
+            "capa": "TBO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 0.85,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W12",
+            "capa": "TBO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W13",
+            "capa": "TBO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W14",
+            "capa": "TBO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W15",
+            "capa": "TBO",
+            "brecha_firmada": -0.3,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W16",
+            "capa": "TBO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W17",
+            "capa": "TBO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.8,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W18",
+            "capa": "TBO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W19",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W20",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W21",
+            "capa": "TBO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.75,
+            "actua_el_operador": 0.15,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W22",
+            "capa": "TBO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 0.75,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W23",
+            "capa": "TBO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W24",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.8,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W25",
+            "capa": "TBO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W26",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W27",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W28",
+            "capa": "TBO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.85,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W29",
+            "capa": "TBO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W30",
+            "capa": "TBO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          }
+        ],
+        "ventanas_derivadas_regla_ventana": [],
+        "ventanas_derivadas_regla_acumulada": [],
+        "evolucion": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "pct_cea": 0.0,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Born",
+            "lcb": 0.0,
+            "brecha": 0.4,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 40,
+            "capa": "BIO",
+            "ciclo_capa": 40,
+            "pct_cea": 31.82,
+            "gate_omega": true,
+            "promueve": true,
+            "estado_despues": "Novice",
+            "lcb": 0.0,
+            "brecha": 0.4,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 60,
+            "capa": "TBO",
+            "ciclo_capa": 20,
+            "pct_cea": 7.69,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Novice",
+            "lcb": 0.0,
+            "brecha": 0.1,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 80,
+            "capa": "TBO",
+            "ciclo_capa": 40,
+            "pct_cea": -20.0,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Novice",
+            "lcb": 0.0,
+            "brecha": 0.0,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 100,
+            "capa": "TBO",
+            "ciclo_capa": 60,
+            "pct_cea": -7.5,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Novice",
+            "lcb": 0.0,
+            "brecha": 0.0333,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 120,
+            "capa": "TBO",
+            "ciclo_capa": 80,
+            "pct_cea": -1.82,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Novice",
+            "lcb": 0.0,
+            "brecha": 0.075,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 140,
+            "capa": "TBO",
+            "ciclo_capa": 100,
+            "pct_cea": 4.35,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Novice",
+            "lcb": 0.0,
+            "brecha": 0.14,
+            "niega_omega": false
+          }
+        ],
+        "teorias": {
+          "en_E": 55,
+          "llegan_a_m_min": 0,
+          "e_min": null,
+          "e_media": null
+        },
+        "teorias_sin_titulo_local": {
+          "en_E": 25,
+          "llegan_a_m_min": 0,
+          "lecturas_AR": 17,
+          "lecturas_no_AR": 215
+        },
+        "alpha_0_5": {
+          "planificaciones": 600,
+          "equidad_usada": 0,
+          "eleccion_cambiada": 0,
+          "accion_cambiada": 0,
+          "elegida_sin_e_frente_a_una_con_e": 0,
+          "ejemplos": []
+        },
+        "comparticion": {
+          "donante": "Matcher-detectable-alpha_0_5",
+          "estados": {
+            "donante": "novato",
+            "receptor": "born"
+          },
+          "aceptada": true,
+          "motivo": "axiomas, can_donate y Ω sin evidencia de sesgo",
+          "axioma": null,
+          "omega_donante": {
+            "brecha": 0.16,
+            "lcb": 0.0,
+            "niega": false,
+            "n_por_grupo": {
+              "AR": 300,
+              "no-AR": 300
+            }
+          },
+          "conteo": {
+            "igual": 0,
+            "similar": 0,
+            "nueva": 117
+          }
+        }
+      }
+    }
+  },
+  "bajo_umbral": {
+    "p_local": {
+      "AR": 0.6,
+      "no-AR": 0.4
+    },
+    "brecha_operador_esperada": 0.1,
+    "dtv_si_matcher": 0.0222,
+    "configuraciones": {
+      "neutro": {
+        "estado_final": "Born",
+        "brecha_toda_la_corrida": 0.1067,
+        "brecha_por_tercio": [
+          0.11,
+          0.03,
+          0.18
+        ],
+        "odds_igualadas": {
+          "tpr": {
+            "AR": 0.3622,
+            "no-AR": 0.2708
+          },
+          "fpr": {
+            "AR": 0.2601,
+            "no-AR": 0.1618
+          },
+          "n_pos": {
+            "AR": 127,
+            "no-AR": 96
+          },
+          "n_neg": {
+            "AR": 173,
+            "no-AR": 204
+          },
+          "delta_tpr": 0.0914,
+          "delta_fpr": 0.0984,
+          "eo": 0.0984
+        },
+        "aciertos_por_grupo": {
+          "n": {
+            "AR": 300,
+            "no-AR": 300
+          },
+          "tasas": {
+            "AR": 0.58,
+            "no-AR": 0.6567
+          },
+          "brecha": 0.0767
+        },
+        "por_ventana": [
+          {
+            "id": "W01",
+            "capa": "BIO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W02",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W03",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W04",
+            "capa": "BIO",
+            "brecha_firmada": -0.3,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W05",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W06",
+            "capa": "BIO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W07",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W08",
+            "capa": "BIO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W09",
+            "capa": "BIO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W10",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W11",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W12",
+            "capa": "BIO",
+            "brecha_firmada": -0.2,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W13",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W14",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W15",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W16",
+            "capa": "BIO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W17",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W18",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W19",
+            "capa": "BIO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W20",
+            "capa": "BIO",
+            "brecha_firmada": -0.3,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W21",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W22",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W23",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W24",
+            "capa": "BIO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W25",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W26",
+            "capa": "BIO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W27",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W28",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W29",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W30",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 1.0,
+            "actua_el_operador": 1.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          }
+        ],
+        "ventanas_derivadas_regla_ventana": [],
+        "ventanas_derivadas_regla_acumulada": [],
+        "evolucion": [],
+        "teorias": {
+          "en_E": 0,
+          "llegan_a_m_min": 0,
+          "e_min": null,
+          "e_media": null
+        },
+        "teorias_sin_titulo_local": {
+          "en_E": 0,
+          "llegan_a_m_min": 0,
+          "lecturas_AR": 0,
+          "lecturas_no_AR": 0
+        }
+      },
+      "alpha_1": {
+        "estado_final": "Born",
+        "brecha_toda_la_corrida": 0.1,
+        "brecha_por_tercio": [
+          0.13,
+          0.11,
+          0.06
+        ],
+        "odds_igualadas": {
+          "tpr": {
+            "AR": 0.8819,
+            "no-AR": 0.8438
+          },
+          "fpr": {
+            "AR": 0.1676,
+            "no-AR": 0.1471
+          },
+          "n_pos": {
+            "AR": 127,
+            "no-AR": 96
+          },
+          "n_neg": {
+            "AR": 173,
+            "no-AR": 204
+          },
+          "delta_tpr": 0.0381,
+          "delta_fpr": 0.0206,
+          "eo": 0.0381
+        },
+        "aciertos_por_grupo": {
+          "n": {
+            "AR": 300,
+            "no-AR": 300
+          },
+          "tasas": {
+            "AR": 0.8533,
+            "no-AR": 0.85
+          },
+          "brecha": 0.0033
+        },
+        "por_ventana": [
+          {
+            "id": "W01",
+            "capa": "BIO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 0.4,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W02",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.45,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W03",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W04",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W05",
+            "capa": "BIO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.4,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W06",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W07",
+            "capa": "BIO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W08",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W09",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W10",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W11",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W12",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W13",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W14",
+            "capa": "BIO",
+            "brecha_firmada": 0.5,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W15",
+            "capa": "BIO",
+            "brecha_firmada": -0.3,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W16",
+            "capa": "BIO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W17",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W18",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W19",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.4,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W20",
+            "capa": "BIO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W21",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W22",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.75,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W23",
+            "capa": "BIO",
+            "brecha_firmada": -0.2,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W24",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.8,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W25",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.75,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W26",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.5,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W27",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W28",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.8,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W29",
+            "capa": "BIO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.45,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W30",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.5,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          }
+        ],
+        "ventanas_derivadas_regla_ventana": [],
+        "ventanas_derivadas_regla_acumulada": [],
+        "evolucion": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "pct_cea": 0.0,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Born",
+            "lcb": 0.0,
+            "brecha": 0.3,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 40,
+            "capa": "BIO",
+            "ciclo_capa": 40,
+            "pct_cea": 21.74,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Born",
+            "lcb": 0.0,
+            "brecha": 0.25,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 60,
+            "capa": "BIO",
+            "ciclo_capa": 60,
+            "pct_cea": 10.53,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Born",
+            "lcb": 0.0,
+            "brecha": 0.2,
+            "niega_omega": false
+          }
+        ],
+        "teorias": {
+          "en_E": 59,
+          "llegan_a_m_min": 17,
+          "e_min": 0.769231,
+          "e_media": 0.9184
+        },
+        "teorias_sin_titulo_local": {
+          "en_E": 27,
+          "llegan_a_m_min": 12,
+          "lecturas_AR": 113,
+          "lecturas_no_AR": 164
+        },
+        "comparticion": {
+          "donante": "Matcher-bajo_umbral-alpha_1",
+          "estados": {
+            "donante": "born",
+            "receptor": "born"
+          },
+          "aceptada": false,
+          "motivo": "rechazada por el código: el colaborador debe tener nivel estrictamente superior (Def. 8)",
+          "axioma": "§4.3.1 [b] (p. 70): la colaboración se presenta entre un SAR en un estado de evolución superior y un SAR receptor en un estado inferior",
+          "omega_donante": {
+            "brecha": 0.1,
+            "lcb": 0.0,
+            "niega": false,
+            "n_por_grupo": {
+              "AR": 300,
+              "no-AR": 300
+            }
+          },
+          "conteo": null
+        }
+      },
+      "alpha_0_5": {
+        "estado_final": "Born",
+        "brecha_toda_la_corrida": 0.1,
+        "brecha_por_tercio": [
+          0.13,
+          0.11,
+          0.06
+        ],
+        "odds_igualadas": {
+          "tpr": {
+            "AR": 0.8819,
+            "no-AR": 0.8438
+          },
+          "fpr": {
+            "AR": 0.1676,
+            "no-AR": 0.1471
+          },
+          "n_pos": {
+            "AR": 127,
+            "no-AR": 96
+          },
+          "n_neg": {
+            "AR": 173,
+            "no-AR": 204
+          },
+          "delta_tpr": 0.0381,
+          "delta_fpr": 0.0206,
+          "eo": 0.0381
+        },
+        "aciertos_por_grupo": {
+          "n": {
+            "AR": 300,
+            "no-AR": 300
+          },
+          "tasas": {
+            "AR": 0.8533,
+            "no-AR": 0.85
+          },
+          "brecha": 0.0033
+        },
+        "por_ventana": [
+          {
+            "id": "W01",
+            "capa": "BIO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 0.4,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W02",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.45,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W03",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W04",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W05",
+            "capa": "BIO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.4,
+            "actua_el_operador": 0.1,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W06",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W07",
+            "capa": "BIO",
+            "brecha_firmada": 0.3,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W08",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W09",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W10",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W11",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W12",
+            "capa": "BIO",
+            "brecha_firmada": 0.4,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W13",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W14",
+            "capa": "BIO",
+            "brecha_firmada": 0.5,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W15",
+            "capa": "BIO",
+            "brecha_firmada": -0.3,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W16",
+            "capa": "BIO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W17",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W18",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.65,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W19",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.4,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W20",
+            "capa": "BIO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W21",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.55,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W22",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.75,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W23",
+            "capa": "BIO",
+            "brecha_firmada": -0.2,
+            "accion_igual_al_operador": 0.7,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W24",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.8,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W25",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.75,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W26",
+            "capa": "BIO",
+            "brecha_firmada": 0.1,
+            "accion_igual_al_operador": 0.5,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W27",
+            "capa": "BIO",
+            "brecha_firmada": 0.2,
+            "accion_igual_al_operador": 0.6,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W28",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.8,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W29",
+            "capa": "BIO",
+            "brecha_firmada": -0.1,
+            "accion_igual_al_operador": 0.45,
+            "actua_el_operador": 0.0,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          },
+          {
+            "id": "W30",
+            "capa": "BIO",
+            "brecha_firmada": 0.0,
+            "accion_igual_al_operador": 0.5,
+            "actua_el_operador": 0.05,
+            "deriva_ventana": false,
+            "deriva_acumulada": false,
+            "lcb_acumulada": 0.0
+          }
+        ],
+        "ventanas_derivadas_regla_ventana": [],
+        "ventanas_derivadas_regla_acumulada": [],
+        "evolucion": [
+          {
+            "ciclo": 20,
+            "capa": "BIO",
+            "ciclo_capa": 20,
+            "pct_cea": 0.0,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Born",
+            "lcb": 0.0,
+            "brecha": 0.3,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 40,
+            "capa": "BIO",
+            "ciclo_capa": 40,
+            "pct_cea": 21.74,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Born",
+            "lcb": 0.0,
+            "brecha": 0.25,
+            "niega_omega": false
+          },
+          {
+            "ciclo": 60,
+            "capa": "BIO",
+            "ciclo_capa": 60,
+            "pct_cea": 10.53,
+            "gate_omega": true,
+            "promueve": false,
+            "estado_despues": "Born",
+            "lcb": 0.0,
+            "brecha": 0.2,
+            "niega_omega": false
+          }
+        ],
+        "teorias": {
+          "en_E": 64,
+          "llegan_a_m_min": 17,
+          "e_min": 0.6,
+          "e_media": 0.8922
+        },
+        "teorias_sin_titulo_local": {
+          "en_E": 29,
+          "llegan_a_m_min": 12,
+          "lecturas_AR": 113,
+          "lecturas_no_AR": 164
+        },
+        "alpha_0_5": {
+          "planificaciones": 600,
+          "equidad_usada": 44,
+          "eleccion_cambiada": 30,
+          "accion_cambiada": 0,
+          "elegida_sin_e_frente_a_una_con_e": 30,
+          "ejemplos": [
+            {
+              "ciclo": 329,
+              "capa": "BIO",
+              "si": {
+                "skills_match": 3,
+                "exp_band": "junior",
+                "edu": "Maestría",
+                "seniority_ok": false,
+                "titulo_local": true
+              },
+              "elegida": {
+                "accion": "REJECT",
+                "teoria": 89,
+                "motivo": "celda"
+              },
+              "con_alpha_1": {
+                "accion": "REJECT",
+                "motivo": "celda",
+                "teoria": 48
+              },
+              "candidatas": [
+                {
+                  "id": 89,
+                  "a": "REJECT",
+                  "sf": {
+                    "calificado": true
+                  },
+                  "u_tarea": 0.7692307692307693,
+                  "u_orden": 0.769231,
+                  "e": null
+                },
+                {
+                  "id": 48,
+                  "a": "REJECT",
+                  "sf": {
+                    "calificado": false
+                  },
+                  "u_tarea": 0.7692307692307693,
+                  "u_orden": 0.684615,
+                  "e": 0.6
+                },
+                {
+                  "id": 36,
+                  "a": "ADVANCE",
+                  "sf": {
+                    "calificado": false
+                  },
+                  "u_tarea": 0.4,
+                  "u_orden": 0.4,
+                  "e": null
+                },
+                {
+                  "id": 34,
+                  "a": "ADVANCE",
+                  "sf": {
+                    "calificado": true
+                  },
+                  "u_tarea": 0.4,
+                  "u_orden": 0.4,
+                  "e": null
+                }
+              ]
+            },
+            {
+              "ciclo": 341,
+              "capa": "BIO",
+              "si": {
+                "skills_match": 1,
+                "exp_band": "senior",
+                "edu": "Licenciatura",
+                "seniority_ok": true,
+                "titulo_local": true
+              },
+              "elegida": {
+                "accion": "ADVANCE",
+                "teoria": 96,
+                "motivo": "celda"
+              },
+              "con_alpha_1": {
+                "accion": "ADVANCE",
+                "motivo": "celda",
+                "teoria": 19
+              },
+              "candidatas": [
+                {
+                  "id": 96,
+                  "a": "ADVANCE",
+                  "sf": {
+                    "calificado": false
+                  },
+                  "u_tarea": 0.8666666666666667,
+                  "u_orden": 0.866667,
+                  "e": null
+                },
+                {
+                  "id": 19,
+                  "a": "ADVANCE",
+                  "sf": {
+                    "calificado": true
+                  },
+                  "u_tarea": 0.8666666666666667,
+                  "u_orden": 0.833333,
+                  "e": 0.8
+                }
+              ]
+            },
+            {
+              "ciclo": 350,
+              "capa": "BIO",
+              "si": {
+                "skills_match": 3,
+                "exp_band": "junior",
+                "edu": "Maestría",
+                "seniority_ok": false,
+                "titulo_local": true
+              },
+              "elegida": {
+                "accion": "REJECT",
+                "teoria": 89,
+                "motivo": "celda"
+              },
+              "con_alpha_1": {
+                "accion": "REJECT",
+                "motivo": "celda",
+                "teoria": 48
+              },
+              "candidatas": [
+                {
+                  "id": 89,
+                  "a": "REJECT",
+                  "sf": {
+                    "calificado": true
+                  },
+                  "u_tarea": 0.7142857142857143,
+                  "u_orden": 0.714286,
+                  "e": null
+                },
+                {
+                  "id": 48,
+                  "a": "REJECT",
+                  "sf": {
+                    "calificado": false
+                  },
+                  "u_tarea": 0.7142857142857143,
+                  "u_orden": 0.657143,
+                  "e": 0.6
+                },
+                {
+                  "id": 36,
+                  "a": "ADVANCE",
+                  "sf": {
+                    "calificado": false
+                  },
+                  "u_tarea": 0.4,
+                  "u_orden": 0.4,
+                  "e": null
+                },
+                {
+                  "id": 34,
+                  "a": "ADVANCE",
+                  "sf": {
+                    "calificado": true
+                  },
+                  "u_tarea": 0.4,
+                  "u_orden": 0.4,
+                  "e": null
+                }
+              ]
+            }
+          ]
+        },
+        "comparticion": {
+          "donante": "Matcher-bajo_umbral-alpha_0_5",
+          "estados": {
+            "donante": "born",
+            "receptor": "born"
+          },
+          "aceptada": false,
+          "motivo": "rechazada por el código: el colaborador debe tener nivel estrictamente superior (Def. 8)",
+          "axioma": "§4.3.1 [b] (p. 70): la colaboración se presenta entre un SAR en un estado de evolución superior y un SAR receptor en un estado inferior",
+          "omega_donante": {
+            "brecha": 0.1,
+            "lcb": 0.0,
+            "niega": false,
+            "n_por_grupo": {
+              "AR": 300,
+              "no-AR": 300
+            }
+          },
+          "conteo": null
+        }
+      }
+    }
+  }
+}
