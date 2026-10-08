@@ -214,3 +214,18 @@ python experiments/demos_direccion/generar_todo.py
 
 Cada demo corre también por separado (`python experiments/demos_direccion/d1_embeddings.py`,
 etc.; `--out DIR` para escribir en otra carpeta). `demo_caso.py` y `run_poc.py` no cambian.
+
+## Bloque E (08/10/2026, en curso) — «parada técnica»: la PoC como ciclo de vida
+
+Rama `eje1/bloque-e` (desde `eje1/formalizacion-v2`, `58ce027`), sin push. Pedido de la dirección
+(Ierache y Becerra): demostrar en el caso de aplicación el ciclo de vida de los agentes según el LLC de
+Ierache (2010). Diagnóstico: `docs/parada_tecnica/E0_DIAGNOSTICO.md`; decisiones P1–P5 de Claude chat:
+`docs/parada_tecnica/E0_RESPUESTA_P1-P5_ClaudeChat_2026-10-08.md`.
+
+- **E1 · Orquestación con LangGraph.** La orquestación con LangGraph existió desde la primera versión
+  (06/06/2026, `pipeline/dag.py`) y quedó fuera del historial al reorganizarlo. El Bloque E la restituye
+  como orquestador del DAG: `core/grafo.py` (`StateGraph` genérico, sin dominio) y
+  `HRPipeline(..., orquestador="langgraph")`. El default sigue en `"secuencial"`, así que `main`,
+  `run_poc.py`, `demo_caso.py` y los demos del Bloque D no cambian. Un test verifica que, en el lote de la
+  PoC, ambos orquestadores dan las mismas decisiones y los mismos eventos en el mismo orden. El fuente de
+  junio queda en la rama local `rescate/langgraph-junio` (`b267323`).

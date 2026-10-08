@@ -27,7 +27,8 @@ class HRPipeline:
     def __init__(self, mode: str = "sim", criterion: str = "demographic_parity",
                  attr: str = "origin_group", threshold: float = 0.075,
                  heterogeneous_reputation: bool = False, auditor_mode: str = "demo",
-                 topology: str = "chain", k: int = 3, aggregation: str = "mean"):
+                 topology: str = "chain", k: int = 3, aggregation: str = "mean",
+                 orquestador: str = "secuencial"):
         # N3: reputación heterogénea para nodos transformadores (Parser ← 1−d̂_TV).
         # Default OFF: decisión pendiente con la dirección; los decisores siempre
         # acumulan fair(W) sobre SUS PROPIAS salidas (ver run_poc).
@@ -59,8 +60,17 @@ class HRPipeline:
         self.explainer = ExplainabilityAgent(self.backend)
         self.monitor = FairnessUtilityMonitor(criterion=criterion, attr=attr,
                                               disparity_threshold=threshold)
-        self.orch = Orchestrator([self.parser, self.matcher, self.auditor, self.explainer],
-                                 monitor=self.monitor, finalize=_finalize)
+        # bloque E · E1: "langgraph" orquesta el mismo DAG con un StateGraph (core/grafo.py);
+        # el default "secuencial" deja intacta la salida de main, run_poc y los demos.
+        nodos = [self.parser, self.matcher, self.auditor, self.explainer]
+        if orquestador == "secuencial":
+            self.orch = Orchestrator(nodos, monitor=self.monitor, finalize=_finalize)
+        elif orquestador == "langgraph":
+            from moav_hr.core.grafo import OrquestadorLangGraph
+            self.orch = OrquestadorLangGraph(nodos, monitor=self.monitor, finalize=_finalize)
+        else:
+            raise ValueError("orquestador debe ser 'secuencial' o 'langgraph'")
+        self.orquestador = orquestador
 
     @property
     def agents(self):
