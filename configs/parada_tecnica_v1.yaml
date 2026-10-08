@@ -1,0 +1,42 @@
+# Bloque E · «parada técnica» — parámetros PRE-REGISTRADOS (decisiones P1–P5 de Claude chat, 08/10/2026).
+# Se commitean ANTES de la primera corrida de P1. No se ajustan después de correr: un cambio va en un
+# commit nuevo, con su motivo, y se reporta en el informe. Las reglas del entorno están en
+# src/moav_hr/instances/hr/entorno.py (mismo commit).
+# Cada valor lleva su justificación. «[CC]» marca los parámetros que agregó Claude Code (no están en la
+# tabla de P1) y que se revisan en el punto de control de E2.
+
+semilla: 20261008                 # [CC] semilla base del entorno; cada capa usa semilla + índice de la capa
+
+ciclo_de_vida:
+  n_intervalo: 20                 # P1: ciclos por intervalo de evaluación; también es la ventana de fair(W) del agente
+  ciclos_por_capa:
+    BIO: 60                       # P1: escenario más simple (8 celdas): 3 intervalos
+    TBO: 100                      # P1: 16 celdas: 5 intervalos
+    WIO: 100                      # P1: 24 celdas y revisión humana con ruido: 5 intervalos
+  rce: 25                         # P1: %RCE, mejora mínima de ciclos exitosos sobre el SAR neutro (no se copia L-3: otra escala)
+  rtn: 20                         # P1: %RTN, tope de teorías nuevas por intervalo (solo si el agente recibió colaboración)
+  umbral_ciclo_exitoso: 0.75      # Ierache 2010, p. 118: ciclo que termina con una teoría de U > 0,75
+  fin_en_mature: true             # [CC] al llegar a Mature termina la corrida del ciclo de vida (Fig. 4.28: «SAR evoluciona de estado» → fin)
+  sin_promocion: detener          # P2: si se agotan los ciclos de la capa sin cumplir la regla, el agente queda en su estado y no pasa de capa
+
+omega:
+  tau: 0.8                        # P1: gate de Ω puntual (reputación = media de fair(W) de las últimas 5 ventanas del agente)
+  certificado_informado: true     # P1: el gate certificado se informa, no se exige (m_min(1,0) = 47 ventanas)
+  criterio: demographic_parity    # [CC] criterio de fair(W) para la ventana del Matcher (ADVANCE/REJECT por grupo)
+  atributo: origin_group          # plano de auditoría (DE-4): nunca entra en Si, A ni prompts
+
+planificador:
+  orden: fig_4_21                 # Ierache 2010, §4.4.7.2, Fig. 4.21: U desc, P desc, K asc (desempate: recencia desc, id asc)
+  validez_plan: u_tarea_mayor_que_0   # P3.1: la primera teoría del orden es plan válido solo si u_tarea > 0
+  acciones_orden_fijo: [ADVANCE, REJECT]  # [CC] orden fijo de la exploración «azar» en BIO y TBO (alfabético, neutro)
+  respaldo_similitud: false       # [CC] en P1 el planificador es el del LLC (sin similitud); P2b muestra el respaldo como extensión declarada (DE-2)
+  delta_similitud: 0.7            # δ del Matcher (D1); solo se usa si respaldo_similitud = true
+  similitud: token-cosine         # default del código (D1)
+
+utilidad:
+  alpha: 1.0                      # DE-5: P1 corre con el LLC puro (U = u_tarea)
+  alpha_comparacion: 0.5          # DE-5: P2b compara con α = 0,5
+  m_min_por_grupo: 5              # [CC] usos mínimos por grupo en E(t) para estimar ê(t); con menos, α = 1 y se registra
+
+entorno:
+  ruido_wio_epsilon: 0.1          # [CC] DE-8: revisión humana simulada (human_sim noisy) en WIO; mismo ε por defecto que run_poc

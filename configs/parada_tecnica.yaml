@@ -1,42 +1,69 @@
-# Bloque E · «parada técnica» — parámetros PRE-REGISTRADOS (decisiones P1–P5 de Claude chat, 08/10/2026).
-# Se commitean ANTES de la primera corrida de P1. No se ajustan después de correr: un cambio va en un
-# commit nuevo, con su motivo, y se reporta en el informe. Las reglas del entorno están en
-# src/moav_hr/instances/hr/entorno.py (mismo commit).
-# Cada valor lleva su justificación. «[CC]» marca los parámetros que agregó Claude Code (no están en la
-# tabla de P1) y que se revisan en el punto de control de E2.
+# Bloque E · «parada técnica» — parámetros PRE-REGISTRADOS, versión 2 (08/10/2026).
+# Se commitea ANTES de correr P1 v2, P2b v2 y E3. Es la única revisión (E2_RESPUESTA de Claude chat):
+# si la v2 tampoco muestra transiciones, no se cambia nada más.
+# La versión 1 (la del primer pre-registro, commit 2d847ad) queda congelada en configs/parada_tecnica_v1.yaml.
+#
+# Cambios respecto de v1 y su motivo (docs/parada_tecnica/E2_RESPUESTA_ClaudeChat_2026-10-08.md):
+#   1. omega.gate_evolucion: «puntual» → «evidencia_de_sesgo». Ω niega la promoción solo si
+#      LCB_{δ/L}(|Δ_DP|) > τ_b sobre TODAS las decisiones del agente en la capa (L = cierres posibles de
+#      la capa, Bonferroni). Motivo: con ventanas de 20, el gate puntual era ruido de muestreo; se usa el
+#      mismo primitivo que la regla de bloqueo publicada (cota de confianza, no estimación puntual).
+#   2. planificador.utilidad_teoria: «u_tarea» → «accion». U(Si, A) = (aciertos de A en la celda + 1) /
+#      (K(Si, A) + 2), igual para todas las variantes (Si, A, ·); validez del plan: U ≥ 0,5. Motivo:
+#      utilidad basada en la acción (Ierache 2010, §4.4.3.2, pp. 89–90; el planificador por ranking rinde
+#      mejor con ella, p. 107) y recomendación 2(a) de la hoja; evita que un acierto aislado deje U = 1.
+#   3. ciclo_de_vida.evaluacion: «por_intervalo» → «acumulada_en_la_capa». CE_a, CE_0 y teorías nuevas se
+#      acumulan desde el inicio de la capa (p. 118: ciclos exitosos es un contador acumulado; Fig. 4.28).
+#   4. compartir (nuevo, para E3): mismo criterio que el gate v2 y can_donate.
+# Sin cambios: semilla, n, ciclos por capa, %RCE, %RTN, umbral de ciclo exitoso, ε de WIO, τ_b, δ.
 
-semilla: 20261008                 # [CC] semilla base del entorno; cada capa usa semilla + índice de la capa
+version_preregistro: v2
+semilla: 20261008                 # aprobado (E2_RESPUESTA §5)
 
 ciclo_de_vida:
-  n_intervalo: 20                 # P1: ciclos por intervalo de evaluación; también es la ventana de fair(W) del agente
+  n_intervalo: 20                 # P1: ciclos por intervalo; también la ventana de fair(W) informada
   ciclos_por_capa:
-    BIO: 60                       # P1: escenario más simple (8 celdas): 3 intervalos
-    TBO: 100                      # P1: 16 celdas: 5 intervalos
-    WIO: 100                      # P1: 24 celdas y revisión humana con ruido: 5 intervalos
-  rce: 25                         # P1: %RCE, mejora mínima de ciclos exitosos sobre el SAR neutro (no se copia L-3: otra escala)
-  rtn: 20                         # P1: %RTN, tope de teorías nuevas por intervalo (solo si el agente recibió colaboración)
-  umbral_ciclo_exitoso: 0.75      # Ierache 2010, p. 118: ciclo que termina con una teoría de U > 0,75
-  fin_en_mature: true             # [CC] al llegar a Mature termina la corrida del ciclo de vida (Fig. 4.28: «SAR evoluciona de estado» → fin)
-  sin_promocion: detener          # P2: si se agotan los ciclos de la capa sin cumplir la regla, el agente queda en su estado y no pasa de capa
+    BIO: 60                       # 3 cierres posibles (L = 3)
+    TBO: 100                      # 5 cierres posibles (L = 5)
+    WIO: 100                      # 5 cierres posibles (L = 5)
+  rce: 25                         # P1: %RCE
+  rtn: 20                         # P1: %RTN (solo si el agente recibió colaboración en la capa)
+  umbral_ciclo_exitoso: 0.75      # p. 118. Ciclo exitoso = la acción del ciclo fue correcta (u del ciclo = 1), igual para el agente y el SAR neutro (E2_RESPUESTA §2)
+  evaluacion: acumulada_en_la_capa   # v2, cambio 3
+  fin_en_mature: true             # aprobado (E2_RESPUESTA §5)
+  sin_promocion: detener          # P2
 
 omega:
-  tau: 0.8                        # P1: gate de Ω puntual (reputación = media de fair(W) de las últimas 5 ventanas del agente)
-  certificado_informado: true     # P1: el gate certificado se informa, no se exige (m_min(1,0) = 47 ventanas)
-  criterio: demographic_parity    # [CC] criterio de fair(W) para la ventana del Matcher (ADVANCE/REJECT por grupo)
-  atributo: origin_group          # plano de auditoría (DE-4): nunca entra en Si, A ni prompts
+  gate_evolucion: evidencia_de_sesgo   # v2, cambio 1; la reputación r y el certificado se informan, no deciden
+  tau_b: 0.075                    # umbral del Monitor (el mismo de la regla de bloqueo)
+  delta: 0.05                     # nivel de la cota; Bonferroni δ/L por los cierres de la capa
+  tau: 0.8                        # se sigue informando la reputación puntual frente a τ (no decide en v2)
+  certificado_informado: true
+  criterio: demographic_parity    # aprobado (E2_RESPUESTA §5)
+  atributo: origin_group          # plano de auditoría (DE-4)
 
 planificador:
-  orden: fig_4_21                 # Ierache 2010, §4.4.7.2, Fig. 4.21: U desc, P desc, K asc (desempate: recencia desc, id asc)
-  validez_plan: u_tarea_mayor_que_0   # P3.1: la primera teoría del orden es plan válido solo si u_tarea > 0
-  acciones_orden_fijo: [ADVANCE, REJECT]  # [CC] orden fijo de la exploración «azar» en BIO y TBO (alfabético, neutro)
-  respaldo_similitud: false       # [CC] en P1 el planificador es el del LLC (sin similitud); P2b muestra el respaldo como extensión declarada (DE-2)
-  delta_similitud: 0.7            # δ del Matcher (D1); solo se usa si respaldo_similitud = true
-  similitud: token-cosine         # default del código (D1)
+  orden: fig_4_21                 # U desc, P desc, K asc (desempate: recencia desc, id asc)
+  utilidad_teoria: accion         # v2, cambio 2: U(Si, A) con Laplace; rango [0, 1] (Ierache usa [−1, 1])
+  validez_plan: u_mayor_o_igual_0_5   # v2, cambio 2 (reemplaza a u_tarea > 0)
+  acciones_orden_fijo: [ADVANCE, REJECT]   # aprobado: exploración «azar» solo en BIO y TBO
+  respaldo_similitud: false       # aprobado: apagado en P1; encendido solo en P2b (ii)
+  delta_similitud: 0.7
+  similitud: token-cosine
 
 utilidad:
-  alpha: 1.0                      # DE-5: P1 corre con el LLC puro (U = u_tarea)
-  alpha_comparacion: 0.5          # DE-5: P2b compara con α = 0,5
-  m_min_por_grupo: 5              # [CC] usos mínimos por grupo en E(t) para estimar ê(t); con menos, α = 1 y se registra
+  alpha: 1.0
+  alpha_comparacion: 0.5
+  m_min_por_grupo: 5              # aprobado; a esta escala α = 0,5 no tiene efecto (se reporta)
 
 entorno:
-  ruido_wio_epsilon: 0.1          # [CC] DE-8: revisión humana simulada (human_sim noisy) en WIO; mismo ε por defecto que run_poc
+  ruido_wio_epsilon: 0.1          # aprobado
+
+compartir:                        # E3 (punto 2a), pre-registrado en v2 antes de correr
+  gate: evidencia_de_sesgo        # se rechaza al donante si LCB_δ(|Δ_DP|) > τ_b sobre TODAS sus decisiones (una evaluación por operación: sin Bonferroni)
+  m0_historia_minima: 3           # can_donate: al menos 3 ventanas observadas (A9)
+  equipos:                        # un Matcher por equipo; cada uno recorre su propio escenario con su semilla
+    A: 20261008                   # el agente de P1 v2 (donante de la colaboración si gana Trained o Mature)
+    B: 20261108                   # recorre BIO con su semilla hasta ganar Novice (receptor; par de la cooperación)
+    C: 20261208                   # ídem (par de la cooperación con B)
+  si_falta_un_estado: detener_y_avisar   # E2_RESPUESTA §4: sin fijar estados a mano
