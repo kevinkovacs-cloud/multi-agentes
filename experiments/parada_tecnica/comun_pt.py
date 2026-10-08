@@ -19,9 +19,19 @@ C_AZUL, C_VERDE, C_ROJO, C_AMBAR, C_VIOLETA, C_TEXTO = (
     "#1F3A5F", "#0F5C46", "#8B1A1A", "#7A4B00", "#3C3489", "#111111")
 
 
-def cargar_config(path: "str | Path | None" = None) -> dict:
+CONFIGS = {"v1": REPO / "configs" / "parada_tecnica_v1.yaml", "v2": CONFIG}
+
+
+def cargar_config(path: "str | Path | None" = None, version: "str | None" = None) -> dict:
     from moav_hr.core.runlog import load_config
+    if version is not None:
+        path = CONFIGS[version]
     return load_config(str(path or CONFIG))
+
+
+def out_version(base: "str | Path | None", version: str) -> Path:
+    """Salidas de cada versión del pre-registro en su subcarpeta (v1/, v2/)."""
+    return out_dir(Path(base if base is not None else OUT_DEFAULT) / version)
 
 
 def out_dir(path: "str | Path | None") -> Path:

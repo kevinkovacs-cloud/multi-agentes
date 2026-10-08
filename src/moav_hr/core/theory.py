@@ -279,6 +279,33 @@ class TheoryBase:
         self.add(nueva)
         return nueva, "nueva"
 
+    def recalcular_u_accion(self, si: dict, a: str,
+                            es_acierto: Callable[[Theory], bool]) -> Optional[float]:
+        """
+        U basada en la acción (bloque E · pre-registro v2, cambio 2): para la celda (Si, A),
+        U(Si, A) = (aciertos de A + 1) / (K(Si, A) + 2), con K(Si, A) = ΣP de la celda (las
+        veces que se ejecutó A en Si) y aciertos = ΣP de las variantes cuya Sf hace correcta la
+        acción (`es_acierto`). Se asigna la misma U a todas las variantes (Si, A, ·): entre
+        acciones decide U; dentro de la acción, P elige la variante (el Sf que se predice).
+        Utilidad basada en la acción de Ierache 2010 (§4.4.3.2, pp. 89–90), estimada con los
+        resultados observados; rango [0, 1]. Devuelve U o None si la celda está vacía.
+        """
+        celda = self._by_cell.get((self.q(si), a), [])
+        if not celda:
+            return None
+        k = sum(t.p for t in celda)
+        aciertos = sum(t.p for t in celda if es_acierto(t))
+        u = (aciertos + 1) / (k + 2)
+        for t in celda:
+            t.u = u
+        return u
+
+    def recalcular_u_accion_todas(self, es_acierto: Callable[[Theory], bool]) -> None:
+        """Recalcula U(Si, A) en todas las celdas (por ejemplo, después de compartir)."""
+        for (qsi, a), celda in list(self._by_cell.items()):
+            if celda:
+                self.recalcular_u_accion(celda[0].si, a, es_acierto)
+
     def __len__(self) -> int:
         return len(self.theories)
 

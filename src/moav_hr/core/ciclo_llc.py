@@ -96,6 +96,14 @@ class ConfigCiclo:
     acciones_orden: tuple = ()
     attr: str = "origin_group"
     criterio: str = "demographic_parity"
+    # pre-registro v2 (los defaults reproducen la v1)
+    version: str = "v1"
+    evaluacion: str = "por_intervalo"          # | "acumulada_en_la_capa"
+    gate: str = "puntual"                      # | "evidencia_de_sesgo"
+    utilidad_teoria: str = "u_tarea"           # | "accion"
+    validez: str = "u_tarea_mayor_que_0"       # | "u_mayor_o_igual_0_5"
+    tau_b: float = 0.075
+    delta_omega: float = 0.05
 
     @classmethod
     def desde_yaml(cls, cfg: dict, **cambios) -> "ConfigCiclo":
@@ -105,7 +113,13 @@ class ConfigCiclo:
                     fin_en_mature=cv["fin_en_mature"], alpha=ut["alpha"],
                     m_min=ut["m_min_por_grupo"], respaldo_similitud=pl["respaldo_similitud"],
                     delta=pl["delta_similitud"], acciones_orden=tuple(pl["acciones_orden_fijo"]),
-                    attr=om["atributo"], criterio=om["criterio"])
+                    attr=om["atributo"], criterio=om["criterio"],
+                    version=cfg.get("version_preregistro", "v1"),
+                    evaluacion=cv.get("evaluacion", "por_intervalo"),
+                    gate=om.get("gate_evolucion", "puntual"),
+                    utilidad_teoria=pl.get("utilidad_teoria", "u_tarea"),
+                    validez=pl.get("validez_plan", "u_tarea_mayor_que_0"),
+                    tau_b=om.get("tau_b", 0.075), delta_omega=om.get("delta", 0.05))
         base.update(cambios)
         return cls(**base)
 
@@ -141,12 +155,28 @@ class MotorLLC:
         self.planificador = PlanificadorLLC(
             agente.theories, cfg.acciones_orden or rol.acciones,
             respaldo_similitud=cfg.respaldo_similitud, delta=cfg.delta, alpha=cfg.alpha,
-            registro_e=self.registro_e, m_min=cfg.m_min)
+            registro_e=self.registro_e, m_min=cfg.m_min,
+            **self.parametros_validez(cfg))
         self.stats = EstadisticasLLC(cfg.umbral_exitoso)
         self.ciclo = 0
         self.ciclos: list[dict] = []
         self.evaluaciones: list[dict] = []
         self.recibio_colaboracion: dict[str, bool] = {c: False for c in CAPAS}
+
+    @staticmethod
+    def parametros_validez(cfg: ConfigCiclo) -> dict:
+        if cfg.validez == "u_mayor_o_igual_0_5":
+            return {"validez_minima": 0.5, "validez_estricta": False}
+        return {"validez_minima": 0.0, "validez_estricta": True}
+
+    def es_acierto(self, t) -> bool:
+        """La Sf de la variante hace correcta su acción (para U basada en la acción)."""
+        return self.rol.utilidad(t.si, t.a, t.sf) > self.cfg.umbral_exitoso
+
+    def recalcular_u(self) -> None:
+        """Con U basada en la acción, recalcula U(Si, A) en toda la base (tras compartir)."""
+        if self.cfg.utilidad_teoria == "accion":
+            self.agente.theories.recalcular_u_accion_todas(self.es_acierto)
 
     def _evento(self, region: Region, nombre_evento: str, capa: str, estado: str, **detalle):
         self.trail.record(self.agente.name, capa, nombre_evento, region=int(region),
@@ -176,8 +206,11 @@ class MotorLLC:
         self._evento(Region.UTILITY, "R4_utilidad", capa, estado, u_tarea=u,
                      alpha=self.cfg.alpha)
         t, tipo = self.agente.learn_llc(si, plan.accion, sf, u)                   # R5
+        if self.cfg.utilidad_teoria == "accion":       # v2: U(Si, A), igual en la celda
+            self.agente.theories.recalcular_u_accion(si, plan.accion, self.es_acierto)
         self._evento(Region.LEARNING, "R5_aprendizaje", capa, estado, teoria=t.id,
-                     registro=tipo, p=t.p, k=t.k, u=t.u,
+                     registro=tipo, p=t.p, k=t.k, u=t.u, u_tarea_del_ciclo=u,
+                     utilidad_teoria=self.cfg.utilidad_teoria,
                      clave=serialize(list(theory_key(t, self.agente.theories.q))))
         grupo = self.rol.grupo(caso)                                   # plano de auditoría
         acierto = u > self.cfg.umbral_exitoso
@@ -205,21 +238,37 @@ class MotorLLC:
         return reg
 
     # ---- región 7 al cierre del intervalo ----
-    def _evaluar(self, capa: str, ciclo_capa: int, iv: _Intervalo, estado: str) -> dict:
+    def _evaluar(self, capa: str, ciclo_capa: int, iv: _Intervalo, acum: _Intervalo,
+                 estado: str) -> dict:
+        # fair(W) de la ventana (n ciclos): alimenta la reputación r y can_donate (A9)
         fair_w = fairness.fair_window(iv.registros_fair, self.cfg.attr, self.cfg.criterio)
         self.agente.record_window_fairness(fair_w)
-        gate = bool(self.monitor.gate_evolution(self.agente))
+        gate_puntual = bool(self.monitor.gate_evolution(self.agente))
         with warnings.catch_warnings(record=True) as avisos:
             warnings.simplefilter("always")
             cert = bool(self.monitor.gate_evolution(self.agente, certified=True, m=M_TODAS))
-        regla = evaluar_regla(iv.ce_a, iv.ce_0, iv.nuevas, self.cfg.n_intervalo,
+        evidencia = None
+        if self.cfg.gate == "evidencia_de_sesgo":       # v2: decide la cota, no la reputación
+            n_cierres = self.cfg.ciclos_por_capa[capa] // self.cfg.n_intervalo
+            evidencia = self.monitor.gate_evidencia_sesgo(acum.registros_fair, n_cierres,
+                                                          self.cfg.delta_omega)
+            gate = evidencia["aprueba"]
+        else:
+            gate = gate_puntual
+        if self.cfg.evaluacion == "acumulada_en_la_capa":   # v2: desde el inicio de la capa
+            base, n_den = acum, ciclo_capa
+        else:
+            base, n_den = iv, self.cfg.n_intervalo
+        regla = evaluar_regla(base.ce_a, base.ce_0, base.nuevas, n_den,
                               self.recibio_colaboracion[capa], gate, self.cfg.rce,
                               self.cfg.rtn)
         ev = {"ciclo": self.ciclo, "capa": capa, "ciclo_capa": ciclo_capa,
-              "estado_antes": estado, "fair_w": fair_w,
+              "estado_antes": estado, "evaluacion": self.cfg.evaluacion,
+              "gate_tipo": self.cfg.gate, "fair_w": fair_w,
               "reputacion": self.agente.reputation(), "tau": self.monitor.tau,
-              "gate_certificado": cert,
-              "aviso_certificado": str(avisos[0].message) if avisos else None, **regla}
+              "gate_puntual_informado": gate_puntual, "gate_certificado": cert,
+              "aviso_certificado": str(avisos[0].message) if avisos else None,
+              "evidencia_sesgo": evidencia, **regla}
         if regla["promueve"]:
             _, despues = self.agente.promover()
             ev["estado_despues"] = NOMBRE_ESTADO[despues.label]
@@ -232,15 +281,17 @@ class MotorLLC:
         n_ciclos = self.cfg.ciclos_por_capa[capa]
         if len(casos) < n_ciclos:
             raise ValueError(f"la capa {capa} necesita {n_ciclos} casos")
-        iv = _Intervalo()
+        iv, acum = _Intervalo(), _Intervalo()          # ventana del intervalo y acumulado
         for j in range(1, n_ciclos + 1):
             reg = self.ciclo_llc(casos[j - 1], capa, j)
-            iv.ce_a += reg["exitoso"]
-            iv.ce_0 += reg["acierto_bio"]
-            iv.nuevas += reg["registro"] in ("nueva", "similar")
-            iv.registros_fair.append({self.cfg.attr: reg["grupo"], "decision": reg["accion"]})
+            for x in (iv, acum):
+                x.ce_a += reg["exitoso"]
+                x.ce_0 += reg["acierto_bio"]
+                x.nuevas += reg["registro"] in ("nueva", "similar")
+                x.registros_fair.append({self.cfg.attr: reg["grupo"],
+                                         "decision": reg["accion"]})
             if j % self.cfg.n_intervalo == 0:
-                ev = self._evaluar(capa, j, iv, reg["estado"])
+                ev = self._evaluar(capa, j, iv, acum, reg["estado"])
                 self._evento(Region.EVOLUTION, "R7_evolucion", capa, reg["estado"],
                              evaluada=True, **{k: v for k, v in ev.items()
                                                if k not in ("ciclo", "capa")})

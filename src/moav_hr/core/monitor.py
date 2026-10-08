@@ -89,6 +89,34 @@ class FairnessUtilityMonitor:
         pos_b = sum(1 for d in db if d in fairness.POSITIVE)
         return stats.lcb_abs_diff_rates(pos_a, len(da), pos_b, len(db), delta)
 
+    # bloque E · v2: gate por evidencia de sesgo (evolución y compartición)
+    def gate_evidencia_sesgo(self, records: list[dict], n_cierres: int = 1,
+                             delta: float = 0.05) -> dict:
+        """
+        Ω niega solo si hay EVIDENCIA de sesgo: LCB_{δ/L}(|Δ_DP|) > τ_b sobre las decisiones
+        dadas (Hoeffding por grupo, `stats.lcb_abs_diff_rates`), con L = `n_cierres`
+        (Bonferroni por evaluar L veces). Es el mismo primitivo que la regla de bloqueo de
+        ventana: sin disparidad real, P(negar) ≤ δ. Con menos de dos grupos no hay evidencia y
+        no niega. No reemplaza a `gate_evolution` ni a `approve_sharing` (que no cambian).
+        """
+        grupos: dict[str, list[str]] = {}
+        for r in records:
+            grupos.setdefault(str(r[self.attr]), []).append(r["decision"])
+        base = {"tau_b": self.disparity_threshold, "delta": delta, "n_cierres": n_cierres,
+                "delta_efectivo": delta / n_cierres,
+                "n_por_grupo": {g: len(v) for g, v in sorted(grupos.items())}}
+        if len(grupos) != 2:
+            return {**base, "brecha": None, "lcb": None, "niega": False, "aprueba": True,
+                    "motivo": "menos de dos grupos: sin evidencia"}
+        (_, da), (_, db) = sorted(grupos.items())
+        pa = sum(d in fairness.POSITIVE for d in da)
+        pb = sum(d in fairness.POSITIVE for d in db)
+        lcb = stats.lcb_abs_diff_rates(pa, len(da), pb, len(db), delta / n_cierres)
+        niega = lcb > self.disparity_threshold
+        return {**base, "brecha": round(abs(pa / len(da) - pb / len(db)), 4),
+                "lcb": round(lcb, 4), "niega": niega, "aprueba": not niega,
+                "motivo": "evidencia de sesgo (LCB > τ_b)" if niega else "sin evidencia de sesgo"}
+
     # compartición (Def. 9)
     def approve_sharing(self, donor) -> bool:
         return donor.reputation() >= self.tau

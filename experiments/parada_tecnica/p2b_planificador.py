@@ -20,8 +20,9 @@ from __future__ import annotations
 import argparse
 import itertools
 
-from comun_pt import encabezado_md, guardar_json, num, out_dir
+from comun_pt import encabezado_md, guardar_json, num, out_version
 from p1_teoria_punto_a_punto import correr_ciclo_de_vida
+from moav_hr.core.ciclo_llc import MotorLLC
 from moav_hr.core.planificador import PlanificadorLLC
 from moav_hr.core.retrieval import similarity
 from moav_hr.core.theory import serialize, theory_key
@@ -54,19 +55,20 @@ def _decision(d) -> dict:
             "equidad_usada": d.equidad_usada, "candidatas": d.candidatas}
 
 
-def correr(out=None) -> dict:
-    destino = out_dir(out)
-    cfg, c, agente, motor, esc, res = correr_ciclo_de_vida()
+def correr(out=None, version: str = "v2") -> dict:
+    destino = out_version(out, version)
+    cfg, c, agente, motor, esc, res = correr_ciclo_de_vida(version=version)
+    val = MotorLLC.parametros_validez(c)
     rol = RolMatcherLLC(cfg["entorno"]["ruido_wio_epsilon"], cfg["semilla"])
     capa = agente.layer.value
     base = agente.theories
     t_est = next(t for t in base.theories if t.id == motor.ciclos[0]["teoria_registrada"])
     pl1 = PlanificadorLLC(base, c.acciones_orden, alpha=1.0, registro_e=motor.registro_e,
-                          m_min=c.m_min)
+                          m_min=c.m_min, **val)
     pl05 = PlanificadorLLC(base, c.acciones_orden, alpha=cfg["utilidad"]["alpha_comparacion"],
-                           registro_e=motor.registro_e, m_min=c.m_min)
+                           registro_e=motor.registro_e, m_min=c.m_min, **val)
     pl_sim = PlanificadorLLC(base, c.acciones_orden, respaldo_similitud=True,
-                             delta=c.delta, alpha=1.0)
+                             delta=c.delta, alpha=1.0, **val)
 
     # (i) la misma Si que T*
     caso_i = entorno.caso_con_si(t_est.si, 1, semilla=cfg["semilla"])
@@ -78,7 +80,8 @@ def correr(out=None) -> dict:
     # celdas vacías: con respaldo por similitud (ii) y sin nada aplicable (iii)
     vacias = [si for si in _todas_las_si() if not base.applicable(si)]
     def max_sim(si):
-        return max((similarity(si, t.si) for t in base.theories if t.u > 0), default=0.0)
+        return max((similarity(si, t.si) for t in base.theories if pl1.es_valida(t)),
+                   default=0.0)
     con_sim = [si for si in vacias if max_sim(si) >= c.delta]
     sin_nada = [si for si in vacias if max((similarity(si, t.si) for t in base.theories),
                                            default=0.0) < c.delta]
@@ -112,6 +115,7 @@ def correr(out=None) -> dict:
 
     salida = {
         "demo": "P2b — ranking y recuperación de la teoría propia",
+        "version": c.version, "utilidad_teoria": c.utilidad_teoria, "validez": c.validez,
         "agente": {"estado": res["estado_final"], "capa": capa, "teorias": len(base),
                    "ciclos": res["ciclos"]},
         "teoria_estrella": {"id": t_est.id, "si": t_est.si, "a": t_est.a, "sf": t_est.sf,
@@ -132,7 +136,7 @@ def correr(out=None) -> dict:
 
 
 def _tabla(cands, extra=False) -> list[str]:
-    cab = "| Puesto | Teoría | A | Sf | u_tarea | U para ordenar | P | K |" + (
+    cab = "| Puesto | Teoría | A | Sf | U de la teoría | U para ordenar | P | K |" + (
         " Similitud |" if extra else "")
     L = [cab, "|" + "---|" * (8 + extra)]
     for f in cands:
@@ -143,16 +147,20 @@ def _tabla(cands, extra=False) -> list[str]:
 
 
 def _por_que(d) -> str:
-    return {"celda": "es la primera del orden (U, P, K) en la celda y su u_tarea > 0",
+    return {"celda": "es la primera del orden (U, P, K) en la celda y es plan válido",
             "similitud": "la celda está vacía y es la primera, en el orden (U, P, K), entre las "
-                         "teorías con similitud ≥ δ y u_tarea > 0 (extensión declarada)",
+                         "teorías con similitud ≥ δ que son plan válido (extensión declarada)",
             "azar_no_probada": "no hay plan válido: «azar» del planificador, primera acción no "
                                "probada en la celda (orden fijo)",
             "azar_bio": "no hay plan válido: «azar» del planificador con el operador BIO"}[d["motivo"]]
 
 
 def _md(s, c) -> str:
-    L = encabezado_md("P2b · Ranking y recuperación de la teoría propia")
+    L = encabezado_md(f"P2b · Ranking y recuperación de la teoría propia (pre-registro {c.version})")
+    L += [("**U de la teoría:** " + ("basada en la acción, U(Si, A) = (aciertos + 1)/(K + 2); "
+                                     "plan válido si U ≥ 0,5." if c.utilidad_teoria == "accion"
+                                     else "u_tarea de la variante; plan válido si u_tarea > 0.")),
+          ""]
     a = s["agente"]
     t = s["teoria_estrella"]
     L += [f"**Agente:** el de P1 al terminar su corrida: estado {a['estado']}, capa {a['capa']}, "
@@ -184,8 +192,8 @@ def _md(s, c) -> str:
         L.append("No hay una Si sin celda con alguna teoría a similitud ≥ δ: no se pudo mostrar.")
     else:
         d = ii["con_respaldo"]
-        L += [f"Si {serialize(ii['si'])} (celda vacía; similitud máxima con una teoría de "
-              f"u_tarea > 0 = {num(ii['similitud_maxima'], 3)}; δ = {num(c.delta, 1)}).", ""]
+        L += [f"Si {serialize(ii['si'])} (celda vacía; similitud máxima con una teoría que es "
+              f"plan válido = {num(ii['similitud_maxima'], 3)}; δ = {num(c.delta, 1)}).", ""]
         L += _tabla(d["candidatas"], extra=True)
         L += ["", f"**Elegida con el respaldo activado:** {d['accion']}"
               + (f" (T{d['teoria']})" if d["teoria"] else "") + f". Por qué: {_por_que(d)}.",
@@ -217,8 +225,10 @@ def _md(s, c) -> str:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="P2b — planificador")
-    ap.add_argument("--out", default=None)
-    s = correr(ap.parse_args().out)
+    ap.add_argument("--out", default=None, help="carpeta base (se escribe en <out>/<version>)")
+    ap.add_argument("--version", choices=["v1", "v2"], default="v2")
+    a = ap.parse_args()
+    s = correr(a.out, a.version)
     ci = s["caso_i_misma_si"]
     print(f"P2b · (i) elige {ci['alpha_1']['accion']} ({ci['alpha_1']['motivo']}), α=0,5 cambia: "
           f"{ci['alpha_cambia_la_elegida']} · (ii) "

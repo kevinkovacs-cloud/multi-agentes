@@ -8,9 +8,9 @@ con la situación actual; el plan es esa sola teoría y su acción es la que se 
 Adaptaciones declaradas:
   · Aplicabilidad = misma celda Q(Si) (cuantización; análogo de la comparación por umbral de
     §4.4.6). Desempate final determinista: recencia desc, id asc.
-  · Validez del plan (P3.1): la primera teoría del orden es plan válido solo si su
-    u_tarea > 0 («acción con sentido», p. 106). Con U binaria evita repetir para siempre una
-    acción que fracasó.
+  · Validez del plan: la primera teoría del orden es plan válido solo si permite «realizar
+    una acción con sentido» (p. 106). v1 (P3.1): u_tarea > 0. v2 (pre-registro v2): con U
+    basada en la acción, U ≥ 0,5 (la acción no falla más de lo que acierta).
   · «Azar» (Fig. 4.17, p. 101; Alg. 4.5): sin plan válido se recurre al plan por
     contingencia y se cuenta como azar. Ninguna decisión aleatoria sobre personas (DE-3):
     en los escenarios BIO y TBO, la primera acción todavía no probada en la celda, en un
@@ -54,7 +54,8 @@ class PlanificadorLLC:
                  respaldo_similitud: bool = False, delta: float = 0.7,
                  alpha: float = 1.0, registro_e: Optional[RegistroE] = None,
                  m_min: int = 5,
-                 similitud: Callable[[dict, dict], float] = similarity):
+                 similitud: Callable[[dict, dict], float] = similarity,
+                 validez_minima: float = 0.0, validez_estricta: bool = True):
         self.base = base
         self.acciones = tuple(acciones)
         self.respaldo_similitud = respaldo_similitud
@@ -63,6 +64,13 @@ class PlanificadorLLC:
         self.registro_e = registro_e
         self.m_min = m_min
         self.similitud = similitud
+        # validez del plan: v1 (P3.1) u_tarea > 0 → (0, estricta); v2 (pre-registro v2,
+        # cambio 2) U ≥ 0,5 → (0,5, no estricta)
+        self.validez_minima = validez_minima
+        self.validez_estricta = validez_estricta
+
+    def es_valida(self, t: Theory) -> bool:
+        return t.u > self.validez_minima if self.validez_estricta else t.u >= self.validez_minima
 
     # ---- utilidad usada para ordenar ----
     def u_orden(self, t: Theory) -> tuple[float, bool, Optional[float]]:
@@ -102,15 +110,15 @@ class PlanificadorLLC:
             if alg47[0] is not ordenadas[0]:
                 desacuerdo = {"fig_4_21": ordenadas[0].id, "alg_4_7": alg47[0].id}
 
-        if ordenadas and ordenadas[0].u > 0:
+        if ordenadas and self.es_valida(ordenadas[0]):
             t = ordenadas[0]
             return DecisionPlan(t.a, "celda", t, False, filas, False, desacuerdo,
                                 self.alpha, equidad_usada)
-        validez = bool(ordenadas)                      # había teoría pero con u_tarea = 0
+        validez = bool(ordenadas)                      # había teoría pero no era plan válido
 
         if not celda and self.respaldo_similitud:
             parecidas = [t for t in self.base.theories
-                         if t.u > 0 and self.similitud(si, t.si) >= self.delta]
+                         if self.es_valida(t) and self.similitud(si, t.si) >= self.delta]
             if parecidas:
                 t = self.ordenar(parecidas)[0]
                 filas_sim = [dict(self._fila(x, i + 1),
