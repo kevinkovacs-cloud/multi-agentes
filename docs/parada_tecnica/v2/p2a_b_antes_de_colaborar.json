@@ -1,0 +1,88 @@
+{
+  "rotulos": [
+    "ilustrativo, entorno simulado (modo sim); no es evidencia experimental",
+    "semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección"
+  ],
+  "demo": "E3 — decisión de B antes de la colaboración A → B",
+  "decisiones": {
+    "T*": {
+      "capa": "TBO",
+      "accion": "REJECT",
+      "motivo": "azar_bio",
+      "candidatas": [
+        {
+          "puesto": 1,
+          "id": 10,
+          "a": "REJECT",
+          "sf": {
+            "calificado": true
+          },
+          "u_tarea": 0.4,
+          "u_orden": 0.4,
+          "e": null,
+          "p": 2,
+          "k": 3
+        },
+        {
+          "puesto": 2,
+          "id": 16,
+          "a": "REJECT",
+          "sf": {
+            "calificado": false
+          },
+          "u_tarea": 0.4,
+          "u_orden": 0.4,
+          "e": null,
+          "p": 1,
+          "k": 3
+        },
+        {
+          "puesto": 3,
+          "id": 8,
+          "a": "ADVANCE",
+          "sf": {
+            "calificado": false
+          },
+          "u_tarea": 0.3333333333333333,
+          "u_orden": 0.333333,
+          "e": null,
+          "p": 1,
+          "k": 1
+        }
+      ]
+    },
+    "T*✓": {
+      "capa": "TBO",
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "candidatas": [
+        {
+          "puesto": 1,
+          "id": 3,
+          "a": "ADVANCE",
+          "sf": {
+            "calificado": true
+          },
+          "u_tarea": 0.6666666666666666,
+          "u_orden": 0.666667,
+          "e": null,
+          "p": 3,
+          "k": 4
+        },
+        {
+          "puesto": 2,
+          "id": 15,
+          "a": "ADVANCE",
+          "sf": {
+            "calificado": false
+          },
+          "u_tarea": 0.6666666666666666,
+          "u_orden": 0.666667,
+          "e": null,
+          "p": 1,
+          "k": 4
+        }
+      ]
+    }
+  }
+}
