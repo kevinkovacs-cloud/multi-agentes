@@ -93,6 +93,7 @@
       },
       "base_receptor_antes": 16,
       "base_donante": 40,
+      "a9": "ventanas",
       "aceptada": true,
       "motivo": "axiomas, can_donate y Ω sin evidencia de sesgo",
       "reporte": {
@@ -976,6 +977,7 @@
       },
       "base_receptor_antes": 12,
       "base_donante": 16,
+      "a9": "ventanas",
       "aceptada": false,
       "motivo": "rechazada por el código: el par SemanticMatcher_B no puede aportar sin historia de equidad (A9: requiere ≥3 ventanas, tiene 2)",
       "axioma": null
@@ -1032,6 +1034,7 @@
       },
       "base_receptor_antes": 16,
       "base_donante": 40,
+      "a9": "ventanas",
       "aceptada": false,
       "motivo": "rechazada por el código: la cooperación requiere mismo estado de evolución (Def. 7)",
       "axioma": "§4.3.1 [a] (p. 70): la cooperación se realiza solo entre SARs que se encuentran con el mismo estado de evolución"
@@ -1068,6 +1071,7 @@
       },
       "base_receptor_antes": 40,
       "base_donante": 16,
+      "a9": "ventanas",
       "aceptada": false,
       "motivo": "rechazada por el código: el colaborador debe tener nivel estrictamente superior (Def. 8)",
       "axioma": "§4.3.1 [b] (p. 70): la colaboración se presenta entre un SAR en un estado de evolución superior y un SAR receptor en un estado inferior"
