@@ -1,0 +1,1246 @@
+{
+  "rotulos": [
+    "ilustrativo, entorno simulado (modo sim); no es evidencia experimental",
+    "semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección"
+  ],
+  "demo": "P2a — cooperación, colaboración y transferencia (E3)",
+  "version": "v2",
+  "agentes": {
+    "A": {
+      "agente": "SemanticMatcher",
+      "estado": "Mature",
+      "ciclos": 100,
+      "teorias": 40,
+      "ventanas": 5,
+      "promociones": [
+        {
+          "ciclo": 20,
+          "de": "Born",
+          "a": "Novice"
+        },
+        {
+          "ciclo": 80,
+          "de": "Novice",
+          "a": "Trained"
+        },
+        {
+          "ciclo": 100,
+          "de": "Trained",
+          "a": "Mature"
+        }
+      ]
+    },
+    "B": {
+      "agente": "SemanticMatcher_B",
+      "estado": "Novice",
+      "ciclos": 40,
+      "teorias": 16,
+      "ventanas": 2,
+      "promociones": [
+        {
+          "ciclo": 40,
+          "de": "Born",
+          "a": "Novice"
+        }
+      ]
+    },
+    "C": {
+      "agente": "SemanticMatcher_C",
+      "estado": "Novice",
+      "ciclos": 20,
+      "teorias": 12,
+      "ventanas": 1,
+      "promociones": [
+        {
+          "ciclo": 20,
+          "de": "Born",
+          "a": "Novice"
+        }
+      ]
+    }
+  },
+  "detenido": false,
+  "operaciones": {
+    "colaboracion_A_B": {
+      "op": "colaboracion",
+      "donante": "SemanticMatcher",
+      "receptor": "SemanticMatcher_B",
+      "estados": {
+        "donante": "mature",
+        "receptor": "novato"
+      },
+      "omega": {
+        "SemanticMatcher": {
+          "can_donate": true,
+          "ventanas": 5,
+          "reputacion_informada": 0.78,
+          "evidencia_sesgo": {
+            "tau_b": 0.075,
+            "delta": 0.05,
+            "n_cierres": 1,
+            "delta_efectivo": 0.05,
+            "n_por_grupo": {
+              "AR": 50,
+              "no-AR": 50
+            },
+            "brecha": 0.1,
+            "lcb": 0.0,
+            "niega": false,
+            "aprueba": true,
+            "motivo": "sin evidencia de sesgo"
+          }
+        }
+      },
+      "base_receptor_antes": 16,
+      "base_donante": 40,
+      "aceptada": true,
+      "motivo": "axiomas, can_donate y Ω sin evidencia de sesgo",
+      "reporte": {
+        "reforzadas": 13,
+        "debilitadas": 11,
+        "transferidas": 23
+      },
+      "conteo": {
+        "igual": 13,
+        "similar": 4,
+        "nueva": 23
+      },
+      "teorias": [
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 0}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "igual",
+          "en_donante": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_antes": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_despues": {
+            "p": 2,
+            "k": 2,
+            "u": 0.25
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 3}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "igual",
+          "en_donante": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_antes": {
+            "p": 2,
+            "k": 4,
+            "u": 0.5
+          },
+          "en_receptor_despues": {
+            "p": 3,
+            "k": 5,
+            "u": 0.4286
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 3}",
+            "ADVANCE",
+            "{\"calificado\": true}"
+          ],
+          "categoria": "igual",
+          "en_donante": {
+            "p": 8,
+            "k": 9,
+            "u": 0.8182
+          },
+          "en_receptor_antes": {
+            "p": 3,
+            "k": 4,
+            "u": 0.6667
+          },
+          "en_receptor_despues": {
+            "p": 11,
+            "k": 13,
+            "u": 0.8
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 1}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "igual",
+          "en_donante": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_antes": {
+            "p": 2,
+            "k": 3,
+            "u": 0.4
+          },
+          "en_receptor_despues": {
+            "p": 3,
+            "k": 4,
+            "u": 0.3333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 1}",
+            "ADVANCE",
+            "{\"calificado\": true}"
+          ],
+          "categoria": "igual",
+          "en_donante": {
+            "p": 5,
+            "k": 5,
+            "u": 0.8571
+          },
+          "en_receptor_antes": {
+            "p": 7,
+            "k": 7,
+            "u": 0.8889
+          },
+          "en_receptor_despues": {
+            "p": 12,
+            "k": 12,
+            "u": 0.9286
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 3}",
+            "REJECT",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 6,
+            "k": 6,
+            "u": 0.875
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 6,
+            "k": 6,
+            "u": 0.875
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 1}",
+            "REJECT",
+            "{\"calificado\": true}"
+          ],
+          "categoria": "similar",
+          "en_donante": {
+            "p": 1,
+            "k": 7,
+            "u": 0.7778
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 8,
+            "u": 0.8
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 2}",
+            "ADVANCE",
+            "{\"calificado\": true}"
+          ],
+          "categoria": "igual",
+          "en_donante": {
+            "p": 7,
+            "k": 8,
+            "u": 0.8
+          },
+          "en_receptor_antes": {
+            "p": 9,
+            "k": 9,
+            "u": 0.9091
+          },
+          "en_receptor_despues": {
+            "p": 16,
+            "k": 17,
+            "u": 0.8947
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 1}",
+            "REJECT",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "igual",
+          "en_donante": {
+            "p": 6,
+            "k": 7,
+            "u": 0.7778
+          },
+          "en_receptor_antes": {
+            "p": 1,
+            "k": 1,
+            "u": 0.6667
+          },
+          "en_receptor_despues": {
+            "p": 7,
+            "k": 8,
+            "u": 0.8
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 2}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "igual",
+          "en_donante": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_antes": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_despues": {
+            "p": 2,
+            "k": 2,
+            "u": 0.25
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 0}",
+            "ADVANCE",
+            "{\"calificado\": true}"
+          ],
+          "categoria": "similar",
+          "en_donante": {
+            "p": 1,
+            "k": 3,
+            "u": 0.4
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 4,
+            "u": 0.3333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 0}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "igual",
+          "en_donante": {
+            "p": 2,
+            "k": 3,
+            "u": 0.4
+          },
+          "en_receptor_antes": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_despues": {
+            "p": 3,
+            "k": 4,
+            "u": 0.3333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 2}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 0}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 3}",
+            "ADVANCE",
+            "{\"calificado\": true}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 1,
+            "k": 3,
+            "u": 0.4
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 3,
+            "u": 0.4
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 2}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "similar",
+          "en_donante": {
+            "p": 1,
+            "k": 8,
+            "u": 0.8
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 17,
+            "u": 0.8947
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 0}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 3}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 2,
+            "k": 3,
+            "u": 0.4
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 2,
+            "k": 3,
+            "u": 0.4
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 0}",
+            "REJECT",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "igual",
+          "en_donante": {
+            "p": 5,
+            "k": 6,
+            "u": 0.75
+          },
+          "en_receptor_antes": {
+            "p": 4,
+            "k": 4,
+            "u": 0.8333
+          },
+          "en_receptor_despues": {
+            "p": 9,
+            "k": 10,
+            "u": 0.8333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 2}",
+            "REJECT",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "igual",
+          "en_donante": {
+            "p": 5,
+            "k": 5,
+            "u": 0.8571
+          },
+          "en_receptor_antes": {
+            "p": 2,
+            "k": 2,
+            "u": 0.75
+          },
+          "en_receptor_despues": {
+            "p": 7,
+            "k": 7,
+            "u": 0.8889
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 3}",
+            "REJECT",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 6,
+            "k": 6,
+            "u": 0.875
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 6,
+            "k": 6,
+            "u": 0.875
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 3}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 2,
+            "k": 5,
+            "u": 0.5714
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 2,
+            "k": 5,
+            "u": 0.5714
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 0}",
+            "REJECT",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "igual",
+          "en_donante": {
+            "p": 5,
+            "k": 5,
+            "u": 0.8571
+          },
+          "en_receptor_antes": {
+            "p": 1,
+            "k": 3,
+            "u": 0.4
+          },
+          "en_receptor_despues": {
+            "p": 6,
+            "k": 8,
+            "u": 0.7
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 0}",
+            "REJECT",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 4,
+            "k": 4,
+            "u": 0.8333
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 4,
+            "k": 4,
+            "u": 0.8333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 1}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 3}",
+            "REJECT",
+            "{\"calificado\": true}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 3}",
+            "ADVANCE",
+            "{\"calificado\": true}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 3,
+            "k": 5,
+            "u": 0.5714
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 3,
+            "k": 5,
+            "u": 0.5714
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 0}",
+            "REJECT",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 4,
+            "k": 4,
+            "u": 0.8333
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 4,
+            "k": 4,
+            "u": 0.8333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 2}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 1}",
+            "ADVANCE",
+            "{\"calificado\": true}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 2,
+            "k": 2,
+            "u": 0.75
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 2,
+            "k": 2,
+            "u": 0.75
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 2}",
+            "REJECT",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 1,
+            "k": 2,
+            "u": 0.5
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 2,
+            "u": 0.5
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 2}",
+            "REJECT",
+            "{\"calificado\": true}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 1,
+            "k": 2,
+            "u": 0.5
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 2,
+            "u": 0.5
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 2}",
+            "REJECT",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 2,
+            "k": 2,
+            "u": 0.75
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 2,
+            "k": 2,
+            "u": 0.75
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Maestría\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 1}",
+            "REJECT",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 2,
+            "k": 2,
+            "u": 0.75
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 2,
+            "k": 2,
+            "u": 0.75
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Doctorado\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 1}",
+            "REJECT",
+            "{\"calificado\": true}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Doctorado\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 3}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 1,
+            "u": 0.3333
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Doctorado\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 1}",
+            "REJECT",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 2,
+            "k": 2,
+            "u": 0.75
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 2,
+            "k": 2,
+            "u": 0.75
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 3}",
+            "ADVANCE",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "igual",
+          "en_donante": {
+            "p": 1,
+            "k": 9,
+            "u": 0.8182
+          },
+          "en_receptor_antes": {
+            "p": 1,
+            "k": 4,
+            "u": 0.6667
+          },
+          "en_receptor_despues": {
+            "p": 2,
+            "k": 13,
+            "u": 0.8
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Doctorado\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 0}",
+            "REJECT",
+            "{\"calificado\": false}"
+          ],
+          "categoria": "nueva",
+          "en_donante": {
+            "p": 2,
+            "k": 2,
+            "u": 0.75
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 2,
+            "k": 2,
+            "u": 0.75
+          }
+        },
+        {
+          "clave": [
+            "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 0}",
+            "REJECT",
+            "{\"calificado\": true}"
+          ],
+          "categoria": "similar",
+          "en_donante": {
+            "p": 1,
+            "k": 6,
+            "u": 0.75
+          },
+          "en_receptor_antes": null,
+          "en_receptor_despues": {
+            "p": 1,
+            "k": 10,
+            "u": 0.8333
+          }
+        }
+      ],
+      "base_receptor_despues": 43,
+      "invariante_receptor": true,
+      "invariante_donante": true,
+      "claves_receptor_antes": 16
+    },
+    "cooperacion_B_C": {
+      "op": "cooperacion",
+      "donante": "SemanticMatcher_B",
+      "receptor": "SemanticMatcher_C",
+      "estados": {
+        "donante": "novato",
+        "receptor": "novato"
+      },
+      "omega": {
+        "SemanticMatcher_B": {
+          "can_donate": false,
+          "ventanas": 2,
+          "reputacion_informada": 1.0,
+          "evidencia_sesgo": {
+            "tau_b": 0.075,
+            "delta": 0.05,
+            "n_cierres": 1,
+            "delta_efectivo": 0.05,
+            "n_por_grupo": {
+              "AR": 20,
+              "no-AR": 20
+            },
+            "brecha": 0.0,
+            "lcb": 0.0,
+            "niega": false,
+            "aprueba": true,
+            "motivo": "sin evidencia de sesgo"
+          }
+        },
+        "SemanticMatcher_C": {
+          "can_donate": false,
+          "ventanas": 1,
+          "reputacion_informada": 0.9,
+          "evidencia_sesgo": {
+            "tau_b": 0.075,
+            "delta": 0.05,
+            "n_cierres": 1,
+            "delta_efectivo": 0.05,
+            "n_por_grupo": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "brecha": 0.1,
+            "lcb": 0.0,
+            "niega": false,
+            "aprueba": true,
+            "motivo": "sin evidencia de sesgo"
+          }
+        }
+      },
+      "base_receptor_antes": 12,
+      "base_donante": 16,
+      "aceptada": false,
+      "motivo": "rechazada por el código: el par SemanticMatcher_B no puede aportar sin historia de equidad (A9: requiere ≥3 ventanas, tiene 2)",
+      "axioma": null
+    },
+    "contraejemplo_cooperacion_A_B": {
+      "op": "cooperacion",
+      "donante": "SemanticMatcher",
+      "receptor": "SemanticMatcher_B",
+      "estados": {
+        "donante": "mature",
+        "receptor": "novato"
+      },
+      "omega": {
+        "SemanticMatcher": {
+          "can_donate": true,
+          "ventanas": 5,
+          "reputacion_informada": 0.78,
+          "evidencia_sesgo": {
+            "tau_b": 0.075,
+            "delta": 0.05,
+            "n_cierres": 1,
+            "delta_efectivo": 0.05,
+            "n_por_grupo": {
+              "AR": 50,
+              "no-AR": 50
+            },
+            "brecha": 0.1,
+            "lcb": 0.0,
+            "niega": false,
+            "aprueba": true,
+            "motivo": "sin evidencia de sesgo"
+          }
+        },
+        "SemanticMatcher_B": {
+          "can_donate": false,
+          "ventanas": 2,
+          "reputacion_informada": 1.0,
+          "evidencia_sesgo": {
+            "tau_b": 0.075,
+            "delta": 0.05,
+            "n_cierres": 1,
+            "delta_efectivo": 0.05,
+            "n_por_grupo": {
+              "AR": 20,
+              "no-AR": 20
+            },
+            "brecha": 0.0,
+            "lcb": 0.0,
+            "niega": false,
+            "aprueba": true,
+            "motivo": "sin evidencia de sesgo"
+          }
+        }
+      },
+      "base_receptor_antes": 16,
+      "base_donante": 40,
+      "aceptada": false,
+      "motivo": "rechazada por el código: la cooperación requiere mismo estado de evolución (Def. 7)",
+      "axioma": "§4.3.1 [a] (p. 70): la cooperación se realiza solo entre SARs que se encuentran con el mismo estado de evolución"
+    },
+    "contraejemplo_colaboracion_B_A": {
+      "op": "colaboracion",
+      "donante": "SemanticMatcher_B",
+      "receptor": "SemanticMatcher",
+      "estados": {
+        "donante": "novato",
+        "receptor": "mature"
+      },
+      "omega": {
+        "SemanticMatcher_B": {
+          "can_donate": false,
+          "ventanas": 2,
+          "reputacion_informada": 1.0,
+          "evidencia_sesgo": {
+            "tau_b": 0.075,
+            "delta": 0.05,
+            "n_cierres": 1,
+            "delta_efectivo": 0.05,
+            "n_por_grupo": {
+              "AR": 20,
+              "no-AR": 20
+            },
+            "brecha": 0.0,
+            "lcb": 0.0,
+            "niega": false,
+            "aprueba": true,
+            "motivo": "sin evidencia de sesgo"
+          }
+        }
+      },
+      "base_receptor_antes": 40,
+      "base_donante": 16,
+      "aceptada": false,
+      "motivo": "rechazada por el código: el colaborador debe tener nivel estrictamente superior (Def. 8)",
+      "axioma": "§4.3.1 [b] (p. 70): la colaboración se presenta entre un SAR en un estado de evolución superior y un SAR receptor en un estado inferior"
+    }
+  },
+  "seguimiento": {
+    "T*": {
+      "clave": [
+        "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 0}",
+        "ADVANCE",
+        "{\"calificado\": false}"
+      ],
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "calificado": false
+      },
+      "iri_donante": "https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/3e30cf25cc66c1f1",
+      "iri_receptor": "https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/3e30cf25cc66c1f1",
+      "en_donante": {
+        "p": 1,
+        "k": 1,
+        "u": 0.3333
+      },
+      "en_receptor": {
+        "p": 2,
+        "k": 2,
+        "u": 0.25
+      },
+      "prov_wasDerivedFrom": [
+        "https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/3e30cf25cc66c1f1"
+      ],
+      "planificador_del_receptor": {
+        "capa": "TBO",
+        "accion": "REJECT",
+        "motivo": "celda",
+        "teoria": 14,
+        "elige_esta_teoria": false,
+        "candidatas": [
+          {
+            "puesto": 1,
+            "id": 14,
+            "a": "REJECT",
+            "sf": {
+              "calificado": false
+            },
+            "u_tarea": 0.7,
+            "u_orden": 0.7,
+            "e": null,
+            "p": 6,
+            "k": 8
+          },
+          {
+            "puesto": 2,
+            "id": 13,
+            "a": "REJECT",
+            "sf": {
+              "calificado": true
+            },
+            "u_tarea": 0.7,
+            "u_orden": 0.7,
+            "e": null,
+            "p": 2,
+            "k": 8
+          },
+          {
+            "puesto": 3,
+            "id": 12,
+            "a": "ADVANCE",
+            "sf": {
+              "calificado": false
+            },
+            "u_tarea": 0.25,
+            "u_orden": 0.25,
+            "e": null,
+            "p": 2,
+            "k": 2
+          }
+        ]
+      }
+    },
+    "T*✓": {
+      "clave": [
+        "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 3}",
+        "ADVANCE",
+        "{\"calificado\": true}"
+      ],
+      "si": {
+        "skills_match": 3,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "a": "ADVANCE",
+      "sf": {
+        "calificado": true
+      },
+      "iri_donante": "https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/aeca6e6faefa0c69",
+      "iri_receptor": "https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/aeca6e6faefa0c69",
+      "en_donante": {
+        "p": 8,
+        "k": 9,
+        "u": 0.8182
+      },
+      "en_receptor": {
+        "p": 11,
+        "k": 13,
+        "u": 0.8
+      },
+      "prov_wasDerivedFrom": [
+        "https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/aeca6e6faefa0c69"
+      ],
+      "planificador_del_receptor": {
+        "capa": "TBO",
+        "accion": "ADVANCE",
+        "motivo": "celda",
+        "teoria": 4,
+        "elige_esta_teoria": true,
+        "candidatas": [
+          {
+            "puesto": 1,
+            "id": 4,
+            "a": "ADVANCE",
+            "sf": {
+              "calificado": true
+            },
+            "u_tarea": 0.8,
+            "u_orden": 0.8,
+            "e": null,
+            "p": 11,
+            "k": 13
+          },
+          {
+            "puesto": 2,
+            "id": 5,
+            "a": "ADVANCE",
+            "sf": {
+              "calificado": false
+            },
+            "u_tarea": 0.8,
+            "u_orden": 0.8,
+            "e": null,
+            "p": 2,
+            "k": 13
+          }
+        ]
+      },
+      "ciclo_en_que_supera_0_75": 5
+    }
+  },
+  "consulta_sparql": "PREFIX prov: <http://www.w3.org/ns/prov#>\nPREFIX moacv: <https://moav-hr.diit.unlam.edu.ar/ontology/>\nSELECT ?receptor ?donante WHERE { ?receptor prov:wasDerivedFrom ?donante ;\n                                           moacv:clave ?c . FILTER(?c = ?clave) }",
+  "cadenas_prov": {
+    "T*": [
+      {
+        "receptor": "https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/3e30cf25cc66c1f1",
+        "donante": "https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/3e30cf25cc66c1f1"
+      }
+    ],
+    "T*✓": [
+      {
+        "receptor": "https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/aeca6e6faefa0c69",
+        "donante": "https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/aeca6e6faefa0c69"
+      }
+    ]
+  },
+  "archivos": [
+    "p2a.json",
+    "p2a_compartir.md",
+    "p2a_procedencia.ttl"
+  ]
+}

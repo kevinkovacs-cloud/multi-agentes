@@ -1,0 +1,332 @@
+@prefix moacv: <https://moav-hr.diit.unlam.edu.ar/ontology/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/01095e736d10e1ca> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/01095e736d10e1ca> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/0137fd4c3da24b4c> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/0137fd4c3da24b4c> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 2}\", \"REJECT\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/02e5e73f3a5a354a> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/02e5e73f3a5a354a> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 2}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/050fe98efb62f7f4> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/050fe98efb62f7f4> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Doctorado\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 1}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/07eb84f0bdee9c23> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/07eb84f0bdee9c23> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Doctorado\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/0916dea70b35c023> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/0916dea70b35c023> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/0edd206e45113eaa> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/0edd206e45113eaa> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 2}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/0f43ee4d6e118bdf> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/0f43ee4d6e118bdf> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/12d256657b4b4f18> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/12d256657b4b4f18> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/22282e129764dc0a> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/22282e129764dc0a> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 2}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/26112501586ffd08> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/26112501586ffd08> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 2}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/373f51924b2c3bb7> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/373f51924b2c3bb7> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/3e30cf25cc66c1f1> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/3e30cf25cc66c1f1> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 0}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/3f89eec7f60e562e> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/3f89eec7f60e562e> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 2}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/4a0c07b64dee86e8> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/4a0c07b64dee86e8> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 3}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/583eff0f41e4522c> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/583eff0f41e4522c> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 3}\", \"REJECT\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/5faf6f9d7fd8fa6e> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/5faf6f9d7fd8fa6e> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 0}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/60dac853f438c625> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/60dac853f438c625> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 2}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/6367f75b48a86a68> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/6367f75b48a86a68> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 1}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/65d93e88fca00ffc> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/65d93e88fca00ffc> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 1}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/7b43f5e7f9ef531f> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/7b43f5e7f9ef531f> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/80a2ac783654be48> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/80a2ac783654be48> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/83c6ed7b1380e4f0> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/83c6ed7b1380e4f0> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/848661efad160a39> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/848661efad160a39> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/8bb23e1473af1557> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/8bb23e1473af1557> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Doctorado\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/91b23912ca072109> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/91b23912ca072109> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 1}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/9d68cf18fff43126> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/9d68cf18fff43126> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 2}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/a14009e7272f346e> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/a14009e7272f346e> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 2}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/a47b2560c1b8064f> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/a47b2560c1b8064f> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Doctorado\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 1}\", \"REJECT\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/adf4444ee9ccff31> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/adf4444ee9ccff31> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 1}\", \"REJECT\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/aebfdd20385e1941> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/aebfdd20385e1941> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 1}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/aeca6e6faefa0c69> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/aeca6e6faefa0c69> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/bc6c804bee40d1e6> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/bc6c804bee40d1e6> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/c270d1f741024930> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/c270d1f741024930> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 0}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/cf3ac49a676b8a56> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/cf3ac49a676b8a56> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 3}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/d5729613bc32c957> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/d5729613bc32c957> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 1}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/d57e7228aa7657dc> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/d57e7228aa7657dc> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"REJECT\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/da05018773936191> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/da05018773936191> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 1}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/f72ac343a878c7f3> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/f72ac343a878c7f3> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 0}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher_B/ffa0156e07e3ba06> a moacv:Teoria ;
+    prov:wasDerivedFrom <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/ffa0156e07e3ba06> ;
+    prov:wasGeneratedBy <https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Agente/SemanticMatcher> a prov:Agent .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Agente/SemanticMatcher_B> a prov:Agent .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/01095e736d10e1ca> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/0137fd4c3da24b4c> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 2}\", \"REJECT\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/02e5e73f3a5a354a> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 2}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/050fe98efb62f7f4> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Doctorado\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 1}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/07eb84f0bdee9c23> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Doctorado\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/0916dea70b35c023> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/0edd206e45113eaa> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 2}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/0f43ee4d6e118bdf> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/12d256657b4b4f18> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/22282e129764dc0a> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 2}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/26112501586ffd08> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 2}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/373f51924b2c3bb7> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/3e30cf25cc66c1f1> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 0}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/3f89eec7f60e562e> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 2}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/4a0c07b64dee86e8> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 3}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/583eff0f41e4522c> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 3}\", \"REJECT\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/5faf6f9d7fd8fa6e> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 0}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/60dac853f438c625> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 2}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/6367f75b48a86a68> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 1}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/65d93e88fca00ffc> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 1}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/7b43f5e7f9ef531f> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/80a2ac783654be48> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/83c6ed7b1380e4f0> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/848661efad160a39> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/8bb23e1473af1557> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Doctorado\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/91b23912ca072109> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 1}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/9d68cf18fff43126> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 2}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/a14009e7272f346e> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 2}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/a47b2560c1b8064f> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Doctorado\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 1}\", \"REJECT\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/adf4444ee9ccff31> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 1}\", \"REJECT\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/aebfdd20385e1941> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 1}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/aeca6e6faefa0c69> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/bc6c804bee40d1e6> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/c270d1f741024930> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 0}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/cf3ac49a676b8a56> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 3}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/d5729613bc32c957> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 1}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/d57e7228aa7657dc> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 0}\", \"REJECT\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/da05018773936191> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 1}\", \"ADVANCE\", \"{\\\"calificado\\\": true}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/f72ac343a878c7f3> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 0}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/ffa0156e07e3ba06> a moacv:Teoria ;
+    moacv:clave "[\"{\\\"edu\\\": \\\"Licenciatura\\\", \\\"exp_band\\\": \\\"senior\\\", \\\"seniority_ok\\\": true, \\\"skills_match\\\": 3}\", \"ADVANCE\", \"{\\\"calificado\\\": false}\"]"^^xsd:string .
+
+<https://moav-hr.diit.unlam.edu.ar/ontology/Actividad/colaboracion_A_B> a prov:Activity ;
+    prov:wasAssociatedWith <https://moav-hr.diit.unlam.edu.ar/ontology/Agente/SemanticMatcher>,
+        <https://moav-hr.diit.unlam.edu.ar/ontology/Agente/SemanticMatcher_B> .
+

@@ -239,3 +239,12 @@ Ierache (2010). Diagnóstico: `docs/parada_tecnica/E0_DIAGNOSTICO.md`; decisione
   rotula la explicación del Explainer como región 6 y la decisión final del Orchestrator como región 7; en el
   LLC la 6 son las estadísticas y la 7, la evolución (Ierache 2010, p. 63). No se cambian esas salidas; en el
   motor nuevo (`core/ciclo_llc.py`) cada región lleva el número que le corresponde en el LLC.
+- **Pre-registro v2 (única revisión, E2_RESPUESTA de Claude chat).** La corrida v1 de P1 (pre-registrada) dejó
+  al Matcher en Born: el gate puntual de Ω con ventanas de 20 casos era ruido de muestreo. La v2, commiteada
+  antes de correr (`configs/parada_tecnica.yaml`; v1 congelada en `configs/parada_tecnica_v1.yaml`), cambia
+  tres reglas: Ω niega solo con evidencia de sesgo (LCB_δ/L > τ_b sobre la capa), U basada en la acción
+  (U(Si, A) con Laplace, validez U ≥ 0,5) y evaluación acumulada en la capa. Salidas v1 y v2 lado a lado:
+  `docs/parada_tecnica/v1/`, `docs/parada_tecnica/v2/` y `E2_v1_vs_v2.md`.
+- **E3 · Compartición (punto 2a).** `core/compartir_llc.py` (axiomas de §4.3.1, `can_donate`, gate v2 sobre las
+  decisiones del donante) y `sharing_rdf.procedencia_compartida` (`prov:wasDerivedFrom` por clave). Demo
+  `experiments/parada_tecnica/p2a_compartir.py`; informe `docs/parada_tecnica/E3_PUNTO_DE_CONTROL.md`.

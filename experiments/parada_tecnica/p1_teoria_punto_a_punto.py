@@ -39,17 +39,18 @@ QUE_HACE = {   # Ierache 2010, §4.2, pp. 62–63
 }
 
 
-def construir(cfg: dict | None = None, version: str = "v2", **cambios):
+def construir(cfg: dict | None = None, version: str = "v2", nombre: str = "SemanticMatcher",
+              **cambios):
     cfg = cfg or cargar_config(version=version)
     c = ConfigCiclo.desde_yaml(cfg, **cambios)
     escenarios = {capa: entorno.generar_escenario(capa, c.ciclos_por_capa[capa], cfg["semilla"])
                   for capa in entorno.CAPAS}
-    agente = AgenteLLC("SemanticMatcher", "matcher")
+    agente = AgenteLLC(nombre, "matcher")
     monitor = FairnessMonitor(tau=cfg["omega"]["tau"], attr=cfg["omega"]["atributo"],
                               criterion=cfg["omega"]["criterio"],
                               disparity_threshold=cfg["omega"].get("tau_b", 0.075))
     rol = RolMatcherLLC(cfg["entorno"]["ruido_wio_epsilon"], cfg["semilla"])
-    motor = MotorLLC(agente, rol, monitor, c, trail=AuditTrail("TRC-P1"))
+    motor = MotorLLC(agente, rol, monitor, c, trail=AuditTrail(f"TRC-P1-{nombre}"))
     return cfg, c, agente, motor, escenarios
 
 
