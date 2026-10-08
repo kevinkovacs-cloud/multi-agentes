@@ -1,0 +1,976 @@
+{
+  "rotulos": [
+    "ilustrativo, entorno simulado (modo sim); no es evidencia experimental",
+    "semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección"
+  ],
+  "equipo": {
+    "equipo": "A",
+    "casos": 260,
+    "ventanas": 13,
+    "roles": {
+      "parser": {
+        "agente": "A-Parser",
+        "estado": "Mature",
+        "ciclos": 260,
+        "teorias": 16,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          },
+          {
+            "ciclo": 60,
+            "de": "Trained",
+            "a": "Mature"
+          }
+        ],
+        "evaluaciones": 3
+      },
+      "matcher": {
+        "agente": "A-SemanticMatcher",
+        "estado": "Trained",
+        "ciclos": 260,
+        "teorias": 69,
+        "promociones": [
+          {
+            "ciclo": 40,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 120,
+            "de": "Novice",
+            "a": "Trained"
+          }
+        ],
+        "evaluaciones": 11
+      },
+      "bias_auditor": {
+        "agente": "A-BiasAuditor",
+        "estado": "Born",
+        "ciclos": 13,
+        "teorias": 7,
+        "promociones": [],
+        "evaluaciones": 0
+      },
+      "explainer": {
+        "agente": "A-Explainer",
+        "estado": "Mature",
+        "ciclos": 260,
+        "teorias": 17,
+        "promociones": [
+          {
+            "ciclo": 20,
+            "de": "Born",
+            "a": "Novice"
+          },
+          {
+            "ciclo": 40,
+            "de": "Novice",
+            "a": "Trained"
+          },
+          {
+            "ciclo": 60,
+            "de": "Trained",
+            "a": "Mature"
+          }
+        ],
+        "evaluaciones": 3
+      }
+    },
+    "orchestrator": "sin teorías (DE-7)"
+  },
+  "config_equipo": {
+    "semilla_casos": 20261008,
+    "semilla_documentos": 20261009,
+    "semilla_destinatario": 20261010,
+    "flujo": [
+      "BIO",
+      "TBO",
+      "WIO"
+    ],
+    "ventana": 20,
+    "orquestacion": "langgraph",
+    "orden_dag": [
+      "parser",
+      "matcher",
+      "bias_auditor",
+      "orchestrator",
+      "explainer"
+    ],
+    "capa_del_ciclo": "la_del_rol",
+    "sin_promocion_en_el_equipo": "sigue_sin_R7",
+    "mature_en_el_equipo": "sigue_sin_R7",
+    "alpha": 1.0,
+    "roles": {
+      "parser": {
+        "acciones_orden_fijo": [
+          "reglas_estrictas",
+          "diccionario_sinonimos"
+        ],
+        "operador_bio": "reglas_estrictas"
+      },
+      "matcher": {
+        "acciones_orden_fijo": [
+          "ADVANCE",
+          "REJECT"
+        ],
+        "operador_bio": "dos_o_mas_skills_clave"
+      },
+      "bias_auditor": {
+        "acciones_orden_fijo": [
+          "LIBERAR",
+          "DERIVAR"
+        ],
+        "operador_bio": "regla_certificada"
+      },
+      "explainer": {
+        "acciones_orden_fijo": [
+          "por_factores",
+          "contrafactica",
+          "regulatoria"
+        ],
+        "operador_bio": "por_factores"
+      },
+      "orchestrator": "sin_teorias"
+    },
+    "casos_traza": {
+      "BIO": 41,
+      "TBO": 81,
+      "WIO": 81
+    }
+  },
+  "estados_finales": {
+    "parser": "Mature",
+    "matcher": "Trained",
+    "bias_auditor": "Born",
+    "explainer": "Mature"
+  },
+  "evaluaciones": {
+    "parser": [
+      {
+        "ciclo": 20,
+        "capa": "BIO",
+        "ciclo_capa": 20,
+        "ce_a": 15,
+        "ce_0": 8,
+        "pct_cea": 87.5,
+        "teorias_nuevas": 9,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Born",
+        "estado_despues": "Novice",
+        "lcb": 0.0,
+        "brecha": 0.1
+      },
+      {
+        "ciclo": 40,
+        "capa": "TBO",
+        "ciclo_capa": 20,
+        "ce_a": 18,
+        "ce_0": 7,
+        "pct_cea": 157.14,
+        "teorias_nuevas": 3,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Novice",
+        "estado_despues": "Trained",
+        "lcb": 0.0,
+        "brecha": 0.0
+      },
+      {
+        "ciclo": 60,
+        "capa": "WIO",
+        "ciclo_capa": 20,
+        "ce_a": 20,
+        "ce_0": 7,
+        "pct_cea": 185.71,
+        "teorias_nuevas": 0,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Trained",
+        "estado_despues": "Mature",
+        "lcb": 0.0,
+        "brecha": 0.0
+      }
+    ],
+    "matcher": [
+      {
+        "ciclo": 20,
+        "capa": "BIO",
+        "ciclo_capa": 20,
+        "ce_a": 13,
+        "ce_0": 11,
+        "pct_cea": 18.18,
+        "teorias_nuevas": 15,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Born",
+        "estado_despues": "Born",
+        "lcb": 0.0,
+        "brecha": 0.4
+      },
+      {
+        "ciclo": 40,
+        "capa": "BIO",
+        "ciclo_capa": 40,
+        "ce_a": 29,
+        "ce_0": 20,
+        "pct_cea": 45.0,
+        "teorias_nuevas": 20,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Born",
+        "estado_despues": "Novice",
+        "lcb": 0.0,
+        "brecha": 0.3
+      },
+      {
+        "ciclo": 60,
+        "capa": "TBO",
+        "ciclo_capa": 20,
+        "ce_a": 16,
+        "ce_0": 13,
+        "pct_cea": 23.08,
+        "teorias_nuevas": 5,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Novice",
+        "estado_despues": "Novice",
+        "lcb": 0.0,
+        "brecha": 0.1
+      },
+      {
+        "ciclo": 80,
+        "capa": "TBO",
+        "ciclo_capa": 40,
+        "ce_a": 27,
+        "ce_0": 26,
+        "pct_cea": 3.85,
+        "teorias_nuevas": 16,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Novice",
+        "estado_despues": "Novice",
+        "lcb": 0.0,
+        "brecha": 0.15
+      },
+      {
+        "ciclo": 100,
+        "capa": "TBO",
+        "ciclo_capa": 60,
+        "ce_a": 45,
+        "ce_0": 37,
+        "pct_cea": 21.62,
+        "teorias_nuevas": 23,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Novice",
+        "estado_despues": "Novice",
+        "lcb": 0.0,
+        "brecha": 0.0333
+      },
+      {
+        "ciclo": 120,
+        "capa": "TBO",
+        "ciclo_capa": 80,
+        "ce_a": 63,
+        "ce_0": 49,
+        "pct_cea": 28.57,
+        "teorias_nuevas": 25,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Novice",
+        "estado_despues": "Trained",
+        "lcb": 0.0,
+        "brecha": 0.05
+      },
+      {
+        "ciclo": 140,
+        "capa": "WIO",
+        "ciclo_capa": 20,
+        "ce_a": 16,
+        "ce_0": 14,
+        "pct_cea": 14.29,
+        "teorias_nuevas": 2,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Trained",
+        "estado_despues": "Trained",
+        "lcb": 0.0,
+        "brecha": 0.3
+      },
+      {
+        "ciclo": 160,
+        "capa": "WIO",
+        "ciclo_capa": 40,
+        "ce_a": 29,
+        "ce_0": 28,
+        "pct_cea": 3.57,
+        "teorias_nuevas": 6,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Trained",
+        "estado_despues": "Trained",
+        "lcb": 0.0,
+        "brecha": 0.25
+      },
+      {
+        "ciclo": 180,
+        "capa": "WIO",
+        "ciclo_capa": 60,
+        "ce_a": 44,
+        "ce_0": 39,
+        "pct_cea": 12.82,
+        "teorias_nuevas": 12,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Trained",
+        "estado_despues": "Trained",
+        "lcb": 0.0,
+        "brecha": 0.1667
+      },
+      {
+        "ciclo": 200,
+        "capa": "WIO",
+        "ciclo_capa": 80,
+        "ce_a": 58,
+        "ce_0": 50,
+        "pct_cea": 16.0,
+        "teorias_nuevas": 17,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Trained",
+        "estado_despues": "Trained",
+        "lcb": 0.0,
+        "brecha": 0.125
+      },
+      {
+        "ciclo": 220,
+        "capa": "WIO",
+        "ciclo_capa": 100,
+        "ce_a": 75,
+        "ce_0": 66,
+        "pct_cea": 13.64,
+        "teorias_nuevas": 19,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Trained",
+        "estado_despues": "Trained",
+        "lcb": 0.0,
+        "brecha": 0.12
+      }
+    ],
+    "bias_auditor": [],
+    "explainer": [
+      {
+        "ciclo": 20,
+        "capa": "BIO",
+        "ciclo_capa": 20,
+        "ce_a": 13,
+        "ce_0": 7,
+        "pct_cea": 85.71,
+        "teorias_nuevas": 12,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Born",
+        "estado_despues": "Novice",
+        "lcb": 0.0,
+        "brecha": 0.5
+      },
+      {
+        "ciclo": 40,
+        "capa": "TBO",
+        "ciclo_capa": 20,
+        "ce_a": 17,
+        "ce_0": 8,
+        "pct_cea": 112.5,
+        "teorias_nuevas": 5,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Novice",
+        "estado_despues": "Trained",
+        "lcb": 0.0,
+        "brecha": 0.1
+      },
+      {
+        "ciclo": 60,
+        "capa": "WIO",
+        "ciclo_capa": 20,
+        "ce_a": 16,
+        "ce_0": 3,
+        "pct_cea": 433.33,
+        "teorias_nuevas": 0,
+        "pct_tn": null,
+        "gate_omega": true,
+        "estado_antes": "Trained",
+        "estado_despues": "Mature",
+        "lcb": 0.0,
+        "brecha": 0.0
+      }
+    ]
+  },
+  "motivos_por_capa": {
+    "parser": {
+      "BIO": {
+        "azar_no_probada": 9,
+        "celda": 11
+      },
+      "TBO": {
+        "azar_no_probada": 1,
+        "celda": 18,
+        "azar_bio": 1
+      },
+      "WIO": {
+        "celda": 218,
+        "azar_bio": 2
+      }
+    },
+    "matcher": {
+      "BIO": {
+        "azar_no_probada": 15,
+        "celda": 23,
+        "azar_bio": 2
+      },
+      "TBO": {
+        "celda": 58,
+        "azar_no_probada": 19,
+        "azar_bio": 3
+      },
+      "WIO": {
+        "celda": 117,
+        "azar_bio": 23
+      }
+    },
+    "bias_auditor": {
+      "BIO": {
+        "regla_certificada": 13
+      }
+    },
+    "explainer": {
+      "BIO": {
+        "azar_no_probada": 12,
+        "celda": 8
+      },
+      "TBO": {
+        "azar_no_probada": 5,
+        "celda": 15
+      },
+      "WIO": {
+        "celda": 172,
+        "azar_bio": 48
+      }
+    }
+  },
+  "ventanas": [
+    {
+      "id": "BIO-W01",
+      "brecha_dp": 0.4,
+      "lcb": 0.0,
+      "n_min_por_grupo": 10,
+      "accion": "LIBERAR",
+      "sf": {
+        "sesgo_confirmado": false,
+        "brecha_errores": "alta"
+      },
+      "u": 1.0
+    },
+    {
+      "id": "BIO-W02",
+      "brecha_dp": 0.2,
+      "lcb": 0.0,
+      "n_min_por_grupo": 10,
+      "accion": "LIBERAR",
+      "sf": {
+        "sesgo_confirmado": false,
+        "brecha_errores": "media"
+      },
+      "u": 1.0
+    },
+    {
+      "id": "BIO-W03",
+      "brecha_dp": 0.1,
+      "lcb": 0.0,
+      "n_min_por_grupo": 10,
+      "accion": "LIBERAR",
+      "sf": {
+        "sesgo_confirmado": false,
+        "brecha_errores": "baja"
+      },
+      "u": 1.0
+    },
+    {
+      "id": "TBO-W01",
+      "brecha_dp": 0.2,
+      "lcb": 0.0,
+      "n_min_por_grupo": 10,
+      "accion": "LIBERAR",
+      "sf": {
+        "sesgo_confirmado": false,
+        "brecha_errores": "media"
+      },
+      "u": 1.0
+    },
+    {
+      "id": "TBO-W02",
+      "brecha_dp": 0.2,
+      "lcb": 0.0,
+      "n_min_por_grupo": 10,
+      "accion": "LIBERAR",
+      "sf": {
+        "sesgo_confirmado": false,
+        "brecha_errores": "baja"
+      },
+      "u": 1.0
+    },
+    {
+      "id": "TBO-W03",
+      "brecha_dp": 0.1,
+      "lcb": 0.0,
+      "n_min_por_grupo": 10,
+      "accion": "LIBERAR",
+      "sf": {
+        "sesgo_confirmado": false,
+        "brecha_errores": "baja"
+      },
+      "u": 1.0
+    },
+    {
+      "id": "TBO-W04",
+      "brecha_dp": 0.3,
+      "lcb": 0.0,
+      "n_min_por_grupo": 10,
+      "accion": "LIBERAR",
+      "sf": {
+        "sesgo_confirmado": false,
+        "brecha_errores": "media"
+      },
+      "u": 1.0
+    },
+    {
+      "id": "TBO-W05",
+      "brecha_dp": 0.2,
+      "lcb": 0.0,
+      "n_min_por_grupo": 10,
+      "accion": "LIBERAR",
+      "sf": {
+        "sesgo_confirmado": false,
+        "brecha_errores": "media"
+      },
+      "u": 1.0
+    },
+    {
+      "id": "WIO-W01",
+      "brecha_dp": 0.0,
+      "lcb": 0.0,
+      "n_min_por_grupo": 10,
+      "accion": "LIBERAR",
+      "sf": {
+        "sesgo_confirmado": false,
+        "brecha_errores": "alta"
+      },
+      "u": 1.0
+    },
+    {
+      "id": "WIO-W02",
+      "brecha_dp": 0.0,
+      "lcb": 0.0,
+      "n_min_por_grupo": 10,
+      "accion": "LIBERAR",
+      "sf": {
+        "sesgo_confirmado": false,
+        "brecha_errores": "baja"
+      },
+      "u": 1.0
+    },
+    {
+      "id": "WIO-W03",
+      "brecha_dp": 0.1,
+      "lcb": 0.0,
+      "n_min_por_grupo": 10,
+      "accion": "LIBERAR",
+      "sf": {
+        "sesgo_confirmado": false,
+        "brecha_errores": "baja"
+      },
+      "u": 1.0
+    },
+    {
+      "id": "WIO-W04",
+      "brecha_dp": 0.4,
+      "lcb": 0.0,
+      "n_min_por_grupo": 10,
+      "accion": "LIBERAR",
+      "sf": {
+        "sesgo_confirmado": false,
+        "brecha_errores": "media"
+      },
+      "u": 1.0
+    },
+    {
+      "id": "WIO-W05",
+      "brecha_dp": 0.2,
+      "lcb": 0.0,
+      "n_min_por_grupo": 10,
+      "accion": "LIBERAR",
+      "sf": {
+        "sesgo_confirmado": false,
+        "brecha_errores": "alta"
+      },
+      "u": 1.0
+    }
+  ],
+  "decisiones_finales": {
+    "ADVANCE": 116,
+    "REJECT": 144,
+    "ESCALATE_HUMAN": 0
+  },
+  "tipos_explicacion": {
+    "avanza · regulador · uno": 16,
+    "rechaza · regulador · uno": 11,
+    "avanza · regulador · varios": 40,
+    "rechaza · regulador · varios": 50,
+    "avanza · usuario · uno": 23,
+    "rechaza · usuario · uno": 12,
+    "avanza · usuario · varios": 37,
+    "rechaza · usuario · varios": 71
+  },
+  "analisis_cadena": {
+    "BIO": {
+      "AR": {
+        "casos": 30,
+        "calificados": 0.6,
+        "perfil_completo": 0.8667,
+        "advance_matcher": 0.6667,
+        "advance_con_perfil_completo": 0.6538,
+        "aciertos_matcher": 0.8
+      },
+      "no-AR": {
+        "casos": 30,
+        "calificados": 0.3333,
+        "perfil_completo": 0.9,
+        "advance_matcher": 0.4333,
+        "advance_con_perfil_completo": 0.4444,
+        "aciertos_matcher": 0.7
+      }
+    },
+    "TBO": {
+      "AR": {
+        "casos": 50,
+        "calificados": 0.36,
+        "perfil_completo": 0.96,
+        "advance_matcher": 0.46,
+        "advance_con_perfil_completo": 0.4375,
+        "aciertos_matcher": 0.78
+      },
+      "no-AR": {
+        "casos": 50,
+        "calificados": 0.28,
+        "perfil_completo": 0.9,
+        "advance_matcher": 0.34,
+        "advance_con_perfil_completo": 0.3111,
+        "aciertos_matcher": 0.74
+      }
+    },
+    "WIO": {
+      "AR": {
+        "casos": 50,
+        "calificados": 0.44,
+        "perfil_completo": 0.88,
+        "advance_matcher": 0.5,
+        "advance_con_perfil_completo": 0.4773,
+        "aciertos_matcher": 0.72
+      },
+      "no-AR": {
+        "casos": 50,
+        "calificados": 0.3,
+        "perfil_completo": 0.84,
+        "advance_matcher": 0.36,
+        "advance_con_perfil_completo": 0.2857,
+        "aciertos_matcher": 0.78
+      }
+    }
+  },
+  "celdas_sin_exito_en_wio": {
+    "parser": [],
+    "matcher": [
+      {
+        "si": {
+          "skills_match": 3,
+          "exp_band": "junior",
+          "edu": "—",
+          "seniority_ok": false
+        },
+        "ciclos": 4,
+        "exitosos": 0,
+        "motivos": {
+          "azar_bio": 4
+        }
+      },
+      {
+        "si": {
+          "skills_match": 1,
+          "exp_band": "senior",
+          "edu": "Doctorado",
+          "seniority_ok": true
+        },
+        "ciclos": 2,
+        "exitosos": 0,
+        "motivos": {
+          "azar_bio": 2
+        }
+      }
+    ],
+    "explainer": [
+      {
+        "si": {
+          "tipo": "rechaza",
+          "destinatario": "regulador",
+          "motivos": "varios"
+        },
+        "ciclos": 48,
+        "exitosos": 0,
+        "motivos": {
+          "azar_bio": 48
+        }
+      }
+    ]
+  },
+  "shacl": {
+    "conforma": true,
+    "negativa_sigma_p": true,
+    "negativa_de4": true,
+    "tripletas": 54211,
+    "clases": {
+      "Teoria": 109,
+      "CicloLLC": 793,
+      "RegionLLC": 5551,
+      "Decision": 260,
+      "LecturaEquidad": 1040
+    }
+  },
+  "sparql": {
+    "teorias_por_rol_y_estado": [
+      {
+        "rol": "bias_auditor",
+        "estado": "Born",
+        "teorias": 7,
+        "sumaP": 13,
+        "exitosas": 5
+      },
+      {
+        "rol": "explainer",
+        "estado": "Born",
+        "teorias": 12,
+        "sumaP": 208,
+        "exitosas": 5
+      },
+      {
+        "rol": "explainer",
+        "estado": "Novice",
+        "teorias": 5,
+        "sumaP": 52,
+        "exitosas": 2
+      },
+      {
+        "rol": "matcher",
+        "estado": "Born",
+        "teorias": 20,
+        "sumaP": 106,
+        "exitosas": 6
+      },
+      {
+        "rol": "matcher",
+        "estado": "Novice",
+        "teorias": 25,
+        "sumaP": 100,
+        "exitosas": 6
+      },
+      {
+        "rol": "matcher",
+        "estado": "Trained",
+        "teorias": 24,
+        "sumaP": 54,
+        "exitosas": 8
+      },
+      {
+        "rol": "parser",
+        "estado": "Born",
+        "teorias": 9,
+        "sumaP": 185,
+        "exitosas": 4
+      },
+      {
+        "rol": "parser",
+        "estado": "Mature",
+        "teorias": 4,
+        "sumaP": 11,
+        "exitosas": 4
+      },
+      {
+        "rol": "parser",
+        "estado": "Novice",
+        "teorias": 3,
+        "sumaP": 64,
+        "exitosas": 2
+      }
+    ],
+    "favorable_por_rol_y_grupo": [
+      {
+        "rol": "bias_auditor",
+        "grupo": "AR",
+        "n": 130,
+        "favorables": 0
+      },
+      {
+        "rol": "bias_auditor",
+        "grupo": "no-AR",
+        "n": 130,
+        "favorables": 0
+      },
+      {
+        "rol": "explainer",
+        "grupo": "AR",
+        "n": 130,
+        "favorables": 105
+      },
+      {
+        "rol": "explainer",
+        "grupo": "no-AR",
+        "n": 130,
+        "favorables": 97
+      },
+      {
+        "rol": "matcher",
+        "grupo": "AR",
+        "n": 130,
+        "favorables": 68
+      },
+      {
+        "rol": "matcher",
+        "grupo": "no-AR",
+        "n": 130,
+        "favorables": 48
+      },
+      {
+        "rol": "parser",
+        "grupo": "AR",
+        "n": 130,
+        "favorables": 118
+      },
+      {
+        "rol": "parser",
+        "grupo": "no-AR",
+        "n": 130,
+        "favorables": 114
+      }
+    ],
+    "brecha_por_rol": {
+      "bias_auditor": {
+        "tasas": {
+          "AR": 0.0,
+          "no-AR": 0.0
+        },
+        "brecha": 0.0
+      },
+      "explainer": {
+        "tasas": {
+          "AR": 0.8076923076923077,
+          "no-AR": 0.7461538461538462
+        },
+        "brecha": 0.0615
+      },
+      "matcher": {
+        "tasas": {
+          "AR": 0.5230769230769231,
+          "no-AR": 0.36923076923076925
+        },
+        "brecha": 0.1538
+      },
+      "parser": {
+        "tasas": {
+          "AR": 0.9076923076923077,
+          "no-AR": 0.8769230769230769
+        },
+        "brecha": 0.0308
+      }
+    }
+  },
+  "genealogia": {
+    "teoria": "https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/A-SemanticMatcher/cf3ac49a676b8a56",
+    "filas": [
+      {
+        "agente": "https://moav-hr.diit.unlam.edu.ar/ontology/Agente/A-SemanticMatcher",
+        "rol": "matcher",
+        "clave": "[\"{\\\"edu\\\": \\\"Maestría\\\", \\\"exp_band\\\": \\\"junior\\\", \\\"seniority_ok\\\": false, \\\"skills_match\\\": 3}\", \"REJECT\", \"{\\\"calificado\\\": false}\"]",
+        "p": 9,
+        "k": 10,
+        "u": 0.8333333333333334,
+        "ciclo": "https://moav-hr.diit.unlam.edu.ar/ontology/Ciclo/A-SemanticMatcher/0074",
+        "n": 74,
+        "capa": "TBO",
+        "estado": "Novice",
+        "caso": "{\"edu\": \"Maestría\", \"exp\": 1, \"id\": 20013, \"nombre\": \"Caso TBO-014\", \"skills\": [\"ML\", \"CUDA\", \"NLP\"]}",
+        "region": "https://moav-hr.diit.unlam.edu.ar/ontology/Ciclo/A-SemanticMatcher/0074/R5",
+        "refuerzos": 8
+      }
+    ],
+    "refuerzos": [
+      {
+        "n": 90,
+        "capa": "TBO",
+        "estado": "Novice"
+      },
+      {
+        "n": 102,
+        "capa": "TBO",
+        "estado": "Novice"
+      },
+      {
+        "n": 103,
+        "capa": "TBO",
+        "estado": "Novice"
+      },
+      {
+        "n": 183,
+        "capa": "WIO",
+        "estado": "Trained"
+      },
+      {
+        "n": 204,
+        "capa": "WIO",
+        "estado": "Trained"
+      },
+      {
+        "n": 240,
+        "capa": "WIO",
+        "estado": "Trained"
+      },
+      {
+        "n": 241,
+        "capa": "WIO",
+        "estado": "Trained"
+      },
+      {
+        "n": 256,
+        "capa": "WIO",
+        "estado": "Trained"
+      }
+    ]
+  },
+  "trazas": [
+    "p4_traza_BIO-041.md",
+    "p4_traza_BIO-041.html",
+    "p4_traza_TBO-081.md",
+    "p4_traza_TBO-081.html",
+    "p4_traza_WIO-081.md",
+    "p4_traza_WIO-081.html"
+  ],
+  "dag_mermaid": "---\nconfig:\n  flowchart:\n    curve: linear\n---\ngraph TD;\n\t__start__([<p>__start__</p>]):::first\n\tinicio(inicio)\n\t01_Parser(01_Parser)\n\t02_SemanticMatcher(02_SemanticMatcher)\n\t03_BiasAuditor(03_BiasAuditor)\n\t04_Orchestrator(04_Orchestrator)\n\t05_Explainer(05_Explainer)\n\t__end__([<p>__end__</p>]):::last\n\t01_Parser --> 02_SemanticMatcher;\n\t02_SemanticMatcher --> 03_BiasAuditor;\n\t03_BiasAuditor --> 04_Orchestrator;\n\t04_Orchestrator --> 05_Explainer;\n\t__start__ --> inicio;\n\tinicio --> 01_Parser;\n\t05_Explainer --> __end__;\n\tclassDef default fill:#f2f0ff,line-height:1.2\n\tclassDef first fill-opacity:0\n\tclassDef last fill:#bfb6fc\n"
+}

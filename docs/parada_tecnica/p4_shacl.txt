@@ -1,0 +1,34 @@
+P4 · Validación SHACL de p4_equipo.ttl
+
+Ilustrativo, entorno simulado (modo sim); no es evidencia experimental.
+Semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección.
+Generado por código.
+
+Shapes: shapes.py (TeoriaShape: P ≤ K y U en [0, 1]; AgenteShape) + shapes_llc.py
+(TeoriaLLCShape con ΣP = K por celda (Si, A) como restricción SPARQL, Fig. 4.13 y
+p. 113; CicloLLCShape con siete regiones; RegionLLCShape; SituacionInicialSinAtributo-
+Shape, DE-4; DecisionLLCShape; LecturaEquidadShape).
+
+Tripletas: 54211. Nodos por clase: Teoria 109, CicloLLC 793, RegionLLC 5551, Decision 260, LecturaEquidad 1040.
+
+CONFORMA: sí
+
+Validation Report
+Conforms: True
+
+--- Prueba negativa 1: copia del grafo con P + 1 en una teoría ---
+Teoría alterada: https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/A-BiasAuditor/1fc367e827759eca
+CONFORMA: no
+
+	Focus Node: <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/A-BiasAuditor/1fc367e827759eca>
+	Message: ΣP ≠ K en la celda (Si, A) del agente (registro de la Fig. 4.13, Ierache 2010, p. 113)
+	Focus Node: <https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/A-BiasAuditor/d57b39078f62c234>
+	Message: ΣP ≠ K en la celda (Si, A) del agente (registro de la Fig. 4.13, Ierache 2010, p. 113)
+
+--- Prueba negativa 2: copia del grafo con un atributo protegido en una región 1 ---
+Región alterada: https://moav-hr.diit.unlam.edu.ar/ontology/Ciclo/A-BiasAuditor/0001/R1
+CONFORMA: no
+
+	Focus Node: <https://moav-hr.diit.unlam.edu.ar/ontology/Ciclo/A-BiasAuditor/0001/R1>
+	Message: atributo protegido en la situación inicial (DE-4)
+

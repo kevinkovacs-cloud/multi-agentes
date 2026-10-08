@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Traza BIO-041</title><style>
+:root { --fondo: #ffffff; --texto: #111111; --borde: #b9b9b9; --cabeza: #1F3A5F;
+        --suave: #eef2f7; --acento: #0F5C46; }
+@media (prefers-color-scheme: dark) {
+  :root { --fondo: #15181c; --texto: #ececec; --borde: #4a4f57; --cabeza: #9cc2ff;
+          --suave: #20252c; --acento: #7fd8b4; } }
+body { background: var(--fondo); color: var(--texto); margin: 0;
+       font: 16px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+h1 { font-size: 26px; margin: 0 0 8px; } h2 { font-size: 20px; color: var(--cabeza);
+     margin: 32px 0 4px; }
+.rotulos { border-left: 4px solid var(--acento); padding: 6px 12px; background: var(--suave);
+           font-style: italic; }
+.sub { margin: 0 0 8px; font-style: italic; }
+.tabla { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { border: 1px solid var(--borde); padding: 6px 8px; vertical-align: top; text-align: left; }
+th { background: var(--suave); }
+td:first-child { white-space: nowrap; font-weight: 600; }
+pre { background: var(--suave); padding: 10px; overflow-x: auto; font-size: 14px; }
+ul.extra { margin: 8px 0 0; }
+</style></head><body><main>
+<h1>P4 · Traza del caso BIO-041</h1>
+<p class="rotulos">Ilustrativo, entorno simulado (modo sim); no es evidencia experimental. · Semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección. Generado por código: ningún número está escrito a mano.</p>
+<p>Escenario <b>BIO</b> · ventana <b>BIO-W03</b> · traza <code>TRC-A-BIO-041</code>.</p>
+<p>Estados de los roles al procesar el caso (ganados en su propio ciclo de vida): Parser <b>Trained</b>; SemanticMatcher <b>Novice</b>; BiasAuditor <b>Born</b>; Explainer <b>Trained</b>. El Orchestrator no tiene teorías (DE-7). DAG de la ventana (LangGraph): Parser → Semantic Matcher → Bias Auditor → Orchestrator → Explainer.</p>
+<h2>Documento recibido</h2><p>El CV trae datos personales, como uno real. El perfil extraído no los retiene y la Si de ningún rol los contiene (DE-4).</p>
+<pre>&lt;ul&gt;&lt;li&gt;Habilidades: Python, Java, Scrum&lt;/li&gt;&lt;li&gt;Antigüedad: 14 años&lt;/li&gt;&lt;li&gt;Formación: Licenciatura&lt;/li&gt;&lt;li&gt;Nacionalidad: AR&lt;/li&gt;&lt;/ul&gt;</pre>
+<h2>Parser</h2>
+<p class="sub">Agente A-Parser · estado Trained · capa WIO · ciclo 41 del rol.</p>
+<div class="tabla"><table><tr><th>Región</th><th>Qué</th><th>Valor</th></tr>
+<tr><td>R1 · situación inicial</td><td>Si (percepción)</td><td>formato = html, estructura = etiquetado, etiquetas = sinonimos</td></tr>
+<tr><td>R2 · acción</td><td>candidatas en la celda (orden de la Fig. 4.21)</td><td>1. T5 · diccionario_sinonimos · Sf completitud = completo, fuga = no · U 0,889 · P 7 · K 7<br>2. T1 · reglas_estrictas · Sf completitud = fallido, fuga = no · U 0,333 · P 1 · K 1</td></tr>
+<tr><td>R2 · acción</td><td>acción tomada</td><td>diccionario_sinonimos — plan: T5, primera del orden de la Fig. 4.21 (U ≥ 0,5)</td></tr>
+<tr><td>R2 · acción</td><td>operador BIO (lo que haría el SAR neutro)</td><td>reglas_estrictas</td></tr>
+<tr><td>R3 · situación final</td><td>Sf</td><td>completitud = completo, fuga = no</td></tr>
+<tr><td>R3 · situación final</td><td>quién la da</td><td>validación SHACL del perfil extraído (PerfilShape)</td></tr>
+<tr><td>R4 · utilidad</td><td>u del ciclo</td><td>1,00</td></tr>
+<tr><td>R5 · aprendizaje</td><td>registro de la Fig. 4.13</td><td>T5: igual (P + 1, K + 1)</td></tr>
+<tr><td>R5 · aprendizaje</td><td>P, K y U de la teoría después del ciclo</td><td>P 8 · K 8 · U 0,900</td></tr>
+<tr><td>R6 · estadísticas</td><td>ciclo exitoso · acumulados del rol</td><td>sí · ciclos 41, exitosos 34, teorías 12, azares 11</td></tr>
+<tr><td>R7 · evolución</td><td>regla de la Fig. 4.28 ∧ gate de Ω</td><td>no se evalúa en este ciclo (se evalúa al cierre de cada intervalo de 20)</td></tr>
+</table></div>
+<ul class="extra"><li><b>Plantilla del documento:</b> 6 (formato = html, estructura = etiquetado, etiquetas = sinonimos)</li><li><b>Perfil extraído:</b> skills = Python, Scrum, Java, exp = 14, edu = Licenciatura</li><li><b>Validación del shape del perfil:</b> completitud completo, fuga no, faltan nada</li></ul>
+<h2>Semantic Matcher</h2>
+<p class="sub">Agente A-SemanticMatcher · estado Novice · capa TBO · ciclo 41 del rol.</p>
+<div class="tabla"><table><tr><th>Región</th><th>Qué</th><th>Valor</th></tr>
+<tr><td>R1 · situación inicial</td><td>Si (percepción)</td><td>skills_match = 1, exp_band = senior, edu = Licenciatura, seniority_ok = sí</td></tr>
+<tr><td>R2 · acción</td><td>candidatas en la celda (orden de la Fig. 4.21)</td><td>1. T11 · ADVANCE · Sf calificado = sí · U 0,857 · P 5 · K 5</td></tr>
+<tr><td>R2 · acción</td><td>acción tomada</td><td>ADVANCE — plan: T11, primera del orden de la Fig. 4.21 (U ≥ 0,5)</td></tr>
+<tr><td>R2 · acción</td><td>operador BIO (lo que haría el SAR neutro)</td><td>REJECT</td></tr>
+<tr><td>R3 · situación final</td><td>Sf</td><td>calificado = sí</td></tr>
+<tr><td>R3 · situación final</td><td>quién la da</td><td>etiqueta del escenario de entrenamiento</td></tr>
+<tr><td>R4 · utilidad</td><td>u del ciclo</td><td>1,00</td></tr>
+<tr><td>R5 · aprendizaje</td><td>registro de la Fig. 4.13</td><td>T11: igual (P + 1, K + 1)</td></tr>
+<tr><td>R5 · aprendizaje</td><td>P, K y U de la teoría después del ciclo</td><td>P 6 · K 6 · U 0,875</td></tr>
+<tr><td>R6 · estadísticas</td><td>ciclo exitoso · acumulados del rol</td><td>sí · ciclos 41, exitosos 30, teorías 20, azares 17</td></tr>
+<tr><td>R7 · evolución</td><td>regla de la Fig. 4.28 ∧ gate de Ω</td><td>no se evalúa en este ciclo (se evalúa al cierre de cada intervalo de 20)</td></tr>
+</table></div>
+<ul class="extra"><li><b>Decisión del Matcher:</b> ADVANCE</li></ul>
+<h2>Bias Auditor (Ω en la cadena)</h2>
+<p class="sub">Agente A-BiasAuditor · estado Born · capa BIO · ciclo 3 del rol · un ciclo por ventana (BIO-W03, 20 casos).</p>
+<div class="tabla"><table><tr><th>Región</th><th>Qué</th><th>Valor</th></tr>
+<tr><td>R1 · situación inicial</td><td>Si (percepción)</td><td>n_por_grupo = 10-49, brecha = media, lcb_supera_tau_b = no</td></tr>
+<tr><td>R2 · acción</td><td>candidatas en la celda (orden de la Fig. 4.21)</td><td>1. T2 · LIBERAR · Sf sesgo_confirmado = no, brecha_errores = media · U 0,667 · P 1 · K 1</td></tr>
+<tr><td>R2 · acción</td><td>acción tomada</td><td>LIBERAR — regla certificada (DE-6): la teoría no decide</td></tr>
+<tr><td>R2 · acción</td><td>operador BIO (lo que haría el SAR neutro)</td><td>LIBERAR</td></tr>
+<tr><td>R3 · situación final</td><td>Sf</td><td>sesgo_confirmado = no, brecha_errores = baja</td></tr>
+<tr><td>R3 · situación final</td><td>quién la da</td><td>revisión de la ventana con la etiqueta del escenario</td></tr>
+<tr><td>R4 · utilidad</td><td>u del ciclo</td><td>1,00</td></tr>
+<tr><td>R5 · aprendizaje</td><td>registro de la Fig. 4.13</td><td>T3: similar (P = 1, K = K + 1)</td></tr>
+<tr><td>R5 · aprendizaje</td><td>P, K y U de la teoría después del ciclo</td><td>P 1 · K 2 · U 0,750</td></tr>
+<tr><td>R6 · estadísticas</td><td>ciclo exitoso · acumulados del rol</td><td>sí · ciclos 3, exitosos 3, teorías 3, azares 0</td></tr>
+<tr><td>R7 · evolución</td><td>regla de la Fig. 4.28 ∧ gate de Ω</td><td>no se evalúa en este ciclo (se evalúa al cierre de cada intervalo de 20)</td></tr>
+</table></div>
+<ul class="extra"><li><b>Medida de la ventana (decisiones del Matcher):</b> brecha de paridad 0,100, LCB 0,000, n mínimo por grupo 10, τ_b 0,075</li></ul>
+<h2>Orchestrator</h2>
+<p class="sub">Sin base de teorías (DE-7): infraestructura de la capa BIO.</p>
+<div class="tabla"><table><tr><th>Región</th><th>Qué</th><th>Valor</th></tr>
+<tr><td>decisión final</td><td>registrada en la región 7 del trail</td><td>ADVANCE</td></tr>
+<tr><td>escalamiento</td><td>ventana derivada por el Bias Auditor</td><td>no</td></tr>
+</table></div>
+<h2>Explainer</h2>
+<p class="sub">Agente A-Explainer · estado Trained · capa WIO · ciclo 41 del rol.</p>
+<div class="tabla"><table><tr><th>Región</th><th>Qué</th><th>Valor</th></tr>
+<tr><td>R1 · situación inicial</td><td>Si (percepción)</td><td>tipo = avanza, destinatario = regulador, motivos = varios</td></tr>
+<tr><td>R2 · acción</td><td>candidatas en la celda (orden de la Fig. 4.21)</td><td>1. T17 · regulatoria · Sf completa = sí · U 0,800 · P 3 · K 3<br>2. T14 · contrafactica · Sf completa = no · U 0,333 · P 1 · K 1<br>3. T13 · por_factores · Sf completa = no · U 0,333 · P 1 · K 1</td></tr>
+<tr><td>R2 · acción</td><td>acción tomada</td><td>regulatoria — plan: T17, primera del orden de la Fig. 4.21 (U ≥ 0,5)</td></tr>
+<tr><td>R2 · acción</td><td>operador BIO (lo que haría el SAR neutro)</td><td>por_factores</td></tr>
+<tr><td>R3 · situación final</td><td>Sf</td><td>completa = sí</td></tr>
+<tr><td>R3 · situación final</td><td>quién la da</td><td>verificación SPARQL contra el grafo RDF del caso</td></tr>
+<tr><td>R4 · utilidad</td><td>u del ciclo</td><td>1,00</td></tr>
+<tr><td>R5 · aprendizaje</td><td>registro de la Fig. 4.13</td><td>T17: igual (P + 1, K + 1)</td></tr>
+<tr><td>R5 · aprendizaje</td><td>P, K y U de la teoría después del ciclo</td><td>P 4 · K 4 · U 0,833</td></tr>
+<tr><td>R6 · estadísticas</td><td>ciclo exitoso · acumulados del rol</td><td>sí · ciclos 41, exitosos 31, teorías 17, azares 17</td></tr>
+<tr><td>R7 · evolución</td><td>regla de la Fig. 4.28 ∧ gate de Ω</td><td>no se evalúa en este ciclo (se evalúa al cierre de cada intervalo de 20)</td></tr>
+</table></div>
+<ul class="extra"><li><b>Elemento «resultado»:</b> Resultado: avanza a la siguiente etapa (ADVANCE).</li><li><b>Elemento «motivo_principal»:</b> Motivo principal: skills clave = 1; antigüedad mínima cumplida.</li><li><b>Elemento «factores_todos»:</b> Factores: skills clave = 1, banda de experiencia = senior, educación = Licenciatura, antigüedad mínima cumplida; teoría T11 del Matcher (P = 5, K = 5, U = 0,857).</li><li><b>Elemento «dictamen_omega»:</b> Monitor de Equidad, ventana BIO-W03: brecha de paridad 0,100, LCB = 0,000 frente a τ_b = 0,075; intervención LIBERAR.</li><li><b>Elemento «secuencia_trazable»:</b> Traza TRC-A-BIO-041: Parser → Semantic Matcher → Bias Auditor → Orchestrator (audit trail RDF/PROV-O).</li><li><b>Elemento «revision_humana»:</b> Una persona del equipo puede revisar el caso si lo pedís o si el Monitor de Equidad lo deriva.</li><li><b>Verificación contra el grafo del caso:</b> requisitos: dictamen_omega, factores_todos, motivo_principal, resultado, secuencia_trazable; faltan: nada; inconsistentes: nada</li></ul>
+<h2>Qué teorías intervinieron en la decisión (SPARQL sobre p4_equipo.ttl)</h2>
+<div class="tabla"><table><tr><th>Rol</th><th>Ciclo</th><th>Capa</th><th>Estado</th><th>Acción</th><th>Motivo</th><th>Teoría usada como plan: Si → A → Sf (P, K y U al final de la corrida)</th></tr>
+<tr><td>bias_auditor</td><td>3</td><td>BIO</td><td>Born</td><td>LIBERAR</td><td>regla_certificada</td><td>—</td></tr>
+<tr><td>explainer</td><td>41</td><td>WIO</td><td>Trained</td><td>regulatoria</td><td>celda</td><td>destinatario = regulador, motivos = varios, tipo = avanza → regulatoria → completa = sí (P 38, K 38, U 0,975)</td></tr>
+<tr><td>matcher</td><td>41</td><td>TBO</td><td>Novice</td><td>ADVANCE</td><td>celda</td><td>edu = Licenciatura, exp_band = senior, seniority_ok = sí, skills_match = 1 → ADVANCE → calificado = sí (P 13, K 14, U 0,875)</td></tr>
+<tr><td>parser</td><td>41</td><td>WIO</td><td>Trained</td><td>diccionario_sinonimos</td><td>celda</td><td>estructura = etiquetado, etiquetas = sinonimos, formato = html → diccionario_sinonimos → completitud = completo, fuga = no (P 46, K 48, U 0,940)</td></tr>
+</table></div>
+</main></body></html>
