@@ -74,3 +74,39 @@ compartir:                        # E3 (punto 2a), pre-registrado en v2 antes de
     B: 20261108                   # recorre BIO con su semilla hasta ganar Novice (receptor; par de la cooperación)
     C: 20261208                   # ídem (par de la cooperación con B)
   si_falta_un_estado: detener_y_avisar   # E2_RESPUESTA §4: sin fijar estados a mano
+
+# Pre-registro E4 (08/10/2026): todos los roles con su ciclo de vida y la traza completa (punto 4).
+# Se commitea ANTES de correr P4. Reglas del entorno de cada rol: instances/hr/entorno.py, reglas 7 a 10;
+# tasas esperadas por (celda de Si, estrategia) en docs/parada_tecnica/E4_PREREGISTRO.md.
+# Los parámetros del ciclo de vida (n, ciclos por capa, %RCE, %RTN, gate v2, U por acción, evaluación
+# acumulada) son los de la v2, iguales para todos los roles.
+equipo_e4:
+  semilla_casos: 20261008          # el mismo flujo de casos que P1 v2 (escenarios BIO, TBO y WIO)
+  semilla_documentos: 20261009     # plantilla y defecto del documento de cada caso (regla 7)
+  semilla_destinatario: 20261010   # destinatario de la explicación de cada caso (regla 10)
+  flujo: [BIO, TBO, WIO]           # escenarios del flujo de casos del equipo; casos por escenario = ciclos_por_capa
+  ventana: 20                      # casos por ventana del equipo: un ciclo del Bias Auditor por ventana
+  orquestacion: langgraph          # el DAG de cada ventana es un StateGraph (core/grafo.py)
+  orden_dag: [parser, matcher, bias_auditor, orchestrator, explainer]
+  capa_del_ciclo: la_del_rol       # cada rol transita SU capa (la de su estado ganado); el escenario solo fija los casos
+  sin_promocion_en_el_equipo: sigue_sin_R7   # capa agotada sin promoción: el rol sigue actuando y aprendiendo (R1–R6), sin evaluar R7
+  mature_en_el_equipo: sigue_sin_R7          # Mature es el estado final: sigue en servicio (R1–R6)
+  alpha: 1.0                       # LLC puro en P4 (α = 0,5 se compara en E6)
+  roles:
+    parser:
+      acciones_orden_fijo: [reglas_estrictas, diccionario_sinonimos]
+      operador_bio: reglas_estrictas
+    matcher:
+      acciones_orden_fijo: [ADVANCE, REJECT]
+      operador_bio: dos_o_mas_skills_clave
+    bias_auditor:
+      acciones_orden_fijo: [LIBERAR, DERIVAR]
+      operador_bio: regla_certificada   # DE-6: la acción la decide la regla, no la teoría
+    explainer:
+      acciones_orden_fijo: [por_factores, contrafactica, regulatoria]
+      operador_bio: por_factores
+    orchestrator: sin_teorias          # DE-7
+  casos_traza:                     # primer caso de la última ventana de cada escenario (número de caso, desde 1)
+    BIO: 41
+    TBO: 81
+    WIO: 81
