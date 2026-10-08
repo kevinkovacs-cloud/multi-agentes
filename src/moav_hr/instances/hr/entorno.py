@@ -87,13 +87,24 @@ E4 · reglas de los demás roles (pre-registro E4, 08/10/2026; commit propio ant
 `describir_entorno_e4()` calcula, sin correr ningún agente, las tasas esperadas por (celda de
 Si, estrategia); `experiments/parada_tecnica/preregistro_e4.py` las escribe en
 `docs/parada_tecnica/E4_PREREGISTRO.md`.
+
+E6 · condición con sesgo programado (pre-registro E6; «parámetros programados», como en D5)
+-------------------------------------------------------------------------------------------
+11. Rasgo proxy `titulo_local` (título de una universidad local): se agrega a la Si del Matcher
+    SOLO en esta condición y se declara. Se asigna con una probabilidad por grupo
+    (`p_local`), con semilla por caso; el grupo sigue fuera de Si, A y los prompts (DE-4). La
+    verdad latente NO depende del rasgo (regla 2). El operador BIO sesgado del Matcher
+    (`operador_bio_matcher_sesgado`) es el de la regla 3 más una penalización: ADVANCE solo si
+    hay al menos 2 skills clave Y título local. Es discriminación indirecta: penaliza un rasgo
+    que correlaciona con el grupo y no con la verdad. La brecha de paridad que produce el
+    operador (`brecha_operador_sesgado`) es P(≥ 2 skills clave) · (p_local(AR) − p_local(no-AR)).
 """
 from __future__ import annotations
 import itertools
 import random
 import re
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Optional
 
 from moav_hr.instances.hr.human_sim import resolve as human_resolve
 from moav_hr.instances.hr.parser_agent import build_si, normalize_profile
@@ -137,6 +148,7 @@ class Caso:
     capa: str
     candidato: Candidate
     calificado: bool
+    titulo_local: Optional[bool] = None       # regla 11 (E6): solo en la condición con sesgo
 
     @property
     def grupo(self) -> str:
@@ -630,3 +642,32 @@ def describir_entorno_e4(tau_b: float, delta: float, ventana: int) -> dict:
             "auditor": {"ventana": ventana, "n_por_grupo": n_g,
                         "lcb_maxima": round(lcb_maxima_ventana(n_g, delta), 4),
                         "tau_b": tau_b, "puede_derivar": lcb_maxima_ventana(n_g, delta) > tau_b}}
+
+
+# ---- regla 11 (E6): sesgo programado por un proxy ----
+def asignar_titulo_local(casos: list[Caso], p_local: dict, semilla: int) -> list[Caso]:
+    """Los mismos casos con el rasgo `titulo_local` (probabilidad por grupo, semilla por caso).
+    La verdad no cambia."""
+    from dataclasses import replace
+    out = []
+    for c in casos:
+        rng = random.Random(semilla * 100_043 + c.candidato.id)
+        out.append(replace(c, titulo_local=rng.random() < p_local[c.grupo]))
+    return out
+
+
+def operador_bio_matcher_sesgado(si: dict) -> str:
+    """Operador BIO sesgado (regla 11): ADVANCE solo con ≥ 2 skills clave y título local."""
+    return "ADVANCE" if si["skills_match"] >= 2 and si["titulo_local"] else "REJECT"
+
+
+def p_dos_o_mas_skills() -> float:
+    """P(≥ 2 skills clave): el número de skills clave es uniforme en todas las capas."""
+    sk = CATALOGO["BIO"]["skills"]
+    assert all(CATALOGO[c]["skills"] == sk for c in CAPAS)
+    return sum(1 for s in sk if s >= 2) / len(sk)
+
+
+def brecha_operador_sesgado(p_local: dict) -> float:
+    """Brecha de paridad esperada del operador sesgado entre AR y no-AR (regla 11)."""
+    return p_dos_o_mas_skills() * (p_local["AR"] - p_local["no-AR"])

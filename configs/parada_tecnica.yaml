@@ -155,3 +155,32 @@ equipo_e5:
     semillas_extra: 200          # semillas 20261008 + 1000·k, k = 1..200, para la distribución de la diferencia
     permutaciones: 10000
     semilla_permutaciones: 20261008
+
+# Pre-registro E6 (08/10/2026): métricas de equidad por rol (punto 5). Se commitea ANTES de correr P5,
+# junto con docs/parada_tecnica/E5_RESPUESTA_ClaudeChat_2026-10-08.md. Vale todo lo de equipo_e5 salvo lo
+# que se agrega acá. Ningún parámetro del ciclo de vida cambia.
+equipo_e6:
+  base: equipo_e5
+  # Duración de la corrida (E5_RESPUESTA §4): 600 casos por configuración, como en L-3 (10 corridas de 600
+  # ciclos, pp. 267–270), para que algunas teorías lleguen a m_min = 5 usos por grupo. Las capas y el
+  # intervalo no cambian: los casos de más llegan con el rol en su capa final (sin región 7, como en E4).
+  flujo_casos: {BIO: 60, TBO: 100, WIO: 440}
+  equipo_equidad:                  # corrida 1: el equipo de E5, sin sesgo programado
+    semillas: {casos: 20261008, documentos: 20261009, destinatario: 20261010}   # el flujo de A extendido
+    alphas: [1.0, 0.5]             # U_rol = α·u + (1 − α)·ê(t), lado a lado (DE-5); m_min = utilidad.m_min_por_grupo
+  sesgo_programado:                # corrida 2: «parámetros programados» (regla 11 de entorno.py)
+    rasgo: titulo_local            # proxy declarado en la Si del Matcher; la verdad no depende de él
+    semilla_rasgo: 20261011
+    semilla_casos: 20261008        # el mismo flujo de 600 casos
+    operador_bio: dos_o_mas_skills_clave_y_titulo_local
+    magnitudes:                    # brecha de paridad del operador = P(≥ 2 skills) · (p(AR) − p(no-AR))
+      detectable: {AR: 0.9, no-AR: 0.1}    # 0,4: detectable con la evidencia acumulada (característica operativa)
+      bajo_umbral: {AR: 0.6, no-AR: 0.4}   # 0,1: por debajo del umbral aun con toda la corrida
+    configuraciones: [neutro, alpha_1, alpha_0_5]   # el Matcher solo (como en P1): neutro = solo el operador sesgado
+    auditor:
+      ventana: 20                  # (i) la regla certificada sobre cada ventana de 20 decisiones
+      acumulada:                   # (ii) la misma regla sobre lo acumulado desde que el Matcher entró en su capa
+        L: 30                      # Bonferroni δ/L con L = las 30 ventanas de la corrida (conservador)
+        delta: 0.05
+    comparticion:                  # (iii) colaboración del Matcher sesgado a un Matcher Born nuevo
+      a9: decisiones
