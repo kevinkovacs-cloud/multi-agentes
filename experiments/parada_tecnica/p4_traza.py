@@ -411,8 +411,14 @@ def celdas_sin_exito(motor, capa: str = "WIO") -> list[dict]:
         x["ciclos"] += 1
         x["exitosos"] += int(r["exitoso"])
         x["motivos"][r["motivo"]] = x["motivos"].get(r["motivo"], 0) + 1
-    return sorted((x for x in celdas.values() if x["exitosos"] == 0),
-                  key=lambda x: -x["ciclos"])
+    sin = sorted((x for x in celdas.values() if x["exitosos"] == 0), key=lambda x: -x["ciclos"])
+    for x in sin:                        # la misma Si en todas las capas del rol
+        en_todas = [r for r in motor.ciclos if r["si"] == x["si"]]
+        x["apariciones_por_capa"] = {c: sum(r["capa"] == c for r in en_todas)
+                                     for c in ("BIO", "TBO", "WIO")}
+        x["acciones_probadas_antes_de_" + capa] = sorted({r["accion"] for r in en_todas
+                                                          if r["capa"] != capa})
+    return sin
 
 
 def _evaluaciones(motor) -> list[dict]:

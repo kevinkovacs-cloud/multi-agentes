@@ -711,7 +711,15 @@
         "exitosos": 0,
         "motivos": {
           "azar_bio": 4
-        }
+        },
+        "apariciones_por_capa": {
+          "BIO": 0,
+          "TBO": 1,
+          "WIO": 4
+        },
+        "acciones_probadas_antes_de_WIO": [
+          "ADVANCE"
+        ]
       },
       {
         "si": {
@@ -724,7 +732,13 @@
         "exitosos": 0,
         "motivos": {
           "azar_bio": 2
-        }
+        },
+        "apariciones_por_capa": {
+          "BIO": 0,
+          "TBO": 0,
+          "WIO": 2
+        },
+        "acciones_probadas_antes_de_WIO": []
       }
     ],
     "explainer": [
@@ -738,7 +752,16 @@
         "exitosos": 0,
         "motivos": {
           "azar_bio": 48
-        }
+        },
+        "apariciones_por_capa": {
+          "BIO": 1,
+          "TBO": 1,
+          "WIO": 48
+        },
+        "acciones_probadas_antes_de_WIO": [
+          "contrafactica",
+          "por_factores"
+        ]
       }
     ]
   },

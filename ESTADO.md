@@ -248,3 +248,13 @@ Ierache (2010). Diagnóstico: `docs/parada_tecnica/E0_DIAGNOSTICO.md`; decisione
 - **E3 · Compartición (punto 2a).** `core/compartir_llc.py` (axiomas de §4.3.1, `can_donate`, gate v2 sobre las
   decisiones del donante) y `sharing_rdf.procedencia_compartida` (`prov:wasDerivedFrom` por clave). Demo
   `experiments/parada_tecnica/p2a_compartir.py`; informe `docs/parada_tecnica/E3_PUNTO_DE_CONTROL.md`.
+- **E4 · Todos los roles con su ciclo de vida y la traza completa (punto 4).** Pre-registro propio antes de
+  correr (`docs/parada_tecnica/E4_PREREGISTRO.md`; reglas 7 a 10 de `instances/hr/entorno.py`, sección
+  `equipo_e4` de la config). Roles Parser, Bias Auditor (DE-6, la regla decide) y Explainer con teorías y
+  estrategias (`instances/hr/roles_llc.py`, `estrategias_llc.py`); el Orchestrator sin teorías (DE-7). Equipo
+  DAG por ventana en LangGraph (`instances/hr/equipo_llc.py`), con `MotorLLC.paso`: cada rol gana su estado
+  en su propio ciclo de vida. RDF: `core/ontology/abox_llc.py` (ciclos, siete regiones, teorías con
+  `prov:wasGeneratedBy`), `shapes_llc.py` (ΣP = K como restricción SPARQL; DE-4 en la región 1) y
+  `queries_llc.py`. Demo `experiments/parada_tecnica/p4_traza.py`; informe
+  `docs/parada_tecnica/E4_PUNTO_DE_CONTROL.md`, con los resultados no esperados y seis preguntas para
+  Claude chat.
