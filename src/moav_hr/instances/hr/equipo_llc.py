@@ -27,7 +27,7 @@ from moav_hr.core.grafo import construir_grafo
 from moav_hr.core.monitor import FairnessMonitor
 from moav_hr.instances.hr import entorno
 from moav_hr.instances.hr.roles_llc import (RolAuditorLLC, RolExplainerLLC, RolMatcherEquipo,
-                                            RolParserLLC)
+                                            RolNeutro, RolParserLLC)
 
 ROLES = ("parser", "matcher", "bias_auditor", "explainer")
 NOMBRE_ROL = {"parser": "Parser", "matcher": "SemanticMatcher", "bias_auditor": "BiasAuditor",
@@ -49,6 +49,7 @@ class CasoEquipo:
     si_parser: Optional[dict] = None
     si_matcher: Optional[dict] = None
     si_explainer: Optional[dict] = None
+    si_explainer_entorno: Optional[dict] = None      # con los motivos del caso (regla 10)
     decision_matcher: Optional[str] = None
     motivo_matcher: Optional[str] = None
     teoria_matcher: Optional[dict] = None
@@ -97,10 +98,23 @@ class _Nodo:
         return state
 
 
+def seccion_equipo(cfg: dict, seccion: str, semillas: Optional[dict] = None) -> dict:
+    """Sección del equipo en la config. Una sección con `base` hereda la base y la pisa con
+    lo suyo (E5 hereda de E4). `semillas` = {casos, documentos, destinatario} del equipo."""
+    eq = dict(cfg[seccion])
+    if "base" in eq:
+        eq = {**cfg[eq["base"]], **eq}
+    if semillas is not None:
+        eq.update(semilla_casos=semillas["casos"], semilla_documentos=semillas["documentos"],
+                  semilla_destinatario=semillas["destinatario"])
+    return eq
+
+
 class EquipoLLC:
-    def __init__(self, nombre: str, cfg: dict):
-        self.nombre, self.cfg = nombre, cfg
-        eq, om = cfg["equipo_e4"], cfg["omega"]
+    def __init__(self, nombre: str, cfg: dict, seccion: str = "equipo_e4",
+                 semillas: Optional[dict] = None, neutro: bool = False):
+        self.nombre, self.cfg, self.neutro = nombre, cfg, neutro
+        eq, om = seccion_equipo(cfg, seccion, semillas), cfg["omega"]
         self.eq = eq
         eps = cfg["entorno"]["ruido_wio_epsilon"]
         self.trail = AuditTrail(f"TRC-{nombre}")
@@ -110,8 +124,14 @@ class EquipoLLC:
         roles = {"parser": RolParserLLC(),
                  "matcher": RolMatcherEquipo(eps, eq["semilla_casos"]),
                  "bias_auditor": RolAuditorLLC(eps, eq["semilla_casos"], om["tau_b"],
-                                               om["delta"]),
-                 "explainer": RolExplainerLLC(eq["semilla_destinatario"])}
+                                               om["delta"],
+                                               evoluciona=eq.get("auditor_evoluciona", True)),
+                 "explainer": RolExplainerLLC(eq["semilla_destinatario"], con_motivos=(
+                     "motivos" in eq.get("si_explainer", ["tipo", "destinatario", "motivos"])))}
+        for r in eq.get("explora_en_wio", []):           # E5, decisión 3
+            roles[r].capas_exploracion = ("BIO", "TBO", "WIO")
+        if neutro:                                         # SAR neutro de L-3 (E5)
+            roles = {r: RolNeutro(x) for r, x in roles.items()}
         self.roles = roles
         self.agentes = {r: AgenteLLC(f"{nombre}-{NOMBRE_ROL[r]}", r) for r in ROLES}
         self.motores = {}
@@ -122,6 +142,7 @@ class EquipoLLC:
                                        trail=self.trail)
         self.ventanas: list[VentanaEquipo] = []
         self.casos: list[CasoEquipo] = []
+        self.linea_de_tiempo: list[dict] = []          # estados de los roles tras cada ventana
         self.grafo = construir_grafo([
             _Nodo("Parser", self._nodo_parser), _Nodo("SemanticMatcher", self._nodo_matcher),
             _Nodo("BiasAuditor", self._nodo_auditor), _Nodo("Orchestrator", self._nodo_orq),
@@ -189,17 +210,22 @@ class EquipoLLC:
                                       "trail": self.trail, "ventana": v}})
         self.ventanas.append(v)
         self.casos.extend(v.casos)
+        self.linea_de_tiempo.append({"ventana": v.id, "casos": len(self.casos),
+                                     "estados": self.estados()})
         return v
 
-    def correr(self, escenarios: Optional[dict] = None) -> dict:
+    def ventanas_del_flujo(self, escenarios: Optional[dict] = None) -> list[VentanaEquipo]:
+        """Las ventanas del flujo de casos del equipo, sin procesar (para correr en paralelo)."""
         cv = self.cfg["ciclo_de_vida"]
         if escenarios is None:
             escenarios = {c: entorno.generar_escenario(c, cv["ciclos_por_capa"][c],
                                                        self.eq["semilla_casos"])
                           for c in self.eq["flujo"]}
-        for esc in self.eq["flujo"]:
-            for v in self._ventanas(esc, escenarios[esc]):
-                self.procesar_ventana(v)
+        return [v for esc in self.eq["flujo"] for v in self._ventanas(esc, escenarios[esc])]
+
+    def correr(self, escenarios: Optional[dict] = None) -> dict:
+        for v in self.ventanas_del_flujo(escenarios):
+            self.procesar_ventana(v)
         return self.resumen()
 
     def estados(self) -> dict:

@@ -14,7 +14,9 @@ Adaptaciones declaradas:
   · «Azar» (Fig. 4.17, p. 101; Alg. 4.5): sin plan válido se recurre al plan por
     contingencia y se cuenta como azar. Ninguna decisión aleatoria sobre personas (DE-3):
     en los escenarios BIO y TBO, la primera acción todavía no probada en la celda, en un
-    orden fijo; si ya se probaron todas, el operador BIO. En WIO, el operador BIO.
+    orden fijo; si ya se probaron todas, el operador BIO. En WIO, el operador BIO. Las capas
+    con exploración son configurables por rol (`capas_exploracion`; E5: el Explainer, que
+    actúa después de la decisión, explora también en WIO).
   · Respaldo por similitud (DE-2, extensión): solo con la celda vacía y si está activado;
     toma la primera, en el orden de la Fig. 4.21, entre las teorías con similitud ≥ δ y
     u_tarea > 0. Cada uso queda registrado.
@@ -55,8 +57,10 @@ class PlanificadorLLC:
                  alpha: float = 1.0, registro_e: Optional[RegistroE] = None,
                  m_min: int = 5,
                  similitud: Callable[[dict, dict], float] = similarity,
-                 validez_minima: float = 0.0, validez_estricta: bool = True):
+                 validez_minima: float = 0.0, validez_estricta: bool = True,
+                 capas_exploracion: tuple[str, ...] = CAPAS_CON_EXPLORACION):
         self.base = base
+        self.capas_exploracion = tuple(capas_exploracion)
         self.acciones = tuple(acciones)
         self.respaldo_similitud = respaldo_similitud
         self.delta = delta
@@ -127,7 +131,7 @@ class PlanificadorLLC:
                 return DecisionPlan(t.a, "similitud", t, False, filas_sim, False, None,
                                     self.alpha, equidad_usada)
 
-        if capa in CAPAS_CON_EXPLORACION:
+        if capa in self.capas_exploracion:
             probadas = {t.a for t in celda}
             no_probadas = [a for a in self.acciones if a not in probadas]
             if no_probadas:

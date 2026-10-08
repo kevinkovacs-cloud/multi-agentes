@@ -136,9 +136,14 @@ class RolAuditorLLC:
     acciones = entorno.ACCIONES_AUDITOR
     accion_por_regla = True                                     # DE-6
 
-    def __init__(self, epsilon_wio: float, semilla: int, tau_b: float, delta: float):
+    motivo_sin_r7 = ("no aplica: rol supervisor de configuración BIO fija, sin estados "
+                     "ganados (E5, decisión 1)")
+
+    def __init__(self, epsilon_wio: float, semilla: int, tau_b: float, delta: float,
+                 evoluciona: bool = True):
         self.epsilon_wio, self.semilla = epsilon_wio, semilla
         self.tau_b, self.delta = tau_b, delta
+        self.evoluciona = evoluciona          # E4: True (nunca cerró un intervalo); E5: False
 
     def percibir(self, v) -> dict:
         v.medida = entorno.medida_ventana(v.decisiones, self.delta)
@@ -177,14 +182,18 @@ class RolExplainerLLC:
     rol = "explainer"
     acciones = entorno.ESTRATEGIAS_EXPLAINER
 
-    def __init__(self, semilla_destinatario: int):
+    def __init__(self, semilla_destinatario: int, con_motivos: bool = True):
         self.semilla = semilla_destinatario
+        self.con_motivos = con_motivos        # E4: True; E5 (decisión 6): Si = tipo · destinatario
 
     def percibir(self, ce) -> dict:
-        ce.si_explainer = {"tipo": entorno.TIPOS_DECISION[ce.decision_final],
-                           "destinatario": entorno.destinatario(ce.caso, self.semilla),
-                           "motivos": "varios" if ce.motivo_matcher in ("celda", "similitud")
-                           else "uno"}
+        # la situación completa la usa el entorno (regla 10); el Explainer percibe su Si
+        ce.si_explainer_entorno = {
+            "tipo": entorno.TIPOS_DECISION[ce.decision_final],
+            "destinatario": entorno.destinatario(ce.caso, self.semilla),
+            "motivos": "varios" if ce.motivo_matcher in ("celda", "similitud") else "uno"}
+        ce.si_explainer = (dict(ce.si_explainer_entorno) if self.con_motivos else
+                           {k: ce.si_explainer_entorno[k] for k in ("tipo", "destinatario")})
         return ce.si_explainer
 
     def accion_bio(self, si: dict, ce) -> str:
@@ -193,7 +202,7 @@ class RolExplainerLLC:
     def observar(self, ce, accion: str, capa: str) -> dict:
         hechos = ce.hechos()
         ce.explicacion = explicar(accion, hechos)
-        v = entorno.verificar_explicacion(ce.explicacion, ce.si_explainer,
+        v = entorno.verificar_explicacion(ce.explicacion, ce.si_explainer_entorno,
                                           entorno.grafo_hechos_caso(hechos))
         ce.verificacion_explicacion = v
         return {"completa": v["completa"]}
@@ -201,7 +210,7 @@ class RolExplainerLLC:
     def sf_contrafactica(self, ce, accion: str, capa: str) -> dict:
         """Sf que habría dado `accion` con los mismos hechos (para CE_0), sin efectos."""
         hechos = ce.hechos()
-        v = entorno.verificar_explicacion(explicar(accion, hechos), ce.si_explainer,
+        v = entorno.verificar_explicacion(explicar(accion, hechos), ce.si_explainer_entorno,
                                           entorno.grafo_hechos_caso(hechos))
         return {"completa": v["completa"]}
 
@@ -221,3 +230,19 @@ class RolExplainerLLC:
     @staticmethod
     def describir(ce) -> dict:
         return {"id": ce.caso.candidato.id, "nombre": ce.caso.candidato.name}
+
+
+class RolNeutro:
+    """SAR neutro de L-3 (E5): el mismo rol, pero actúa siempre con su operador BIO. Registra
+    sus teorías (para contar las teorías nuevas de la configuración) y no las usa; no
+    comparte ni evoluciona."""
+    accion_por_regla = True
+    motivo_regla = "operador_bio"
+    evoluciona = False
+    motivo_sin_r7 = "SAR neutro: configuración de referencia de L-3"
+
+    def __init__(self, rol):
+        self._rol = rol
+
+    def __getattr__(self, nombre):
+        return getattr(self._rol, nombre)

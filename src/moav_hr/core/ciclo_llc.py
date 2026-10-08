@@ -36,7 +36,7 @@ from moav_hr.core.audit.trail import AuditTrail
 from moav_hr.core.equidad_roles import RegistroE
 from moav_hr.core.estadisticas import EstadisticasLLC
 from moav_hr.core.lifecycle import MaturityState, Region, capa_llc, next_state
-from moav_hr.core.planificador import PlanificadorLLC
+from moav_hr.core.planificador import CAPAS_CON_EXPLORACION, PlanificadorLLC
 from moav_hr.core.theory import serialize, theory_key
 
 CAPAS = ("BIO", "TBO", "WIO")
@@ -166,6 +166,7 @@ class MotorLLC:
             agente.theories, cfg.acciones_orden or rol.acciones,
             respaldo_similitud=cfg.respaldo_similitud, delta=cfg.delta, alpha=cfg.alpha,
             registro_e=self.registro_e, m_min=cfg.m_min,
+            capas_exploracion=getattr(rol, "capas_exploracion", CAPAS_CON_EXPLORACION),
             **self.parametros_validez(cfg))
         self.stats = EstadisticasLLC(cfg.umbral_exitoso)
         self.ciclo = 0
@@ -203,9 +204,10 @@ class MotorLLC:
         bio = self.rol.accion_bio(si, caso)                                       # R2
         plan = self.planificador.planificar(si, capa, bio)
         if getattr(self.rol, "accion_por_regla", False):
-            # DE-6: decide la regla (operador BIO); las candidatas quedan en la traza
-            plan = replace(plan, accion=bio, motivo="regla_certificada", teoria=None,
-                           es_azar=False)
+            # DE-6: decide la regla (operador BIO); las candidatas quedan en la traza. También
+            # el SAR neutro de L-3 (E5), que actúa solo con su operador BIO.
+            plan = replace(plan, accion=bio, teoria=None, es_azar=False,
+                           motivo=getattr(self.rol, "motivo_regla", "regla_certificada"))
         self._evento(Region.ACTION, "R2_accion", capa, estado, accion=plan.accion,
                      motivo=plan.motivo, es_azar=plan.es_azar,
                      teoria_plan=None if plan.teoria is None else plan.teoria.id,
@@ -351,16 +353,20 @@ class MotorLLC:
         """Un ciclo del rol dentro de un equipo (E4): la capa es la del estado ganado del
         agente y los contadores, intervalos y región 7 son propios del rol. Con la capa
         agotada sin promoción, o en Mature, el rol sigue actuando y aprendiendo (regiones
-        1 a 6) sin evaluar la región 7 (pre-registro E4)."""
+        1 a 6) sin evaluar la región 7 (pre-registro E4). Un rol con `evoluciona = False`
+        (E5: el Bias Auditor, rol supervisor) no aplica la región 7."""
         capa = self.agente.layer.value
         if self._ec is None or self._ec.capa != capa:
             self._ec = _EstadoCapa(capa)
         ec = self._ec
         final = self.agente.maturity == MaturityState.MATURE
-        if final or ec.j >= self.cfg.ciclos_por_capa[capa]:
+        evoluciona = getattr(self.rol, "evoluciona", True)
+        if not evoluciona or final or ec.j >= self.cfg.ciclos_por_capa[capa]:
             ec.j += 1
             reg = self.ciclo_llc(caso, capa, ec.j)
-            motivo = "estado final (Mature)" if final else "capa agotada sin promoción"
+            motivo = (getattr(self.rol, "motivo_sin_r7", "el rol no evoluciona")
+                      if not evoluciona else "estado final (Mature)" if final
+                      else "capa agotada sin promoción")
             self._evento(Region.EVOLUTION, "R7_evolucion", capa, reg["estado"],
                          evaluada=False, sin_r7=motivo)
             reg.update(evolucion=None, sin_r7=motivo,
