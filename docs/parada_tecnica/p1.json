@@ -1,0 +1,1993 @@
+{
+  "rotulos": [
+    "ilustrativo, entorno simulado (modo sim); no es evidencia experimental",
+    "semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección"
+  ],
+  "demo": "P1 — un caso que genera una teoría y el ciclo de vida punto a punto",
+  "config": {
+    "n_intervalo": 20,
+    "ciclos_por_capa": {
+      "BIO": 60,
+      "TBO": 100,
+      "WIO": 100
+    },
+    "rce": 25,
+    "rtn": 20,
+    "tau": 0.8,
+    "alpha": 1.0,
+    "respaldo_similitud": false,
+    "semilla": 20261008,
+    "epsilon_wio": 0.1
+  },
+  "resultado": {
+    "estado_final": "Born",
+    "ciclos": 60,
+    "capas": [
+      {
+        "capa": "BIO",
+        "promovido": false,
+        "ciclos": 60
+      }
+    ]
+  },
+  "evaluaciones": [
+    {
+      "ciclo": 20,
+      "capa": "BIO",
+      "ciclo_capa": 20,
+      "estado_antes": "Born",
+      "fair_w": 0.7,
+      "reputacion": 0.7,
+      "tau": 0.8,
+      "gate_certificado": false,
+      "aviso_certificado": "el gate certificado no puede aprobar con 1 ventanas; mínimo m_min(1.0)=47",
+      "ce_a": 14,
+      "ce_0": 11,
+      "pct_cea": 27.27,
+      "rce": 25,
+      "cumple_cea": true,
+      "teorias_nuevas": 12,
+      "pct_tn": null,
+      "rtn": 20,
+      "tn_aplica": false,
+      "cumple_tn": true,
+      "gate_omega": false,
+      "promueve": false,
+      "estado_despues": "Born"
+    },
+    {
+      "ciclo": 40,
+      "capa": "BIO",
+      "ciclo_capa": 40,
+      "estado_antes": "Born",
+      "fair_w": 0.7,
+      "reputacion": 0.7,
+      "tau": 0.8,
+      "gate_certificado": false,
+      "aviso_certificado": "el gate certificado no puede aprobar con 2 ventanas; mínimo m_min(1.0)=47",
+      "ce_a": 17,
+      "ce_0": 9,
+      "pct_cea": 88.89,
+      "rce": 25,
+      "cumple_cea": true,
+      "teorias_nuevas": 4,
+      "pct_tn": null,
+      "rtn": 20,
+      "tn_aplica": false,
+      "cumple_tn": true,
+      "gate_omega": false,
+      "promueve": false,
+      "estado_despues": "Born"
+    },
+    {
+      "ciclo": 60,
+      "capa": "BIO",
+      "ciclo_capa": 60,
+      "estado_antes": "Born",
+      "fair_w": 0.9,
+      "reputacion": 0.7667,
+      "tau": 0.8,
+      "gate_certificado": false,
+      "aviso_certificado": "el gate certificado no puede aprobar con 3 ventanas; mínimo m_min(1.0)=47",
+      "ce_a": 12,
+      "ce_0": 13,
+      "pct_cea": -7.69,
+      "rce": 25,
+      "cumple_cea": false,
+      "teorias_nuevas": 3,
+      "pct_tn": null,
+      "rtn": 20,
+      "tn_aplica": false,
+      "cumple_tn": true,
+      "gate_omega": false,
+      "promueve": false,
+      "estado_despues": "Born"
+    }
+  ],
+  "teoria_estrella": {
+    "id": 1,
+    "iri": "https://moav-hr.diit.unlam.edu.ar/ontology/Teoria/SemanticMatcher/3e30cf25cc66c1f1",
+    "si": {
+      "skills_match": 0,
+      "exp_band": "senior",
+      "edu": "Licenciatura",
+      "seniority_ok": true
+    },
+    "a": "ADVANCE",
+    "sf": {
+      "calificado": false
+    },
+    "nacimiento": {
+      "p": 1,
+      "k": 1,
+      "u": 0.0,
+      "ciclo": 1,
+      "registro": "nueva"
+    },
+    "final": {
+      "p": 1,
+      "k": 1,
+      "u": 0.0
+    },
+    "usos": [
+      {
+        "ciclo": 1,
+        "capa": "BIO",
+        "estado": "Born",
+        "como": "registro"
+      }
+    ]
+  },
+  "estadisticas_finales": {
+    "ciclos": 60,
+    "situaciones": 8,
+    "teorias_acumuladas": 19,
+    "teorias_por_intervalo_u": [
+      0,
+      0,
+      0,
+      8
+    ],
+    "teorias_exitosas": 8,
+    "teorias_nuevas": 19,
+    "ciclos_exitosos": 43,
+    "planes": 47,
+    "planes_exitosos": 35,
+    "azares": 13,
+    "pk_por_intervalo_u": [
+      null,
+      null,
+      null,
+      0.7518
+    ],
+    "pk_general": 0.6316
+  },
+  "regla_de_validez_aplicada": {
+    "veces": 5,
+    "ciclos": [
+      8,
+      10,
+      12,
+      22,
+      28
+    ]
+  },
+  "desacuerdos_fig421_alg47": {
+    "veces": 0,
+    "casos": []
+  },
+  "decisiones_por_motivo": {
+    "azar_no_probada": 12,
+    "celda": 47,
+    "azar_bio": 1
+  },
+  "invariante_sigma_p_igual_k": true,
+  "ciclos": [
+    {
+      "ciclo": 1,
+      "capa": "BIO",
+      "ciclo_capa": 1,
+      "estado": "Born",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "azar_no_probada",
+      "es_azar": true,
+      "teoria_plan": null,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 1,
+      "registro": "nueva",
+      "p": 1,
+      "k": 1,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 2,
+      "capa": "BIO",
+      "ciclo_capa": 2,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "ADVANCE",
+      "motivo": "azar_no_probada",
+      "es_azar": true,
+      "teoria_plan": null,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 2,
+      "registro": "nueva",
+      "p": 1,
+      "k": 1,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 3,
+      "capa": "BIO",
+      "ciclo_capa": 3,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "azar_no_probada",
+      "es_azar": true,
+      "teoria_plan": null,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 3,
+      "registro": "nueva",
+      "p": 1,
+      "k": 1,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 4,
+      "capa": "BIO",
+      "ciclo_capa": 4,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 3,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 3,
+      "registro": "igual",
+      "p": 2,
+      "k": 2,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 5,
+      "capa": "BIO",
+      "ciclo_capa": 5,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 3,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 3,
+      "registro": "igual",
+      "p": 3,
+      "k": 3,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 6,
+      "capa": "BIO",
+      "ciclo_capa": 6,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "ADVANCE",
+      "motivo": "azar_no_probada",
+      "es_azar": true,
+      "teoria_plan": null,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 4,
+      "registro": "nueva",
+      "p": 1,
+      "k": 1,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 7,
+      "capa": "BIO",
+      "ciclo_capa": 7,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "azar_no_probada",
+      "es_azar": true,
+      "teoria_plan": null,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 5,
+      "registro": "nueva",
+      "p": 1,
+      "k": 1,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 8,
+      "capa": "BIO",
+      "ciclo_capa": 8,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "azar_no_probada",
+      "es_azar": true,
+      "teoria_plan": null,
+      "validez_aplicada": true,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 6,
+      "registro": "nueva",
+      "p": 1,
+      "k": 1,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 9,
+      "capa": "BIO",
+      "ciclo_capa": 9,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 6,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 6,
+      "registro": "igual",
+      "p": 2,
+      "k": 2,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 10,
+      "capa": "BIO",
+      "ciclo_capa": 10,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "azar_no_probada",
+      "es_azar": true,
+      "teoria_plan": null,
+      "validez_aplicada": true,
+      "accion_bio": "REJECT",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 7,
+      "registro": "nueva",
+      "p": 1,
+      "k": 1,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 11,
+      "capa": "BIO",
+      "ciclo_capa": 11,
+      "estado": "Born",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "azar_no_probada",
+      "es_azar": true,
+      "teoria_plan": null,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 8,
+      "registro": "nueva",
+      "p": 1,
+      "k": 1,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 12,
+      "capa": "BIO",
+      "ciclo_capa": 12,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "azar_bio",
+      "es_azar": true,
+      "teoria_plan": null,
+      "validez_aplicada": true,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 9,
+      "registro": "similar",
+      "p": 1,
+      "k": 2,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 13,
+      "capa": "BIO",
+      "ciclo_capa": 13,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 5,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 5,
+      "registro": "igual",
+      "p": 2,
+      "k": 2,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 14,
+      "capa": "BIO",
+      "ciclo_capa": 14,
+      "estado": "Born",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "ADVANCE",
+      "motivo": "azar_no_probada",
+      "es_azar": true,
+      "teoria_plan": null,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 10,
+      "registro": "nueva",
+      "p": 1,
+      "k": 1,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 15,
+      "capa": "BIO",
+      "ciclo_capa": 15,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 3,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 3,
+      "registro": "igual",
+      "p": 4,
+      "k": 4,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 16,
+      "capa": "BIO",
+      "ciclo_capa": 16,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 9,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 9,
+      "registro": "igual",
+      "p": 2,
+      "k": 3,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 17,
+      "capa": "BIO",
+      "ciclo_capa": 17,
+      "estado": "Born",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "ADVANCE",
+      "motivo": "azar_no_probada",
+      "es_azar": true,
+      "teoria_plan": null,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 11,
+      "registro": "nueva",
+      "p": 1,
+      "k": 1,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 18,
+      "capa": "BIO",
+      "ciclo_capa": 18,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 9,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 9,
+      "registro": "igual",
+      "p": 3,
+      "k": 4,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 19,
+      "capa": "BIO",
+      "ciclo_capa": 19,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 6,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 6,
+      "registro": "igual",
+      "p": 3,
+      "k": 3,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 20,
+      "capa": "BIO",
+      "ciclo_capa": 20,
+      "estado": "Born",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 11,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 12,
+      "registro": "similar",
+      "p": 1,
+      "k": 2,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 21,
+      "capa": "BIO",
+      "ciclo_capa": 21,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 3,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 13,
+      "registro": "similar",
+      "p": 1,
+      "k": 5,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 22,
+      "capa": "BIO",
+      "ciclo_capa": 22,
+      "estado": "Born",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "REJECT",
+      "motivo": "azar_no_probada",
+      "es_azar": true,
+      "teoria_plan": null,
+      "validez_aplicada": true,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 14,
+      "registro": "nueva",
+      "p": 1,
+      "k": 1,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 23,
+      "capa": "BIO",
+      "ciclo_capa": 23,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 6,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 6,
+      "registro": "igual",
+      "p": 4,
+      "k": 4,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 24,
+      "capa": "BIO",
+      "ciclo_capa": 24,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 3,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 3,
+      "registro": "igual",
+      "p": 5,
+      "k": 6,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 25,
+      "capa": "BIO",
+      "ciclo_capa": 25,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 5,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 5,
+      "registro": "igual",
+      "p": 3,
+      "k": 3,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 26,
+      "capa": "BIO",
+      "ciclo_capa": 26,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 3,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 3,
+      "registro": "igual",
+      "p": 6,
+      "k": 7,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 27,
+      "capa": "BIO",
+      "ciclo_capa": 27,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 3,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 3,
+      "registro": "igual",
+      "p": 7,
+      "k": 8,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 28,
+      "capa": "BIO",
+      "ciclo_capa": 28,
+      "estado": "Born",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "azar_no_probada",
+      "es_azar": true,
+      "teoria_plan": null,
+      "validez_aplicada": true,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 15,
+      "registro": "nueva",
+      "p": 1,
+      "k": 1,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 29,
+      "capa": "BIO",
+      "ciclo_capa": 29,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 5,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 5,
+      "registro": "igual",
+      "p": 4,
+      "k": 4,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 30,
+      "capa": "BIO",
+      "ciclo_capa": 30,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 9,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 9,
+      "registro": "igual",
+      "p": 4,
+      "k": 5,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 31,
+      "capa": "BIO",
+      "ciclo_capa": 31,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 9,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 9,
+      "registro": "igual",
+      "p": 5,
+      "k": 6,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 32,
+      "capa": "BIO",
+      "ciclo_capa": 32,
+      "estado": "Born",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 8,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 8,
+      "registro": "igual",
+      "p": 2,
+      "k": 2,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 33,
+      "capa": "BIO",
+      "ciclo_capa": 33,
+      "estado": "Born",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 8,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 8,
+      "registro": "igual",
+      "p": 3,
+      "k": 3,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 34,
+      "capa": "BIO",
+      "ciclo_capa": 34,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 5,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 5,
+      "registro": "igual",
+      "p": 5,
+      "k": 5,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 35,
+      "capa": "BIO",
+      "ciclo_capa": 35,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 5,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 5,
+      "registro": "igual",
+      "p": 6,
+      "k": 6,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 36,
+      "capa": "BIO",
+      "ciclo_capa": 36,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 5,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 5,
+      "registro": "igual",
+      "p": 7,
+      "k": 7,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 37,
+      "capa": "BIO",
+      "ciclo_capa": 37,
+      "estado": "Born",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 8,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 16,
+      "registro": "similar",
+      "p": 1,
+      "k": 4,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 38,
+      "capa": "BIO",
+      "ciclo_capa": 38,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 6,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 6,
+      "registro": "igual",
+      "p": 5,
+      "k": 5,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 39,
+      "capa": "BIO",
+      "ciclo_capa": 39,
+      "estado": "Born",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 11,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 12,
+      "registro": "igual",
+      "p": 2,
+      "k": 3,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 40,
+      "capa": "BIO",
+      "ciclo_capa": 40,
+      "estado": "Born",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 15,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 15,
+      "registro": "igual",
+      "p": 2,
+      "k": 2,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 41,
+      "capa": "BIO",
+      "ciclo_capa": 41,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 5,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 5,
+      "registro": "igual",
+      "p": 8,
+      "k": 8,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 42,
+      "capa": "BIO",
+      "ciclo_capa": 42,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 9,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 9,
+      "registro": "igual",
+      "p": 6,
+      "k": 7,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 43,
+      "capa": "BIO",
+      "ciclo_capa": 43,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 3,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 3,
+      "registro": "igual",
+      "p": 8,
+      "k": 9,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 44,
+      "capa": "BIO",
+      "ciclo_capa": 44,
+      "estado": "Born",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 8,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 8,
+      "registro": "igual",
+      "p": 4,
+      "k": 5,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 45,
+      "capa": "BIO",
+      "ciclo_capa": 45,
+      "estado": "Born",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 11,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 12,
+      "registro": "igual",
+      "p": 3,
+      "k": 4,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 46,
+      "capa": "BIO",
+      "ciclo_capa": 46,
+      "estado": "Born",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 11,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 12,
+      "registro": "igual",
+      "p": 4,
+      "k": 5,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 47,
+      "capa": "BIO",
+      "ciclo_capa": 47,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 6,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 17,
+      "registro": "similar",
+      "p": 1,
+      "k": 6,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 48,
+      "capa": "BIO",
+      "ciclo_capa": 48,
+      "estado": "Born",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 14,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 18,
+      "registro": "similar",
+      "p": 1,
+      "k": 2,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 49,
+      "capa": "BIO",
+      "ciclo_capa": 49,
+      "estado": "Born",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 15,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 15,
+      "registro": "igual",
+      "p": 3,
+      "k": 3,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 50,
+      "capa": "BIO",
+      "ciclo_capa": 50,
+      "estado": "Born",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 15,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 15,
+      "registro": "igual",
+      "p": 4,
+      "k": 4,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 51,
+      "capa": "BIO",
+      "ciclo_capa": 51,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 3,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 3,
+      "registro": "igual",
+      "p": 9,
+      "k": 10,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 52,
+      "capa": "BIO",
+      "ciclo_capa": 52,
+      "estado": "Born",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 15,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 15,
+      "registro": "igual",
+      "p": 5,
+      "k": 5,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 53,
+      "capa": "BIO",
+      "ciclo_capa": 53,
+      "estado": "Born",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 15,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 15,
+      "registro": "igual",
+      "p": 6,
+      "k": 6,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 54,
+      "capa": "BIO",
+      "ciclo_capa": 54,
+      "estado": "Born",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 11,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 12,
+      "registro": "igual",
+      "p": 5,
+      "k": 6,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 55,
+      "capa": "BIO",
+      "ciclo_capa": 55,
+      "estado": "Born",
+      "si": {
+        "skills_match": 3,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 6,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 17,
+      "registro": "igual",
+      "p": 2,
+      "k": 7,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 56,
+      "capa": "BIO",
+      "ciclo_capa": 56,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 5,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 19,
+      "registro": "similar",
+      "p": 1,
+      "k": 9,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 57,
+      "capa": "BIO",
+      "ciclo_capa": 57,
+      "estado": "Born",
+      "si": {
+        "skills_match": 1,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 5,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": false,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 5,
+      "registro": "igual",
+      "p": 9,
+      "k": 10,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 58,
+      "capa": "BIO",
+      "ciclo_capa": 58,
+      "estado": "Born",
+      "si": {
+        "skills_match": 2,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 8,
+      "validez_aplicada": false,
+      "accion_bio": "ADVANCE",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": true
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 8,
+      "registro": "igual",
+      "p": 5,
+      "k": 6,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    },
+    {
+      "ciclo": 59,
+      "capa": "BIO",
+      "ciclo_capa": 59,
+      "estado": "Born",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "junior",
+        "edu": "Licenciatura",
+        "seniority_ok": false
+      },
+      "accion": "ADVANCE",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 11,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 0.0,
+      "teoria_registrada": 12,
+      "registro": "igual",
+      "p": 6,
+      "k": 7,
+      "u": 0.0,
+      "exitoso": false,
+      "grupo": "AR"
+    },
+    {
+      "ciclo": 60,
+      "capa": "BIO",
+      "ciclo_capa": 60,
+      "estado": "Born",
+      "si": {
+        "skills_match": 0,
+        "exp_band": "senior",
+        "edu": "Licenciatura",
+        "seniority_ok": true
+      },
+      "accion": "REJECT",
+      "motivo": "celda",
+      "es_azar": false,
+      "teoria_plan": 14,
+      "validez_aplicada": false,
+      "accion_bio": "REJECT",
+      "acierto_bio": true,
+      "sf": {
+        "calificado": false
+      },
+      "u_tarea": 1.0,
+      "teoria_registrada": 14,
+      "registro": "igual",
+      "p": 2,
+      "k": 3,
+      "u": 1.0,
+      "exitoso": true,
+      "grupo": "no-AR"
+    }
+  ],
+  "figuras": [
+    "p1_linea_de_tiempo.png"
+  ],
+  "trazas": [
+    "p1_traza_ciclo1.md"
+  ]
+}
