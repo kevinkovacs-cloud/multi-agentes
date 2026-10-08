@@ -257,6 +257,8 @@ class MotorLLC:
                "u_tarea": u, "teoria_registrada": t.id, "registro": tipo,
                "p": t.p, "k": t.k, "u": t.u, "exitoso": exitoso, "grupo": grupo,
                "estadisticas": foto}
+        if self.cfg.alpha < 1.0:            # DE-5 (E6): uso de ê(t) y elección con α = 1
+            reg.update(equidad_usada=plan.equidad_usada, plan_alpha_1=plan.alpha_1)
         self.ciclos.append(reg)
         return reg
 

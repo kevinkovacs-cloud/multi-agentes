@@ -49,6 +49,7 @@ class DecisionPlan:
     desacuerdo_alg47: Optional[dict] = None
     alpha: float = 1.0
     equidad_usada: bool = False       # U_rol usó ê(t) en al menos una candidata
+    alpha_1: Optional[dict] = None    # con α < 1: qué habría elegido el planificador con α = 1
 
 
 class PlanificadorLLC:
@@ -104,6 +105,18 @@ class PlanificadorLLC:
 
     # ---- región 2 ----
     def planificar(self, si: dict, capa: str, accion_bio: str) -> DecisionPlan:
+        plan = self._planificar(si, capa, accion_bio)
+        if self.alpha < 1.0:                  # contrafáctico α = 1 en el mismo estado (E6)
+            alpha, self.alpha = self.alpha, 1.0
+            try:
+                p1 = self._planificar(si, capa, accion_bio)
+            finally:
+                self.alpha = alpha
+            plan.alpha_1 = {"accion": p1.accion, "motivo": p1.motivo,
+                            "teoria": None if p1.teoria is None else p1.teoria.id}
+        return plan
+
+    def _planificar(self, si: dict, capa: str, accion_bio: str) -> DecisionPlan:
         celda = self.base.applicable(si)
         ordenadas = self.ordenar(celda)
         filas = [self._fila(t, i + 1) for i, t in enumerate(ordenadas)]

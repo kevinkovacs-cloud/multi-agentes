@@ -102,8 +102,8 @@ def seccion_equipo(cfg: dict, seccion: str, semillas: Optional[dict] = None) -> 
     """Sección del equipo en la config. Una sección con `base` hereda la base y la pisa con
     lo suyo (E5 hereda de E4). `semillas` = {casos, documentos, destinatario} del equipo."""
     eq = dict(cfg[seccion])
-    if "base" in eq:
-        eq = {**cfg[eq["base"]], **eq}
+    if "base" in eq:                                   # la base puede heredar de otra (E6 → E5 → E4)
+        eq = {**seccion_equipo(cfg, eq["base"]), **eq}
     if semillas is not None:
         eq.update(semilla_casos=semillas["casos"], semilla_documentos=semillas["documentos"],
                   semilla_destinatario=semillas["destinatario"])
@@ -112,9 +112,12 @@ def seccion_equipo(cfg: dict, seccion: str, semillas: Optional[dict] = None) -> 
 
 class EquipoLLC:
     def __init__(self, nombre: str, cfg: dict, seccion: str = "equipo_e4",
-                 semillas: Optional[dict] = None, neutro: bool = False):
+                 semillas: Optional[dict] = None, neutro: bool = False,
+                 alpha: Optional[float] = None):
         self.nombre, self.cfg, self.neutro = nombre, cfg, neutro
         eq, om = seccion_equipo(cfg, seccion, semillas), cfg["omega"]
+        if alpha is not None:                              # E6: α = 1 y α = 0,5 lado a lado
+            eq["alpha"] = alpha
         self.eq = eq
         eps = cfg["entorno"]["ruido_wio_epsilon"]
         self.trail = AuditTrail(f"TRC-{nombre}")
@@ -217,9 +220,10 @@ class EquipoLLC:
     def ventanas_del_flujo(self, escenarios: Optional[dict] = None) -> list[VentanaEquipo]:
         """Las ventanas del flujo de casos del equipo, sin procesar (para correr en paralelo)."""
         cv = self.cfg["ciclo_de_vida"]
-        if escenarios is None:
-            escenarios = {c: entorno.generar_escenario(c, cv["ciclos_por_capa"][c],
-                                                       self.eq["semilla_casos"])
+        if escenarios is None:                  # E6: `flujo_casos` alarga el flujo (600 casos)
+            n = {c: self.eq.get("flujo_casos", {}).get(c, cv["ciclos_por_capa"][c])
+                 for c in self.eq["flujo"]}
+            escenarios = {c: entorno.generar_escenario(c, n[c], self.eq["semilla_casos"])
                           for c in self.eq["flujo"]}
         return [v for esc in self.eq["flujo"] for v in self._ventanas(esc, escenarios[esc])]
 

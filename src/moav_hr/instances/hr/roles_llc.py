@@ -246,3 +246,16 @@ class RolNeutro:
 
     def __getattr__(self, nombre):
         return getattr(self._rol, nombre)
+
+
+class RolMatcherSesgo(RolMatcherLLC):
+    """Matcher de la condición con sesgo programado (E6, regla 11; «parámetros programados»):
+    su Si agrega el rasgo proxy `titulo_local` y su operador BIO lo penaliza. El grupo sigue
+    fuera de Si, A y los prompts (DE-4); la verdad no depende del rasgo."""
+
+    def percibir(self, caso: entorno.Caso) -> dict:
+        return {**build_si(normalize_profile(caso.candidato)),
+                "titulo_local": bool(caso.titulo_local)}
+
+    def accion_bio(self, si: dict, caso: entorno.Caso) -> str:
+        return entorno.operador_bio_matcher_sesgado(si)
