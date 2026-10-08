@@ -90,3 +90,36 @@ def theories_from_turtle(source: "Graph | str") -> list[Theory]:
         out.append(Theory(si=si, a=a, sf=sf,
                           p=int(row.p), k=int(row.k), u=float(row.u), k_own=k_own))
     return out
+
+
+def procedencia_compartida(receptor: str, donante: str, receptor_theories: list[Theory],
+                           donante_theories: list[Theory], q=q_canonical,
+                           actividad: str = "compartir") -> Graph:
+    """
+    Procedencia de una compartición (bloque E · E3): cada teoría del receptor cuya clave
+    (Q(Si), A, Q(Sf)) también está en el donante queda `prov:wasDerivedFrom` la teoría del
+    donante. Los IRIs son por clave y por agente (abox.theory_iri), así que la misma teoría
+    conserva su clave en los dos agentes. Se tipa la actividad de compartir y se asocia a
+    los dos agentes.
+    """
+    from moav_hr.core.ontology.ns import PROV
+    g = Graph()
+    g.bind("moacv", MOACV)
+    g.bind("prov", PROV)
+    act = MOACV[f"Actividad/{actividad}"]
+    g.add((act, RDF.type, PROV.Activity))
+    for nombre in (receptor, donante):
+        ag = MOACV[f"Agente/{nombre}"]
+        g.add((ag, RDF.type, PROV.Agent))
+        g.add((act, PROV.wasAssociatedWith, ag))
+    claves_don = {theory_clave(t, q): t for t in donante_theories}
+    for t in receptor_theories:
+        clave = theory_clave(t, q)
+        if clave in claves_don:
+            tr, td = theory_iri(receptor, t, q), theory_iri(donante, claves_don[clave], q)
+            for nodo in (tr, td):
+                g.add((nodo, RDF.type, MOACV.Teoria))
+                g.add((nodo, MOACV.clave, Literal(clave, datatype=XSD.string)))
+            g.add((tr, PROV.wasDerivedFrom, td))
+            g.add((tr, PROV.wasGeneratedBy, act))
+    return g
