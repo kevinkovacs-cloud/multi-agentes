@@ -100,6 +100,11 @@ class MOACVAgent:
         self.theories.add(cand)
         return cand
 
+    def learn_llc(self, si: dict, a: str, sf: dict, u: float) -> tuple[Theory, str]:
+        """Región 5 con la semántica del LLC (bloque E, DE-1): registro de la Fig. 4.13
+        (ver TheoryBase.registrar_llc). Modo opcional; `learn` no cambia."""
+        return self.theories.registrar_llc(si, a, sf, u)
+
     # ---- reputación de equidad (Def. 9) ----
     def record_window_fairness(self, fair_w: float) -> None:
         self._fair_history.append(fair_w)

@@ -148,6 +148,21 @@ def theory_key(t: Theory, q: QuantizationFn) -> tuple[str, str, str]:
     return (_key_part(q(t.si)), t.a, _key_part(q(t.sf)))
 
 
+def violaciones_invariante_llc(base: "TheoryBase") -> list[dict]:
+    """Celdas (Q(Si), A) que violan el invariante del LLC: todas las teorías de la celda
+    comparten K y ΣP = K (Ierache 2010, §4.1.2 p. 60 y §4.4.8.2 p. 113). Lista vacía = cumple."""
+    celdas: dict[tuple, list[Theory]] = {}
+    for t in base.theories:
+        celdas.setdefault((base.q(t.si), t.a), []).append(t)
+    malas = []
+    for (qsi, a), ts in celdas.items():
+        ks = {t.k for t in ts}
+        suma_p = sum(t.p for t in ts)
+        if len(ks) != 1 or suma_p != next(iter(ks)):
+            malas.append({"si": qsi, "a": a, "k": sorted(ks), "suma_p": suma_p})
+    return malas
+
+
 class TheoryBase:
     """
     Base de conocimiento de teorías de un agente (θᵢ, Def. 1/2), indexada por celda.
@@ -221,6 +236,48 @@ class TheoryBase:
             if self.q(t.sf) != qsf:
                 return t
         return None
+
+    # ---- registro con la semántica del LLC (bloque E · E2.1, DE-1) ----
+    def registrar_llc(self, si: dict, a: str, sf: dict, u: float) -> tuple[Theory, str]:
+        """
+        Registro de teorías del LLC (Ierache 2010, §4.4.4, Fig. 4.13, pp. 93–94), rama sin
+        mutación (la mutación, §4.4.5, queda fuera de alcance):
+
+          · teoría IGUAL (misma Si, A y Sf) → P + 1, K + 1, y K + 1 en las similares;
+          · teoría SIMILAR (misma Si y A, otra Sf) → entra con P = 1, K = K_similar + 1,
+            y K + 1 en las demás similares;
+          · sin similares → entra con P = 1, K = 1.
+
+        Así P cuenta «se ejecutó A en Si y se obtuvo Sf» y K «se ejecutó A en Si» (§4.1.2,
+        p. 60): todas las teorías de la celda (Si, A) comparten K y ΣP = K (p. 113).
+        En este modo `k_own` = P (las observaciones propias de la variante), de modo que la
+        fusión de `core/sharing._merge` (K de la celda = Σ k_own) conserva ΣP = K. U guarda
+        la utilidad de tarea de la teoría (u_tarea, R4), que con Sf dentro de la identidad es
+        constante por teoría. Devuelve (teoría registrada, "igual" | "similar" | "nueva").
+        Es un modo opcional: `learn` (semántica anterior) no cambia.
+        """
+        cand = Theory(si=si, a=a, sf=sf)
+        celda = list(self._by_cell.get(self._cell(cand), []))
+        igual = self.find_equal(cand)
+        if igual is not None:
+            igual.p += 1
+            igual.k += 1
+            igual.k_own += 1
+            igual.u = u
+            for t in celda:
+                if t is not igual:
+                    t.k += 1
+            return igual, "igual"
+        if celda:
+            k_similar = celda[0].k
+            nueva = Theory(si=si, a=a, sf=sf, p=1, k=k_similar + 1, u=u, k_own=1)
+            for t in celda:
+                t.k += 1
+            self.add(nueva)
+            return nueva, "similar"
+        nueva = Theory(si=si, a=a, sf=sf, p=1, k=1, u=u, k_own=1)
+        self.add(nueva)
+        return nueva, "nueva"
 
     def __len__(self) -> int:
         return len(self.theories)
