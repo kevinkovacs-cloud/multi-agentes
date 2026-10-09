@@ -11,7 +11,7 @@ métricas por rol, el informe final y el guion de la reunión.
       temporal y compara byte a byte con lo commiteado en docs/parada_tecnica
 
 Algunos documentos están escritos a mano y no se regeneran: el diagnóstico E0, las respuestas
-de Claude chat y el pre-registro corto de E3 (sin números).
+y la revisión de Claude chat y el pre-registro corto de E3 (sin números).
 """
 from __future__ import annotations
 import argparse
@@ -129,6 +129,6 @@ if __name__ == "__main__":
         pendientes = cambios_sin_commitear(OUT_DEFAULT)
         print("cambios sin commitear en docs/parada_tecnica:", pendientes or "ninguno")
         esperados = {n for n in r["no_regenerados"]
-                     if n in A_MANO or "_RESPUESTA_" in n}
+                     if n in A_MANO or "_RESPUESTA_" in n or "_REVISION_" in n}
         if r["distintos"] or set(r["no_regenerados"]) - esperados or pendientes:
             raise SystemExit(1)
