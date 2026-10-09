@@ -163,6 +163,8 @@ def seccion_3(base) -> list[str]:
         return next((f["cumple_sin_interrupcion_desde"] for f in rc[e][r] if f["capa"] == "BIO"),
                     None)
     l3b = {r: d["l3"][r]["evaluadas"]["B"] for r in d["l3"]}
+    iguales = [r for r, x in l3b.items()
+               if d["l3"][r]["teorias_nuevas"]["B"] == 0 and x["pct_tna"] == x["pct_rtn"]]
     return [
         "## Punto 3 · Equipos DAG: un equipo maduro hace madurar a otro", "",
         "- **Qué se demuestra (mecanismo):** equipos DAG orquestados con LangGraph (Parser → "
@@ -183,6 +185,19 @@ def seccion_3(base) -> list[str]:
                     f"%TNA {num(x['pct_tna'], 1)} ≤ %RTN {num(x['pct_rtn'], 1)}: "
                     f"{'evoluciona' if x['evoluciona'] else 'no evoluciona'}"
                     for r, x in l3b.items()) + ".",
+        "- **Nota técnica sobre L-3, para conversar con Jorge.** Con estas definiciones, %TNA ≤ "
+        "%RTN equivale a «promedio de teorías nuevas ≤ máximo», y %CEA ≥ %RCE, a «ciclos exitosos "
+        "de la configuración evaluada ≥ promedio de las configuraciones». "
+        + (" y ".join(TITULO[r] for r in iguales) + ": %TNA = %RTN porque B no generó teorías "
+           "propias (las recibió todas de A); la condición se cumple por igualdad. "
+           if iguales else "")
+        + f"El %CEA del Explainer ({num(l3b['explainer']['pct_cea'], 1)}) es tan alto porque el "
+        f"operador BIO neutro casi nunca completa la explicación: el Explainer de N tuvo "
+        f"{d['l3']['explainer']['ciclos_exitosos']['N']} ciclos exitosos de {fn['casos']}.",
+        f"- **Cuánto pesa el entorno.** Las magnitudes dependen del entorno pre-registrado: los "
+        f"operadores BIO son imperfectos por construcción, y el equipo neutro resuelve "
+        f"{fn['N']['equipo']} de {fn['casos']} casos. Los resultados muestran el mecanismo de "
+        "colaboración y maduración, no cuánto ayudaría en un sistema real.",
         "- **Figuras:** `docs/parada_tecnica/p3_maduracion_equipos.png`, "
         "`docs/parada_tecnica/p3_curvas_aprendizaje.png`.",
         *_rotulos(),
@@ -213,7 +228,10 @@ def seccion_4(base) -> list[str]:
         + ", ".join(f"{k} {v}" for k, v in sh["clases"].items()) + "); SHACL conforma: "
         f"{'sí' if sh['conforma'] else 'no'}; las dos pruebas negativas fallan como deben: "
         f"{'sí' if sh['negativa_sigma_p'] and sh['negativa_de4'] else 'no'}. Estados ganados: "
-        + ", ".join(f"{TITULO[r]} {x['estado']}" for r, x in roles.items()) + ".",
+        + ", ".join(f"{TITULO[r]} {x['estado']}" for r, x in roles.items()
+                    if r != "bias_auditor")
+        + f"; Bias Auditor: {roles['bias_auditor']['estado']} en E4; desde E5 no tiene estados por "
+        "diseño (su regla es regulatoria; decisión 1 de E4_RESPUESTA).",
         "- **Archivos:** " + ", ".join(f"`docs/parada_tecnica/{t}`" for t in d["trazas"]
                                        if t.endswith(".html"))
         + ", `docs/parada_tecnica/p4_equipo.ttl`, `p4_shacl.txt`, `p4_sparql.md`.",
@@ -273,10 +291,21 @@ def seccion_5(base) -> list[str]:
         f"{_n(det['neutro']['brecha_toda_la_corrida'])} a {_n(det['alpha_1']['brecha_toda_la_corrida'])}"
         " y ninguna regla lo detecta; Ω acepta su compartición. Atenuación: ilustra el "
         "mecanismo; no es evidencia de la conjetura de atenuación.",
+        "- **Qué significa que α = 0,5 no haya cambiado nada.** El ajuste funciona: el test "
+        "`tests/test_bloquee_e6_v2.py::test_la_equidad_por_celda_puede_cambiar_la_accion` muestra "
+        "que, con evidencia en las dos acciones y U parecidas, α = 0,5 cambia la acción. El ajuste "
+        "por equidad necesita evidencia sobre la acción que el agente no elige, y el aprendizaje "
+        f"deja de generarla (en {aj['no_aplicable_falta_evidencia']} de "
+        f"{aj['aplicado'] + aj['no_aplicable_falta_evidencia']} planificaciones faltó evidencia). "
+        "Es una propiedad del tamaño de muestra y de la explotación, no de la definición.",
         f"- **Control post hoc** («{ctl['rotulo']}»): Matcher sin rasgo ni sesgo, paridad "
         f"demográfica {_n(k['brecha_toda_la_corrida'])}, odds igualadas "
-        f"{_n(k['odds_igualadas']['eo'])}, estado final {k['estado_final']}; no es un contrafáctico "
-        "limpio (no explora en WIO).",
+        f"{_n(k['odds_igualadas']['eo'])}, estado final {k['estado_final']}. La diferencia con el "
+        f"Matcher sesgado que aprende ({_n(det['alpha_1']['brecha_toda_la_corrida'])} frente a "
+        f"{_n(k['brecha_toda_la_corrida'])}) da una idea del sesgo residual atribuible al proxy, "
+        f"del orden de {_n(ctl['frente_al_matcher_sesgado_que_aprende']['detectable']['paridad_demografica']['diferencia'], 2)}"
+        ", con la salvedad de que el control no es un contrafáctico limpio: llegó a Mature y no "
+        "explora en WIO.",
         "- **Figura:** `docs/parada_tecnica/p5_sesgo_programado.png`.",
         *_rotulos(),
         "- **Resultados inesperados:** α = 0,5 no cambió ninguna acción ni en la v1 ni en la v2; "
@@ -315,6 +344,10 @@ PREGUNTAS = [
      "(implementado como opción) frente a la semántica anterior?"),
     ("Similitud como extensión del planificador", "¿Se acepta el respaldo por similitud (solo con "
      "la celda vacía, registrado) como extensión declarada para situaciones en lenguaje natural?"),
+    ("Equidad en la utilidad con poca evidencia", "Con m_min = {m_min} lecturas por grupo, el "
+     "ajuste casi nunca se aplica, porque el agente deja de probar la acción que no elige. ¿Se "
+     "exige exploración mínima para estimar la equidad de ambas acciones, se baja m_min o se "
+     "acepta el límite?"),
 ]
 
 
@@ -337,12 +370,18 @@ def escribir(out=None) -> str:
     cv = cfg["ciclo_de_vida"]
     valores = (f"%RCE {cv['rce']}, %RTN {cv['rtn']}, intervalos de {cv['n_intervalo']} ciclos, "
                "α = " + " y ".join(num(a, 1) for a in cfg["equipo_e6"]["equipo_equidad"]["alphas"]))
-    L += [f"{i}. **{t}.** {q.format(valores=valores)}" for i, (t, q) in enumerate(PREGUNTAS, 1)]
+    L += [f"{i}. **{t}.** {q.format(valores=valores, m_min=cfg['utilidad']['m_min_por_grupo'])}"
+          for i, (t, q) in enumerate(PREGUNTAS, 1)]
     L += ["", "## Estado", "",
-          "Rama `eje1/bloque-e`, sin push: el informe espera la revisión de Claude chat y de Kevin. "
-          "Los puntos de control de cada fase y las respuestas de Claude chat están en "
-          "`docs/parada_tecnica/` (E0 a E6). No se adoptó ninguna de las decisiones de la hoja: "
-          "están implementadas como opciones para que la dirección las evalúe funcionando.", ""]
+          "Rama `eje1/bloque-e`, revisada por Claude chat "
+          "(`docs/parada_tecnica/E7_REVISION_ClaudeChat_2026-10-08.md`); sin merge a `main`, que "
+          "queda congelada hasta después del encuentro con la dirección. Los puntos de control de "
+          "cada fase y las respuestas de Claude chat están en `docs/parada_tecnica/` (E0 a E7). No "
+          "se adoptó ninguna de las decisiones de la hoja: están implementadas como opciones para "
+          "que la dirección las evalúe funcionando.", "",
+          "**Infraestructura.** La orquestación con LangGraph existió desde la primera versión "
+          "(06/06/2026) y quedó fuera del historial al reorganizarlo; E1 la restituye "
+          "(`core/grafo.py`); el código de junio queda en la rama `rescate/langgraph-junio`.", ""]
     (base / "INFORME_PARADA_TECNICA.md").write_text("\n".join(L) + "\n", encoding="utf-8")
     p4 = _j(base, "p4_equipo.json")
     traza = next(t for t in p4["trazas"] if t.endswith(".html") and "TBO" in t)
