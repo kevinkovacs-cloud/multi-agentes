@@ -8,7 +8,12 @@ from comun import ROTULO_SEM, ROTULO_SIM  # noqa: E402
 
 
 def test_generar_todo_sin_modelo(tmp_path):
-    import generar_todo
+    # por ruta: experiments/parada_tecnica también tiene un generar_todo.py (bloque E · E7)
+    import importlib.util
+    ruta = Path(__file__).resolve().parents[1] / "experiments" / "demos_direccion" / "generar_todo.py"
+    spec = importlib.util.spec_from_file_location("generar_todo_demos_direccion", ruta)
+    generar_todo = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(generar_todo)
     texto = generar_todo.correr(tmp_path, backend="token-cosine")
     md = (tmp_path / "NUMEROS_PARA_PLACAS.md").read_text(encoding="utf-8")
     assert md == texto

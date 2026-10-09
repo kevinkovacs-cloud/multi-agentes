@@ -14,7 +14,7 @@ from __future__ import annotations
 import argparse
 import json
 
-from comun_pt import OUT_DEFAULT, cargar_config, encabezado_md, guardar_json, num, out_dir
+from comun_pt import cargar_config, encabezado_md, guardar_json, num, out_dir
 from p5_metricas_equidad import (ROTULO_PROG, TITULO, correr_matcher, flujo_sesgo,
                                  metricas_equipo, metricas_sesgo)
 from moav_hr.instances.hr.equipo_llc import EquipoLLC
@@ -66,8 +66,8 @@ def _acc_eo(roles: dict) -> dict:
 
 
 def escribir_md(res: dict, destino) -> None:
-    v1 = json.loads((OUT_DEFAULT / "p5_metricas_equidad.json").read_text(encoding="utf-8"))
-    s1 = json.loads((OUT_DEFAULT / "p5_sesgo_programado.json").read_text(encoding="utf-8"))
+    v1 = json.loads((destino / "p5_metricas_equidad.json").read_text(encoding="utf-8"))
+    s1 = json.loads((destino / "p5_sesgo_programado.json").read_text(encoding="utf-8"))
     c1 = res["corrida_1"]
     L = encabezado_md("E6 v2 · Equidad por celda (Si, A): v1 y v2 lado a lado")
     L += ["Pre-registro corto: `E6_PREREGISTRO_v2.md`. Se volvió a correr solo lo que toca "

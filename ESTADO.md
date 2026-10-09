@@ -215,12 +215,41 @@ python experiments/demos_direccion/generar_todo.py
 Cada demo corre también por separado (`python experiments/demos_direccion/d1_embeddings.py`,
 etc.; `--out DIR` para escribir en otra carpeta). `demo_caso.py` y `run_poc.py` no cambian.
 
-## Bloque E (08/10/2026, en curso) — «parada técnica»: la PoC como ciclo de vida
+## Bloque E (08/10/2026, en revisión) — «parada técnica»: la PoC como ciclo de vida
 
 Rama `eje1/bloque-e` (desde `eje1/formalizacion-v2`, `58ce027`), sin push. Pedido de la dirección
 (Ierache y Becerra): demostrar en el caso de aplicación el ciclo de vida de los agentes según el LLC de
 Ierache (2010). Diagnóstico: `docs/parada_tecnica/E0_DIAGNOSTICO.md`; decisiones P1–P5 de Claude chat:
 `docs/parada_tecnica/E0_RESPUESTA_P1-P5_ClaudeChat_2026-10-08.md`.
+
+**Informe para la dirección:** `docs/parada_tecnica/INFORME_PARADA_TECNICA.md` (una sección por punto del
+pedido, con comando, números, figuras, resultados inesperados, historial de revisiones y las preguntas para
+el encuentro). Guion de la reunión: `docs/parada_tecnica/LEEME_REUNION.md`. Todo se regenera con
+`python experiments/parada_tecnica/generar_todo.py`; con `--verificar` se compara byte a byte con lo
+commiteado.
+
+### Hecho
+
+Las fases E0 a E7 (detalle abajo), cada una con su pre-registro antes de correr y su punto de control. Todas
+las cifras son del modo sim: ilustrativas, en un entorno simulado; no son evidencia experimental.
+
+### Pendiente
+
+- Revisión del informe por Claude chat y Kevin, y recién después el push de `eje1/bloque-e` (sin merge a
+  `main`).
+- E8 (opcional): P1 y P4 en modo llm con Llama 3.1 8B local, con las salidas separadas; no se corrió.
+- Propuestas sin implementar (E6_RESPUESTA): que el gate de compartición use la métrica del rol (odds
+  igualadas para el Matcher) y mostrar el d_TV de la Si frente al grupo como alerta de proxy del Monitor.
+
+### Sujeto a la dirección
+
+Las once preguntas de «Preguntas para el encuentro» del informe: la decisión 1 de la hoja (evidencia de
+sesgo o de equidad), A9 en decisiones o ventanas, Ω sin ciclo de vida, con qué se compara un agente dentro
+de un equipo, el criterio del rol decisor, el sesgo por proxy por debajo de lo detectable, la observación
+selectiva en WIO, Si/A/Sf por rol, %RCE/%RTN/n/α, la semántica LLC de P y K (decisión 2) y la similitud
+como extensión del planificador. Ninguna decisión de la hoja se adoptó: están implementadas como opciones.
+
+### Fases
 
 - **E1 · Orquestación con LangGraph.** La orquestación con LangGraph existió desde la primera versión
   (06/06/2026, `pipeline/dag.py`) y quedó fuera del historial al reorganizarlo. El Bloque E la restituye
@@ -274,3 +303,13 @@ Ierache (2010). Diagnóstico: `docs/parada_tecnica/E0_DIAGNOSTICO.md`; decisione
   `RolMatcherSesgo`; «parámetros programados»). Demo `experiments/parada_tecnica/p5_metricas_equidad.py`;
   documento para la dirección `docs/parada_tecnica/METRICAS_EQUIDAD_POR_ROL.md`; informe
   `docs/parada_tecnica/E6_PUNTO_DE_CONTROL.md`.
+- **E6 v2 (única revisión de E6, E6_RESPUESTA).** Pre-registro corto antes de correr
+  (`docs/parada_tecnica/E6_PREREGISTRO_v2.md`): ê por celda (Si, A) en la utilidad y, si alguna acción
+  candidata no tiene ê, α = 1 para todas (opción `equidad="celda"` del planificador; el default reproduce
+  E6). Se volvió a correr solo lo que toca α = 0,5 (`p5_equidad_v2.py`). Control post hoc rotulado como no
+  pre-registrado (`p5_control_post_hoc.py`). `METRICAS_EQUIDAD_POR_ROL.md` lo escribe ahora
+  `metricas_equidad_doc.py`, con la terminología precisa (paridad demográfica, paridad de aciertos, odds
+  igualadas, paridad de tasa de error).
+- **E7 · Informe y cierre.** `experiments/parada_tecnica/generar_todo.py` (corre todo y regenera salidas e
+  informes; `--verificar` compara byte a byte), `informe_final.py` (`INFORME_PARADA_TECNICA.md` y
+  `LEEME_REUNION.md`). Frenado en el punto de control: falta la revisión antes del push.

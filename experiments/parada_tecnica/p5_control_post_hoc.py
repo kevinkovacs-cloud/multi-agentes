@@ -16,7 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 
-from comun_pt import OUT_DEFAULT, cargar_config, guardar_json, out_dir
+from comun_pt import cargar_config, guardar_json, out_dir
 from p5_metricas_equidad import calificados_del_flujo, correr_matcher, flujo_sesgo, metricas_sesgo
 from moav_hr.instances.hr.roles_llc import RolMatcherLLC
 
@@ -26,7 +26,7 @@ def correr(out=None) -> dict:
     destino = out_dir(out)
     sp = cfg["equipo_e6"]["sesgo_programado"]
     rotulo = cfg["equipo_e6_v2"]["control_post_hoc"]["rotulo"]
-    s1 = json.loads((OUT_DEFAULT / "p5_sesgo_programado.json").read_text(encoding="utf-8"))
+    s1 = json.loads((destino / "p5_sesgo_programado.json").read_text(encoding="utf-8"))
     # los casos y la verdad son los mismos en las dos magnitudes; el rasgo no se usa
     casos = flujo_sesgo(cfg, sp["magnitudes"]["detectable"])
     rol = RolMatcherLLC(cfg["entorno"]["ruido_wio_epsilon"], sp["semilla_casos"])

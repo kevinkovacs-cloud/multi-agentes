@@ -12,7 +12,7 @@ import argparse
 import itertools
 import json
 
-from comun_pt import OUT_DEFAULT, cargar_config, encabezado_md, num, out_dir
+from comun_pt import cargar_config, encabezado_md, num, out_dir
 from preregistro_v2 import brecha_minima
 from moav_hr.instances.hr import entorno
 
@@ -52,7 +52,7 @@ def escribir(out=None) -> str:
     tau_b, delta, L = om["tau_b"], aud["acumulada"]["delta"], aud["acumulada"]["L"]
     m_min, flujo = ut["m_min_por_grupo"], e6["flujo_casos"]
     total = sum(flujo.values())
-    p4 = json.loads((OUT_DEFAULT / "p4_equipo.json").read_text(encoding="utf-8"))
+    p4 = json.loads((out_dir(out) / "p4_equipo.json").read_text(encoding="utf-8"))
     ac = p4["analisis_cadena"]
     aci = {g: sum(ac[e][g]["aciertos_matcher"] * ac[e][g]["casos"] for e in ac)
            / sum(ac[e][g]["casos"] for e in ac) for g in ("AR", "no-AR")}
