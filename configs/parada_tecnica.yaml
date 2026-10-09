@@ -184,3 +184,19 @@ equipo_e6:
         delta: 0.05
     comparticion:                  # (iii) colaboración del Matcher sesgado a un Matcher Born nuevo
       a9: decisiones
+
+# Pre-registro corto E6 v2 (08/10/2026; E6_RESPUESTA de Claude chat, decisión 1). Se commitea ANTES de
+# correr, junto con docs/parada_tecnica/E6_RESPUESTA_ClaudeChat_2026-10-08.md. Única revisión de E6:
+# cómo entra la equidad en la utilidad. E6 (v1) queda como está. Nada más cambia.
+equipo_e6_v2:
+  base: equipo_e6
+  equidad_utilidad: celda          # v1: «variante» (ê por teoría); v2: ê(Si, A) = 1 − |err(AR) − err(no-AR)|
+                                   # sobre E(Si, A) = todas las decisiones en que se aplicó A en Si
+  sin_evidencia: alpha_1_para_todas   # candidatas = la mejor variante de cada acción de la celda; si alguna no
+                                      # tiene ê (menos de m_min lecturas en algún grupo), α = 1 para todas y se
+                                      # registra «ajuste no aplicable: falta evidencia»
+  validez_plan: la_de_v2           # la validez del plan sigue usando U (U ≥ 0,5), como en la v1 de DE-5
+  se_vuelve_a_correr: [corrida_1_alpha_0_5, sesgo_programado_alpha_0_5]   # α = 1 y el neutro no cambian
+  control_post_hoc:                # decisión 4: agregado después de ver los resultados; NO pre-registrado
+    rotulo: control agregado después de ver los resultados; no pre-registrado
+    configuracion: matcher_sin_rasgo_ni_sesgo   # el Matcher de P1 (Si sin titulo_local, operador BIO sin sesgo), α = 1
