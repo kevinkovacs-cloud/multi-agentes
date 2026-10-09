@@ -1,0 +1,3607 @@
+{
+  "rotulos": [
+    "ilustrativo, entorno simulado (modo sim); no es evidencia experimental",
+    "semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección"
+  ],
+  "demo": "E6 v2 · equidad por celda (Si, A), solo α = 0,5",
+  "rotulo_programado": "parámetros programados",
+  "corrida_1": {
+    "alpha": 0.5,
+    "equidad_utilidad": "celda",
+    "casos": 600,
+    "estados": {
+      "parser": "Mature",
+      "matcher": "Trained",
+      "bias_auditor": "Born",
+      "explainer": "Mature"
+    },
+    "roles": {
+      "parser": {
+        "estado_final": "Mature",
+        "ciclos": 600,
+        "aciertos": 539,
+        "favorable": {
+          "n": {
+            "AR": 300,
+            "no-AR": 300
+          },
+          "tasas": {
+            "AR": 0.8967,
+            "no-AR": 0.9
+          },
+          "brecha": 0.0033
+        },
+        "por_ventana": [
+          {
+            "ventana": "BIO-W01",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.7,
+              "no-AR": 0.8
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "BIO-W02",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.9,
+              "no-AR": 0.9
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.9,
+              "no-AR": 1.0
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "TBO-W02",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 0.9
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "TBO-W03",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 0.9
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "TBO-W04",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 0.9
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "TBO-W05",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.9,
+              "no-AR": 0.8
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W01",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.8,
+              "no-AR": 0.9
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W02",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.9,
+              "no-AR": 0.7
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "WIO-W03",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.9,
+              "no-AR": 0.9
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.8,
+              "no-AR": 0.9
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W05",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 0.8
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "WIO-W06",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.8,
+              "no-AR": 0.9
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W07",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.6,
+              "no-AR": 0.9
+            },
+            "brecha": 0.3
+          },
+          {
+            "ventana": "WIO-W08",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.9,
+              "no-AR": 0.8
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W09",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.8,
+              "no-AR": 1.0
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "WIO-W10",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.9,
+              "no-AR": 1.0
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W11",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 0.9
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W12",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.8,
+              "no-AR": 1.0
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "WIO-W13",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.9,
+              "no-AR": 1.0
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W14",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W15",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.9,
+              "no-AR": 1.0
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W16",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 0.9
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W17",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 0.6
+            },
+            "brecha": 0.4
+          },
+          {
+            "ventana": "WIO-W18",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.8,
+              "no-AR": 1.0
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "WIO-W19",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W20",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.8,
+              "no-AR": 0.9
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W21",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 0.9
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W22",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.9,
+              "no-AR": 0.8
+            },
+            "brecha": 0.1
+          }
+        ],
+        "teorias": {
+          "en_E": 6,
+          "llegan_a_m_min": 6,
+          "e_min": 0.955758,
+          "e_media": 0.974,
+          "teorias_con_e": [
+            {
+              "clave": [
+                "{\"estructura\": \"anidado\", \"etiquetas\": \"canonicas\", \"formato\": \"json\"}",
+                "reglas_estrictas",
+                "{\"completitud\": \"completo\", \"fuga\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 58,
+                "no-AR": 38
+              },
+              "e": 0.998185
+            },
+            {
+              "clave": [
+                "{\"estructura\": \"plano\", \"etiquetas\": \"canonicas\", \"formato\": \"json\"}",
+                "reglas_estrictas",
+                "{\"completitud\": \"completo\", \"fuga\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 66,
+                "no-AR": 50
+              },
+              "e": 0.955758
+            },
+            {
+              "clave": [
+                "{\"estructura\": \"etiquetado\", \"etiquetas\": \"sinonimos\", \"formato\": \"html\"}",
+                "diccionario_sinonimos",
+                "{\"completitud\": \"completo\", \"fuga\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 37,
+                "no-AR": 81
+              },
+              "e": 0.980647
+            },
+            {
+              "clave": [
+                "{\"estructura\": \"plano\", \"etiquetas\": \"sinonimos\", \"formato\": \"json\"}",
+                "diccionario_sinonimos",
+                "{\"completitud\": \"completo\", \"fuga\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 49,
+                "no-AR": 60
+              },
+              "e": 0.981633
+            },
+            {
+              "clave": [
+                "{\"estructura\": \"libre\", \"etiquetas\": \"ninguna\", \"formato\": \"texto\"}",
+                "diccionario_sinonimos",
+                "{\"completitud\": \"completo\", \"fuga\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 33,
+                "no-AR": 39
+              },
+              "e": 0.960373
+            },
+            {
+              "clave": [
+                "{\"estructura\": \"etiquetado\", \"etiquetas\": \"canonicas\", \"formato\": \"texto\"}",
+                "reglas_estrictas",
+                "{\"completitud\": \"completo\", \"fuga\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 48,
+                "no-AR": 28
+              },
+              "e": 0.967262
+            }
+          ]
+        },
+        "alpha_0_5": {
+          "planificaciones": 600,
+          "equidad_usada": 193,
+          "eleccion_cambiada": 0,
+          "accion_cambiada": 0,
+          "elegida_sin_e_frente_a_una_con_e": 0,
+          "ejemplos": []
+        },
+        "dtv_canal_proxy": 0.1444,
+        "ajuste_v2": {
+          "planificaciones": 600,
+          "con_candidatas": 594,
+          "aplicado": 193,
+          "no_aplicable_falta_evidencia": 401
+        }
+      },
+      "matcher": {
+        "estado_final": "Trained",
+        "ciclos": 600,
+        "aciertos": 445,
+        "favorable": {
+          "n": {
+            "AR": 300,
+            "no-AR": 300
+          },
+          "tasas": {
+            "AR": 0.5033,
+            "no-AR": 0.38
+          },
+          "brecha": 0.1233
+        },
+        "por_ventana": [
+          {
+            "ventana": "BIO-W01",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.8,
+              "no-AR": 0.4
+            },
+            "brecha": 0.4
+          },
+          {
+            "ventana": "BIO-W02",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.8,
+              "no-AR": 0.6
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "BIO-W03",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.4,
+              "no-AR": 0.3
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "TBO-W01",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.7,
+              "no-AR": 0.5
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "TBO-W02",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.3,
+              "no-AR": 0.5
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "TBO-W03",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.4,
+              "no-AR": 0.3
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "TBO-W04",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.5,
+              "no-AR": 0.2
+            },
+            "brecha": 0.3
+          },
+          {
+            "ventana": "TBO-W05",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.4,
+              "no-AR": 0.2
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "WIO-W01",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.3,
+              "no-AR": 0.3
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.6,
+              "no-AR": 0.6
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.6,
+              "no-AR": 0.5
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W04",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.6,
+              "no-AR": 0.2
+            },
+            "brecha": 0.4
+          },
+          {
+            "ventana": "WIO-W05",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.4,
+              "no-AR": 0.2
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "WIO-W06",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.8,
+              "no-AR": 0.4
+            },
+            "brecha": 0.4
+          },
+          {
+            "ventana": "WIO-W07",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.3,
+              "no-AR": 0.5
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "WIO-W08",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.5,
+              "no-AR": 0.5
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W09",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.5,
+              "no-AR": 0.1
+            },
+            "brecha": 0.4
+          },
+          {
+            "ventana": "WIO-W10",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.2,
+              "no-AR": 0.3
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W11",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.7,
+              "no-AR": 0.7
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W12",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.6,
+              "no-AR": 0.4
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "WIO-W13",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.7,
+              "no-AR": 0.3
+            },
+            "brecha": 0.4
+          },
+          {
+            "ventana": "WIO-W14",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.6,
+              "no-AR": 0.4
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "WIO-W15",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.3,
+              "no-AR": 0.4
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W16",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.4,
+              "no-AR": 0.3
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W17",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.2,
+              "no-AR": 0.3
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W18",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.6,
+              "no-AR": 0.4
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "WIO-W19",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.6,
+              "no-AR": 0.4
+            },
+            "brecha": 0.2
+          },
+          {
+            "ventana": "WIO-W20",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.3,
+              "no-AR": 0.2
+            },
+            "brecha": 0.1
+          },
+          {
+            "ventana": "WIO-W21",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.5,
+              "no-AR": 0.5
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W22",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.5,
+              "no-AR": 0.5
+            },
+            "brecha": 0.0
+          }
+        ],
+        "teorias": {
+          "en_E": 38,
+          "llegan_a_m_min": 22,
+          "e_min": 0.615385,
+          "e_media": 0.8201,
+          "teorias_con_e": [
+            {
+              "clave": [
+                "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 3}",
+                "ADVANCE",
+                "{\"calificado\": true}"
+              ],
+              "n_por_grupo": {
+                "AR": 17,
+                "no-AR": 10
+              },
+              "e": 0.758824
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 3}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 10,
+                "no-AR": 14
+              },
+              "e": 0.942857
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 1}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 7,
+                "no-AR": 17
+              },
+              "e": 0.97479
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 1}",
+                "ADVANCE",
+                "{\"calificado\": true}"
+              ],
+              "n_por_grupo": {
+                "AR": 19,
+                "no-AR": 16
+              },
+              "e": 0.802632
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 2}",
+                "ADVANCE",
+                "{\"calificado\": true}"
+              ],
+              "n_por_grupo": {
+                "AR": 12,
+                "no-AR": 12
+              },
+              "e": 0.833333
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 2}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 9,
+                "no-AR": 15
+              },
+              "e": 0.911111
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Licenciatura\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 0}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 9,
+                "no-AR": 16
+              },
+              "e": 0.618056
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Licenciatura\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 0}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 13,
+                "no-AR": 13
+              },
+              "e": 0.615385
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Maestría\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 3}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 12,
+                "no-AR": 13
+              },
+              "e": 0.929487
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Maestría\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 0}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 13,
+                "no-AR": 17
+              },
+              "e": 0.841629
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Maestría\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 0}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 9,
+                "no-AR": 10
+              },
+              "e": 1.0
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Maestría\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 3}",
+                "ADVANCE",
+                "{\"calificado\": true}"
+              ],
+              "n_por_grupo": {
+                "AR": 11,
+                "no-AR": 8
+              },
+              "e": 0.977273
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Maestría\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 1}",
+                "ADVANCE",
+                "{\"calificado\": true}"
+              ],
+              "n_por_grupo": {
+                "AR": 16,
+                "no-AR": 6
+              },
+              "e": 0.729167
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Maestría\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 1}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 11,
+                "no-AR": 6
+              },
+              "e": 0.893939
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Maestría\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 2}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 10,
+                "no-AR": 10
+              },
+              "e": 0.8
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Maestría\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 2}",
+                "ADVANCE",
+                "{\"calificado\": true}"
+              ],
+              "n_por_grupo": {
+                "AR": 5,
+                "no-AR": 5
+              },
+              "e": 0.8
+            },
+            {
+              "clave": [
+                "{\"edu\": \"—\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 0}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 6,
+                "no-AR": 5
+              },
+              "e": 0.833333
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Doctorado\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 1}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 7,
+                "no-AR": 8
+              },
+              "e": 0.767857
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Doctorado\", \"exp_band\": \"junior\", \"seniority_ok\": false, \"skills_match\": 0}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 9,
+                "no-AR": 10
+              },
+              "e": 0.777778
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Doctorado\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 2}",
+                "ADVANCE",
+                "{\"calificado\": true}"
+              ],
+              "n_por_grupo": {
+                "AR": 7,
+                "no-AR": 5
+              },
+              "e": 0.628571
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Doctorado\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 0}",
+                "REJECT",
+                "{\"calificado\": false}"
+              ],
+              "n_por_grupo": {
+                "AR": 7,
+                "no-AR": 8
+              },
+              "e": 0.892857
+            },
+            {
+              "clave": [
+                "{\"edu\": \"Doctorado\", \"exp_band\": \"senior\", \"seniority_ok\": true, \"skills_match\": 3}",
+                "ADVANCE",
+                "{\"calificado\": true}"
+              ],
+              "n_por_grupo": {
+                "AR": 7,
+                "no-AR": 7
+              },
+              "e": 0.714286
+            }
+          ]
+        },
+        "alpha_0_5": {
+          "planificaciones": 600,
+          "equidad_usada": 91,
+          "eleccion_cambiada": 0,
+          "accion_cambiada": 0,
+          "elegida_sin_e_frente_a_una_con_e": 0,
+          "ejemplos": []
+        },
+        "odds_igualadas": {
+          "tpr": {
+            "AR": 0.8031,
+            "no-AR": 0.6542
+          },
+          "fpr": {
+            "AR": 0.2832,
+            "no-AR": 0.228
+          },
+          "n_pos": {
+            "AR": 127,
+            "no-AR": 107
+          },
+          "n_neg": {
+            "AR": 173,
+            "no-AR": 193
+          },
+          "delta_tpr": 0.1489,
+          "delta_fpr": 0.0553,
+          "eo": 0.1489
+        },
+        "odds_igualadas_por_ventana": [
+          {
+            "ventana": "BIO-W01",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 0.0
+            },
+            "fpr": {
+              "AR": 0.3333,
+              "no-AR": 0.5
+            },
+            "n_pos": {
+              "AR": 7,
+              "no-AR": 2
+            },
+            "n_neg": {
+              "AR": 3,
+              "no-AR": 8
+            },
+            "delta_tpr": 1.0,
+            "delta_fpr": 0.1667,
+            "eo": 1.0
+          },
+          {
+            "ventana": "BIO-W02",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "fpr": {
+              "AR": 0.6,
+              "no-AR": 0.2
+            },
+            "n_pos": {
+              "AR": 5,
+              "no-AR": 5
+            },
+            "n_neg": {
+              "AR": 5,
+              "no-AR": 5
+            },
+            "delta_tpr": 0.0,
+            "delta_fpr": 0.4,
+            "eo": 0.4
+          },
+          {
+            "ventana": "BIO-W03",
+            "tpr": {
+              "AR": 0.6667,
+              "no-AR": 0.6667
+            },
+            "fpr": {
+              "AR": 0.0,
+              "no-AR": 0.1429
+            },
+            "n_pos": {
+              "AR": 6,
+              "no-AR": 3
+            },
+            "n_neg": {
+              "AR": 4,
+              "no-AR": 7
+            },
+            "delta_tpr": 0.0,
+            "delta_fpr": 0.1429,
+            "eo": 0.1429
+          },
+          {
+            "ventana": "TBO-W01",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 0.5
+            },
+            "fpr": {
+              "AR": 0.5714,
+              "no-AR": 0.5
+            },
+            "n_pos": {
+              "AR": 3,
+              "no-AR": 2
+            },
+            "n_neg": {
+              "AR": 7,
+              "no-AR": 8
+            },
+            "delta_tpr": 0.5,
+            "delta_fpr": 0.0714,
+            "eo": 0.5
+          },
+          {
+            "ventana": "TBO-W02",
+            "tpr": {
+              "AR": 0.75,
+              "no-AR": 1.0
+            },
+            "fpr": {
+              "AR": 0.0,
+              "no-AR": 0.1667
+            },
+            "n_pos": {
+              "AR": 4,
+              "no-AR": 4
+            },
+            "n_neg": {
+              "AR": 6,
+              "no-AR": 6
+            },
+            "delta_tpr": 0.25,
+            "delta_fpr": 0.1667,
+            "eo": 0.25
+          },
+          {
+            "ventana": "TBO-W03",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "fpr": {
+              "AR": 0.1429,
+              "no-AR": 0.125
+            },
+            "n_pos": {
+              "AR": 3,
+              "no-AR": 2
+            },
+            "n_neg": {
+              "AR": 7,
+              "no-AR": 8
+            },
+            "delta_tpr": 0.0,
+            "delta_fpr": 0.0179,
+            "eo": 0.0179
+          },
+          {
+            "ventana": "TBO-W04",
+            "tpr": {
+              "AR": 0.8,
+              "no-AR": 0.5
+            },
+            "fpr": {
+              "AR": 0.2,
+              "no-AR": 0.0
+            },
+            "n_pos": {
+              "AR": 5,
+              "no-AR": 4
+            },
+            "n_neg": {
+              "AR": 5,
+              "no-AR": 6
+            },
+            "delta_tpr": 0.3,
+            "delta_fpr": 0.2,
+            "eo": 0.3
+          },
+          {
+            "ventana": "TBO-W05",
+            "tpr": {
+              "AR": 0.6,
+              "no-AR": 0.3333
+            },
+            "fpr": {
+              "AR": 0.2,
+              "no-AR": 0.0
+            },
+            "n_pos": {
+              "AR": 5,
+              "no-AR": 6
+            },
+            "n_neg": {
+              "AR": 5,
+              "no-AR": 4
+            },
+            "delta_tpr": 0.2667,
+            "delta_fpr": 0.2,
+            "eo": 0.2667
+          },
+          {
+            "ventana": "WIO-W01",
+            "tpr": {
+              "AR": 0.3333,
+              "no-AR": 1.0
+            },
+            "fpr": {
+              "AR": 0.2857,
+              "no-AR": 0.125
+            },
+            "n_pos": {
+              "AR": 3,
+              "no-AR": 2
+            },
+            "n_neg": {
+              "AR": 7,
+              "no-AR": 8
+            },
+            "delta_tpr": 0.6667,
+            "delta_fpr": 0.1607,
+            "eo": 0.6667
+          },
+          {
+            "ventana": "WIO-W02",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 0.8
+            },
+            "fpr": {
+              "AR": 0.4286,
+              "no-AR": 0.4
+            },
+            "n_pos": {
+              "AR": 3,
+              "no-AR": 5
+            },
+            "n_neg": {
+              "AR": 7,
+              "no-AR": 5
+            },
+            "delta_tpr": 0.2,
+            "delta_fpr": 0.0286,
+            "eo": 0.2
+          },
+          {
+            "ventana": "WIO-W03",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "fpr": {
+              "AR": 0.2,
+              "no-AR": 0.2857
+            },
+            "n_pos": {
+              "AR": 5,
+              "no-AR": 3
+            },
+            "n_neg": {
+              "AR": 5,
+              "no-AR": 7
+            },
+            "delta_tpr": 0.0,
+            "delta_fpr": 0.0857,
+            "eo": 0.0857
+          },
+          {
+            "ventana": "WIO-W04",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 0.3333
+            },
+            "fpr": {
+              "AR": 0.3333,
+              "no-AR": 0.1429
+            },
+            "n_pos": {
+              "AR": 4,
+              "no-AR": 3
+            },
+            "n_neg": {
+              "AR": 6,
+              "no-AR": 7
+            },
+            "delta_tpr": 0.6667,
+            "delta_fpr": 0.1905,
+            "eo": 0.6667
+          },
+          {
+            "ventana": "WIO-W05",
+            "tpr": {
+              "AR": 0.5,
+              "no-AR": 0.5
+            },
+            "fpr": {
+              "AR": 0.3333,
+              "no-AR": 0.0
+            },
+            "n_pos": {
+              "AR": 4,
+              "no-AR": 4
+            },
+            "n_neg": {
+              "AR": 6,
+              "no-AR": 6
+            },
+            "delta_tpr": 0.0,
+            "delta_fpr": 0.3333,
+            "eo": 0.3333
+          },
+          {
+            "ventana": "WIO-W06",
+            "tpr": {
+              "AR": 0.875,
+              "no-AR": 0.3333
+            },
+            "fpr": {
+              "AR": 0.5,
+              "no-AR": 0.4286
+            },
+            "n_pos": {
+              "AR": 8,
+              "no-AR": 3
+            },
+            "n_neg": {
+              "AR": 2,
+              "no-AR": 7
+            },
+            "delta_tpr": 0.5417,
+            "delta_fpr": 0.0714,
+            "eo": 0.5417
+          },
+          {
+            "ventana": "WIO-W07",
+            "tpr": {
+              "AR": 0.3333,
+              "no-AR": 0.75
+            },
+            "fpr": {
+              "AR": 0.2857,
+              "no-AR": 0.3333
+            },
+            "n_pos": {
+              "AR": 3,
+              "no-AR": 4
+            },
+            "n_neg": {
+              "AR": 7,
+              "no-AR": 6
+            },
+            "delta_tpr": 0.4167,
+            "delta_fpr": 0.0476,
+            "eo": 0.4167
+          },
+          {
+            "ventana": "WIO-W08",
+            "tpr": {
+              "AR": 0.3333,
+              "no-AR": 1.0
+            },
+            "fpr": {
+              "AR": 0.5714,
+              "no-AR": 0.2857
+            },
+            "n_pos": {
+              "AR": 3,
+              "no-AR": 3
+            },
+            "n_neg": {
+              "AR": 7,
+              "no-AR": 7
+            },
+            "delta_tpr": 0.6667,
+            "delta_fpr": 0.2857,
+            "eo": 0.6667
+          },
+          {
+            "ventana": "WIO-W09",
+            "tpr": {
+              "AR": 0.75,
+              "no-AR": 0.0
+            },
+            "fpr": {
+              "AR": 0.3333,
+              "no-AR": 0.1111
+            },
+            "n_pos": {
+              "AR": 4,
+              "no-AR": 1
+            },
+            "n_neg": {
+              "AR": 6,
+              "no-AR": 9
+            },
+            "delta_tpr": 0.75,
+            "delta_fpr": 0.2222,
+            "eo": 0.75
+          },
+          {
+            "ventana": "WIO-W10",
+            "tpr": {
+              "AR": 0.6667,
+              "no-AR": 0.6667
+            },
+            "fpr": {
+              "AR": 0.0,
+              "no-AR": 0.1429
+            },
+            "n_pos": {
+              "AR": 3,
+              "no-AR": 3
+            },
+            "n_neg": {
+              "AR": 7,
+              "no-AR": 7
+            },
+            "delta_tpr": 0.0,
+            "delta_fpr": 0.1429,
+            "eo": 0.1429
+          },
+          {
+            "ventana": "WIO-W11",
+            "tpr": {
+              "AR": 0.6667,
+              "no-AR": 0.7143
+            },
+            "fpr": {
+              "AR": 1.0,
+              "no-AR": 0.6667
+            },
+            "n_pos": {
+              "AR": 9,
+              "no-AR": 7
+            },
+            "n_neg": {
+              "AR": 1,
+              "no-AR": 3
+            },
+            "delta_tpr": 0.0476,
+            "delta_fpr": 0.3333,
+            "eo": 0.3333
+          },
+          {
+            "ventana": "WIO-W12",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 0.4286
+            },
+            "fpr": {
+              "AR": 0.2,
+              "no-AR": 0.3333
+            },
+            "n_pos": {
+              "AR": 5,
+              "no-AR": 7
+            },
+            "n_neg": {
+              "AR": 5,
+              "no-AR": 3
+            },
+            "delta_tpr": 0.5714,
+            "delta_fpr": 0.1333,
+            "eo": 0.5714
+          },
+          {
+            "ventana": "WIO-W13",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 0.6667
+            },
+            "fpr": {
+              "AR": 0.5,
+              "no-AR": 0.1429
+            },
+            "n_pos": {
+              "AR": 4,
+              "no-AR": 3
+            },
+            "n_neg": {
+              "AR": 6,
+              "no-AR": 7
+            },
+            "delta_tpr": 0.3333,
+            "delta_fpr": 0.3571,
+            "eo": 0.3571
+          },
+          {
+            "ventana": "WIO-W14",
+            "tpr": {
+              "AR": 0.75,
+              "no-AR": 0.5
+            },
+            "fpr": {
+              "AR": 0.5,
+              "no-AR": 0.3333
+            },
+            "n_pos": {
+              "AR": 4,
+              "no-AR": 4
+            },
+            "n_neg": {
+              "AR": 6,
+              "no-AR": 6
+            },
+            "delta_tpr": 0.25,
+            "delta_fpr": 0.1667,
+            "eo": 0.25
+          },
+          {
+            "ventana": "WIO-W15",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 0.6
+            },
+            "fpr": {
+              "AR": 0.125,
+              "no-AR": 0.2
+            },
+            "n_pos": {
+              "AR": 2,
+              "no-AR": 5
+            },
+            "n_neg": {
+              "AR": 8,
+              "no-AR": 5
+            },
+            "delta_tpr": 0.4,
+            "delta_fpr": 0.075,
+            "eo": 0.4
+          },
+          {
+            "ventana": "WIO-W16",
+            "tpr": {
+              "AR": 0.6667,
+              "no-AR": 1.0
+            },
+            "fpr": {
+              "AR": 0.2857,
+              "no-AR": 0.2222
+            },
+            "n_pos": {
+              "AR": 3,
+              "no-AR": 1
+            },
+            "n_neg": {
+              "AR": 7,
+              "no-AR": 9
+            },
+            "delta_tpr": 0.3333,
+            "delta_fpr": 0.0635,
+            "eo": 0.3333
+          },
+          {
+            "ventana": "WIO-W17",
+            "tpr": {
+              "AR": 0.3333,
+              "no-AR": 0.5
+            },
+            "fpr": {
+              "AR": 0.1429,
+              "no-AR": 0.25
+            },
+            "n_pos": {
+              "AR": 3,
+              "no-AR": 2
+            },
+            "n_neg": {
+              "AR": 7,
+              "no-AR": 8
+            },
+            "delta_tpr": 0.1667,
+            "delta_fpr": 0.1071,
+            "eo": 0.1667
+          },
+          {
+            "ventana": "WIO-W18",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 0.0
+            },
+            "fpr": {
+              "AR": 0.3333,
+              "no-AR": 0.5714
+            },
+            "n_pos": {
+              "AR": 4,
+              "no-AR": 3
+            },
+            "n_neg": {
+              "AR": 6,
+              "no-AR": 7
+            },
+            "delta_tpr": 1.0,
+            "delta_fpr": 0.2381,
+            "eo": 1.0
+          },
+          {
+            "ventana": "WIO-W19",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 0.8
+            },
+            "fpr": {
+              "AR": 0.2,
+              "no-AR": 0.0
+            },
+            "n_pos": {
+              "AR": 5,
+              "no-AR": 5
+            },
+            "n_neg": {
+              "AR": 5,
+              "no-AR": 5
+            },
+            "delta_tpr": 0.2,
+            "delta_fpr": 0.2,
+            "eo": 0.2
+          },
+          {
+            "ventana": "WIO-W20",
+            "tpr": {
+              "AR": 0.6667,
+              "no-AR": 1.0
+            },
+            "fpr": {
+              "AR": 0.1429,
+              "no-AR": 0.1111
+            },
+            "n_pos": {
+              "AR": 3,
+              "no-AR": 1
+            },
+            "n_neg": {
+              "AR": 7,
+              "no-AR": 9
+            },
+            "delta_tpr": 0.3333,
+            "delta_fpr": 0.0317,
+            "eo": 0.3333
+          },
+          {
+            "ventana": "WIO-W21",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "fpr": {
+              "AR": 0.2857,
+              "no-AR": 0.0
+            },
+            "n_pos": {
+              "AR": 3,
+              "no-AR": 5
+            },
+            "n_neg": {
+              "AR": 7,
+              "no-AR": 5
+            },
+            "delta_tpr": 0.0,
+            "delta_fpr": 0.2857,
+            "eo": 0.2857
+          },
+          {
+            "ventana": "WIO-W22",
+            "tpr": {
+              "AR": 1.0,
+              "no-AR": 0.8
+            },
+            "fpr": {
+              "AR": 0.1667,
+              "no-AR": 0.2
+            },
+            "n_pos": {
+              "AR": 4,
+              "no-AR": 5
+            },
+            "n_neg": {
+              "AR": 6,
+              "no-AR": 5
+            },
+            "delta_tpr": 0.2,
+            "delta_fpr": 0.0333,
+            "eo": 0.2
+          }
+        ],
+        "aciertos_por_grupo": {
+          "n": {
+            "AR": 300,
+            "no-AR": 300
+          },
+          "tasas": {
+            "AR": 0.7533,
+            "no-AR": 0.73
+          },
+          "brecha": 0.0233
+        },
+        "primeros_260": {
+          "advance": 116,
+          "aciertos_por_grupo": {
+            "n": {
+              "AR": 130,
+              "no-AR": 130
+            },
+            "tasas": {
+              "AR": 0.7615,
+              "no-AR": 0.7462
+            },
+            "brecha": 0.0153
+          },
+          "paridad_demografica": {
+            "n": {
+              "AR": 130,
+              "no-AR": 130
+            },
+            "tasas": {
+              "AR": 0.5231,
+              "no-AR": 0.3692
+            },
+            "brecha": 0.1539
+          },
+          "odds_igualadas": {
+            "tpr": {
+              "AR": 0.8246,
+              "no-AR": 0.6667
+            },
+            "fpr": {
+              "AR": 0.2877,
+              "no-AR": 0.2118
+            },
+            "n_pos": {
+              "AR": 57,
+              "no-AR": 45
+            },
+            "n_neg": {
+              "AR": 73,
+              "no-AR": 85
+            },
+            "delta_tpr": 0.1579,
+            "delta_fpr": 0.0759,
+            "eo": 0.1579
+          }
+        },
+        "ajuste_v2": {
+          "planificaciones": 600,
+          "con_candidatas": 568,
+          "aplicado": 91,
+          "no_aplicable_falta_evidencia": 477
+        }
+      },
+      "bias_auditor": {
+        "estado_final": "Born",
+        "ciclos": 30,
+        "aciertos": 30,
+        "favorable": {
+          "n": {
+            "AR": 300,
+            "no-AR": 300
+          },
+          "tasas": {
+            "AR": 0.0,
+            "no-AR": 0.0
+          },
+          "brecha": 0.0
+        },
+        "por_ventana": [
+          {
+            "ventana": "BIO-W01",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "BIO-W02",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W06",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W07",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W08",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W09",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W10",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W11",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W12",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W13",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W14",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W15",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W16",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W17",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W18",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W19",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W20",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W21",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W22",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 0.0,
+              "no-AR": 0.0
+            },
+            "brecha": 0.0
+          }
+        ],
+        "teorias": {
+          "en_E": 0,
+          "llegan_a_m_min": 0,
+          "e_min": null,
+          "e_media": null,
+          "teorias_con_e": []
+        },
+        "alpha_0_5": {
+          "planificaciones": 0,
+          "equidad_usada": 0,
+          "eleccion_cambiada": 0,
+          "accion_cambiada": 0,
+          "elegida_sin_e_frente_a_una_con_e": 0,
+          "ejemplos": []
+        }
+      },
+      "explainer": {
+        "estado_final": "Mature",
+        "ciclos": 600,
+        "aciertos": 595,
+        "favorable": {
+          "n": {
+            "AR": 300,
+            "no-AR": 300
+          },
+          "tasas": {
+            "AR": 1.0,
+            "no-AR": 0.9833
+          },
+          "brecha": 0.0167
+        },
+        "por_ventana": [
+          {
+            "ventana": "BIO-W01",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 0.5
+            },
+            "brecha": 0.5
+          },
+          {
+            "ventana": "BIO-W02",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "BIO-W03",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "TBO-W01",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "TBO-W02",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "TBO-W03",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "TBO-W04",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "TBO-W05",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W01",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W02",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W03",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W04",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W05",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W06",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W07",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W08",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W09",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W10",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W11",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W12",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W13",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W14",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W15",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W16",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W17",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W18",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W19",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W20",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W21",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          },
+          {
+            "ventana": "WIO-W22",
+            "n": {
+              "AR": 10,
+              "no-AR": 10
+            },
+            "tasas": {
+              "AR": 1.0,
+              "no-AR": 1.0
+            },
+            "brecha": 0.0
+          }
+        ],
+        "teorias": {
+          "en_E": 4,
+          "llegan_a_m_min": 4,
+          "e_min": 1.0,
+          "e_media": 1.0,
+          "teorias_con_e": [
+            {
+              "clave": [
+                "{\"destinatario\": \"usuario\", \"tipo\": \"avanza\"}",
+                "por_factores",
+                "{\"completa\": true}"
+              ],
+              "n_por_grupo": {
+                "AR": 78,
+                "no-AR": 55
+              },
+              "e": 1.0
+            },
+            {
+              "clave": [
+                "{\"destinatario\": \"regulador\", \"tipo\": \"avanza\"}",
+                "regulatoria",
+                "{\"completa\": true}"
+              ],
+              "n_por_grupo": {
+                "AR": 71,
+                "no-AR": 57
+              },
+              "e": 1.0
+            },
+            {
+              "clave": [
+                "{\"destinatario\": \"usuario\", \"tipo\": \"rechaza\"}",
+                "contrafactica",
+                "{\"completa\": true}"
+              ],
+              "n_por_grupo": {
+                "AR": 78,
+                "no-AR": 104
+              },
+              "e": 1.0
+            },
+            {
+              "clave": [
+                "{\"destinatario\": \"regulador\", \"tipo\": \"rechaza\"}",
+                "regulatoria",
+                "{\"completa\": true}"
+              ],
+              "n_por_grupo": {
+                "AR": 70,
+                "no-AR": 78
+              },
+              "e": 1.0
+            }
+          ]
+        },
+        "alpha_0_5": {
+          "planificaciones": 600,
+          "equidad_usada": 120,
+          "eleccion_cambiada": 0,
+          "accion_cambiada": 0,
+          "elegida_sin_e_frente_a_una_con_e": 0,
+          "ejemplos": []
+        },
+        "ajuste_v2": {
+          "planificaciones": 600,
+          "con_candidatas": 596,
+          "aplicado": 120,
+          "no_aplicable_falta_evidencia": 476
+        }
+      }
+    }
+  },
+  "corrida_2": {
+    "detectable": {
+      "estado_final": "Novice",
+      "brecha_toda_la_corrida": 0.16,
+      "brecha_por_tercio": [
+        0.18,
+        0.14,
+        0.16
+      ],
+      "odds_igualadas": {
+        "tpr": {
+          "AR": 0.8504,
+          "no-AR": 0.7292
+        },
+        "fpr": {
+          "AR": 0.1965,
+          "no-AR": 0.1176
+        },
+        "n_pos": {
+          "AR": 127,
+          "no-AR": 96
+        },
+        "n_neg": {
+          "AR": 173,
+          "no-AR": 204
+        },
+        "delta_tpr": 0.1212,
+        "delta_fpr": 0.0789,
+        "eo": 0.1212
+      },
+      "aciertos_por_grupo": {
+        "n": {
+          "AR": 300,
+          "no-AR": 300
+        },
+        "tasas": {
+          "AR": 0.8233,
+          "no-AR": 0.8333
+        },
+        "brecha": 0.01
+      },
+      "por_ventana": [
+        {
+          "id": "W01",
+          "capa": "BIO",
+          "brecha_firmada": 0.4,
+          "accion_igual_al_operador": 0.5,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W02",
+          "capa": "BIO",
+          "brecha_firmada": 0.4,
+          "accion_igual_al_operador": 0.45,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W03",
+          "capa": "TBO",
+          "brecha_firmada": -0.1,
+          "accion_igual_al_operador": 0.45,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W04",
+          "capa": "TBO",
+          "brecha_firmada": 0.1,
+          "accion_igual_al_operador": 0.65,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W05",
+          "capa": "TBO",
+          "brecha_firmada": 0.1,
+          "accion_igual_al_operador": 0.55,
+          "actua_el_operador": 0.1,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W06",
+          "capa": "TBO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.8,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W07",
+          "capa": "TBO",
+          "brecha_firmada": 0.4,
+          "accion_igual_al_operador": 0.8,
+          "actua_el_operador": 0.1,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W08",
+          "capa": "TBO",
+          "brecha_firmada": 0.3,
+          "accion_igual_al_operador": 0.65,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W09",
+          "capa": "TBO",
+          "brecha_firmada": 0.0,
+          "accion_igual_al_operador": 0.5,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W10",
+          "capa": "TBO",
+          "brecha_firmada": 0.0,
+          "accion_igual_al_operador": 0.5,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W11",
+          "capa": "TBO",
+          "brecha_firmada": 0.3,
+          "accion_igual_al_operador": 0.85,
+          "actua_el_operador": 0.1,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W12",
+          "capa": "TBO",
+          "brecha_firmada": 0.3,
+          "accion_igual_al_operador": 0.55,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W13",
+          "capa": "TBO",
+          "brecha_firmada": 0.1,
+          "accion_igual_al_operador": 0.7,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W14",
+          "capa": "TBO",
+          "brecha_firmada": 0.4,
+          "accion_igual_al_operador": 0.6,
+          "actua_el_operador": 0.1,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W15",
+          "capa": "TBO",
+          "brecha_firmada": -0.3,
+          "accion_igual_al_operador": 0.6,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W16",
+          "capa": "TBO",
+          "brecha_firmada": -0.1,
+          "accion_igual_al_operador": 0.6,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W17",
+          "capa": "TBO",
+          "brecha_firmada": 0.4,
+          "accion_igual_al_operador": 0.8,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W18",
+          "capa": "TBO",
+          "brecha_firmada": -0.1,
+          "accion_igual_al_operador": 0.55,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W19",
+          "capa": "TBO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.55,
+          "actua_el_operador": 0.1,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W20",
+          "capa": "TBO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.7,
+          "actua_el_operador": 0.1,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W21",
+          "capa": "TBO",
+          "brecha_firmada": 0.4,
+          "accion_igual_al_operador": 0.75,
+          "actua_el_operador": 0.15,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W22",
+          "capa": "TBO",
+          "brecha_firmada": 0.3,
+          "accion_igual_al_operador": 0.75,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W23",
+          "capa": "TBO",
+          "brecha_firmada": -0.1,
+          "accion_igual_al_operador": 0.7,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W24",
+          "capa": "TBO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.8,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W25",
+          "capa": "TBO",
+          "brecha_firmada": 0.1,
+          "accion_igual_al_operador": 0.7,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W26",
+          "capa": "TBO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.6,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W27",
+          "capa": "TBO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.65,
+          "actua_el_operador": 0.1,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W28",
+          "capa": "TBO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.85,
+          "actua_el_operador": 0.1,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W29",
+          "capa": "TBO",
+          "brecha_firmada": 0.0,
+          "accion_igual_al_operador": 0.6,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W30",
+          "capa": "TBO",
+          "brecha_firmada": 0.1,
+          "accion_igual_al_operador": 0.6,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        }
+      ],
+      "ventanas_derivadas_regla_ventana": [],
+      "ventanas_derivadas_regla_acumulada": [],
+      "evolucion": [
+        {
+          "ciclo": 20,
+          "capa": "BIO",
+          "ciclo_capa": 20,
+          "pct_cea": 0.0,
+          "gate_omega": true,
+          "promueve": false,
+          "estado_despues": "Born",
+          "lcb": 0.0,
+          "brecha": 0.4,
+          "niega_omega": false
+        },
+        {
+          "ciclo": 40,
+          "capa": "BIO",
+          "ciclo_capa": 40,
+          "pct_cea": 31.82,
+          "gate_omega": true,
+          "promueve": true,
+          "estado_despues": "Novice",
+          "lcb": 0.0,
+          "brecha": 0.4,
+          "niega_omega": false
+        },
+        {
+          "ciclo": 60,
+          "capa": "TBO",
+          "ciclo_capa": 20,
+          "pct_cea": 7.69,
+          "gate_omega": true,
+          "promueve": false,
+          "estado_despues": "Novice",
+          "lcb": 0.0,
+          "brecha": 0.1,
+          "niega_omega": false
+        },
+        {
+          "ciclo": 80,
+          "capa": "TBO",
+          "ciclo_capa": 40,
+          "pct_cea": -20.0,
+          "gate_omega": true,
+          "promueve": false,
+          "estado_despues": "Novice",
+          "lcb": 0.0,
+          "brecha": 0.0,
+          "niega_omega": false
+        },
+        {
+          "ciclo": 100,
+          "capa": "TBO",
+          "ciclo_capa": 60,
+          "pct_cea": -7.5,
+          "gate_omega": true,
+          "promueve": false,
+          "estado_despues": "Novice",
+          "lcb": 0.0,
+          "brecha": 0.0333,
+          "niega_omega": false
+        },
+        {
+          "ciclo": 120,
+          "capa": "TBO",
+          "ciclo_capa": 80,
+          "pct_cea": -1.82,
+          "gate_omega": true,
+          "promueve": false,
+          "estado_despues": "Novice",
+          "lcb": 0.0,
+          "brecha": 0.075,
+          "niega_omega": false
+        },
+        {
+          "ciclo": 140,
+          "capa": "TBO",
+          "ciclo_capa": 100,
+          "pct_cea": 4.35,
+          "gate_omega": true,
+          "promueve": false,
+          "estado_despues": "Novice",
+          "lcb": 0.0,
+          "brecha": 0.14,
+          "niega_omega": false
+        }
+      ],
+      "teorias": {
+        "en_E": 55,
+        "llegan_a_m_min": 0,
+        "e_min": null,
+        "e_media": null
+      },
+      "teorias_sin_titulo_local": {
+        "en_E": 25,
+        "llegan_a_m_min": 0,
+        "lecturas_AR": 17,
+        "lecturas_no_AR": 215
+      },
+      "alpha_0_5": {
+        "planificaciones": 600,
+        "equidad_usada": 0,
+        "eleccion_cambiada": 0,
+        "accion_cambiada": 0,
+        "elegida_sin_e_frente_a_una_con_e": 0,
+        "ejemplos": []
+      },
+      "ajuste_v2": {
+        "planificaciones": 600,
+        "con_candidatas": 552,
+        "aplicado": 0,
+        "no_aplicable_falta_evidencia": 552
+      }
+    },
+    "bajo_umbral": {
+      "estado_final": "Born",
+      "brecha_toda_la_corrida": 0.1,
+      "brecha_por_tercio": [
+        0.13,
+        0.11,
+        0.06
+      ],
+      "odds_igualadas": {
+        "tpr": {
+          "AR": 0.8819,
+          "no-AR": 0.8438
+        },
+        "fpr": {
+          "AR": 0.1676,
+          "no-AR": 0.1471
+        },
+        "n_pos": {
+          "AR": 127,
+          "no-AR": 96
+        },
+        "n_neg": {
+          "AR": 173,
+          "no-AR": 204
+        },
+        "delta_tpr": 0.0381,
+        "delta_fpr": 0.0206,
+        "eo": 0.0381
+      },
+      "aciertos_por_grupo": {
+        "n": {
+          "AR": 300,
+          "no-AR": 300
+        },
+        "tasas": {
+          "AR": 0.8533,
+          "no-AR": 0.85
+        },
+        "brecha": 0.0033
+      },
+      "por_ventana": [
+        {
+          "id": "W01",
+          "capa": "BIO",
+          "brecha_firmada": 0.3,
+          "accion_igual_al_operador": 0.4,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W02",
+          "capa": "BIO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.45,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W03",
+          "capa": "BIO",
+          "brecha_firmada": 0.1,
+          "accion_igual_al_operador": 0.65,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W04",
+          "capa": "BIO",
+          "brecha_firmada": 0.0,
+          "accion_igual_al_operador": 0.55,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W05",
+          "capa": "BIO",
+          "brecha_firmada": -0.1,
+          "accion_igual_al_operador": 0.4,
+          "actua_el_operador": 0.1,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W06",
+          "capa": "BIO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.65,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W07",
+          "capa": "BIO",
+          "brecha_firmada": 0.3,
+          "accion_igual_al_operador": 0.65,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W08",
+          "capa": "BIO",
+          "brecha_firmada": 0.1,
+          "accion_igual_al_operador": 0.7,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W09",
+          "capa": "BIO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.55,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W10",
+          "capa": "BIO",
+          "brecha_firmada": 0.0,
+          "accion_igual_al_operador": 0.6,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W11",
+          "capa": "BIO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.7,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W12",
+          "capa": "BIO",
+          "brecha_firmada": 0.4,
+          "accion_igual_al_operador": 0.7,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W13",
+          "capa": "BIO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.6,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W14",
+          "capa": "BIO",
+          "brecha_firmada": 0.5,
+          "accion_igual_al_operador": 0.55,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W15",
+          "capa": "BIO",
+          "brecha_firmada": -0.3,
+          "accion_igual_al_operador": 0.65,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W16",
+          "capa": "BIO",
+          "brecha_firmada": -0.1,
+          "accion_igual_al_operador": 0.7,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W17",
+          "capa": "BIO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.65,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W18",
+          "capa": "BIO",
+          "brecha_firmada": 0.0,
+          "accion_igual_al_operador": 0.65,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W19",
+          "capa": "BIO",
+          "brecha_firmada": 0.1,
+          "accion_igual_al_operador": 0.4,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W20",
+          "capa": "BIO",
+          "brecha_firmada": -0.1,
+          "accion_igual_al_operador": 0.6,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W21",
+          "capa": "BIO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.55,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W22",
+          "capa": "BIO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.75,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W23",
+          "capa": "BIO",
+          "brecha_firmada": -0.2,
+          "accion_igual_al_operador": 0.7,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W24",
+          "capa": "BIO",
+          "brecha_firmada": 0.1,
+          "accion_igual_al_operador": 0.8,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W25",
+          "capa": "BIO",
+          "brecha_firmada": 0.1,
+          "accion_igual_al_operador": 0.75,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W26",
+          "capa": "BIO",
+          "brecha_firmada": 0.1,
+          "accion_igual_al_operador": 0.5,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W27",
+          "capa": "BIO",
+          "brecha_firmada": 0.2,
+          "accion_igual_al_operador": 0.6,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W28",
+          "capa": "BIO",
+          "brecha_firmada": 0.0,
+          "accion_igual_al_operador": 0.8,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W29",
+          "capa": "BIO",
+          "brecha_firmada": -0.1,
+          "accion_igual_al_operador": 0.45,
+          "actua_el_operador": 0.0,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        },
+        {
+          "id": "W30",
+          "capa": "BIO",
+          "brecha_firmada": 0.0,
+          "accion_igual_al_operador": 0.5,
+          "actua_el_operador": 0.05,
+          "deriva_ventana": false,
+          "deriva_acumulada": false,
+          "lcb_acumulada": 0.0
+        }
+      ],
+      "ventanas_derivadas_regla_ventana": [],
+      "ventanas_derivadas_regla_acumulada": [],
+      "evolucion": [
+        {
+          "ciclo": 20,
+          "capa": "BIO",
+          "ciclo_capa": 20,
+          "pct_cea": 0.0,
+          "gate_omega": true,
+          "promueve": false,
+          "estado_despues": "Born",
+          "lcb": 0.0,
+          "brecha": 0.3,
+          "niega_omega": false
+        },
+        {
+          "ciclo": 40,
+          "capa": "BIO",
+          "ciclo_capa": 40,
+          "pct_cea": 21.74,
+          "gate_omega": true,
+          "promueve": false,
+          "estado_despues": "Born",
+          "lcb": 0.0,
+          "brecha": 0.25,
+          "niega_omega": false
+        },
+        {
+          "ciclo": 60,
+          "capa": "BIO",
+          "ciclo_capa": 60,
+          "pct_cea": 10.53,
+          "gate_omega": true,
+          "promueve": false,
+          "estado_despues": "Born",
+          "lcb": 0.0,
+          "brecha": 0.2,
+          "niega_omega": false
+        }
+      ],
+      "teorias": {
+        "en_E": 59,
+        "llegan_a_m_min": 17,
+        "e_min": 0.769231,
+        "e_media": 0.9184
+      },
+      "teorias_sin_titulo_local": {
+        "en_E": 27,
+        "llegan_a_m_min": 12,
+        "lecturas_AR": 113,
+        "lecturas_no_AR": 164
+      },
+      "alpha_0_5": {
+        "planificaciones": 600,
+        "equidad_usada": 25,
+        "eleccion_cambiada": 0,
+        "accion_cambiada": 0,
+        "elegida_sin_e_frente_a_una_con_e": 0,
+        "ejemplos": []
+      },
+      "ajuste_v2": {
+        "planificaciones": 600,
+        "con_candidatas": 552,
+        "aplicado": 25,
+        "no_aplicable_falta_evidencia": 527
+      }
+    }
+  }
+}

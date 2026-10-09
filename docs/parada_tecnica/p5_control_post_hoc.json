@@ -1,0 +1,178 @@
+{
+  "rotulos": [
+    "ilustrativo, entorno simulado (modo sim); no es evidencia experimental",
+    "semántica LLC propuesta; decisiones 2, 4 y 5 pendientes de la dirección"
+  ],
+  "demo": "E6 · control post hoc sin sesgo programado",
+  "rotulo": "control agregado después de ver los resultados; no pre-registrado",
+  "calificados_del_flujo": {
+    "n": {
+      "AR": 300,
+      "no-AR": 300
+    },
+    "tasas": {
+      "AR": 0.4233,
+      "no-AR": 0.32
+    },
+    "brecha": 0.1033
+  },
+  "control": {
+    "estado_final": "Mature",
+    "brecha_toda_la_corrida": 0.08,
+    "brecha_por_tercio": [
+      0.12,
+      0.09,
+      0.03
+    ],
+    "odds_igualadas": {
+      "tpr": {
+        "AR": 0.7143,
+        "no-AR": 0.6455
+      },
+      "fpr": {
+        "AR": 0.3678,
+        "no-AR": 0.3105
+      },
+      "n_pos": {
+        "AR": 126,
+        "no-AR": 110
+      },
+      "n_neg": {
+        "AR": 174,
+        "no-AR": 190
+      },
+      "delta_tpr": 0.0688,
+      "delta_fpr": 0.0573,
+      "eo": 0.0688
+    },
+    "aciertos_por_grupo": {
+      "n": {
+        "AR": 300,
+        "no-AR": 300
+      },
+      "tasas": {
+        "AR": 0.6667,
+        "no-AR": 0.6733
+      },
+      "brecha": 0.0066
+    },
+    "evolucion": [
+      {
+        "ciclo": 20,
+        "capa": "BIO",
+        "ciclo_capa": 20,
+        "pct_cea": 27.27,
+        "gate_omega": true,
+        "promueve": true,
+        "estado_despues": "Novice",
+        "lcb": 0.0,
+        "brecha": 0.3,
+        "niega_omega": false
+      },
+      {
+        "ciclo": 40,
+        "capa": "TBO",
+        "ciclo_capa": 20,
+        "pct_cea": 88.89,
+        "gate_omega": true,
+        "promueve": true,
+        "estado_despues": "Trained",
+        "lcb": 0.0,
+        "brecha": 0.3,
+        "niega_omega": false
+      },
+      {
+        "ciclo": 60,
+        "capa": "WIO",
+        "ciclo_capa": 20,
+        "pct_cea": 25.0,
+        "gate_omega": true,
+        "promueve": true,
+        "estado_despues": "Mature",
+        "lcb": 0.0,
+        "brecha": 0.1,
+        "niega_omega": false
+      }
+    ],
+    "ventanas_derivadas_regla_ventana": [],
+    "ventanas_derivadas_regla_acumulada": [],
+    "motivos_por_capa": {
+      "BIO": {
+        "azar_no_probada": 10,
+        "celda": 9,
+        "azar_bio": 1
+      },
+      "TBO": {
+        "celda": 18,
+        "azar_no_probada": 2
+      },
+      "WIO": {
+        "celda": 417,
+        "azar_bio": 143
+      }
+    },
+    "fraccion_operador_bio": 0.24
+  },
+  "frente_al_matcher_sesgado_que_aprende": {
+    "detectable": {
+      "paridad_demografica": {
+        "sesgado": 0.16,
+        "control": 0.08,
+        "diferencia": 0.08
+      },
+      "odds_igualadas": {
+        "sesgado": 0.1212,
+        "control": 0.0688,
+        "diferencia": 0.0524
+      },
+      "aciertos_por_grupo": {
+        "sesgado": {
+          "AR": 0.8233,
+          "no-AR": 0.8333
+        },
+        "control": {
+          "AR": 0.6667,
+          "no-AR": 0.6733
+        }
+      },
+      "estado_final": {
+        "sesgado": "Novice",
+        "control": "Mature"
+      },
+      "fraccion_operador_bio": {
+        "sesgado": 0.05,
+        "control": 0.24
+      }
+    },
+    "bajo_umbral": {
+      "paridad_demografica": {
+        "sesgado": 0.1,
+        "control": 0.08,
+        "diferencia": 0.02
+      },
+      "odds_igualadas": {
+        "sesgado": 0.0381,
+        "control": 0.0688,
+        "diferencia": -0.0307
+      },
+      "aciertos_por_grupo": {
+        "sesgado": {
+          "AR": 0.8533,
+          "no-AR": 0.85
+        },
+        "control": {
+          "AR": 0.6667,
+          "no-AR": 0.6733
+        }
+      },
+      "estado_final": {
+        "sesgado": "Born",
+        "control": "Mature"
+      },
+      "fraccion_operador_bio": {
+        "sesgado": 0.02,
+        "control": 0.24
+      }
+    }
+  }
+}
