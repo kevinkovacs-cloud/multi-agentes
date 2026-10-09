@@ -14,7 +14,7 @@ from moav_hr.instances.hr.roles_llc import RolMatcherLLC, RolMatcherSesgo
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "experiments" / "parada_tecnica"))
 import p5_metricas_equidad  # noqa: E402
-from comun_pt import ROTULOS, cargar_config, mayus  # noqa: E402
+from comun_pt import cargar_config  # noqa: E402
 
 PROTEGIDOS = {"origin", "origin_group", "origen", "gender", "genero", "age", "edad"}
 
@@ -73,11 +73,8 @@ def p5(tmp_path_factory):
 
 def test_p5_salidas_y_rotulos(p5):
     out, _ = p5
-    for f in ("p5_metricas_equidad.json", "p5_sesgo_programado.json", "p5_sesgo_programado.png",
-              "METRICAS_EQUIDAD_POR_ROL.md"):
+    for f in ("p5_metricas_equidad.json", "p5_sesgo_programado.json", "p5_sesgo_programado.png"):
         assert (out / f).exists()
-    md = (out / "METRICAS_EQUIDAD_POR_ROL.md").read_text(encoding="utf-8")
-    assert all(mayus(r) in md for r in ROTULOS) and "Parámetros programados" in md
     d = json.loads((out / "p5_sesgo_programado.json").read_text(encoding="utf-8"))
     assert d["rotulo_programado"] == "parámetros programados"
     assert "no es evidencia de la conjetura de atenuación" in d["rotulo_atenuacion"]

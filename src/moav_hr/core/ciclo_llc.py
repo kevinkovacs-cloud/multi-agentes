@@ -104,6 +104,7 @@ class ConfigCiclo:
     validez: str = "u_tarea_mayor_que_0"       # | "u_mayor_o_igual_0_5"
     tau_b: float = 0.075
     delta_omega: float = 0.05
+    equidad_utilidad: str = "variante"         # E6 v2: | "celda" (ê(Si, A))
 
     @classmethod
     def desde_yaml(cls, cfg: dict, **cambios) -> "ConfigCiclo":
@@ -162,11 +163,13 @@ class MotorLLC:
         # `is None`, no `or`: un AuditTrail vacío es falso (len 0) y el equipo comparte uno
         self.trail = trail if trail is not None else AuditTrail("TRC-LLC")
         self.registro_e = registro_e if registro_e is not None else RegistroE()
+        self.registro_celda = RegistroE()             # E(Si, A) de la E6 v2 (plano de auditoría)
         self.planificador = PlanificadorLLC(
             agente.theories, cfg.acciones_orden or rol.acciones,
             respaldo_similitud=cfg.respaldo_similitud, delta=cfg.delta, alpha=cfg.alpha,
             registro_e=self.registro_e, m_min=cfg.m_min,
             capas_exploracion=getattr(rol, "capas_exploracion", CAPAS_CON_EXPLORACION),
+            equidad=cfg.equidad_utilidad, registro_celda=self.registro_celda,
             **self.parametros_validez(cfg))
         self.stats = EstadisticasLLC(cfg.umbral_exitoso)
         self.ciclo = 0
@@ -234,6 +237,8 @@ class MotorLLC:
         if plan.teoria is not None:                                    # E(t): t fue el plan
             self.registro_e.registrar(theory_key(plan.teoria, self.agente.theories.q),
                                       grupo, acierto)
+        self.registro_celda.registrar(self.planificador.clave_celda(si, plan.accion), grupo,
+                                      acierto)                         # E(Si, A), E6 v2
         plan_valido = plan.motivo in ("celda", "similitud")
         plan_exitoso = plan_valido and plan.teoria is not None and sf == plan.teoria.sf
         exitoso = self.stats.registrar_ciclo(serialize(si), tipo, u, plan.es_azar,   # R6
@@ -259,6 +264,8 @@ class MotorLLC:
                "estadisticas": foto}
         if self.cfg.alpha < 1.0:            # DE-5 (E6): uso de ê(t) y elección con α = 1
             reg.update(equidad_usada=plan.equidad_usada, plan_alpha_1=plan.alpha_1)
+            if self.cfg.equidad_utilidad == "celda":
+                reg["ajuste_equidad"] = plan.ajuste_equidad
         self.ciclos.append(reg)
         return reg
 

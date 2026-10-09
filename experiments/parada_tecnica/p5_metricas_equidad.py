@@ -12,8 +12,9 @@ antes de correr (docs/parada_tecnica/E6_PREREGISTRO.md; sección `equipo_e6` de 
     dos magnitudes; neutro, α = 1 y α = 0,5; las dos reglas del Auditor, el gate de evolución,
     la compartición y la atenuación por aprendizaje.
 
-Salidas en docs/parada_tecnica/: p5_metricas_equidad.json, p5_sesgo_programado.json,
-p5_sesgo_programado.png y METRICAS_EQUIDAD_POR_ROL.md.
+Salidas en docs/parada_tecnica/: p5_metricas_equidad.json, p5_sesgo_programado.json y
+p5_sesgo_programado.png. METRICAS_EQUIDAD_POR_ROL.md lo escribe metricas_equidad_doc.py
+(E7), con E6, E6 v2 y el control post hoc.
 
 Uso:  python experiments/parada_tecnica/p5_metricas_equidad.py [--out DIR]
 """
@@ -21,8 +22,8 @@ from __future__ import annotations
 import argparse
 import json
 
-from comun_pt import (C_AMBAR, C_AZUL, C_ROJO, C_TEXTO, C_VERDE, ROTULOS, cargar_config,
-                      encabezado_md, estilo_figuras, guardar_json, mayus, num, out_dir,
+from comun_pt import (C_AMBAR, C_AZUL, C_ROJO, C_TEXTO, C_VERDE, cargar_config,
+                      estilo_figuras, guardar_json, mayus, num, out_dir,
                       pie_rotulos, plt)
 from moav_hr.core import fairness
 from moav_hr.core.audit.trail import AuditTrail
@@ -162,12 +163,17 @@ def _tasa(regs, g, pred) -> float:
     return sum(x) / len(x) if x else 0.0
 
 
-def correr_matcher(cfg: dict, casos: list, nombre: str, conf: str):
+def correr_matcher(cfg: dict, casos: list, nombre: str, conf: str,
+                   equidad: str = "variante", rol=None):
+    """El Matcher solo sobre los casos. `equidad` = «celda» es la E6 v2; `rol` permite el
+    control post hoc (el Matcher de P1, sin rasgo ni sesgo)."""
     sp = cfg["equipo_e6"]["sesgo_programado"]
-    rol = RolMatcherSesgo(cfg["entorno"]["ruido_wio_epsilon"], sp["semilla_casos"])
+    if rol is None:
+        rol = RolMatcherSesgo(cfg["entorno"]["ruido_wio_epsilon"], sp["semilla_casos"])
     if conf == "neutro":
         rol = RolNeutro(rol)
-    c = ConfigCiclo.desde_yaml(cfg, alpha=0.5 if conf == "alpha_0_5" else 1.0)
+    c = ConfigCiclo.desde_yaml(cfg, alpha=0.5 if conf == "alpha_0_5" else 1.0,
+                               equidad_utilidad=equidad)
     motor = MotorLLC(AgenteLLC(nombre, "matcher"), rol, _monitor(cfg), c,
                      trail=AuditTrail(f"TRC-{nombre}"))
     for caso in casos:
@@ -328,154 +334,6 @@ def figura(c2: dict, base: dict, destino) -> str:
     return ruta.name
 
 
-def _ej_cambio(c1: dict) -> list[str]:
-    out = []
-    for r in ("parser", "matcher", "explainer"):
-        x = c1["alpha_0.5"]["roles"][r].get("alpha_0_5", {})
-        for e in x.get("ejemplos", [])[:1]:
-            cand = "; ".join(f"T{c['id']} {c['a']} (U {num(c['u_tarea'], 3)}, ê "
-                             f"{'—' if c['e'] is None else num(c['e'], 3)}, U_rol "
-                             f"{num(c['u_orden'], 3)})" for c in e["candidatas"])
-            out.append(f"{TITULO[r]}, ciclo {e['ciclo']} ({e['capa']}): con α = 0,5 eligió "
-                       f"T{e['elegida']['teoria']} ({e['elegida']['accion']}); con α = 1 "
-                       f"habría elegido T{e['con_alpha_1']['teoria']} "
-                       f"({e['con_alpha_1']['accion']}). Candidatas: {cand}.")
-    return out
-
-
-def escribir_metricas_md(cfg: dict, c1: dict, c2: dict, base: dict, destino) -> None:
-    m_min = cfg["utilidad"]["m_min_por_grupo"]
-    a1, a5 = c1["alpha_1.0"]["roles"], c1["alpha_0.5"]["roles"]
-    L = encabezado_md("Métricas de equidad por rol (punto 5 del pedido)")
-    L += ["Documento para la dirección, generado por "
-          "`experiments/parada_tecnica/p5_metricas_equidad.py`. Reglas pre-registradas en "
-          "`E6_PREREGISTRO.md`. Corrida 1: el equipo de E5 sobre "
-          f"{c1['alpha_1.0']['casos']} casos, con α = 1 y α = 0,5. Corrida 2: condición con sesgo "
-          f"programado («{ROTULO_PROG}»).", "",
-          "**Planos.** Los datos del plano de decisión son lo que el rol percibe y hace (Si, A, "
-          "Sf). El grupo vive solo en el plano de auditoría (Ω y E(t)): nunca entra en Si, A ni "
-          "los prompts (DE-4). Toda brecha entre grupos se calcula en ese plano.", "",
-          f"**U_rol (DE-5).** U_rol(t) = α·U(t) + (1 − α)·ê(t), con ê(t) = 1 − |err(AR) − "
-          f"err(no-AR)| sobre E(t) (las decisiones en que t fue el plan). Solo con al menos "
-          f"m_min = {m_min} lecturas en cada grupo; si no, se usa α = 1 y se registra.", ""]
-    sec = {
-        "parser": ("Brecha de completitud de la extracción entre grupos; métrica de auditoría "
-                   "adicional: d_TV del canal proxy (cota inferior, B3).",
-                   "|P(completo | AR) − P(completo | no-AR)|; d̂_TV = max(0, 2·bAcc − 1) de un "
-                   "clasificador grupo ~ Si del Parser en held-out.",
-                   "Sf del Parser (decisión); grupo (auditoría).",
-                   "La brecha mezcla la estrategia elegida con lo que trae el documento (defectos "
-                   "de esta semilla, E5). El d_TV es una cota inferior, no el valor."),
-        "matcher": ("Paridad de errores (equalized odds) en la ventana y en la corrida; por "
-                    "teoría, ê(t) desde E(t). La paridad demográfica se informa para contrastar.",
-                    "EO = max(|ΔTPR|, |ΔFPR|) con la etiqueta observada (BIO y TBO: etiqueta del "
-                    "escenario; WIO: revisión humana); ê(t) = 1 − |err(AR) − err(no-AR)|.",
-                    "Acción y Sf (decisión); grupo (auditoría).",
-                    "Advertencia formal: la acción de la teoría es la decisión; dentro de una "
-                    "celda todos reciben la misma acción, así que la paridad demográfica por "
-                    "teoría es trivial y ê(t) usa paridad de errores, que necesita Sf. La "
-                    "disparidad de trato surge de qué teorías se aplican a cada grupo y se mide "
-                    "en la ventana. En WIO la etiqueta es la revisión humana, que puede "
-                    "equivocarse (ε)."),
-        "bias_auditor": ("Paridad de derivación Δ_esc (C5).",
-                         "|P(derivado | AR) − P(derivado | no-AR)|.",
-                         "Acción del Auditor y grupo de cada caso de la ventana (auditoría).",
-                         "La derivación es por ventana: todos los casos de una ventana reciben la "
-                         "misma intervención, así que Δ_esc es 0 por construcción mientras las "
-                         "ventanas tengan los dos grupos por igual. Con ventanas de 20 la regla "
-                         "certificada no puede derivar."),
-        "explainer": ("Brecha de completitud de la explicación entre grupos.",
-                      "|P(completa | AR) − P(completa | no-AR)|.",
-                      "Sf del Explainer (decisión); grupo (auditoría).",
-                      "La completitud depende del tipo de decisión y del destinatario; si las "
-                      "decisiones difieren por grupo, la brecha lo arrastra."),
-    }
-    for r in ROLES:
-        d, f, pl, lim = sec[r]
-        x1, x5 = a1[r], a5[r]
-        mm = ("no aplica: la acción la decide la regla certificada (DE-6), así que ninguna "
-              "teoría es plan y E(t) queda vacío; U_rol no interviene."
-              if r == "bias_auditor" else f"{m_min} lecturas por grupo para ê(t).")
-        L += [f"## {TITULO[r]}", "", f"- **Definición:** {d}", f"- **Fórmula:** {f}",
-              f"- **Datos y plano:** {pl}", f"- **m_min:** {mm}",
-              f"- **Límites:** {lim}",
-              f"- **Valores (α = 1 · α = 0,5):** brecha del resultado favorable "
-              f"{num(x1['favorable']['brecha'], 3)} · {num(x5['favorable']['brecha'], 3)} (tasas "
-              f"AR {num(x1['favorable']['tasas']['AR'], 3)}, no-AR "
-              f"{num(x1['favorable']['tasas']['no-AR'], 3)} con α = 1); teorías con ê(t) "
-              f"(m_min en los dos grupos): {x1['teorias']['llegan_a_m_min']} de "
-              f"{x1['teorias']['en_E']} · {x5['teorias']['llegan_a_m_min']} de "
-              f"{x5['teorias']['en_E']}."]
-        if r == "parser":
-            L.append(f"- **d_TV del canal proxy (cota inferior):** "
-                     f"{num(x1['dtv_canal_proxy'], 3)} (α = 1).")
-        if r == "matcher":
-            eo1, eo5 = x1["odds_igualadas"], x5["odds_igualadas"]
-            p2 = x1["primeros_260"]
-            eo2 = p2["odds_igualadas"]
-            L.append(f"- **Paridad de errores (EO):** {num(eo1['eo'], 3)} · {num(eo5['eo'], 3)} "
-                     f"(ΔTPR {num(eo1['delta_tpr'], 3)}, ΔFPR {num(eo1['delta_fpr'], 3)} con "
-                     f"α = 1). **Paridad demográfica:** {num(x1['favorable']['brecha'], 3)}; "
-                     f"diferencia de calificados del flujo: {num(base['brecha'], 3)}. En los "
-                     f"primeros 260 casos (los de E4): paridad demográfica "
-                     f"{num(p2['paridad_demografica']['brecha'], 3)}, aciertos "
-                     f"{num(p2['aciertos_por_grupo']['tasas']['AR'], 3)} (AR) y "
-                     f"{num(p2['aciertos_por_grupo']['tasas']['no-AR'], 3)} (no-AR), pero EO "
-                     f"{num(eo2['eo'], 3)}: TPR {num(eo2['tpr']['AR'], 3)} (AR, "
-                     f"{eo2['n_pos']['AR']} casos con Sf calificado) frente a "
-                     f"{num(eo2['tpr']['no-AR'], 3)} (no-AR, {eo2['n_pos']['no-AR']}). La "
-                     "paridad de aciertos pareja no implica odds igualadas.")
-        if "alpha_0_5" in x5 and r != "bias_auditor":
-            c = x5["alpha_0_5"]
-            L.append(f"- **¿α = 0,5 cambió la elección?** Se usó ê(t) en {c['equidad_usada']} de "
-                     f"{c['planificaciones']} planificaciones; la teoría elegida cambió respecto "
-                     f"de α = 1 en {c['eleccion_cambiada']} (la acción, en "
-                     f"{c['accion_cambiada']}; en {c['elegida_sin_e_frente_a_una_con_e']} la "
-                     "elegida no tenía ê(t) y la de α = 1 sí).")
-        L.append("")
-    ej = _ej_cambio(c1)
-    L += ["## Casos en que α = 0,5 cambia la teoría elegida", ""]
-    L += ([f"- {x}" for x in ej] if ej else
-          ["- No ocurrió en ningún rol en la corrida 1: se deja constancia."])
-    tot = {k: sum(a5[r]["alpha_0_5"][k] for r in ("parser", "matcher", "explainer"))
-           for k in ("eleccion_cambiada", "accion_cambiada", "elegida_sin_e_frente_a_una_con_e")}
-    L += ["", f"**Lo que se observa.** α = 0,5 cambió la teoría elegida {tot['eleccion_cambiada']} "
-          f"veces y la acción {tot['accion_cambiada']}: con U basada en la acción (v2), todas las "
-          "variantes (Si, A, ·) tienen la misma U, y ê(t) solo reordena variantes de la misma "
-          f"acción. En {tot['elegida_sin_e_frente_a_una_con_e']} de esos cambios la variante "
-          "elegida no tenía ê(t) y la de α = 1 sí: el respaldo «sin ê se usa α = 1» favorece a la "
-          "variante sin evidencia frente a la que tiene ê < 1."]
-    L += ["", "## Condición con sesgo programado: qué mide cada métrica", "",
-          f"«{mayus(ROTULO_PROG)}». El sesgo entra por el rasgo proxy `titulo_local` en la Si del "
-          "Matcher (regla 11); el grupo sigue fuera del plano de decisión. La paridad "
-          "demográfica por ventana lo detecta; ê(t) casi no puede verlo: las teorías de las "
-          "celdas sin título local tienen pocas lecturas del grupo AR."]
-    for mag, f in c2.items():
-        cf = f["configuraciones"]
-        ne, a1_ = cf["neutro"], cf["alpha_1"]
-        der = ne["ventanas_derivadas_regla_acumulada"]
-        L.append(f"- **{mag.replace('_', ' ').capitalize()}** (brecha del operador "
-                 f"{num(f['brecha_operador_esperada'], 2)}): paridad demográfica en toda la "
-                 f"corrida, neutro {num(ne['brecha_toda_la_corrida'], 3)}, Matcher que aprende "
-                 f"{num(a1_['brecha_toda_la_corrida'], 3)} (α = 1) y "
-                 f"{num(cf['alpha_0_5']['brecha_toda_la_corrida'], 3)} (α = 0,5); EO "
-                 f"{num(ne['odds_igualadas']['eo'], 3)} y {num(a1_['odds_igualadas']['eo'], 3)}. "
-                 f"La regla acumulada deriva {len(der)} ventanas del neutro"
-                 + (f" (desde {der[0]})" if der else "") + " y "
-                 f"{len(a1_['ventanas_derivadas_regla_acumulada'])} del Matcher que aprende.")
-    L += ["", f"Diferencia de calificados entre grupos en el flujo (tasa base, sin sesgo): "
-          f"{num(base['brecha'], 3)}."]
-    for mag, f in c2.items():
-        x = f["configuraciones"]["alpha_1"]["teorias_sin_titulo_local"]
-        L.append(f"- **{mag.replace('_', ' ').capitalize()}:** d_TV de la Si del Matcher frente "
-                 f"al grupo (cota inferior) {num(f['dtv_si_matcher'], 3)}; en las teorías sin "
-                 f"título local del Matcher con α = 1 hay {x['lecturas_AR']} lecturas de AR y "
-                 f"{x['lecturas_no_AR']} de no-AR en E(t), y {x['llegan_a_m_min']} de "
-                 f"{x['en_E']} llegan a m_min en los dos grupos.")
-    L.append("")
-    (destino / "METRICAS_EQUIDAD_POR_ROL.md").write_text("\n".join(L) + "\n", encoding="utf-8")
-
-
 def correr(out=None) -> dict:
     cfg = cargar_config()
     destino = out_dir(out)
@@ -490,7 +348,6 @@ def correr(out=None) -> dict:
                   "rotulo_programado": ROTULO_PROG, "rotulo_atenuacion": ROTULO_IV,
                   "calificados_del_flujo": base,
                   "figura": fig, **c2}, "p5_sesgo_programado.json", destino)
-    escribir_metricas_md(cfg, c1, c2, base, destino)
     return {"corrida_1": c1, "corrida_2": c2}
 
 

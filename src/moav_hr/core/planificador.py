@@ -23,7 +23,8 @@ Adaptaciones declaradas:
   · Fig. 4.21 frente al Alg. 4.7 (P3.2): el Alg. 4.7 (p. 108) desempata por P/K; se registra
     cada vez que los dos órdenes eligen teorías distintas (evidencia para la decisión 2).
   · Equidad (DE-5): con α < 1 el orden usa U_rol = α·u_tarea + (1 − α)·ê(t); la validez
-    sigue usando u_tarea.
+    sigue usando u_tarea. E6 v2 (`equidad="celda"`): ê(Si, A) sobre todas las decisiones en
+    que se aplicó A en Si; si alguna acción candidata no tiene ê, α = 1 para todas.
 
 Genérico: no importa `instances/`.
 """
@@ -33,7 +34,7 @@ from typing import Callable, Optional
 
 from moav_hr.core.equidad_roles import RegistroE, e_paridad_errores, u_rol
 from moav_hr.core.retrieval import similarity
-from moav_hr.core.theory import Theory, TheoryBase, theory_key
+from moav_hr.core.theory import Theory, TheoryBase, _key_part, theory_key
 
 CAPAS_CON_EXPLORACION = ("BIO", "TBO")
 
@@ -50,6 +51,7 @@ class DecisionPlan:
     alpha: float = 1.0
     equidad_usada: bool = False       # U_rol usó ê(t) en al menos una candidata
     alpha_1: Optional[dict] = None    # con α < 1: qué habría elegido el planificador con α = 1
+    ajuste_equidad: Optional[str] = None   # E6 v2: «aplicado» | «no aplicable: falta evidencia»
 
 
 class PlanificadorLLC:
@@ -59,8 +61,14 @@ class PlanificadorLLC:
                  m_min: int = 5,
                  similitud: Callable[[dict, dict], float] = similarity,
                  validez_minima: float = 0.0, validez_estricta: bool = True,
-                 capas_exploracion: tuple[str, ...] = CAPAS_CON_EXPLORACION):
+                 capas_exploracion: tuple[str, ...] = CAPAS_CON_EXPLORACION,
+                 equidad: str = "variante", registro_celda: Optional[RegistroE] = None):
         self.base = base
+        # E6 v2: «variante» = ê(t) por teoría (v1); «celda» = ê(Si, A) sobre E(Si, A)
+        self.equidad = equidad
+        self.registro_celda = registro_celda
+        self._ajuste: Optional[dict] = None          # acción → ê(Si, A) cuando el ajuste aplica
+        self._estado_ajuste: Optional[str] = None
         self.capas_exploracion = tuple(capas_exploracion)
         self.acciones = tuple(acciones)
         self.respaldo_similitud = respaldo_similitud
@@ -78,8 +86,28 @@ class PlanificadorLLC:
         return t.u > self.validez_minima if self.validez_estricta else t.u >= self.validez_minima
 
     # ---- utilidad usada para ordenar ----
+    def clave_celda(self, si: dict, a: str) -> tuple[str, str]:
+        """Celda (Q(Si), A) del registro E(Si, A) de la E6 v2."""
+        return (_key_part(self.base.q(si)), a)
+
+    def _ajuste_celda(self, celda: list[Theory]) -> Optional[dict]:
+        """E6 v2: ê(Si, A) de la mejor variante de cada acción de la celda; None si alguna no
+        tiene ê (menos de m_min lecturas en algún grupo): α = 1 para todas."""
+        mejores: dict[str, Theory] = {}
+        for t in sorted(celda, key=lambda t: (-t.u, -t.p, t.k, -t.created_at, t.id)):
+            mejores.setdefault(t.a, t)
+        es = {a: e_paridad_errores(self.registro_celda.lecturas(self.clave_celda(t.si, a)),
+                                   self.m_min) if self.registro_celda is not None else None
+              for a, t in mejores.items()}
+        return None if any(e is None for e in es.values()) else es
+
     def u_orden(self, t: Theory) -> tuple[float, bool, Optional[float]]:
         """(U para ordenar, usó equidad, ê(t))."""
+        if self.equidad == "celda":                    # E6 v2: U_rol(Si, A)
+            if self._ajuste is None or self.alpha >= 1.0:
+                return float(t.u), False, None
+            e = self._ajuste[t.a]
+            return self.alpha * float(t.u) + (1.0 - self.alpha) * e, True, e
         e = None
         if self.alpha < 1.0 and self.registro_e is not None:
             e = e_paridad_errores(self.registro_e.lecturas(theory_key(t, self.base.q)),
@@ -106,6 +134,7 @@ class PlanificadorLLC:
     # ---- región 2 ----
     def planificar(self, si: dict, capa: str, accion_bio: str) -> DecisionPlan:
         plan = self._planificar(si, capa, accion_bio)
+        plan.ajuste_equidad = self._estado_ajuste
         if self.alpha < 1.0:                  # contrafáctico α = 1 en el mismo estado (E6)
             alpha, self.alpha = self.alpha, 1.0
             try:
@@ -118,6 +147,11 @@ class PlanificadorLLC:
 
     def _planificar(self, si: dict, capa: str, accion_bio: str) -> DecisionPlan:
         celda = self.base.applicable(si)
+        self._ajuste, self._estado_ajuste = None, None
+        if self.equidad == "celda" and self.alpha < 1.0 and celda:
+            self._ajuste = self._ajuste_celda(celda)
+            self._estado_ajuste = ("aplicado" if self._ajuste is not None
+                                   else "no aplicable: falta evidencia")
         ordenadas = self.ordenar(celda)
         filas = [self._fila(t, i + 1) for i, t in enumerate(ordenadas)]
         equidad_usada = any(self.u_orden(t)[1] for t in ordenadas)

@@ -140,7 +140,8 @@ class EquipoLLC:
         self.motores = {}
         for r in ROLES:
             c = ConfigCiclo.desde_yaml(cfg, alpha=eq["alpha"], acciones_orden=tuple(
-                eq["roles"][r]["acciones_orden_fijo"]))
+                eq["roles"][r]["acciones_orden_fijo"]),
+                equidad_utilidad=eq.get("equidad_utilidad", "variante"))
             self.motores[r] = MotorLLC(self.agentes[r], roles[r], self.monitor, c,
                                        trail=self.trail)
         self.ventanas: list[VentanaEquipo] = []
