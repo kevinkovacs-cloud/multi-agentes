@@ -215,7 +215,7 @@ python experiments/demos_direccion/generar_todo.py
 Cada demo corre también por separado (`python experiments/demos_direccion/d1_embeddings.py`,
 etc.; `--out DIR` para escribir en otra carpeta). `demo_caso.py` y `run_poc.py` no cambian.
 
-## Bloque E (08/10/2026, en revisión) — «parada técnica»: la PoC como ciclo de vida
+## Bloque E (08/10/2026, revisado) — «parada técnica»: la PoC como ciclo de vida
 
 Rama `eje1/bloque-e` (desde `eje1/formalizacion-v2`, `58ce027`), sin push. Pedido de la dirección
 (Ierache y Becerra): demostrar en el caso de aplicación el ciclo de vida de los agentes según el LLC de
@@ -235,8 +235,7 @@ las cifras son del modo sim: ilustrativas, en un entorno simulado; no son eviden
 
 ### Pendiente
 
-- Revisión del informe por Claude chat y Kevin, y recién después el push de `eje1/bloque-e` (sin merge a
-  `main`).
+- El encuentro con la dirección. `main` queda congelada hasta después: sin merge de `eje1/bloque-e`.
 - E8 (opcional): P1 y P4 en modo llm con Llama 3.1 8B local, con las salidas separadas; no se corrió.
 - Propuestas sin implementar (E6_RESPUESTA): que el gate de compartición use la métrica del rol (odds
   igualadas para el Matcher) y mostrar el d_TV de la Si frente al grupo como alerta de proxy del Monitor.
@@ -312,4 +311,6 @@ como extensión del planificador. Ninguna decisión de la hoja se adoptó: está
   igualadas, paridad de tasa de error).
 - **E7 · Informe y cierre.** `experiments/parada_tecnica/generar_todo.py` (corre todo y regenera salidas e
   informes; `--verificar` compara byte a byte), `informe_final.py` (`INFORME_PARADA_TECNICA.md` y
-  `LEEME_REUNION.md`). Frenado en el punto de control: falta la revisión antes del push.
+  `LEEME_REUNION.md`). Revisión de Claude chat (`docs/parada_tecnica/E7_REVISION_ClaudeChat_2026-10-08.md`)
+  aplicada en el generador; `eje1/bloque-e` y `rescate/langgraph-junio` publicadas en origin con la
+  autorización de Kevin, sin merge a `main`.
